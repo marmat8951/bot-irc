@@ -1,14 +1,12 @@
 package IRC;
 
-import java.util.List;
-
 public class Server {
 	private String address;
 	private int port;
-	private List<String> chan;
+	private String chan;
 	
 	
-	public Server(String address, int port, List<String> chan) {
+	public Server(String address, int port, String chan) {
 		super();
 		this.address = address;
 		this.port = port;
@@ -16,15 +14,11 @@ public class Server {
 	}
 	
 	public Server(String gen) {
-		String serv = gen;
+		
 		if(gen.substring(0, 7).equals("irc://")) {
-			
-			if(serv.contains(":")) {
-				String val = serv.
-				port = Integer.parseInt();
-			}else {
-				port = 6667;
-			}
+			this.port = getSrvPort(gen);
+			this.address = getSrvAddr(gen);
+			this.chan = getSrvChan(gen);
 		}else {
 			throw new IllegalArgumentException("Le serveur "+gen+" n'est pas un serveur IRC valide");
 		}
@@ -46,8 +40,27 @@ public class Server {
 			res = 6667; 
 		}
 		return res;
+	}
+
+	private String getSrvAddr(String s) {
+		String res="";
+		String serv=s.substring(7); // on enleve irc://
+		int idxcar = 0;
+		while(idxcar<serv.length() && serv.charAt(idxcar)!=':' && serv.charAt(idxcar)!='#') {
+			res+= serv.charAt(idxcar);
+			idxcar++;
+		}
+		return res;
+	}
+	
+	private String getSrvChan(String s) {
+		int idxcar = s.indexOf('#');
+		return s.substring(idxcar+1);
+		
 		
 	}
+	
+
 	
 	public String getAddress() {
 		return address;
@@ -61,12 +74,15 @@ public class Server {
 	public void setPort(int port) {
 		this.port = port;
 	}
-	public List<String> getChan() {
+
+	public String getChan() {
 		return chan;
 	}
-	public void setChan(List<String> chan) {
+
+	public void setChan(String chan) {
 		this.chan = chan;
 	}
+
 	
 	
 	

@@ -88,7 +88,9 @@ public class ISPDAO {
 	public ISP getISP(int number) {
 		String json = getHTML(dbAdress+number);
 		JSONObject jsonObj = new JSONObject(json);
+		ISPData =
 		
+		String name =
 		
 
 		return null;

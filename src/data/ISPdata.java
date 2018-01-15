@@ -1,8 +1,13 @@
 package data;
 
+import java.util.Iterator;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class ISPdata {
 
-	public final ISP ISP;
+	private ISP ISP;
 	private String website;
 	private String description;
 	private String [] chatrooms;
@@ -14,10 +19,10 @@ public class ISPdata {
 	
 	
 
-	public ISPdata(data.ISP iSP, String website, String description, String[] chatrooms, int progressStatus,
+	public ISPdata(data.ISP ISP, String website, String description, String[] chatrooms, int progressStatus,
 			int membersCount, int subscribersCount) {
 		super();
-		ISP = iSP;
+		this.ISP = ISP;
 		this.website = website;
 		this.description = description;
 		this.chatrooms = chatrooms;
@@ -25,7 +30,15 @@ public class ISPdata {
 		this.membersCount = membersCount;
 		this.subscribersCount = subscribersCount;
 	}
-
+	
+	public ISPdata(ISP isp, JSONObject jo){
+		this.ISP = ISP;
+		this.website = jo.getString("website");
+		isp.setName(jo.getString("name"));
+		JSONArray chatrooms = jo.getJSONArray("chatrooms");
+		
+		
+	}
 
 	public String getWebsite() {
 		return website;
@@ -53,5 +66,6 @@ public class ISPdata {
 	public int getSubscribersCount() {
 		return subscribersCount;
 	}
+	
 	
 }

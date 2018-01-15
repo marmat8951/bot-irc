@@ -23,6 +23,16 @@ public class ISP {
 	}
 	
 	
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public void setData(ISPdata data) {
+		this.data = data;
+	}
+
+
 	public String getName() {
 		return name;
 	}

@@ -5,8 +5,8 @@ import java.net.ConnectException;
 public class Main {
 	
 	public static final String SERVER = "irc.geeknode.net";
-	public static final int PORT = 6697;
-	public static final String[] CHANNELS = { "#ffdn" };
+	public static final int PORT = 6667;
+	public static final String[] CHANNELS = { "#marmat" };
 	
 	public static void main(String[] args) throws Exception {
 		try {

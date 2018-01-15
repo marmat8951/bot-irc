@@ -10,9 +10,22 @@ public class ISPdata {
 	private int membersCount;
 	private int subscribersCount;
 	
-	public ISPdata(ISP i) {
-		this.ISP=i;
+	
+	
+	
+
+	public ISPdata(data.ISP iSP, String website, String description, String[] chatrooms, int progressStatus,
+			int membersCount, int subscribersCount) {
+		super();
+		ISP = iSP;
+		this.website = website;
+		this.description = description;
+		this.chatrooms = chatrooms;
+		this.progressStatus = progressStatus;
+		this.membersCount = membersCount;
+		this.subscribersCount = subscribersCount;
 	}
+
 
 	public String getWebsite() {
 		return website;

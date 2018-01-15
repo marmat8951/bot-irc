@@ -3,12 +3,32 @@ package data;
 import java.util.Date;
 
 public class ISP {
+	
+	private String name;
 	private int id;
 	private boolean isFFDNMember;
 	private Date date_added;
 	private Date last_update;
 	private ISPdata data;
 	
+	
+	public ISP(String name, int id, boolean isFFDNMember, Date date_added, Date last_update, ISPdata data) {
+		super();
+		this.name = name;
+		this.id = id;
+		this.isFFDNMember = isFFDNMember;
+		this.date_added = date_added;
+		this.last_update = last_update;
+		this.data = data;
+	}
+	
+	
+	public String getName() {
+		return name;
+	}
+	public ISPdata getData() {
+		return data;
+	}
 	public int getId() {
 		return id;
 	}
@@ -42,5 +62,12 @@ public class ISP {
 		return data.getSubscribersCount();
 	}
 	
+	public String toString() {
+		String res="";
+		res+=name+" : \n";
+		res+="Est membre: "+isFFDNMember()+" \n";
+		res+="Nombre de membres: "+getMembersCount()+" Nombre d'abonnements:"+getSubscribersCount(); 
+		return res;
+	}
 
 }

@@ -132,7 +132,7 @@ public class Cache {
 	
 	public ISP getISPWithName(String s) {
 		for(ISP i : cache) {
-			if(i.getShortestName().equalsIgnoreCase(s)) {
+			if(i.getShortestName().equalsIgnoreCase(s) || i.getName().equalsIgnoreCase(s)) {
 				return i;
 			}
 		}

@@ -1,43 +1,59 @@
 package data;
 
-import java.util.Iterator;
-
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import IRC.Server;
 
 public class ISPdata {
 
-	private ISP ISP;
 	private String website;
 	private String description;
 	private Server [] ircChan;
 	private int progressStatus;
 	private int membersCount;
 	private int subscribersCount;
-	
+	private String email;
+	private String creationDate;
+	private String joinDate;
 	
 	
 	
 
-	public ISPdata(data.ISP ISP, String website, String description, Server[] chatrooms, int progressStatus,
-			int membersCount, int subscribersCount) {
+	public ISPdata(String website, String description, Server[] chatrooms, int progressStatus,
+			int membersCount, int subscribersCount, String email, String creationDate, String joinDate) {
 		super();
-		this.ISP = ISP;
 		this.website = website;
 		this.description = description;
 		this.ircChan = chatrooms;
 		this.progressStatus = progressStatus;
 		this.membersCount = membersCount;
 		this.subscribersCount = subscribersCount;
+		this.email=email;
+		this.creationDate = creationDate;
+		this.joinDate = joinDate;
 	}
 	
-	public ISPdata(ISP isp, JSONObject jo){
-		this.ISP = ISP;
+	public ISPdata(JSONObject jo){
 		this.website = jo.getString("website");
-		isp.setName(jo.getString("name"));
-		JSONArray chatrooms = jo.getJSONArray("chatrooms");
+		JSONArray chatroomsJSON = jo.getJSONArray("chatrooms");
+		Server [] chatrooms = new Server[chatroomsJSON.length()];
+		for(int i = 0; i<chatroomsJSON.length(); ++i) {
+			String servaddr = chatroomsJSON.getString(i);
+			chatrooms[i] = new Server(servaddr);
+					
+		}
+		this.progressStatus = jo.getInt("progressStatus");
+		this.membersCount = jo.getInt("memberCount");
+		this.subscribersCount = jo.getInt("subscriberCount");
+		try {
+		this.joinDate = jo.getString("ffdnMemberSince");
+		}catch (JSONException joe) {
+			this.joinDate = "?";
+		}
+		this.creationDate = jo.getString("creationDate");
+		
 	}
 
 	public String getWebsite() {
@@ -49,10 +65,16 @@ public class ISPdata {
 		return description;
 	}
 
-	public String[] getChatrooms() {
+	
+
+
+	public Server[] getIrcChan() {
 		return ircChan;
 	}
 
+	public String getEmail() {
+		return email;
+	}
 
 	public int getProgressStatus() {
 		return progressStatus;
@@ -65,6 +87,14 @@ public class ISPdata {
 
 	public int getSubscribersCount() {
 		return subscribersCount;
+	}
+
+	public String getCreationDate() {
+		return creationDate;
+	}
+
+	public String getJoinDate() {
+		return joinDate;
 	}
 	
 	

@@ -7,12 +7,13 @@ public class ISP {
 	private String name;
 	private int id;
 	private boolean isFFDNMember;
-	private Date date_added;
-	private Date last_update;
+	private String date_added;
+	private String last_update;
 	private ISPdata data;
 	
 	
-	public ISP(String name, int id, boolean isFFDNMember, Date date_added, Date last_update, ISPdata data) {
+	
+	public ISP(String name, int id, boolean isFFDNMember, String date_added, String last_update, ISPdata data) {
 		super();
 		this.name = name;
 		this.id = id;
@@ -51,19 +52,28 @@ public class ISP {
 	public void setFFDNMember(boolean isFFDNMember) {
 		this.isFFDNMember = isFFDNMember;
 	}
-	public Date getDate_added() {
+
+	
+	public String getDate_added() {
 		return date_added;
 	}
-	public void setDate_added(Date date_added) {
+
+
+	public void setDate_added(String date_added) {
 		this.date_added = date_added;
 	}
-	public Date getLast_update() {
+
+
+	public String getLast_update() {
 		return last_update;
 	}
-	public void setLast_update(Date last_update) {
+
+
+	public void setLast_update(String last_update) {
 		this.last_update = last_update;
 	}
-	
+
+
 	public int getMembersCount() {
 		return data.getMembersCount();
 	}
@@ -74,8 +84,8 @@ public class ISP {
 	
 	public String toString() {
 		String res="";
-		res+=name+" : \n";
-		res+="Est membre: "+isFFDNMember()+" \n";
+		res+=name+" : ";
+		res+="Est membre: "+isFFDNMember()+" ";
 		res+="Nombre de membres: "+getMembersCount()+" Nombre d'abonnements:"+getSubscribersCount(); 
 		return res;
 	}

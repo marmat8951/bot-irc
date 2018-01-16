@@ -4,7 +4,11 @@ public class Server {
 	private String address;
 	private int port;
 	private String chan;
+	private Type t;
 	
+	private enum Type{
+		IRC,AUTRE;
+	}
 	
 	public Server(String address, int port, String chan) {
 		super();
@@ -16,11 +20,13 @@ public class Server {
 	public Server(String gen) {
 		
 		if(gen.substring(0, 7).equals("irc://")) {
+			this.t=Type.IRC;
 			this.port = getSrvPort(gen);
 			this.address = getSrvAddr(gen);
 			this.chan = getSrvChan(gen);
 		}else {
-			throw new IllegalArgumentException("Le serveur "+gen+" n'est pas un serveur IRC valide");
+			this.t=Type.AUTRE;
+			this.address=gen;
 		}
 		
 		
@@ -83,6 +89,9 @@ public class Server {
 		this.chan = chan;
 	}
 
+	public boolean isIRC() {
+		return this.t.equals(Type.IRC);
+	}
 	
 	
 	

@@ -2,10 +2,15 @@ package main;
 
 import org.jibble.pircbot.PircBot;
 
+import data.ISPDAO;
+
 public class Bot extends PircBot {
 
+	private ISPDAO idao;
+	
 	public Bot() {
 		this.setName("UneFede2");
+		idao = ISPDAO.getInstance();
 	}
 
 	public void onMessage(String channel, String sender,
@@ -13,6 +18,13 @@ public class Bot extends PircBot {
 		if (message.equalsIgnoreCase("time?")) {
 			String time = new java.util.Date().toString();
 			sendMessage(channel, sender + ": The time is now " + time);
+		}
+		
+		if (message.contains("+info")) {
+			
+			String res="";
+			int  id = Integer.parseInt(message.substring(message.indexOf(' ')+1));
+			sendMessage(channel,idao.getISP(id).toString());
 		}
 	}
 }

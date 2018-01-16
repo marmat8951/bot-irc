@@ -1,6 +1,7 @@
 package data;
 
-import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ISP {
 	
@@ -85,8 +86,32 @@ public class ISP {
 	public String toString() {
 		String res="";
 		res+=name+" : ";
-		res+="Est membre: "+isFFDNMember()+" ";
+		res+="Est membre: "+booleanToOuiNon(isFFDNMember())+" ";
 		res+="Nombre de membres: "+getMembersCount()+" Nombre d'abonnements:"+getSubscribersCount(); 
+		return res;
+	}
+	
+	private String booleanToOuiNon(boolean b) {
+		if(b) {
+			return "oui";
+		}
+		return "non";
+		
+	}
+	
+	/**
+	 * Renvoie une Liste de chaine de caractères pour permettre l'affichage sur IRC ligne par ligne, bien que le \n ne soit pas interprété.
+	 * @return Une Liste de chaine correspondant à toutes les lignes que le bot doit écrire
+	 */
+	
+	public List<String> toStringIRC () {
+		List<String> res = new LinkedList<>();
+		res.add(name+" : ");
+		res.add("Est membre de la fédération : "+booleanToOuiNon(isFFDNMember()));
+		res.add("Nombre de Membres : "+getMembersCount());
+		res.add("Nombre d'abonnements : "+getSubscribersCount());
+		
+		
 		return res;
 	}
 

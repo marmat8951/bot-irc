@@ -16,6 +16,7 @@ import java.util.Scanner;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ISPDAO {
@@ -115,9 +116,9 @@ public class ISPDAO {
 		String json = executeGet(dbAdress+number+'/');
 		System.out.println(json);
 		JSONObject jsonObj = new JSONObject(json);
-		String name = jsonObj.getJSONObject("ispformat").getString("name");
-		int id = jsonObj.getInt("id");
-		boolean member = jsonObj.getBoolean("is_ffdn_member");
+		String name = getName(jsonObj);
+		int id = getId(jsonObj);
+		boolean member = getIsMember(jsonObj);
 		ISPdata ispData = new ISPdata(jsonObj.getJSONObject("ispformat"));
 		String date_added = jsonObj.getString("date_added");
 		String last_update = jsonObj.getString("last_update");
@@ -125,7 +126,66 @@ public class ISPDAO {
 		return isp;
 
 	}
-
+	/**
+	 * Recupere le nom de l'ISP dans le JSON
+	 * @param json Objet JSON généré a partir de la requete principale
+	 * @return Le nom si displonible ou null
+	 */
+	private String getName(JSONObject json) {
+		try {
+		return json.getJSONObject("ispformat").getString("name");
+		}catch(JSONException jo) {
+			System.err.println("Erreur au moment de récuperer le champ nom dans le JSON : ");
+			jo.printStackTrace();
+			return null;
+		}
+	}
+	
+	private int getId(JSONObject json) {
+		try {
+			return json.getInt("id");
+		}catch(JSONException jo) {
+			System.err.println("Erreur au moment de récuperer le champ id dans le JSON : ");
+			jo.printStackTrace();
+			return -1;
+		}
+	}
+	
+	private Boolean getIsMember(JSONObject json) {
+		try {
+			return json.getBoolean("is_ffdn_member");
+		}catch(JSONException jo) {
+			System.err.println("Erreur au moment de récuperer le champ is_ffdn_member dans le JSON : ");
+			jo.printStackTrace();
+			return null;
+		}
+	}
+	
+	private String getDateAdded(JSONObject json) {
+		try {
+			return json.getString("date_added");
+		}catch(JSONException jo) {
+			System.err.println("Erreur au moment de récuperer le champ date_added dans le JSON : ");
+			jo.printStackTrace();
+			return null;
+		}
+	}
+	/**
+	 * 
+	 * @param json Objet json a l'origine
+	 * @return chaine representant la date sous forme string:ISO8601 ou nu
+	 */
+	private String getDateUpdated(JSONObject json) {
+		try {
+			return json.getString("last_update");
+		}catch(JSONException jo) {
+			//System.err.println("Erreur au moment de récuperer le champ date_added dans le JSON : ");
+			//jo.printStackTrace();
+			return null;
+		}
+	}
+	
+	
 	/**
 	 *TODO : implements this in Isp
 	 * @param date String correspondant a une date au format aaaa-mm-jj ou aaaa-mm

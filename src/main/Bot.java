@@ -1,5 +1,7 @@
 package main;
 
+import java.util.List;
+
 import org.jibble.pircbot.PircBot;
 
 import data.ISPDAO;
@@ -22,9 +24,18 @@ public class Bot extends PircBot {
 		
 		if (message.contains("+info")) {
 			
-			String res="";
 			int  id = Integer.parseInt(message.substring(message.indexOf(' ')+1));
-			sendMessage(channel,idao.getISP(id).toString());
+			List<String> s = idao.getISP(id).toStringIRC();
+			for(String response : s) {
+				sendMessage(channel,response);
+			}
+			
 		}
+		
+		//easter Egg
+		if (message.contains("Ehlo UneFede")) {
+			sendMessage(channel, "Ehlo "+sender+"!!");
+		}
+		
 	}
 }

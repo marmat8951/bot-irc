@@ -7,6 +7,7 @@ public class Main {
 	public static final String SERVER = "irc.geeknode.net";
 	public static final int PORT = 6667;
 	public static final String[] CHANNELS = { "#marmat", "#ffdn" };
+	public static final Cache cache = Cache.getInstance();
 	
 	public static void main(String[] args) throws Exception {
 		try {
@@ -17,8 +18,13 @@ public class Main {
         bot.setVerbose(true);
         
         // Connect to the IRC server.
-        
         bot.connect(SERVER,PORT);
+        
+        // Get All the infomations and store in a cache
+        
+        
+        
+        
         // Join the #pircbot channel.
         for(int i = 0; i< CHANNELS.length; i++) {
         bot.joinChannel(CHANNELS[i]);

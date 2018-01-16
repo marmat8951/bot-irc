@@ -1,6 +1,14 @@
 package IRC;
 
-public class Server {
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+import com.sun.org.apache.bcel.internal.generic.AALOAD;
+
+import main.AffichableSurIRC;
+
+public class Server implements AffichableSurIRC{
 	private String address;
 	private int port;
 	private String chan;
@@ -91,6 +99,17 @@ public class Server {
 
 	public boolean isIRC() {
 		return this.t.equals(Type.IRC);
+	}
+
+	@Override
+	public List<String> toStringIRC() {
+		List<String> s = new LinkedList<>();
+		if(isIRC()) {
+			s.add("IRC://"+address+" chan:"+chan+" port:"+port);
+		}else {
+			s.add(address);
+		}
+		return s;
 	}
 	
 	

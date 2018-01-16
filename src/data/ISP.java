@@ -3,9 +3,10 @@ package data;
 import java.util.LinkedList;
 import java.util.List;
 
+import main.AffichableSurIRC;
 import main.Cache;
 
-public class ISP {
+public class ISP implements AffichableSurIRC {
 	
 	private String name;
 	private int id;

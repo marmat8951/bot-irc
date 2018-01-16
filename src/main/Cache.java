@@ -7,7 +7,7 @@ import java.util.List;
 import data.ISP;
 import data.ISPDAO;
 
-public class Cache {
+public class Cache implements AffichableSurIRC {
 	/**
 	 * Cette classe sert de cache pour les infos de DB
 	 * Elle implemente le Design Pattern Singleton dans la mesure où cette classe doit être l'unique instance de référence peu importe le Thread l'utilisant, et que le cache est unique.

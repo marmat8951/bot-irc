@@ -3,6 +3,8 @@ package data;
 import java.util.LinkedList;
 import java.util.List;
 
+import main.Cache;
+
 public class ISP {
 	
 	private String name;
@@ -112,11 +114,12 @@ public class ISP {
 	 */
 	
 	public List<String> toStringIRC () {
+		Cache c = Cache.getInstance();
 		List<String> res = new LinkedList<>();
 		res.add(name+" : ");
 		res.add("Est membre de la fédération : "+booleanToOuiNon(isFFDNMember()));
-		res.add("Nombre de Membres : "+getMembersCount());
-		res.add("Nombre d'abonnements : "+getSubscribersCount());
+		res.add("Nombre de Membres : "+getMembersCount()+" soit "+c.getMembersPercents(getMembersCount()));
+		res.add("Nombre d'abonnements : "+getSubscribersCount()+" soit "+c.getSubscribersPercents(getSubscribersCount()));
 		
 		
 		return res;

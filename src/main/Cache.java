@@ -1,5 +1,6 @@
 package main;
 
+import java.text.NumberFormat;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -87,6 +88,26 @@ public class Cache {
 		}
 		return i;
 	}
+	
+	public String getSubscribersPercents(int val) {
+		NumberFormat nf = NumberFormat.getInstance();
+		nf.setMaximumFractionDigits(2);
+		nf.setMinimumFractionDigits(0);
+		Double val2 = val+0.0;
+		Double nbSubscribers = 0.0+getSubscribersCountInFede();
+		return nf.format((val2/nbSubscribers)*100)+" %";
+	}
+	
+	public String getMembersPercents(int val) {
+		NumberFormat nf = NumberFormat.getInstance();
+		nf.setMaximumFractionDigits(2);
+		nf.setMinimumFractionDigits(0);
+		Double val2 = val+0.0;
+		Double nbMembers = 0.0+getMemberCountInFede();
+		return nf.format((val2/nbMembers)*100)+" %";
+	}
+	
+	
 	
 	/**
 	 * Donne le nombre de FAI de la fédé en parcourant le cache.

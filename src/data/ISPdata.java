@@ -8,6 +8,7 @@ import IRC.Server;
 
 public class ISPdata {
 
+	private String shortname;
 	private String website;
 	private String description;
 	private Server [] ircChan;
@@ -17,13 +18,14 @@ public class ISPdata {
 	private String email;
 	private String creationDate;
 	private String joinDate;
-	
-	
-	
 
-	public ISPdata(String website, String description, Server[] chatrooms, int progressStatus,
+
+
+
+	public ISPdata(String shortName, String website, String description, Server[] chatrooms, int progressStatus,
 			int membersCount, int subscribersCount, String email, String creationDate, String joinDate) {
 		super();
+		this.shortname = shortName;
 		this.website = website;
 		this.description = description;
 		this.ircChan = chatrooms;
@@ -33,28 +35,67 @@ public class ISPdata {
 		this.email=email;
 		this.creationDate = creationDate;
 		this.joinDate = joinDate;
+		
 	}
-	
+
 	public ISPdata(JSONObject jo){
-		this.website = jo.getString("website");
-		JSONArray chatroomsJSON = jo.getJSONArray("chatrooms");
-		Server [] chatrooms = new Server[chatroomsJSON.length()];
-		for(int i = 0; i<chatroomsJSON.length(); ++i) {
-			String servaddr = chatroomsJSON.getString(i);
-			chatrooms[i] = new Server(servaddr);
-					
-		}
-		this.progressStatus = jo.getInt("progressStatus");
-		this.membersCount = jo.getInt("memberCount");
-		this.subscribersCount = jo.getInt("subscriberCount");
+		this.shortname = getString(jo,"shortname");
+		this.website = getString(jo,"website","?");
+		Server [] chatrooms;
 		try {
-		this.joinDate = jo.getString("ffdnMemberSince");
+			JSONArray chatroomsJSON = jo.getJSONArray("chatrooms");
+			chatrooms = new Server[chatroomsJSON.length()];
+			for(int i = 0; i<chatroomsJSON.length(); ++i) {
+				String servaddr = chatroomsJSON.getString(i);
+				chatrooms[i] = new Server(servaddr);
+
+			}
+		}catch(JSONException jsonE) {	// Si il n'y a pas de chatroom
+			chatrooms = new Server[0];
+		}
+		this.progressStatus = getInt(jo,"progressStatus");
+		this.membersCount = getInt(jo,"memberCount",0);
+		this.subscribersCount = getInt(jo,"subscriberCount",0);
+		try {
+			this.joinDate = getString(jo,"ffdnMemberSince","?");
 		}catch (JSONException joe) {
 			this.joinDate = "?";
 		}
-		this.creationDate = jo.getString("creationDate");
+		this.creationDate = getString(jo,"creationDate","?");
+
+	}
+	
+
+	private int getInt(JSONObject jo, String key, int DEFAULT) {
+		int res;
+		try {
+			res = jo.getInt(key);
+		}catch(JSONException jsone) {
+			res = DEFAULT;
+		}
+		return res;
 		
 	}
+	
+	private int getInt(JSONObject jo, String key) {
+		return getInt(jo,key,-1);
+		
+	}
+	
+	private String getString (JSONObject jo, String key, String DEFAULT) {
+		String res;
+		try {
+			res = jo.getString(key);
+		}catch(JSONException jsoe) {
+			res = DEFAULT;
+		}
+		return res;
+	}
+	
+	private String getString (JSONObject jo, String key) {
+		return getString(jo, key, null);
+	}
+	
 
 	public String getWebsite() {
 		return website;
@@ -65,7 +106,7 @@ public class ISPdata {
 		return description;
 	}
 
-	
+
 
 
 	public Server[] getIrcChan() {
@@ -95,6 +136,15 @@ public class ISPdata {
 
 	public String getJoinDate() {
 		return joinDate;
+	}
+
+
+	public boolean hasShortName() {
+		return !(shortname==null || shortname.equals(""));
+	}
+
+	public String getShortname() {
+		return shortname;
 	}
 	
 	

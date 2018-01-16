@@ -1,5 +1,6 @@
 package data;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Authenticator;
@@ -79,9 +80,11 @@ public class ISPDAO {
 
 	    } catch (MalformedURLException e) {
 	        e.printStackTrace();
+	    } catch (FileNotFoundException fnfe) { // IF 404
+	    	return null;
 	    } catch (IOException e) {
 	        e.printStackTrace();
-	    }
+	    } 
 	    if(s!=null) {
 	    	s.close();
 	    }
@@ -114,6 +117,7 @@ public class ISPDAO {
 
 	public ISP getISP(int number) {
 		String json = executeGet(dbAdress+number+'/');
+		if(json != null) {
 		System.out.println(json);
 		JSONObject jsonObj = new JSONObject(json);
 		String name = getName(jsonObj);
@@ -124,6 +128,8 @@ public class ISPDAO {
 		String last_update = getDateUpdated(jsonObj);
 		ISP isp = new ISP(name, id, member, date_added, last_update, ispData);
 		return isp;
+		}
+		return null;
 
 	}
 	/**
@@ -206,5 +212,8 @@ public class ISPDAO {
 		Date d = c.getTime();
 		return d;
 	}
+	
+	
+	
 
 }

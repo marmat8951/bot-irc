@@ -24,6 +24,13 @@ public class ISP {
 		this.data = data;
 	}
 	
+	public String getShortestName() {
+		if(data.hasShortName()) {
+			return data.getShortname();
+		}else {
+			return name;
+		}
+	}
 	
 	public void setName(String name) {
 		this.name = name;

@@ -26,37 +26,7 @@ public class Bot extends PircBot {
 
 		if (message.contains("+info")) {
 
-			String s = message.substring(message.indexOf(' ')+1);
-			if(!EntierPositifNonVide.verifie(s)) {			// Un mot après +info
-				if(s.equalsIgnoreCase("all")) {	            // +info all
-					Cache c = Cache.getInstance();
-					List<ISP> listeFAI;
-					try {
-						listeFAI = c.getListe();
-					}catch (Exception e) {
-						try {
-							listeFAI = idao.getISPs();
-						} catch (Exception e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					}
-					for(ISP i : c.getListe()) {
-						if(i.isFFDNMember()) {
-							sendMessage(channel, i.toStringIRC());
-						}
-					}
-
-				}
-
-			}else {											// Un nombre après +info
-
-				int  id = Integer.parseInt(message.substring(message.indexOf(' ')+1));
-				List<String> strings = idao.getISP(id).toStringIRC();
-				for(String response : strings) {
-					sendMessage(channel,response);
-				}
-			}
+			info(channel,sender,login,hostname,message);
 
 		}
 
@@ -75,4 +45,61 @@ public class Bot extends PircBot {
 			sendMessage(channel,s);
 		}
 	}
+	
+	
+	public void info(String channel, String sender,
+	String login, String hostname, String message) {
+		
+		String s = message.substring(message.indexOf(' ')+1);
+		if(!EntierPositifNonVide.verifie(s)) {			// Un mot après +info
+			
+			
+			if(s.equalsIgnoreCase("all")) {	          			  // +info all
+				Cache c = Cache.getInstance();
+				sendMessage(channel, c.toStringIRC());
+				
+				
+				
+				List<ISP> listeFAI;
+				try {
+					listeFAI = c.getListe();
+				}catch (Exception e) {
+					try {
+						listeFAI = idao.getISPs();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				for(ISP i : c.getListe()) {
+					if(i.isFFDNMember()) {
+						sendMessage(channel, i.toStringIRC());
+					}
+				}
+
+			}else if(s.equalsIgnoreCase("ffdn")) {				//+info ffdn
+				Cache c = Cache.getInstance();
+				sendMessage(channel, c.toStringIRC());
+				
+			}else {
+				Cache c = Cache.getInstance();
+				ISP i = c.getISPWithName(s);
+				if(i == null) {
+					sendMessage(channel, "Le FAI "+s+" est Inconnu, désolé");
+				}else {
+					sendMessage(channel, i.toStringIRC());
+				}
+			}
+
+		}else {											// Un nombre après +info
+
+			int  id = Integer.parseInt(message.substring(message.indexOf(' ')+1));
+			List<String> strings = idao.getISP(id).toStringIRC();
+			for(String response : strings) {
+				sendMessage(channel,response);
+			}
+		}
+		
+	}
+	
 }

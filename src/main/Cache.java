@@ -1,8 +1,7 @@
 package main;
 
+import java.util.LinkedList;
 import java.util.List;
-
-import com.sun.corba.se.impl.orbutil.RepositoryIdUtility;
 
 import data.ISP;
 import data.ISPDAO;
@@ -68,4 +67,69 @@ public class Cache {
 	public List<ISP> getListe(){
 		return cache;
 	}
+	
+	public int getMemberCountInFede() {
+		int i = 0;
+		for(ISP isp : getListe()) {
+			if(isp.isFFDNMember()) {
+				i += isp.getMembersCount();
+			}
+		}
+		return i;
+	}
+	
+	public int getSubscribersCountInFede() {
+		int i = 0;
+		for(ISP isp : getListe()) {
+			if(isp.isFFDNMember()) {
+				i += isp.getSubscribersCount();
+			}
+		}
+		return i;
+	}
+	
+	/**
+	 * Donne le nombre de FAI de la fédé en parcourant le cache.
+	 * @param ffdn_member Si = null alors on s'en fout, si =true, seuls les FAI de la fédé, si = false, seuls les FAI non membres
+	 * @return nombre de FAI
+	 */
+	public int getISPCount(Boolean ffdn_member) {
+		if(ffdn_member == null) {
+			return cache.size();
+		}else{
+			int count = 0;
+			for(ISP fai : cache) {
+				if(ffdn_member == fai.isFFDNMember()) {
+					count++;
+				}
+			}
+			return count;
+			
+		}
+			
+	}
+	
+	public ISP getISPWithName(String s) {
+		for(ISP i : cache) {
+			if(i.getShortestName().equalsIgnoreCase(s)) {
+				return i;
+			}
+		}
+		return null;
+	}
+	
+	public String toString() {
+		return "Cache de "+cache.size()+" FAI";
+	}
+	
+	public List<String> toStringIRC() {
+		List<String> liste = new LinkedList<String>();
+		liste.add("Il y a "+cache.size()+" FAI dont "+getISPCount(Boolean.TRUE)+" dans la fédé");
+		liste.add("Cela représente en tout (dans la fédé) "+getSubscribersCountInFede()+" Abonné.e.s et "+getMemberCountInFede()+" Membres");
+		return liste;
+	}
+	
+	
+	
+	
 }

@@ -100,8 +100,8 @@ public class ISPDAO {
 		JSONObject allISPCount = new JSONObject(jsonInfo);
 		int nbItems = allISPCount.getInt("total_items");
 		ArrayList<ISP> ar = new ArrayList<>(nbItems);
-
-		for (int i=0; i<nbItems; ++i) {
+		
+		for (int i=1; i<nbItems; ++i) {
 			ISP isp = getISP(i);
 			if(isp != null) {
 				ar.add(isp);
@@ -120,8 +120,8 @@ public class ISPDAO {
 		int id = getId(jsonObj);
 		boolean member = getIsMember(jsonObj);
 		ISPdata ispData = new ISPdata(jsonObj.getJSONObject("ispformat"));
-		String date_added = jsonObj.getString("date_added");
-		String last_update = jsonObj.getString("last_update");
+		String date_added = getDateAdded(jsonObj);
+		String last_update = getDateUpdated(jsonObj);
 		ISP isp = new ISP(name, id, member, date_added, last_update, ispData);
 		return isp;
 
@@ -162,13 +162,17 @@ public class ISPDAO {
 	}
 	
 	private String getDateAdded(JSONObject json) {
+		String res ="";
 		try {
-			return json.getString("date_added");
+			
+			res= json.getString("date_added");
+		
 		}catch(JSONException jo) {
 			System.err.println("Erreur au moment de récuperer le champ date_added dans le JSON : ");
 			jo.printStackTrace();
-			return null;
+			
 		}
+		return res;
 	}
 	/**
 	 * 
@@ -176,13 +180,17 @@ public class ISPDAO {
 	 * @return chaine representant la date sous forme string:ISO8601 ou nu
 	 */
 	private String getDateUpdated(JSONObject json) {
+		String res = "";
 		try {
-			return json.getString("last_update");
+			
+			res = json.getString("last_update");
+			
 		}catch(JSONException jo) {
 			//System.err.println("Erreur au moment de récuperer le champ date_added dans le JSON : ");
 			//jo.printStackTrace();
-			return null;
+			
 		}
+		return res;
 	}
 	
 	

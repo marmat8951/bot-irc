@@ -6,7 +6,7 @@ public class Main {
 	
 	public static final String SERVER = "irc.geeknode.net";
 	public static final int PORT = 6667;
-	public static final String[] CHANNELS = { "#marmat", "#ffdn" };
+	public static final String[] CHANNELS = { "#marmat" };
 	public static final Cache cache = Cache.getInstance();
 	
 	public static void main(String[] args) throws Exception {

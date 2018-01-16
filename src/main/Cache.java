@@ -2,6 +2,8 @@ package main;
 
 import java.util.List;
 
+import com.sun.corba.se.impl.orbutil.RepositoryIdUtility;
+
 import data.ISP;
 import data.ISPDAO;
 
@@ -58,5 +60,12 @@ public class Cache {
 		}
 		return true;
 	}
+	
+	public int size() {
+		return cache.size();
+	}
 
+	public List<ISP> getListe(){
+		return cache;
+	}
 }

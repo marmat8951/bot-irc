@@ -35,6 +35,45 @@ public class ISP implements AffichableSurIRC {
 		}
 	}
 	
+	/**
+	 * Méthode pour récuperer le nom le plus correct pour afficher les informations.
+	 * Si il n'y a pas de Shortname alors name sera utilisé.
+	 * Si name possède des espaces alors le shortname sera utilisé.
+	 * Si name est plus long que 15 caractères alors shortname sera utilisé.
+	 * Sinon, on utilise Name
+	 * @return Le meilleur nom utilisable pour l'affichage.
+	 */
+	public String getBetterName() {
+		if(data.hasShortName()) {
+			String shortname = getShortName();
+			if(name.length()>15 || name.contains(" ")) {
+				return shortname;
+			}else {
+				return name;
+			}
+		}else {
+			return name;
+		}
+		
+	}
+	/**
+	 * Inverse de getBetterName. Le but est dans le cadre de l'affichage de plusieurs noms
+	 * @return Le moins bon nom pour l'affichage
+	 */
+	public String getWorstName() {
+		if(data.hasShortName()) {
+			String shortname = getShortName();
+			if(name.length()>15 || name.contains(" ")) {
+				return name;
+			}else {
+				return shortname;
+			}
+			
+		}else {
+			return name;
+		}
+	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -117,13 +156,17 @@ public class ISP implements AffichableSurIRC {
 	public List<String> toStringIRC () {
 		Cache c = Cache.getInstance();
 		List<String> res = new LinkedList<>();
-		res.add(name+" : ");
-		res.add("Est membre de la fédération : "+booleanToOuiNon(isFFDNMember()));
-		res.add("Nombre de Membres : "+getMembersCount()+" soit "+c.getMembersPercents(getMembersCount()));
-		res.add("Nombre d'abonnements : "+getSubscribersCount()+" soit "+c.getSubscribersPercents(getSubscribersCount()));
+		String preface = "["+getBetterName()+"] ";
+		res.add(preface+"Est membre de la fédération : "+booleanToOuiNon(isFFDNMember()));
+		res.add(preface+"Nombre de Membres : "+getMembersCount()+" soit "+c.getMembersPercents(getMembersCount()));
+		res.add(preface+"Nombre d'abonnements : "+getSubscribersCount()+" soit "+c.getSubscribersPercents(getSubscribersCount()));
 		
 		
 		return res;
+	}
+	
+	private String getShortName() {
+		return data.getShortname();
 	}
 
 }

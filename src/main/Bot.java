@@ -1,5 +1,6 @@
 package main;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import verif_saisie.EntierPositifNonVide;
 
 public class Bot extends PircBot {
 
+	public static final long TIME_BETWEEN_RELOADS = 360000;
 	private ISPDAO idao;
 
 	public Bot() {
@@ -35,6 +37,23 @@ public class Bot extends PircBot {
 			list(channel, sender, login, hostname, message);
 		}
 
+		if(message.equals("+reload")) {
+			Date now = new Date();
+			Date lastCU = Cache.getInstance().getLastCacheUpdate();
+			if(lastCU.getTime() < now.getTime()-TIME_BETWEEN_RELOADS ) {		// Si la dernière MAJ date de + de 5 minutes
+				sendMessage(channel, "Je lance le reload!");
+				if(reload()) {
+					sendMessage(channel, sender+": Le reload s'est bien passé.");
+				}else {
+					sendMessage(channel, sender+": Erreur au moment du reload.");
+				}
+			}else {
+				Date nextAllowed = new Date(lastCU.getTime()+TIME_BETWEEN_RELOADS);
+				sendMessage(channel, "Trop de reload, attendez un peu. Le dernier à eu lieu le "+lastCU.toString()+" Prochain autorisé le "+nextAllowed);
+			}
+		}
+
+
 		//easter Egg
 		String ea="Ehlo UneFede";
 		if (message.contains("Ehlo UneFede")) {
@@ -43,6 +62,11 @@ public class Bot extends PircBot {
 
 
 
+	}
+
+	private boolean reload() {
+		Cache c = Cache.getInstance();
+		return c.reload();
 	}
 
 	public void sendMessage(String channel, List<String> lines) {
@@ -69,16 +93,12 @@ public class Bot extends PircBot {
 		List<String> messages = new LinkedList<>();
 		messages.add("Les FAI surveillés par mes petits yeux mignons de bot sont:");
 		String s="";
-		
+
 		for(ISP isp: listeFAI ) {
 			if(isp.isFFDNMember()) {
-				
-				if(isp.getName().length()<=15 && !isp.getName().contains(" ")){
-					s+=isp.getName();
-				}else {
-					s+=isp.getShortestName();
-				}
-				
+
+				s+= isp.getBetterName();
+
 				if(s.length()>=80) {
 					messages.add(s);
 					s="";

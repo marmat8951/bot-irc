@@ -6,7 +6,7 @@ public class Main {
 	
 	public static final String SERVER = "irc.geeknode.net";
 	public static final int PORT = 6667;
-	public static final String[] CHANNELS = { "#marmat", "#ffdn" };
+	public static final String[] CHANNELS = { "#marmat" };
 	public static final Cache cache = Cache.getInstance();
 	
 	public static void main(String[] args) throws Exception {
@@ -21,6 +21,7 @@ public class Main {
         bot.connect(SERVER,PORT);
         
         // Get All the infomations and store in a cache
+        Cache c = Cache.getInstance();
         
         
         

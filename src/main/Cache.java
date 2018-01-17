@@ -1,6 +1,7 @@
 package main;
 
 import java.text.NumberFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,12 +15,14 @@ public class Cache implements AffichableSurIRC {
 	 */
 	
 	public static volatile Cache instance = null;
+	private Date lastCacheUpdate;
 	private List<ISP> cache;
 	
 	private Cache() {
 		ISPDAO idao = ISPDAO.getInstance();
 		try {
 			cache = idao.getISPs();
+			lastCacheUpdate = new Date();
 		} catch (Exception e) {
 			System.err.println("Le cache n'as pas pu être géré à cause de l'exception suivante");
 			e.printStackTrace();
@@ -27,6 +30,11 @@ public class Cache implements AffichableSurIRC {
 	}
 	
 	
+	public  Date getLastCacheUpdate() {
+		return lastCacheUpdate;
+	}
+
+
 	/**
 	 * Méthode du design patern singleton. Permet de récuperer et si besoin d'initialiser, l'unique instance de la classe.
 	 * @return Instance du Cache
@@ -36,6 +44,8 @@ public class Cache implements AffichableSurIRC {
 			synchronized (ISPDAO.class) {
 				if(Cache.instance == null) {
 					Cache.instance = new Cache();
+					
+					
 				}
 			}
 		}
@@ -58,6 +68,7 @@ public class Cache implements AffichableSurIRC {
 			System.err.println("Erreur au moment du reload() :\n "+e.getMessage());
 			return false;
 		}
+		lastCacheUpdate = new Date();
 		return true;
 	}
 	

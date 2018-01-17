@@ -99,16 +99,25 @@ public class ISPDAO {
 	 * @return List of ISPs constructed.
 	 */
 	public List<ISP> getISPs() throws Exception{
+		
 		String jsonInfo = executeGet(dbAdress+"?per_page=0");
 		JSONObject allISPCount = new JSONObject(jsonInfo);
 		int nbItems = allISPCount.getInt("total_items");
 		ArrayList<ISP> ar = new ArrayList<>(nbItems);
-		
-		for (int i=1; i<nbItems; ++i) {
-			ISP isp = getISP(i);
+		int i=0;
+		int increm=0;
+		final int MAX_FAILS=5;
+		int fails=0;
+		while(i<nbItems && fails < MAX_FAILS) {
+			ISP isp = getISP(increm);
 			if(isp != null) {
 				ar.add(isp);
+				i++;
+				fails=0;
+			}else {
+				fails++;
 			}
+			increm++;
 		}
 		return ar;
 

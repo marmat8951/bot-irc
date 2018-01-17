@@ -89,17 +89,35 @@ public class Bot extends PircBot {
 				e1.printStackTrace();
 			}
 		}
+		
+		
 
 		List<String> messages = new LinkedList<>();
 		messages.add("Les FAI surveillés par mes petits yeux mignons de bot sont:");
 		String s="";
-
+		
+		
+		if(message.indexOf(' ')!=-1 && message.substring(message.indexOf(" ")).contains("all")) {
+			messages.add("=== Hors fédé: ===");
+			for(ISP isp: listeFAI) {
+				if(!isp.isFFDNMember()) {
+					s+= isp.getBetterName()+", ";
+				}
+				if(s.length()>=AffichableSurIRC.MAX_CHARACTERS) {
+					messages.add(s);
+					s="";
+				}
+			}
+			messages.add(s);
+			s="";
+		}
+			messages.add("=== Dans la fédé: ===");
 		for(ISP isp: listeFAI ) {
 			if(isp.isFFDNMember()) {
 
 				s+= isp.getBetterName();
 
-				if(s.length()>=80) {
+				if(s.length()>=AffichableSurIRC.MAX_CHARACTERS) {
 					messages.add(s);
 					s="";
 				}else {
@@ -112,6 +130,8 @@ public class Bot extends PircBot {
 
 
 	}
+	
+	
 
 
 	public void info(String channel, String sender,

@@ -100,6 +100,26 @@ public class Cache implements AffichableSurIRC {
 		return i;
 	}
 	
+	public int getMemberCountOutFede() {
+		int i = 0;
+		for(ISP isp : getListe()) {
+			if(!isp.isFFDNMember()) {
+				i += isp.getMembersCount();
+			}
+		}
+		return i;
+	}
+	
+	public int getSubscribersCountOutFede() {
+		int i = 0;
+		for(ISP isp : getListe()) {
+			if(!isp.isFFDNMember()) {
+				i += isp.getSubscribersCount();
+			}
+		}
+		return i;
+	}
+	
 	public String getSubscribersPercents(int val) {
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMaximumFractionDigits(2);
@@ -158,6 +178,7 @@ public class Cache implements AffichableSurIRC {
 		List<String> liste = new LinkedList<String>();
 		liste.add("Il y a "+cache.size()+" FAI dont "+getISPCount(Boolean.TRUE)+" dans la fédé");
 		liste.add("Cela représente en tout (dans la fédé) "+getSubscribersCountInFede()+" Abonné.e.s et "+getMemberCountInFede()+" Membres");
+		liste.add("Et hors fédé : "+getSubscribersCountOutFede()+" Abonné.e.s et "+getMemberCountOutFede()+" Membres");
 		return liste;
 	}
 	

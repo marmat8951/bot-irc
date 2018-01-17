@@ -158,8 +158,13 @@ public class ISP implements AffichableSurIRC {
 		List<String> res = new LinkedList<>();
 		String preface = "["+getBetterName()+"] ";
 		res.add(preface+"Est membre de la fédération : "+booleanToOuiNon(isFFDNMember()));
-		res.add(preface+"Nombre de Membres : "+getMembersCount()+" soit "+c.getMembersPercents(getMembersCount()));
-		res.add(preface+"Nombre d'abonnements : "+getSubscribersCount()+" soit "+c.getSubscribersPercents(getSubscribersCount()));
+		if(isFFDNMember()) {
+			res.add(preface+"Nombre de Membres : "+getMembersCount()+" soit "+c.getMembersPercents(getMembersCount()));
+			res.add(preface+"Nombre d'abonnements : "+getSubscribersCount()+" soit "+c.getSubscribersPercents(getSubscribersCount()));
+		}else {
+			res.add(preface+"Nombre de Membres : "+getMembersCount());
+			res.add(preface+"Nombre d'abonnements : "+getSubscribersCount());
+		}
 		
 		
 		return res;

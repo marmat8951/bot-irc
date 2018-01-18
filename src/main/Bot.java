@@ -36,6 +36,10 @@ public class Bot extends PircBot {
 		if (message.contains("+liste")) {
 			list(channel, sender, login, hostname, message);
 		}
+		
+		if (message.equals("+source")) {
+			sendMessage(channel, sender+": mes sources sont disponibles ici: https://code.ffdn.org/marmat8951/bot-irc2");
+		}
 
 		if(message.equals("+reload")) {
 			Date now = new Date();

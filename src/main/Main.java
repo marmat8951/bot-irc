@@ -31,7 +31,8 @@ public class Main {
         for(int i = 0; i< CHANNELS.length; i++) {
         bot.joinChannel(CHANNELS[i]);
         }
-        
+        CacheReloader cacheReloader = new CacheReloader(3600); // Met à jour la base toute les heures.
+        cacheReloader.start();
 		}catch(ConnectException ce) {
 			failures++;
 			System.err.println("Erreur numéro "+failures);

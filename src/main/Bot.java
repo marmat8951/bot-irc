@@ -24,21 +24,20 @@ public class Bot extends PircBot {
 			String login, String hostname, String message) {
 		if (message.equalsIgnoreCase("time?")) {
 			String time = new java.util.Date().toString();
-			sendMessage(channel, sender + ": The time is now " + time);
+			sendMessage(channel, sender + ": Nous sommes le " + time);
 		}
 
-		if (message.contains("+info")) {
-
+		if (message.substring(0, 5).equalsIgnoreCase("+info")) {
 			info(channel,sender,login,hostname,message);
-
 		}
 
-		if (message.contains("+liste")) {
-			list(channel, sender, login, hostname, message);
-		}
-		
-		if (message.equals("+source")) {
+		if (message.equalsIgnoreCase("+source") || message.equalsIgnoreCase("+code") || message.equalsIgnoreCase("+sources")) {
 			sendMessage(channel, sender+": mes sources sont disponibles ici: https://code.ffdn.org/marmat8951/bot-irc2");
+		}
+
+
+		if (message.substring(0, 6).equals("+liste")) {
+			list(channel, sender, login, hostname, message);
 		}
 
 		if(message.equals("+reload")) {
@@ -93,14 +92,14 @@ public class Bot extends PircBot {
 				e1.printStackTrace();
 			}
 		}
-		
-		
+
+
 
 		List<String> messages = new LinkedList<>();
 		messages.add("Les FAI surveillés par mes petits yeux mignons de bot sont:");
 		String s="";
-		
-		
+
+
 		if(message.indexOf(' ')!=-1 && message.substring(message.indexOf(" ")).contains("all")) {
 			messages.add("=== Hors fédé: ===");
 			for(ISP isp: listeFAI) {
@@ -115,7 +114,7 @@ public class Bot extends PircBot {
 			messages.add(s);
 			s="";
 		}
-			messages.add("=== Dans la fédé: ===");
+		messages.add("=== Dans la fédé: ===");
 		for(ISP isp: listeFAI ) {
 			if(isp.isFFDNMember()) {
 
@@ -134,8 +133,8 @@ public class Bot extends PircBot {
 
 
 	}
-	
-	
+
+
 
 
 	public void info(String channel, String sender,

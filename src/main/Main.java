@@ -10,16 +10,27 @@ public class Main {
 	public static final long TIMEOUT_BEFORE_RECONNECTING = 360;
 	public static final Cache cache = Cache.getInstance();
 	public static int failures = 0;
-	
+	private static boolean DEBUG;
 	
 	public static void main(String[] args) throws Exception {
+		
+		for(int i=0;i<args.length;i++) {
+			if(args[i].equals("-debug")) {
+				DEBUG = true;
+			}
+			DEBUG = false;
+		}
 		
 		try {
         // Now start our bot up.
         Bot bot = new Bot();
         
+        if(isDebug()) {
         // Enable debugging output.
-        bot.setVerbose(true);
+        	bot.setVerbose(true);
+        }else {
+        	bot.setVerbose(false);
+        }
         
         // Connect to the IRC server.
         bot.connect(SERVER,PORT);
@@ -43,4 +54,8 @@ public class Main {
 		}
 	}
 
+	
+	public static boolean isDebug () {
+		return Main.DEBUG;
+	}
 }

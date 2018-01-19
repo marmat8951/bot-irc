@@ -20,6 +20,8 @@ import javax.net.ssl.HttpsURLConnection;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import main.Main;
+
 public class ISPDAO {
 
 	/**
@@ -127,7 +129,10 @@ public class ISPDAO {
 	public ISP getISP(int number) {
 		String json = executeGet(dbAdress+number+'/');
 		if(json != null) {
+			if(Main.isDebug()) {
+				System.out.println("JSON du FAI "+number);
 		System.out.println(json);
+			}
 		JSONObject jsonObj = new JSONObject(json);
 		String name = getName(jsonObj);
 		int id = getId(jsonObj);
@@ -137,8 +142,13 @@ public class ISPDAO {
 		String last_update = getDateUpdated(jsonObj);
 		ISP isp = new ISP(name, id, member, date_added, last_update, ispData);
 		return isp;
+		}else {
+			if(Main.isDebug()) {
+				System.out.println("Pas de JSON pour le FAI "+number);
+			}
+			
+			return null;
 		}
-		return null;
 
 	}
 	/**

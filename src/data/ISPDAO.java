@@ -17,6 +17,7 @@ import java.util.Scanner;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -140,7 +141,8 @@ public class ISPDAO {
 		ISPdata ispData = new ISPdata(jsonObj.getJSONObject("ispformat"));
 		String date_added = getDateAdded(jsonObj);
 		String last_update = getDateUpdated(jsonObj);
-		ISP isp = new ISP(name, id, member, date_added, last_update, ispData);
+		CoveredAreas[] ca = getCoveredAreas(jsonObj);
+		ISP isp = new ISP(name, id, member, date_added, last_update, ispData,ca);
 		return isp;
 		}else {
 			if(Main.isDebug()) {
@@ -216,6 +218,30 @@ public class ISPDAO {
 			
 		}
 		return res;
+	}
+	
+	private CoveredAreas [] getCoveredAreas(JSONObject json) {
+		CoveredAreas [] res=null;
+		try {
+			JSONArray ja = json.getJSONArray("coveredAreas");
+			res = new CoveredAreas [ja.length()];
+			for(int i=0;i<ja.length();i++) {
+				JSONObject jo = ja.getJSONObject(i);
+				JSONArray tech= jo.getJSONArray("technologies");
+				String name = jo.getString("name");
+				List<TechnoCoverage> technos = new ArrayList<>();
+				for(int j=0;j<tech.length();j++) {
+					technos.add(TechnoCoverage.getFromString(tech.getString(j)));
+				}
+				res[i]=new CoveredAreas(name, technos);				
+				
+				
+			}
+			return res;
+		}catch(JSONException jo) {
+			return null;
+		}
+		
 	}
 	
 	

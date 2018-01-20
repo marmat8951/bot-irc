@@ -14,10 +14,11 @@ public class ISP implements AffichableSurIRC {
 	private String date_added;
 	private String last_update;
 	private ISPdata data;
+	private CoveredAreas [] coveredAreas;
 	
 	
 	
-	public ISP(String name, int id, boolean isFFDNMember, String date_added, String last_update, ISPdata data) {
+	public ISP(String name, int id, boolean isFFDNMember, String date_added, String last_update, ISPdata data, CoveredAreas [] ca) {
 		super();
 		this.name = name;
 		this.id = id;
@@ -25,6 +26,7 @@ public class ISP implements AffichableSurIRC {
 		this.date_added = date_added;
 		this.last_update = last_update;
 		this.data = data;
+		this.coveredAreas = ca;
 	}
 	
 	public String getShortestName() {
@@ -174,4 +176,9 @@ public class ISP implements AffichableSurIRC {
 		return data.getShortname();
 	}
 
+	public CoveredAreas[] getCoveredAreas() {
+		return coveredAreas;
+	}
+
+	
 }

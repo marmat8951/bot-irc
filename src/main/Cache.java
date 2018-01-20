@@ -183,6 +183,14 @@ public class Cache implements AffichableSurIRC {
 	}
 	
 	
+	public ISP getISPWithGeoZone(String s) {
+		for(ISP i: cache) {
+			
+		}
+		
+		return null;
+		
+	}
 	
 	
 }

@@ -35,7 +35,10 @@ public class CacheReloader implements Runnable {
 			long lastCacheUpdate = c.getLastCacheUpdate().getTime();
 			long now = new Date().getTime();
 			if(lastCacheUpdate+timeout < now) {
-				System.out.println("MISE A JOUR DE DB!!");
+				if(Main.isDebug()) {
+					Date d = new Date();
+					System.out.println(d+" : "+"Mise à jour du cache à partir de DB");
+				}
 				c.reload();
 			}
 			Thread.sleep(timeout*1000);

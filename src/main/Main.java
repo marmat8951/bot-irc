@@ -10,7 +10,7 @@ public class Main {
 	public static final long TIMEOUT_BEFORE_RECONNECTING = 360;
 	public static final Cache cache = Cache.getInstance();
 	public static int failures = 0;
-	private static boolean DEBUG;
+	private static boolean DEBUG=true;
 
 	public static void main(String[] args) throws Exception {
 

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import data.CoveredAreas;
 import data.ISP;
 import data.ISPDAO;
 
@@ -13,11 +14,11 @@ public class Cache implements AffichableSurIRC {
 	 * Cette classe sert de cache pour les infos de DB
 	 * Elle implemente le Design Pattern Singleton dans la mesure où cette classe doit être l'unique instance de référence peu importe le Thread l'utilisant, et que le cache est unique.
 	 */
-	
+
 	public static volatile Cache instance = null;
 	private Date lastCacheUpdate;
 	private List<ISP> cache;
-	
+
 	private Cache() {
 		ISPDAO idao = ISPDAO.getInstance();
 		try {
@@ -28,8 +29,8 @@ public class Cache implements AffichableSurIRC {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
+
 	public  Date getLastCacheUpdate() {
 		return lastCacheUpdate;
 	}
@@ -44,14 +45,14 @@ public class Cache implements AffichableSurIRC {
 			synchronized (ISPDAO.class) {
 				if(Cache.instance == null) {
 					Cache.instance = new Cache();
-					
-					
+
+
 				}
 			}
 		}
 		return Cache.instance;
 	}
-	
+
 	/**
 	 * Cette methode vient mettre à jour le cache des FAI. Pour cela, il récupere l'instance du DAO et récupère la liste des ISP. Si tout cse passe correctement, il supprime le cache précédent et le remplace par les nouvelles valeurs. Sinon, il maaintient le cache précédent.
 	 * @return True si l'operation s'est passée correctement, False sinon et affiche la cause
@@ -71,7 +72,7 @@ public class Cache implements AffichableSurIRC {
 		lastCacheUpdate = new Date();
 		return true;
 	}
-	
+
 	public int size() {
 		return cache.size();
 	}
@@ -79,7 +80,7 @@ public class Cache implements AffichableSurIRC {
 	public List<ISP> getListe(){
 		return cache;
 	}
-	
+
 	public int getMemberCountInFede() {
 		int i = 0;
 		for(ISP isp : getListe()) {
@@ -89,7 +90,7 @@ public class Cache implements AffichableSurIRC {
 		}
 		return i;
 	}
-	
+
 	public int getSubscribersCountInFede() {
 		int i = 0;
 		for(ISP isp : getListe()) {
@@ -99,7 +100,7 @@ public class Cache implements AffichableSurIRC {
 		}
 		return i;
 	}
-	
+
 	public int getMemberCountOutFede() {
 		int i = 0;
 		for(ISP isp : getListe()) {
@@ -109,7 +110,7 @@ public class Cache implements AffichableSurIRC {
 		}
 		return i;
 	}
-	
+
 	public int getSubscribersCountOutFede() {
 		int i = 0;
 		for(ISP isp : getListe()) {
@@ -119,7 +120,7 @@ public class Cache implements AffichableSurIRC {
 		}
 		return i;
 	}
-	
+
 	public String getSubscribersPercents(int val) {
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMaximumFractionDigits(2);
@@ -128,7 +129,7 @@ public class Cache implements AffichableSurIRC {
 		Double nbSubscribers = 0.0+getSubscribersCountInFede();
 		return nf.format((val2/nbSubscribers)*100)+" %";
 	}
-	
+
 	public String getMembersPercents(int val) {
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMaximumFractionDigits(2);
@@ -137,9 +138,9 @@ public class Cache implements AffichableSurIRC {
 		Double nbMembers = 0.0+getMemberCountInFede();
 		return nf.format((val2/nbMembers)*100)+" %";
 	}
-	
-	
-	
+
+
+
 	/**
 	 * Donne le nombre de FAI de la fédé en parcourant le cache.
 	 * @param ffdn_member Si = null alors on s'en fout, si =true, seuls les FAI de la fédé, si = false, seuls les FAI non membres
@@ -156,11 +157,11 @@ public class Cache implements AffichableSurIRC {
 				}
 			}
 			return count;
-			
+
 		}
-			
+
 	}
-	
+
 	public ISP getISPWithName(String s) {
 		for(ISP i : cache) {
 			if(i.getShortestName().equalsIgnoreCase(s) || i.getName().equalsIgnoreCase(s)) {
@@ -169,11 +170,11 @@ public class Cache implements AffichableSurIRC {
 		}
 		return null;
 	}
-	
+
 	public String toString() {
 		return "Cache de "+cache.size()+" FAI";
 	}
-	
+
 	public List<String> toStringIRC() {
 		List<String> liste = new LinkedList<String>();
 		liste.add("Il y a "+cache.size()+" FAI dont "+getISPCount(Boolean.TRUE)+" dans la fédé");
@@ -181,16 +182,28 @@ public class Cache implements AffichableSurIRC {
 		liste.add("Et hors fédé : "+getSubscribersCountOutFede()+" Abonné.e.s et "+getMemberCountOutFede()+" Membres");
 		return liste;
 	}
-	
-	
+
+
 	public ISP getISPWithGeoZone(String s) {
+
 		for(ISP i: cache) {
-			
+			if(Main.isDebug()) {
+				System.out.println("Recherche sur "+i.getBetterName());
+			}
+			if(i.getCoveredAreas()!= null) for(CoveredAreas ca : i.getCoveredAreas()) {
+				if(Main.isDebug()) {
+					ca.getName();
+				}
+				if(s.equalsIgnoreCase(ca.getName())) {
+					return i;
+				}
+			}
+
 		}
-		
+
 		return null;
-		
+
 	}
-	
-	
+
+
 }

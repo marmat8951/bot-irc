@@ -1,5 +1,6 @@
 package data;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -179,6 +180,37 @@ public class ISP implements AffichableSurIRC {
 	public CoveredAreas[] getCoveredAreas() {
 		return coveredAreas;
 	}
-
+	
+	/**
+	 * Récupere la zone couverte correspondante au paramètre
+	 * @param name Nom de la zone
+	 * @return	la première Zone correspondante au nom.
+	 */
+	public CoveredAreas getCoveredArea(String name) {
+		for(CoveredAreas ca : coveredAreas) {
+			if(ca.getName().equalsIgnoreCase(name)) {
+				return ca;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	  * Récupere la zone couverte correspondante au paramètre
+	 * @param name Nom de la zone
+	 * @return	toutes les Zones correspondante au nom.
+	 */
+	public List<CoveredAreas> getCoveredAreas(String name){
+		List<CoveredAreas> lca = new ArrayList<>(4);
+		for(CoveredAreas ca : coveredAreas) {
+			if(ca.getName().equalsIgnoreCase(name)) {
+				lca.add(ca);
+			}
+		}
+		return lca;
+		
+	}
+	
+	
 	
 }

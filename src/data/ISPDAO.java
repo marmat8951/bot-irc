@@ -221,9 +221,12 @@ public class ISPDAO {
 	}
 	
 	private CoveredAreas [] getCoveredAreas(JSONObject json) {
+		json = json.getJSONObject("ispformat");
 		CoveredAreas [] res=null;
 		try {
+			
 			JSONArray ja = json.getJSONArray("coveredAreas");
+		
 			res = new CoveredAreas [ja.length()];
 			for(int i=0;i<ja.length();i++) {
 				JSONObject jo = ja.getJSONObject(i);
@@ -239,6 +242,8 @@ public class ISPDAO {
 			}
 			return res;
 		}catch(JSONException jo) {
+			System.err.println("erreur GetCoveredAreas pour "+getName(json));
+			jo.printStackTrace(System.err);
 			return null;
 		}
 		

@@ -5,6 +5,12 @@ import java.util.List;
 
 import main.AffichableSurIRC;
 
+/**
+ * Cette classe à pour but de stocker les serveurs/channels pour les FAI
+ * @author Marmat
+ *
+ */
+
 public class Server implements AffichableSurIRC{
 	private String address;
 	private int port;
@@ -36,6 +42,12 @@ public class Server implements AffichableSurIRC{
 		
 		
 	}
+	
+	/**
+	 * Extrait le port d'une URI. par exemple irc://geeknode.net:6789#marmat renveira 6789
+	 * @param s URI sur laquelle extraire le numéro de port
+	 * @return Le numéro de port
+	 */
 	private int getSrvPort(String s) {
 		int res;
 		if(s.contains(":")) {
@@ -53,6 +65,11 @@ public class Server implements AffichableSurIRC{
 		return res;
 	}
 
+	/**
+	 * Extrait l'addresse d'une URI. par exemple irc://geeknode.net:789#marmat renveira geeknode.net
+	 * @param s URI 
+	 * @return L'addresse 
+	 */
 	private String getSrvAddr(String s) {
 		String res="";
 		String serv=s.substring(7); // on enleve irc://
@@ -64,6 +81,11 @@ public class Server implements AffichableSurIRC{
 		return res;
 	}
 	
+	/**
+	 * Extrait le chan d'une URI. par exemple irc://geeknode.net:789#marmat renveira #marmat
+	 * @param s URI 
+	 * @return L'addresse 
+	 */
 	private String getSrvChan(String s) {
 		int idxcar = s.indexOf('#');
 		return s.substring(idxcar+1);

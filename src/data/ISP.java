@@ -17,7 +17,16 @@ public class ISP implements AffichableSurIRC {
 	private ISPdata data;
 	private CoveredAreas [] coveredAreas;
 	
-	
+	/**
+	 *  Constructeur principal de la classe.
+	 * @param name
+	 * @param id
+	 * @param isFFDNMember
+	 * @param date_added
+	 * @param last_update
+	 * @param data
+	 * @param ca
+	 */
 	
 	public ISP(String name, int id, boolean isFFDNMember, String date_added, String last_update, ISPdata data, CoveredAreas [] ca) {
 		super();
@@ -33,6 +42,10 @@ public class ISP implements AffichableSurIRC {
 		}
 	}
 	
+	/**
+	 * Méthode pour récuperer le plus court des noms du FAI, c'est à dire, si il existe shortname, sinon name
+	 * @return 
+	 */
 	public String getShortestName() {
 		if(data.hasShortName()) {
 			return data.getShortname();

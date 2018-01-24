@@ -28,6 +28,9 @@ public class ISP implements AffichableSurIRC {
 		this.last_update = last_update;
 		this.data = data;
 		this.coveredAreas = ca;
+		for(int i=0; i<coveredAreas.length;++i) {
+			coveredAreas[i].setIsp(this);
+		}
 	}
 	
 	public String getShortestName() {

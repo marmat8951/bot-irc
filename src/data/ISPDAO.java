@@ -26,17 +26,20 @@ import main.Main;
 public class ISPDAO {
 
 	/**
-	 * This class implements the Sigleton Design Patern and is the DataAcess Object. It's role is to get informations from <a href="db.ffdn.org"> db.ffdn.org </a> and transform the into data Objects.
+	 * Cette classe implémente le design patern singleton. Son role est de récuperer les données de <a href="db.ffdn.org"> db.ffdn.org </a> et de les transformer en objets utilisables ensuite.
 	 */
 
 	public static volatile ISPDAO instance = null;
 	private final String dbAdress = "https://db.ffdn.org/api/v1/isp/";
 
-
+	// Ceci permet de rendre impossible l'instanciation de la classe, conformement au design patern singleton.
 	private ISPDAO() {
 
 	}
-
+	/**
+	 * Cette méthode est celle permettant de récuperer l'instance de la classe. Si cette dernière n'est pas initialisée, elle l'initialise avant.
+	 * @return L'instance de la classe a utiliser ensuite
+	 */
 	public final static ISPDAO getInstance() {
 		if (ISPDAO.instance == null) {
 			synchronized (ISPDAO.class) {
@@ -48,10 +51,22 @@ public class ISPDAO {
 		return ISPDAO.instance;
 	}
 
+	/**
+	 * Version simplifiée : Execute une requette de type GET en HTTPS simplement avec l'addresse et avec les paramètres par défault pour du https
+	 * @param https_url URL a récuperer en HTTPS
+	 * @return La chaine de caractères correspondant à la page demandée par l'URL.
+	 */
 	private String executeGet(String https_url) {
 		return executeGet(https_url, "", 443);
 	}
 	
+	/**
+	 * Implementation reele de la requete HTTPS.
+	 * @param https_url URL sur laquelle récuperer la ressource
+	 * @param proxyName Le nom du proxy, si besoin
+	 * @param port le port sur lequel faire la demande
+	 * @return La chaine de caractères correspondant à la page demandée par l'URL.
+	 */
 	@SuppressWarnings("resource")
 	private String executeGet(final String https_url, final String proxyName, final int port) {
 	    String ret = "";
@@ -98,8 +113,8 @@ public class ISPDAO {
 
 
 	/**
-	 * 
-	 * @return List of ISPs constructed.
+	 * Récupere tous les FAI possibles. Dans le cas ou il y a des Fails consécutifs, c'est que peut-être DB.ffdn est deffectueux, car on a pas atteint le nombre de fai annoncés par total_items, mais on n'as que des réponses indiquant que la ressource est incorrecte.
+	 * @return la liste de tous les FAIs possibles.
 	 */
 	public List<ISP> getISPs() throws Exception{
 		
@@ -125,7 +140,12 @@ public class ISPDAO {
 		return ar;
 
 	}
-
+	
+	/**
+	 * Récupere le FAI qui a pour id dans db.ffdn.org le paramètre number
+	 * @param number numéro correspondna tà l'id a aller chercher dans db
+	 * @return le FAI construit correspondant, ou null si l'id n'est pas ou plus occupé par un FAI
+	 */
 
 	public ISP getISP(int number) {
 		String json = executeGet(dbAdress+number+'/');
@@ -220,10 +240,18 @@ public class ISPDAO {
 		return res;
 	}
 	
+	/**
+	 * Récupere les données
+	 * @param json objet récupéré depuis db.ffdn
+	 * @return Tableau des zones couvertes
+	 */
 	private CoveredAreas [] getCoveredAreas(JSONObject json) {
+		json = json.getJSONObject("ispformat");
 		CoveredAreas [] res=null;
 		try {
+			
 			JSONArray ja = json.getJSONArray("coveredAreas");
+		
 			res = new CoveredAreas [ja.length()];
 			for(int i=0;i<ja.length();i++) {
 				JSONObject jo = ja.getJSONObject(i);
@@ -239,6 +267,8 @@ public class ISPDAO {
 			}
 			return res;
 		}catch(JSONException jo) {
+			System.err.println("erreur GetCoveredAreas pour "+getName(json));
+			jo.printStackTrace(System.err);
 			return null;
 		}
 		

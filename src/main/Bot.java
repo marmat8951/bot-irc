@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.jibble.pircbot.PircBot;
 
+import data.CoveredAreas;
 import data.ISP;
 import data.ISPDAO;
 import verif_saisie.EntierPositifNonVide;
@@ -19,6 +20,11 @@ public class Bot extends PircBot {
 	public Bot() {
 		this.setName("UneFede2");
 		this.setMessageDelay(TIME_BETWEEN_MESSAGES);
+		if(Main.isDebug()) {
+			this.setVerbose(true);
+		}else {
+			this.setVerbose(false);
+		}
 		idao = ISPDAO.getInstance();
 	}
 
@@ -29,16 +35,21 @@ public class Bot extends PircBot {
 			sendMessage(channel, sender + ": Nous sommes le " + time);
 		}
 
-		if (message.substring(0, 5).equalsIgnoreCase("+info")) {
+		if (message.length()>6 && message.substring(0, 5).equalsIgnoreCase("+info")) {
 			info(channel,sender,login,hostname,message);
 		}
+		
+		if (message.length()>9 && message.substring(0, 8).equalsIgnoreCase("+contact")) {
+			contact(channel,sender,login,hostname,message);
+		}
+		
 
 		if (message.equalsIgnoreCase("+source") || message.equalsIgnoreCase("+code") || message.equalsIgnoreCase("+sources")) {
 			sendMessage(channel, sender+": mes sources sont disponibles ici: https://code.ffdn.org/marmat8951/bot-irc2");
 		}
 
 
-		if (message.substring(0, 6).equals("+liste")) {
+		if (message.length()>= 6 && message.substring(0, 6).equals("+liste")) {
 			list(channel, sender, login, hostname, message);
 		}
 
@@ -137,8 +148,25 @@ public class Bot extends PircBot {
 	}
 
 
+	public void contact(String channel, String sender,
+			String login, String hostname, String message) {
+		
+		String s = message.substring(message.indexOf(' ')+1);
+		if(!EntierPositifNonVide.verifie(s)) {					// +contact suivi d'un mot
+			Cache c = Cache.getInstance();
+			ISP fai = c.getISPWithName(s);
+			if(fai == null) {
+				sendMessage(channel, "Aucun FAI "+s);
+			}else {
+				sendMessage(channel, fai.contact());
+			}
+		}
+		
+		
+	}
 
-
+	
+	
 	public void info(String channel, String sender,
 			String login, String hostname, String message) {
 
@@ -177,7 +205,20 @@ public class Bot extends PircBot {
 				Cache c = Cache.getInstance();
 				ISP i = c.getISPWithName(s);
 				if(i == null) {
-					sendMessage(channel, "Le FAI "+s+" est Inconnu, désolé");
+					sendMessage(channel, "Recherche d'une zone "+s);
+					ISP j = c.getISPWithGeoZone(s);
+					if(j == null)
+					sendMessage(channel, "Le FAI "+s+" est Inconnu, désolé. Et aucun FAI n'opère sur une sone dénomée "+s+" ...");
+					else {
+						sendMessage(channel, "Un FAI opère sur la zone "+s+" : ");
+						sendMessage(channel, j.toStringIRC());
+						List<CoveredAreas> cas = j.getCoveredAreas(s);
+						String technos = "";
+						for(CoveredAreas ca: cas) {
+							technos+=ca.getTechnos()+" ";
+						}
+						sendMessage(channel, "Avec pour techno "+technos);
+					}
 				}else {
 					sendMessage(channel, i.toStringIRC());
 				}

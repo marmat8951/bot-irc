@@ -17,12 +17,8 @@ public class Main {
 		try {
 			setDebug(args[0].equals("-debug"));
 
-
-
 			// Now start our bot up.
 			Bot bot = new Bot();
-
-
 
 			// Connect to the IRC server.
 			bot.connect(SERVER,PORT);
@@ -39,12 +35,7 @@ public class Main {
 			
 			
 			
-			if(isDebug()) {
-				// Enable debugging output.
-				bot.setVerbose(true);
-			}else {
-				bot.setVerbose(false);
-			}
+			
 			
 			System.out.println("Debug? "+DEBUG);
 

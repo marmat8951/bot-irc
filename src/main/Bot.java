@@ -18,6 +18,11 @@ public class Bot extends PircBot {
 
 	public Bot() {
 		this.setName("UneFede2");
+		if(Main.isDebug()) {
+			this.setVerbose(true);
+		}else {
+			this.setVerbose(false);
+		}
 		idao = ISPDAO.getInstance();
 	}
 
@@ -37,7 +42,7 @@ public class Bot extends PircBot {
 		}
 
 
-		if (message.length()> 6 && message.substring(0, 6).equals("+liste")) {
+		if (message.length()>= 6 && message.substring(0, 6).equals("+liste")) {
 			list(channel, sender, login, hostname, message);
 		}
 

@@ -13,10 +13,12 @@ import verif_saisie.EntierPositifNonVide;
 public class Bot extends PircBot {
 
 	public static final long TIME_BETWEEN_RELOADS = 360000;
+	public static final long TIME_BETWEEN_MESSAGES = 200;
 	private ISPDAO idao;
 
 	public Bot() {
 		this.setName("UneFede2");
+		this.setMessageDelay(TIME_BETWEEN_MESSAGES);
 		idao = ISPDAO.getInstance();
 	}
 

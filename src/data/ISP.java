@@ -7,6 +7,7 @@ import java.util.List;
 import IRC.Server;
 import main.AffichableSurIRC;
 import main.Cache;
+import main.Main;
 
 public class ISP implements AffichableSurIRC {
 
@@ -235,11 +236,15 @@ public class ISP implements AffichableSurIRC {
 		s.add("Mail: "+getData().emailSyntaxer());
 		String chats="Chat : ";
 		Server[] chans = getData().getIrcChan();
-		if(chans!= null) {
+		if(chans != null) {
 			for(int i=0; i<chans.length; i++) {
 				chats+=chans[i].toString()+" ";
 			}
 			s.add(chats);
+		} else {
+			if(Main.isDebug()) {
+			s.add("Chans a Null");
+			}
 		}
 		return s;
 	}

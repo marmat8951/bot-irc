@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import IRC.Server;
+import main.Main;
 
 public class ISPdata {
 
@@ -52,8 +53,13 @@ public class ISPdata {
 
 			}
 		}catch(JSONException jsonE) {	// Si il n'y a pas de chatroom
+			if(Main.isDebug()) {
+				System.err.println("Warning : Pas de chatroom pour "+this.shortname);
+				jsonE.printStackTrace(System.err);
+			}
 			chatrooms = new Server[0];
 		}
+		this.ircChan = chatrooms;
 		this.progressStatus = getInt(jo,"progressStatus");
 		this.membersCount = getInt(jo,"memberCount",0);
 		this.subscribersCount = getInt(jo,"subscriberCount",0);
@@ -63,6 +69,7 @@ public class ISPdata {
 			this.joinDate = "?";
 		}
 		this.creationDate = getString(jo,"creationDate","?");
+		this.email = getString(jo,"email","?");
 
 	}
 	

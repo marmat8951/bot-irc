@@ -164,7 +164,7 @@ public class Cache implements AffichableSurIRC {
 
 	public ISP getISPWithName(String s) {
 		for(ISP i : cache) {
-			if(i.getShortestName().equalsIgnoreCase(s) || i.getName().equalsIgnoreCase(s)) {
+			if(i.getShortestName().toLowerCase().contains(s.toLowerCase()) || i.getName().toLowerCase().contains(s.toLowerCase())) {
 				return i;
 			}
 		}

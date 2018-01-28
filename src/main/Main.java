@@ -33,11 +33,8 @@ public class Main {
 			CacheReloader cacheReloader = new CacheReloader(3600); // Met à jour la base toute les heures.
 			cacheReloader.start();
 			
-			
-			
-			
-			
 			System.out.println("Debug? "+DEBUG);
+			
 
 		}catch(ConnectException ce) {
 			failures++;

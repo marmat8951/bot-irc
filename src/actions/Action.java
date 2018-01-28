@@ -2,12 +2,12 @@ package actions;
 
 import java.util.List;
 
-import main.Bot;
+import org.jibble.pircbot.PircBot;
 
 public abstract class Action {
 
 	public List<String> keyWords;
-	public Bot bot;
+	public PircBot bot;
 	
 	public abstract void react(String channel, String sender,
 			String login, String hostname, String message);

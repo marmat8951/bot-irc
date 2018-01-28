@@ -148,5 +148,26 @@ public class ISPdata {
 		return shortname;
 	}
 	
-	
+	/**
+	 * Transforme l'addresse mail. Si l'adresse est a null, alors renvoie la chaine vide a la place.
+	 * @return L'adresse Email modifiée pour ne pas être en clair.
+	 */
+	public String emailSyntaxer() {
+		String email = this.getEmail();
+		String res="";
+		if(email==null) {
+			return res;
+		}
+		for(int i=0; i<email.length(); ++i) {
+			if(email.charAt(i) == '@' ) {
+				res +=" <at> ";
+			}else if( email.charAt(i) == '.' ) {
+				res +=" <dot> ";
+			}else {
+				res +=email.charAt(i);
+			}
+		}
+		return res;
+		
+	}
 }

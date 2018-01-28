@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import IRC.Server;
 import main.AffichableSurIRC;
 import main.Cache;
 
 public class ISP implements AffichableSurIRC {
-	
+
 	private String name;
 	private int id;
 	private boolean isFFDNMember;
@@ -16,7 +17,7 @@ public class ISP implements AffichableSurIRC {
 	private String last_update;
 	private ISPdata data;
 	private CoveredAreas [] coveredAreas;
-	
+
 	/**
 	 *  Constructeur principal de la classe.
 	 * @param name
@@ -27,7 +28,7 @@ public class ISP implements AffichableSurIRC {
 	 * @param data
 	 * @param ca
 	 */
-	
+
 	public ISP(String name, int id, boolean isFFDNMember, String date_added, String last_update, ISPdata data, CoveredAreas [] ca) {
 		super();
 		this.name = name;
@@ -41,7 +42,7 @@ public class ISP implements AffichableSurIRC {
 			coveredAreas[i].setIsp(this);
 		}
 	}
-	
+
 	/**
 	 * Méthode pour récuperer le plus court des noms du FAI, c'est à dire, si il existe shortname, sinon name
 	 * @return 
@@ -53,7 +54,7 @@ public class ISP implements AffichableSurIRC {
 			return name;
 		}
 	}
-	
+
 	/**
 	 * Méthode pour récuperer le nom le plus correct pour afficher les informations.
 	 * Si il n'y a pas de Shortname alors name sera utilisé.
@@ -73,7 +74,7 @@ public class ISP implements AffichableSurIRC {
 		}else {
 			return name;
 		}
-		
+
 	}
 	/**
 	 * Inverse de getBetterName. Le but est dans le cadre de l'affichage de plusieurs noms
@@ -87,12 +88,12 @@ public class ISP implements AffichableSurIRC {
 			}else {
 				return shortname;
 			}
-			
+
 		}else {
 			return name;
 		}
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -122,7 +123,7 @@ public class ISP implements AffichableSurIRC {
 		this.isFFDNMember = isFFDNMember;
 	}
 
-	
+
 	public String getDate_added() {
 		return date_added;
 	}
@@ -150,7 +151,7 @@ public class ISP implements AffichableSurIRC {
 	public int getSubscribersCount() {
 		return data.getSubscribersCount();
 	}
-	
+
 	public String toString() {
 		String res="";
 		res+=name+" : ";
@@ -158,20 +159,20 @@ public class ISP implements AffichableSurIRC {
 		res+="Nombre de membres: "+getMembersCount()+" Nombre d'abonnements:"+getSubscribersCount(); 
 		return res;
 	}
-	
+
 	private String booleanToOuiNon(boolean b) {
 		if(b) {
 			return "oui";
 		}
 		return "non";
-		
+
 	}
-	
+
 	/**
 	 * Renvoie une Liste de chaine de caractères pour permettre l'affichage sur IRC ligne par ligne, bien que le \n ne soit pas interprété.
 	 * @return Une Liste de chaine correspondant à toutes les lignes que le bot doit écrire
 	 */
-	
+
 	public List<String> toStringIRC () {
 		Cache c = Cache.getInstance();
 		List<String> res = new LinkedList<>();
@@ -184,11 +185,11 @@ public class ISP implements AffichableSurIRC {
 			res.add(preface+"Nombre de Membres : "+getMembersCount());
 			res.add(preface+"Nombre d'abonnements : "+getSubscribersCount());
 		}
-		
-		
+
+
 		return res;
 	}
-	
+
 	private String getShortName() {
 		return data.getShortname();
 	}
@@ -196,7 +197,7 @@ public class ISP implements AffichableSurIRC {
 	public CoveredAreas[] getCoveredAreas() {
 		return coveredAreas;
 	}
-	
+
 	/**
 	 * Récupere la zone couverte correspondante au paramètre
 	 * @param name Nom de la zone
@@ -210,9 +211,9 @@ public class ISP implements AffichableSurIRC {
 		}
 		return null;
 	}
-	
+
 	/**
-	  * Récupere la zone couverte correspondante au paramètre
+	 * Récupere la zone couverte correspondante au paramètre
 	 * @param name Nom de la zone
 	 * @return	toutes les Zones correspondante au nom.
 	 */
@@ -224,9 +225,23 @@ public class ISP implements AffichableSurIRC {
 			}
 		}
 		return lca;
-		
+
 	}
-	
-	
-	
+
+	public List<String> contact() {
+		List<String> s = new ArrayList<>();
+		s.add( "["+this.getBetterName()+"] est joignable par:");
+		s.add("Site web: "+getData().getWebsite());
+		s.add("Mail: "+getData().emailSyntaxer());
+		String chats="Chat : ";
+		Server[] chans = getData().getIrcChan();
+		if(chans!= null) {
+			for(int i=0; i<chans.length; i++) {
+				chats+=chans[i].toString()+" ";
+			}
+			s.add(chats);
+		}
+		return s;
+	}
+
 }

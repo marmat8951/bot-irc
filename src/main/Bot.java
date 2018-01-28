@@ -36,6 +36,11 @@ public class Bot extends PircBot {
 		if (message.length()>6 && message.substring(0, 5).equalsIgnoreCase("+info")) {
 			info(channel,sender,login,hostname,message);
 		}
+		
+		if (message.length()>9 && message.substring(0, 8).equalsIgnoreCase("+contact")) {
+			contact(channel,sender,login,hostname,message);
+		}
+		
 
 		if (message.equalsIgnoreCase("+source") || message.equalsIgnoreCase("+code") || message.equalsIgnoreCase("+sources")) {
 			sendMessage(channel, sender+": mes sources sont disponibles ici: https://code.ffdn.org/marmat8951/bot-irc2");
@@ -146,7 +151,13 @@ public class Bot extends PircBot {
 		
 		String s = message.substring(message.indexOf(' ')+1);
 		if(!EntierPositifNonVide.verifie(s)) {					// +contact suivi d'un mot
-			
+			Cache c = Cache.getInstance();
+			ISP fai = c.getISPWithName(s);
+			if(fai == null) {
+				sendMessage(channel, "Aucun FAI "+s);
+			}else {
+				sendMessage(channel, fai.contact());
+			}
 		}
 		
 		

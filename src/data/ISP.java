@@ -21,13 +21,13 @@ public class ISP implements AffichableSurIRC {
 
 	/**
 	 *  Constructeur principal de la classe.
-	 * @param name
-	 * @param id
-	 * @param isFFDNMember
-	 * @param date_added
-	 * @param last_update
-	 * @param data
-	 * @param ca
+	 * @param name Nom du FAI
+	 * @param id Identifiant unique sur DB
+	 * @param isFFDNMember est il membre de FFDN
+	 * @param date_added Date d'ajout
+	 * @param last_update Date de mise a jour sur DB
+	 * @param data Data correspondant au champ étendu sur db
+	 * @param ca  Zones couvertes
 	 */
 
 	public ISP(String name, int id, boolean isFFDNMember, String date_added, String last_update, ISPdata data, CoveredAreas [] ca) {
@@ -46,7 +46,7 @@ public class ISP implements AffichableSurIRC {
 
 	/**
 	 * Méthode pour récuperer le plus court des noms du FAI, c'est à dire, si il existe shortname, sinon name
-	 * @return 
+	 * @return Le nom le plus court du FAI
 	 */
 	public String getShortestName() {
 		if(data.hasShortName()) {
@@ -180,8 +180,8 @@ public class ISP implements AffichableSurIRC {
 		String preface = "["+getBetterName()+"] ";
 		res.add(preface+"Est membre de la fédération : "+booleanToOuiNon(isFFDNMember()));
 		if(isFFDNMember()) {
-			res.add(preface+"Nombre de Membres : "+getMembersCount()+" soit "+c.getMembersPercents(getMembersCount()));
-			res.add(preface+"Nombre d'abonnements : "+getSubscribersCount()+" soit "+c.getSubscribersPercents(getSubscribersCount()));
+			res.add(preface+"Nombre de Membres : "+getMembersCount()+" soit "+c.getMembersPercents(getMembersCount())+" de ceux de la fédération");
+			res.add(preface+"Nombre d'abonnements : "+getSubscribersCount()+" soit "+c.getSubscribersPercents(getSubscribersCount())+" de ceux de la fédération");
 		}else {
 			res.add(preface+"Nombre de Membres : "+getMembersCount());
 			res.add(preface+"Nombre d'abonnements : "+getSubscribersCount());

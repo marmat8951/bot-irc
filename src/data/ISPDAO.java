@@ -115,6 +115,7 @@ public class ISPDAO {
 	/**
 	 * Récupere tous les FAI possibles. Dans le cas ou il y a des Fails consécutifs, c'est que peut-être DB.ffdn est deffectueux, car on a pas atteint le nombre de fai annoncés par total_items, mais on n'as que des réponses indiquant que la ressource est incorrecte.
 	 * @return la liste de tous les FAIs possibles.
+	 * @throws Exception Si il n'arrive pas a faire le get ou le JsonObjects
 	 */
 	public List<ISP> getISPs() throws Exception{
 		

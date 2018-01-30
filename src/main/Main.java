@@ -15,8 +15,11 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 
 		try {
+			if(args.length>0) {
 			setDebug(args[0].equals("-debug"));
-
+			}else {
+				setDebug(false);
+			}
 			// Now start our bot up.
 			Bot bot = new Bot();
 

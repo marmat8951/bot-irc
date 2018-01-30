@@ -54,6 +54,7 @@ public abstract class Action {
 		ar.add(new Liste(b));
 		ar.add(new Source(b));
 		ar.add(new Reload(b));
+		ar.add(new ID(b));
 		return ar;
 	}
 	

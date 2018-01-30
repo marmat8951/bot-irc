@@ -18,6 +18,7 @@ public class Cache implements AffichableSurIRC {
 	public static volatile Cache instance = null;
 	private Date lastCacheUpdate;
 	private List<ISP> cache;
+	public static final long TIME_BETWEEN_RELOADS = 360000;
 
 	private Cache() {
 		ISPDAO idao = ISPDAO.getInstance();

@@ -13,7 +13,7 @@ import main.Cache;
 public class Liste extends Action {
 
 	public Liste(Bot b) {
-		this.bot = b;
+		super(b);
 		List<String> ar = new ArrayList<>();
 		ar.add("liste");
 		this.keyWords = ar;

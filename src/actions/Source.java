@@ -13,7 +13,7 @@ import verif_saisie.EntierPositifNonVide;
 public class Source extends Action {
 
 	public Source(Bot b) {
-		this.bot = b;
+		super(b);
 		List<String> ar = new ArrayList<>();
 		ar.add("source");
 		ar.add("sources");

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.jibble.pircbot.PircBot;
 
+import actions.Action;
 import data.CoveredAreas;
 import data.ISP;
 import data.ISPDAO;
@@ -13,9 +14,10 @@ import verif_saisie.EntierPositifNonVide;
 
 public class Bot extends PircBot {
 
-	public static final long TIME_BETWEEN_RELOADS = 360000;
 	public static final long TIME_BETWEEN_MESSAGES = 200;
+	public static char CARACTERE_COMMANDE = '+';
 	private ISPDAO idao;
+	private List<Action> actions = Action.getAllActions(this);
 
 	public Bot() {
 		this.setName("UneFede2");
@@ -56,7 +58,7 @@ public class Bot extends PircBot {
 		if(message.equals("+reload")) {
 			Date now = new Date();
 			Date lastCU = Cache.getInstance().getLastCacheUpdate();
-			if(lastCU.getTime() < now.getTime()-TIME_BETWEEN_RELOADS ) {		// Si la dernière MAJ date de + de 5 minutes
+			if(lastCU.getTime() < now.getTime()-Cache.TIME_BETWEEN_RELOADS ) {		// Si la dernière MAJ date de + de 5 minutes
 				sendMessage(channel, "Je lance le reload!");
 				if(reload()) {
 					sendMessage(channel, sender+": Le reload s'est bien passé.");
@@ -64,7 +66,7 @@ public class Bot extends PircBot {
 					sendMessage(channel, sender+": Erreur au moment du reload.");
 				}
 			}else {
-				Date nextAllowed = new Date(lastCU.getTime()+TIME_BETWEEN_RELOADS);
+				Date nextAllowed = new Date(lastCU.getTime()+Cache.TIME_BETWEEN_RELOADS);
 				sendMessage(channel, "Trop de reload, attendez un peu. Le dernier à eu lieu le "+lastCU.toString()+" Prochain autorisé le "+nextAllowed);
 			}
 		}

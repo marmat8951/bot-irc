@@ -13,7 +13,7 @@ import verif_saisie.EntierPositifNonVide;
 public class Info extends Action {
 
 	public Info(Bot b) {
-		this.bot = b;
+		super(b);
 		List<String> ar = new ArrayList<>();
 		ar.add("info");
 		this.keyWords = ar;

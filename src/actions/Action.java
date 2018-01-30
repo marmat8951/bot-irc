@@ -53,6 +53,7 @@ public abstract class Action {
 		ar.add(new Info(b));
 		ar.add(new Liste(b));
 		ar.add(new Source(b));
+		ar.add(new Reload(b));
 		return ar;
 	}
 	

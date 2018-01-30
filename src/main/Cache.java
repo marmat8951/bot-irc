@@ -205,6 +205,15 @@ public class Cache implements AffichableSurIRC {
 		return null;
 
 	}
+	
+	public ISP getISPWithID(int id) {
+		for(ISP i:cache) {
+			if(i.getId() == id) {
+				return i;
+			}
+		}
+		return null;
+	}
 
 
 }

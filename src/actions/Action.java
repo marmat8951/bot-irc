@@ -21,10 +21,24 @@ public abstract class Action {
 		this.bot = b;
 	}
 	
+	/**
+	 * 
+	 * Methode réagissant au message @see PircBot;
+	 * @param channel channer sur l'IRC
+	 * @param sender personne ayant envoyé le message
+	 * @param login	login du bot
+	 * @param hostname hostname actuell
+	 * @param message message en question
+	 */
 	public abstract void react(String channel, String sender,
 			String login, String hostname, String message);
 	
 	
+	/**
+	 * Indique si oui ou non cette action doit être executée
+	 * @param s message envoyé
+	 * @return true si l'action contenue doit être executée, false sinon.
+	 */
 	public boolean hasToReact(String s) {
 		if(s.charAt(0)!=Bot.CARACTERE_COMMANDE) {
 			return false;								// On ne réagit pas si ce n'est pas une commande. Cela évite la suite du traitement.
@@ -47,6 +61,11 @@ public abstract class Action {
 		
 	}
 	
+	/**
+	 * Renvoie toutes les actions possibles prêtes à utiliser le Bot pour s'executer.
+	 * @param b Bot que nous utiliserons pour nos actions
+	 * @return Liste d'actions prete à être utilisée dans un forEach verifiant si elle doivent être executées.
+	 */
 	public static List<Action> getAllActions(Bot b){
 		List<Action> ar= new ArrayList<>();
 		ar.add(new Contact(b));

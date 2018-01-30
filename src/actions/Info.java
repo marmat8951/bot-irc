@@ -23,21 +23,22 @@ public class Info extends Action {
 	public void react(String channel, String sender, String login, String hostname, String message) {
 		String s = message.substring(message.indexOf(' ')+1);
 		ISPDAO idao = ISPDAO.getInstance();
+		Bot ib = (Bot)bot;
 		if(!EntierPositifNonVide.verifie(s)) {			// Un mot après +info
 
 
 			if(s.equalsIgnoreCase("all")) {	          			  // +info all
 				Cache c = Cache.getInstance();
-				bot.sendMessage(channel, c.toStringIRC());
+				ib.sendMessage(channel, c.toStringIRC());
 				for(ISP i : c.getListe()) {
 					if(i.isFFDNMember()) {
-						bot.sendMessage(channel, i.toStringIRC());
+						ib.sendMessage(channel, c.toStringIRC());
 					}
 				}
 
 			}else if(s.equalsIgnoreCase("ffdn")) {				//+info ffdn
 				Cache c = Cache.getInstance();
-				bot.sendMessage(channel, c.toStringIRC());
+				ib.sendMessage(channel, c.toStringIRC());
 
 			}else {
 				Cache c = Cache.getInstance();
@@ -49,7 +50,7 @@ public class Info extends Action {
 						bot.sendMessage(channel, "Le FAI "+s+" est Inconnu, désolé. Et aucun FAI n'opère sur une sone dénomée "+s+" ...");
 					else {
 						bot.sendMessage(channel, "Un FAI opère sur la zone "+s+" : ");
-						bot.sendMessage(channel, j.toStringIRC());
+						ib.sendMessage(channel, j.toStringIRC());
 						List<CoveredAreas> cas = j.getCoveredAreas(s);
 						String technos = "";
 						for(CoveredAreas ca: cas) {
@@ -58,7 +59,7 @@ public class Info extends Action {
 						bot.sendMessage(channel, "Avec pour techno "+technos);
 					}
 				}else {
-					bot.sendMessage(channel, i.toStringIRC());
+					ib.sendMessage(channel, i.toStringIRC());
 				}
 			}
 

@@ -84,7 +84,7 @@ public class Bot extends PircBot {
 		Cache c = Cache.getInstance();
 		return c.reload();
 	}
-
+	
 	public void sendMessage(String channel, List<String> lines) {
 		for(String s : lines) {
 			sendMessage(channel,s);

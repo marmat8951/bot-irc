@@ -50,4 +50,8 @@ public class Coordinates {
 		
 	}
 	
+	public double distanceAvec(Coordinates coord) {
+		return distanceAvec(coord.latitude, coord.longitude);
+	}
+	
 }

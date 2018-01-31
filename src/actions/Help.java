@@ -16,7 +16,31 @@ public class Help extends Action {
 
 	@Override
 	public void react(String channel, String sender, String login, String hostname, String message) {
-		// TODO Auto-generated method stub
+		List<Action> l = Action.getAllActions((Bot) bot);
+		String commande = message.substring(message.indexOf(' ')+1);
+		commande = commande.substring(0,message.indexOf(' '));
+		boolean hasreacted = false;
+		if(commande.equals("help")) {
+			bot.sendMessage(channel, help());
+			hasreacted = true;
+		}else {
+			for(Action a : l) {
+				if(a.keyWords.contains(commande) && hasreacted == false) {
+					String msg = "";
+					for(String s : a.keyWords) {
+						msg+="+"+s+" ";
+					}
+					msg += a.help();
+					bot.sendMessage(channel, msg);
+					hasreacted = true;
+				}
+			}
+		}
 		
+	}
+
+	@Override
+	public String help() {
+		return "Utilisez +help <commande> Pour avoir les informations sur une commande.";
 	}
 }

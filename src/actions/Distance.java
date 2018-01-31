@@ -28,9 +28,6 @@ public class Distance extends Action {
 		s=s.substring(s.indexOf(' ')+1); // Je me met après la commande
 		double latitude = Double.POSITIVE_INFINITY, longitude = latitude;
 		try {
-			if(Main.isDebug()) {
-			bot.sendMessage(channel, s.substring(0, s.indexOf(' ')));
-			}
 			latitude = Double.parseDouble(s.substring(0, s.indexOf(' ')));
 			s=s.substring(s.indexOf(' ')+1); // Je me et au second paramètre
 			longitude = Double.parseDouble(s);

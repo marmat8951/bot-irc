@@ -3,9 +3,7 @@ package actions;
 import java.util.ArrayList;
 import java.util.List;
 
-import data.CoveredAreas;
 import data.ISP;
-import data.ISPDAO;
 import main.Bot;
 import main.Cache;
 import verif_saisie.EntierPositifNonVide;

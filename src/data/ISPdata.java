@@ -19,6 +19,7 @@ public class ISPdata {
 	private String email;
 	private String creationDate;
 	private String joinDate;
+	private Coordinates coordonnees;
 	
 
 
@@ -70,9 +71,31 @@ public class ISPdata {
 		}
 		this.creationDate = getString(jo,"creationDate","?");
 		this.email = getString(jo,"email","?");
+		
+		JSONObject coord = jo.getJSONObject("coordinates");
+		this.coordonnees = new Coordinates(getDouble(coord, "latitude"), getDouble(coord, "longitude"));
 
 	}
 	
+	private double getDouble(JSONObject jo, String key, double DEFAULT) {
+		double res;
+		try {
+			res = jo.getDouble(key);
+		}catch(JSONException jsone) {
+			res = DEFAULT;
+		}
+		return res;
+	}
+	
+	/**
+	 * Recupere un double dans un objet Json
+	 * @param jo Objet Json a parser
+	 * @param key clé de la valeur
+	 * @return double correspondant
+	 */
+	private double getDouble(JSONObject jo, String key) {
+		return getDouble(jo, key, Double.POSITIVE_INFINITY);
+	}
 
 	private int getInt(JSONObject jo, String key, int DEFAULT) {
 		int res;
@@ -114,8 +137,9 @@ public class ISPdata {
 		return description;
 	}
 
-
-
+	public Coordinates getCoordonnees() {
+		return coordonnees;
+	}
 
 	public Server[] getIrcChan() {
 		return ircChan;

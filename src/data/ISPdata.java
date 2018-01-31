@@ -71,9 +71,13 @@ public class ISPdata {
 		}
 		this.creationDate = getString(jo,"creationDate","?");
 		this.email = getString(jo,"email","?");
+		try {
+			JSONObject coord = jo.getJSONObject("coordinates");
+			this.coordonnees = new Coordinates(getDouble(coord, "latitude"), getDouble(coord, "longitude"));
+		}catch(JSONException joe) {
+			this.coordonnees = new Coordinates(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
+		}
 		
-		JSONObject coord = jo.getJSONObject("coordinates");
-		this.coordonnees = new Coordinates(getDouble(coord, "latitude"), getDouble(coord, "longitude"));
 
 	}
 	

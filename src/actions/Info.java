@@ -32,7 +32,7 @@ public class Info extends Action {
 				ib.sendMessage(channel, c.toStringIRC());
 				for(ISP i : c.getListe()) {
 					if(i.isFFDNMember()) {
-						ib.sendMessage(channel, c.toStringIRC());
+						ib.sendMessage(channel, i.toStringIRC());
 					}
 				}
 

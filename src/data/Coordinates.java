@@ -37,6 +37,10 @@ public class Coordinates {
 	 * @return Distance calculée en mètres.
 	 */
 	public double distanceAvec(double latitude2,double longitude2) {
+		if(this.isNotMesurable() || new Coordinates(latitude2, longitude2).isNotMesurable()) {
+			return -1;
+		}
+		
 		final double EARTH_RADIUS = 6378137;  // Rayon en mètres de la terre
 		double rlat1 = Math.PI * latitude/180;
 		double rlat2 = Math.PI * latitude2/180;
@@ -52,6 +56,10 @@ public class Coordinates {
 	
 	public double distanceAvec(Coordinates coord) {
 		return distanceAvec(coord.latitude, coord.longitude);
+	}
+	
+	public boolean isNotMesurable() {
+		return this.latitude == Double.POSITIVE_INFINITY || this.longitude == Double.POSITIVE_INFINITY || this.latitude == Double.NEGATIVE_INFINITY || this.longitude == Double.NEGATIVE_INFINITY || this.latitude == Double.NaN || this.longitude == Double.NaN; 
 	}
 	
 }

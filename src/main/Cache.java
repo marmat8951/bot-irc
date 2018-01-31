@@ -1,6 +1,7 @@
 package main;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -80,6 +81,17 @@ public class Cache implements AffichableSurIRC {
 
 	public List<ISP> getListe(){
 		return cache;
+	}
+	
+	public List<ISP> getListeInFede(){
+		List<ISP> listeall = getListe();
+		List<ISP> res = new ArrayList<>(30);
+		for(ISP isp : listeall) {
+			if(isp.isFFDNMember()) {
+				res.add(isp);
+			}
+		}
+		return res;
 	}
 
 	public int getMemberCountInFede() {

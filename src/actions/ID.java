@@ -53,4 +53,9 @@ public class ID extends Action {
 		bot.sendMessage(channel, sender+": "+s);
 	}
 
+	@Override
+	public String help() {
+		return " Suivi du nom d'un FAI ou du numero d'un FAI. Renvoie l'Opposé de l'information donnée en paramètre. Exemple: \"+id 2\"   renvoie \"Ilico\"";
+	}
+
 }

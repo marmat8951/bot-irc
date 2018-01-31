@@ -75,6 +75,11 @@ public class Liste extends Action {
 		b2.sendMessage(channel, messages);
 	}
 
+	@Override
+	public String help() {
+		return " Liste tous les FAI de la fédération. L'Ajout du parametre All affiche aussi ceux hors fédération.";
+	}
+
 }
 
 

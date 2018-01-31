@@ -39,4 +39,9 @@ public class Reload extends Action {
 		return c.reload();
 	}
 
+	@Override
+	public String help() {
+		return " Met à jour le cache";
+	}
+
 }

@@ -34,6 +34,13 @@ public class Contact extends Action {
 
 	}
 
+	@Override
+	public String help() {
+		return " suivi du nom d'un fai. Renvoie les moyens pour contacter le FAI en question";
+	}
+
+	
+
 }
 
 

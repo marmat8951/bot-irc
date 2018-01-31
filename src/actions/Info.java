@@ -74,6 +74,11 @@ public class Info extends Action {
 
 	}
 
+	@Override
+	public String help() {
+		return " suivi du nom d'un FAI ou de son numero. Dans le cas d'un nom, il va le chercher dans le Cache. Dans le cas d'un numéro, il fait la requète directement dans db.ffdn.org. Exemples: \"+info 2\" ou \"+info fdn\" ";
+	}
+
 }
 
 

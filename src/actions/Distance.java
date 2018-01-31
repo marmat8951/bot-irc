@@ -93,6 +93,12 @@ public class Distance extends Action {
 			array[i]=array[i-1];
 		}
 	}
+
+	@Override
+	public String help() {
+		
+		return " suivi de la latitude, puis la longitude au format décimal. Exemple: +"+keyWords.get(0)+" 50,410658 61.574548      Renvoie les "+NOMBRE_AFFICHABLE+" FAI de la fédération les plus proches à vol d'oiseau";
+	}
 	
 }
 

@@ -21,6 +21,11 @@ public class Source extends Action {
 		bot.sendMessage(channel, sender+": mes sources sont disponibles ici: https://code.ffdn.org/marmat8951/bot-irc2");
 	}
 
+	@Override
+	public String help() {
+		return " Renvoie une URI où on peut trouver les sources";
+	}
+
 }
 
 

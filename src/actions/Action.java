@@ -79,5 +79,7 @@ public abstract class Action {
 		return ar;
 	}
 	
+	public abstract String help();
+	
 
 }

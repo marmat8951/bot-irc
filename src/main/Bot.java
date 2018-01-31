@@ -1,33 +1,26 @@
 package main;
 
-import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.jibble.pircbot.PircBot;
 
 import actions.Action;
-import data.CoveredAreas;
-import data.ISP;
-import data.ISPDAO;
-import verif_saisie.EntierPositifNonVide;
 
 public class Bot extends PircBot {
 
 	public static final long TIME_BETWEEN_MESSAGES = 200;
 	public static char CARACTERE_COMMANDE = '+';
-	private ISPDAO idao;
 	private List<Action> actions = Action.getAllActions(this);
 
 	public Bot() {
 		this.setName("UneFede2");
+		this.setVersion("Gentille Droide de la fédération, <3 Marmat");
 		this.setMessageDelay(TIME_BETWEEN_MESSAGES);
 		if(Main.isDebug()) {
 			this.setVerbose(true);
 		}else {
 			this.setVerbose(false);
 		}
-		idao = ISPDAO.getInstance();
 	}
 
 	public void onMessage(String channel, String sender,

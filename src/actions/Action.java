@@ -68,6 +68,7 @@ public abstract class Action {
 	 */
 	public static List<Action> getAllActions(Bot b){
 		List<Action> ar= new ArrayList<>();
+		ar.add(new Help(b));
 		ar.add(new Contact(b));
 		ar.add(new Info(b));
 		ar.add(new Liste(b));

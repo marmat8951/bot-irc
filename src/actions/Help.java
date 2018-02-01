@@ -39,7 +39,11 @@ public class Help extends Action {
 					}
 				}
 			}
-		
+			
+			// Si il n'as pas encore réagi
+			if(!hasreacted) {
+				bot.sendMessage(channel, "commande inconnue");
+			}
 
 	}
 

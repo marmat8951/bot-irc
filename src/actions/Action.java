@@ -21,6 +21,15 @@ public abstract class Action {
 		this.bot = b;
 	}
 	
+	protected Action(Bot b, String...keywords) {
+		this.bot = b;
+		List<String> ar = new ArrayList<>(keywords.length); 
+		for(int i=0;i<keywords.length;++i) {
+			ar.add(keywords[i]);
+		}
+		this.keyWords=ar;
+	}
+	
 	/**
 	 * 
 	 * Methode réagissant au message @see PircBot;
@@ -79,6 +88,10 @@ public abstract class Action {
 		return ar;
 	}
 	
+	/**
+	 * Renvoie le message help de la fonction. Ce message sert lors de l'utilisation de +help <nom de commande>
+	 * @return chaine help de la commande
+	 */
 	public abstract String help();
 	
 

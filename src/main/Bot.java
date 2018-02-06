@@ -40,6 +40,11 @@ public class Bot extends PircBot {
 	}
 
 	
+	/**
+	 * Envoie les messages les uns à la suite de l'autre dans l'ordre de la liste.
+	 * @param channel Channel IRC dans lequel envoyer les messages
+	 * @param lines liste de chaaines de caractères à envoyer.
+	 */
 	public void sendMessage(String channel, List<String> lines) {
 		for(String s : lines) {
 			sendMessage(channel,s);

@@ -9,7 +9,6 @@ import actions.Action;
 public class Bot extends PircBot {
 
 	public static final long TIME_BETWEEN_MESSAGES = 200;
-	public static char CARACTERE_COMMANDE = '+';
 	private List<Action> actions = Action.getAllActions(this);
 
 	public Bot() {

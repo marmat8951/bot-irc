@@ -11,6 +11,7 @@ public abstract class Action {
 
 	public List<String> keyWords;
 	public PircBot bot;
+	public static char CARACTERE_COMMANDE = '+';
 	
 	protected Action(Bot b, List<String> keywords) {
 		this.keyWords = keywords;
@@ -49,7 +50,7 @@ public abstract class Action {
 	 * @return true si l'action contenue doit être executée, false sinon.
 	 */
 	public boolean hasToReact(String s) {
-		if(s.charAt(0)!=Bot.CARACTERE_COMMANDE) {
+		if(s.charAt(0)!=CARACTERE_COMMANDE) {
 			return false;								// On ne réagit pas si ce n'est pas une commande. Cela évite la suite du traitement.
 		}
 		s=s.substring(1); // on enleve le caractère de commande

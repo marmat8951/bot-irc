@@ -18,15 +18,17 @@ public class Help extends Action {
 	@Override
 	public void react(String channel, String sender, String login, String hostname, String message) {
 		List<Action> l = Action.getAllActions((Bot) bot);
-		String commande = message.substring(message.indexOf(' ')+1);
-		if(commande.indexOf(' ') != -1) {
-			commande = commande.substring(0,commande.indexOf(' '));
-		}
 			boolean hasreacted = false;
-			if(commande.equals("help")) {
+			String commandeSansEspaces = message.replaceAll("\\s", "").substring(1); // On enleve les espaces et le +
+			if(commandeSansEspaces.toLowerCase().equals("help")) {
 				bot.sendMessage(channel, help());
+				afficheListeCommandes(l, channel);
 				hasreacted = true;
 			}else {
+				String commande = message.substring(message.indexOf(' ')+1);
+				if(commande.indexOf(' ') != -1) {
+					commande = commande.substring(0,commande.indexOf(' '));
+				}
 				for(Action a : l) {
 					if(a.keyWords.contains(commande) && hasreacted == false) {
 						String msg = "";
@@ -42,11 +44,21 @@ public class Help extends Action {
 			
 			// Si il n'as pas encore réagi
 			if(!hasreacted) {
-				bot.sendMessage(channel, "commande inconnue");
+				bot.sendMessage(channel, "Commande inconnue.");
+				afficheListeCommandes(l, channel);
 			}
 
 	}
+	
+	private void afficheListeCommandes(List<Action> l, String channel) {
+		String listeCommandes="Voici la liste des commandes: ";
+		for(Action a : l) {
+			listeCommandes += CARACTERE_COMMANDE+a.keyWords.get(0)+" ";
+		}
+		bot.sendMessage(channel, listeCommandes);
+	}
 
+	
 	@Override
 	public String help() {
 		return "Utilisez +help <commande> Pour avoir les informations sur une commande.";

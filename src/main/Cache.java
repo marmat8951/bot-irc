@@ -94,6 +94,10 @@ public class Cache implements AffichableSurIRC {
 		return res;
 	}
 
+	/**
+	 * Compte le nombre de membres au total dans la fédération. <br>Extrait à partir de la somme du champ membercount de DB sur les FAI de la fédé
+	 * @return un entier positif correspondant au nombre total de personnes dans les FAI de la fédé
+	 */
 	public int getMemberCountInFede() {
 		int i = 0;
 		for(ISP isp : getListe()) {
@@ -104,6 +108,10 @@ public class Cache implements AffichableSurIRC {
 		return i;
 	}
 
+	/**
+	 * Compte le nombre d'abonnés dans la fédération. Ce nombre peut representer des abonnés xDSL, VPN, ... <br> Extrait à partir du champ subsriberscount de DB sur les FAI de la fédé
+	 * @return un entier positif correspondant au nombre total d'abonné.e.s dans la fédé
+	 */
 	public int getSubscribersCountInFede() {
 		int i = 0;
 		for(ISP isp : getListe()) {
@@ -124,6 +132,10 @@ public class Cache implements AffichableSurIRC {
 		return i;
 	}
 
+	/**
+	 * Compte le nombre d'abonnés dans la fédération. Ce nombre peut representer des abonnés xDSL, VPN, ... <br> Extrait à partir du champ subsriberscount de DB sur les FAI en dehors de la fédé
+	 * @return un entier positif correspondant au nombre total d'abonné.e.s hors de la fédé
+	 */
 	public int getSubscribersCountOutFede() {
 		int i = 0;
 		for(ISP isp : getListe()) {

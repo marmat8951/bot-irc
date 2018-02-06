@@ -20,7 +20,10 @@ public class Cache implements AffichableSurIRC {
 	private Date lastCacheUpdate;
 	private List<ISP> cache;
 	public static final long TIME_BETWEEN_RELOADS = 360000;
-
+	
+	/**
+	 * Constructeur de cache. Celui ci est privé car la classe utilise le Design Patern singleton.
+	 */
 	private Cache() {
 		ISPDAO idao = ISPDAO.getInstance();
 		try {
@@ -31,8 +34,11 @@ public class Cache implements AffichableSurIRC {
 			e.printStackTrace();
 		}
 	}
-
-
+	
+	/**
+	 * Dernière fois que le cache à été mis a jour.
+	 * @return Date correspondante à la dernière fois que le cache à été mis a jour
+	 */
 	public  Date getLastCacheUpdate() {
 		return lastCacheUpdate;
 	}
@@ -95,7 +101,7 @@ public class Cache implements AffichableSurIRC {
 	}
 
 	/**
-	 * Compte le nombre de membres au total dans la fédération. <br>Extrait à partir de la somme du champ membercount de DB sur les FAI de la fédé
+	 * Compte le nombre de membres <b>dans</b> la fédération. <br>Extrait à partir de la somme du champ membercount de DB sur les FAI de la fédé
 	 * @return un entier positif correspondant au nombre total de personnes dans les FAI de la fédé
 	 */
 	public int getMemberCountInFede() {
@@ -109,7 +115,7 @@ public class Cache implements AffichableSurIRC {
 	}
 
 	/**
-	 * Compte le nombre d'abonnés dans la fédération. Ce nombre peut representer des abonnés xDSL, VPN, ... <br> Extrait à partir du champ subsriberscount de DB sur les FAI de la fédé
+	 * Compte le nombre d'abonnés <b>dans</b> la fédération. Ce nombre peut representer des abonnés xDSL, VPN, ... <br> Extrait à partir du champ subsriberscount de DB sur les FAI de la fédé
 	 * @return un entier positif correspondant au nombre total d'abonné.e.s dans la fédé
 	 */
 	public int getSubscribersCountInFede() {
@@ -121,7 +127,12 @@ public class Cache implements AffichableSurIRC {
 		}
 		return i;
 	}
-
+	
+	/**
+	 * Compte le nombre de membres <b>HORS</b> la fédération. <br>Extrait à partir de la somme du champ membercount de DB sur les FAI de la fédé
+	 * @return un entier positif correspondant au nombre total de personnes hors des FAI de la fédé
+	 */
+	
 	public int getMemberCountOutFede() {
 		int i = 0;
 		for(ISP isp : getListe()) {
@@ -133,7 +144,7 @@ public class Cache implements AffichableSurIRC {
 	}
 
 	/**
-	 * Compte le nombre d'abonnés dans la fédération. Ce nombre peut representer des abonnés xDSL, VPN, ... <br> Extrait à partir du champ subsriberscount de DB sur les FAI en dehors de la fédé
+	 * Compte le nombre d'abonnés <b>HORS</b> la fédération. Ce nombre peut representer des abonnés xDSL, VPN, ... <br> Extrait à partir du champ subsriberscount de DB sur les FAI en dehors de la fédé
 	 * @return un entier positif correspondant au nombre total d'abonné.e.s hors de la fédé
 	 */
 	public int getSubscribersCountOutFede() {
@@ -146,6 +157,12 @@ public class Cache implements AffichableSurIRC {
 		return i;
 	}
 
+	
+	/**
+	 * Cette méthode sert a sortir le pourcentage d'abonnées auquel val correspond dans la fédération. Cette methode sert lors de l'affichage d'un FAI notamment à l'aide de +info
+	 * @param val Entier correspondant a un nombre d'abonnés
+	 * @return Chaine de caractère sous la forme X.XX % avec entre 0 et 2 nombres après la virgule.
+	 */
 	public String getSubscribersPercents(int val) {
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMaximumFractionDigits(2);
@@ -155,6 +172,12 @@ public class Cache implements AffichableSurIRC {
 		return nf.format((val2/nbSubscribers)*100)+" %";
 	}
 
+
+	/**
+	 * Cette méthode sert a sortir le pourcentage de membres auquel val correspond dans la fédération. Cette methode sert lors de l'affichage d'un FAI notamment à l'aide de +info
+	 * @param val Entier correspondant a un nombre de membres.
+	 * @return Chaine de caractère sous la forme "X.XX %" avec entre 0 et 2 nombres après la virgule.
+	 */
 	public String getMembersPercents(int val) {
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMaximumFractionDigits(2);
@@ -186,6 +209,12 @@ public class Cache implements AffichableSurIRC {
 		}
 
 	}
+	
+	/**
+	 * Récupere le FAI correspondant au nom indiqué. Dès qu'il en trouve un, il le renvoie sinon il renvoie NULL
+	 * @param s Chaine de caractère à rechercher
+	 * @return FAI correspondant a la chaine ou null si il n'y en a pas.
+	 */
 
 	public ISP getISPWithName(String s) {
 		for(ISP i : cache) {
@@ -199,7 +228,10 @@ public class Cache implements AffichableSurIRC {
 	public String toString() {
 		return "Cache de "+cache.size()+" FAI";
 	}
-
+	
+	/**
+	 * Affichage des statistiques de la fédération. Méthode utilisée pour l'affichage de +info ffdn
+	 */
 	public List<String> toStringIRC() {
 		List<String> liste = new LinkedList<String>();
 		liste.add("Il y a "+cache.size()+" FAI dont "+getISPCount(Boolean.TRUE)+" dans la fédé");
@@ -208,7 +240,12 @@ public class Cache implements AffichableSurIRC {
 		return liste;
 	}
 
-
+	/**
+	 * Récupere la zone geo avec le nom passé en paramètres.
+	 * @param s Nom de la zone.
+	 * @return FAI ayant indiqué être présent sur la zone.
+	 */
+	//TODO Changer la méthode pour la zone geographique en soignant plus le nom, et verifier si il n'y a pas plusieurs FAIs
 	public ISP getISPWithGeoZone(String s) {
 
 		for(ISP i: cache) {
@@ -230,6 +267,11 @@ public class Cache implements AffichableSurIRC {
 
 	}
 	
+	/**
+	 * 
+	 * @param id numerro correspondanat au FAI dans <a href=db.ffdn.org>db.ffdn.org</a>
+	 * @return ISP correpondant a l'identifiant ou null si ce dernier n'est pas dans le cache.
+	 */
 	public ISP getISPWithID(int id) {
 		for(ISP i:cache) {
 			if(i.getId() == id) {

@@ -21,7 +21,11 @@ public class Bot extends PircBot {
 			this.setVerbose(false);
 		}
 	}
-
+	
+	public void onPrivateMessage(String sender, String login, String hostname, String message) {
+		this.sendMessage(sender, "Bonjour a toi "+sender+". Pas la peine de me demander mon 06, je ne répond pas aux messages privés. Sauf certains spéciaux.");
+	}
+	
 	public void onMessage(String channel, String sender,
 			String login, String hostname, String message) {
 		

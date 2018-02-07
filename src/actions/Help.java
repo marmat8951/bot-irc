@@ -29,6 +29,7 @@ public class Help extends Action {
 				if(commande.indexOf(' ') != -1) {
 					commande = commande.substring(0,commande.indexOf(' '));
 				}
+				commande = commande.replace("+", "");
 				for(Action a : l) {
 					if(a.keyWords.contains(commande) && hasreacted == false) {
 						String msg = "";

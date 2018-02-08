@@ -53,5 +53,13 @@ public class Bot extends PircBot {
 			sendMessage(channel,s);
 		}
 	}
+	
+	public void onKick (String channel, String kickerNick, String login, String hostname, String recipientNick, String reason) {
+		if(recipientNick.equalsIgnoreCase(this.getNick())){
+			RejoinThread rj = new RejoinThread(this,channel);
+			rj.start();
+		}
+		
+	}
 
 }

@@ -228,12 +228,22 @@ public class ISP implements AffichableSurIRC {
 		return lca;
 
 	}
-
+	
+	/**
+	 * Renvoie une liste 
+	 * @return Liste de phrases utilisables pour afficher le contact de ce FAI
+	 */
 	public List<String> contact() {
 		List<String> s = new ArrayList<>();
-		s.add( "["+this.getBetterName()+"] est joignable par:");
-		s.add("Site web: "+getData().getWebsite());
-		s.add("Mail: "+getData().emailSyntaxer());
+		
+		String res= "["+this.getBetterName()+"] est joignable par: ";
+		String site = getData().getWebsite();
+		if(site != null && !site.equals("")) res+= "Site web: "+site;
+		String email = getData().emailSyntaxer();
+		if(email != null && !email.equals("")) {
+			res+=" Email: "+email;
+		}
+		s.add(res);
 		String chats="Chat : ";
 		Server[] chans = getData().getIrcChan();
 		if(chans != null) {

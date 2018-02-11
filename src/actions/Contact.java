@@ -21,7 +21,9 @@ public class Contact extends Action {
 	public void react(String channel, String sender, String login, String hostname, String message) {
 		
 		String s = message.substring(message.indexOf(' ')+1);
-		if(!EntierPositifNonVide.verifie(s)) {					// +contact suivi d'un mot
+		if(keyWords.contains(messageSansEspace(s).substring(1))) {	//+contact seul
+			bot.sendMessage(channel, messageSansEspace(s)+help());
+		}else if(!EntierPositifNonVide.verifie(s)) {					// +contact suivi d'un mot
 			Cache c = Cache.getInstance();
 			ISP fai = c.getISPWithName(s);
 			if(fai == null) {

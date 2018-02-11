@@ -95,5 +95,8 @@ public abstract class Action {
 	 */
 	public abstract String help();
 	
-
+	public static String messageSansEspace(String s) {
+		return s.toLowerCase().replaceAll("\\s", "");
+	}
+	
 }

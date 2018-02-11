@@ -8,8 +8,9 @@ import actions.Action;
 
 public class Bot extends PircBot {
 
-	public static final long TIME_BETWEEN_MESSAGES = 200;
+	private static long TIME_BETWEEN_MESSAGES = 200;
 	private List<Action> actions = Action.getAllActions(this);
+	private String[] admins;
 
 	public Bot() {
 		this.setName("UneFede2");
@@ -54,6 +55,10 @@ public class Bot extends PircBot {
 		}
 	}
 	
+	/**
+	 * 
+	 */
+	@Override
 	public void onKick (String channel, String kickerNick, String login, String hostname, String recipientNick, String reason) {
 		if(recipientNick.equalsIgnoreCase(this.getNick())){
 			RejoinThread rj = new RejoinThread(this,channel);
@@ -61,5 +66,48 @@ public class Bot extends PircBot {
 		}
 		
 	}
+	
+	public void sendMessageToAdmins(String message) {
+		for(int i=0;i<admins.length;i++) {
+			sendMessage(admins[i], message);
+		}
+	}
+	
+	public void sendMessageToAdmins(List<String> messages) {
+		for(int i=0;i<admins.length;i++) {
+			sendMessage(admins[i], messages);
+		}
+	}
+	
+	
+	/**
+	 * @return the tIME_BETWEEN_MESSAGES
+	 */
+	public static long getTIME_BETWEEN_MESSAGES() {
+		return TIME_BETWEEN_MESSAGES;
+	}
+
+	/**
+	 * @param tIME_BETWEEN_MESSAGES the tIME_BETWEEN_MESSAGES to set
+	 */
+	public static void setTIME_BETWEEN_MESSAGES(long tIME_BETWEEN_MESSAGES) {
+		TIME_BETWEEN_MESSAGES = tIME_BETWEEN_MESSAGES;
+	}
+
+	/**
+	 * @return the admins
+	 */
+	public String[] getAdmins() {
+		return admins;
+	}
+
+	/**
+	 * @param admins the admins to set
+	 */
+	public void setAdmins(String[] admins) {
+		this.admins = admins;
+	}
+	
+	
 
 }

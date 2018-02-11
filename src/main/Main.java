@@ -4,24 +4,24 @@ import java.net.ConnectException;
 
 public class Main {
 
-	public static final String SERVER = "irc.geeknode.net";
-	public static final int PORT = 6667;
-	public static final String[] CHANNELS = { "#marmat" };
-	public static final long TIMEOUT_BEFORE_RECONNECTING = 360;
-	public static final Cache cache = Cache.getInstance();
-	public static int failures = 0;
+	private static String SERVER = "irc.geeknode.net";
+	private static int PORT = 6667;
+	private static String[] CHANNELS = { "#marmat" };
+	private static long TIMEOUT_BEFORE_RECONNECTING = 360;
+	private static int failures = 0;
 	private static boolean DEBUG=true;
 
 	public static void main(String[] args) throws Exception {
 
 		try {
-			if(args.length>0) {
-			setDebug(args[0].equals("-debug"));
-			}else {
-				setDebug(false);
-			}
+			
+			CacheReloader cr = new CacheReloader(3600); // Met à jour la base toute les heures.
 			// Now start our bot up.
 			Bot bot = new Bot();
+			
+			//Properties Setter
+			PropertiesSetter ps = new PropertiesSetter("../../ressources/config/config.properties");
+			ps.setPropertiesOn(cr, bot);
 
 			// Connect to the IRC server.
 			bot.connect(SERVER,PORT);
@@ -33,9 +33,13 @@ public class Main {
 			for(int i = 0; i< CHANNELS.length; i++) {
 				bot.joinChannel(CHANNELS[i]);
 			}
-			CacheReloader cacheReloader = new CacheReloader(3600); // Met à jour la base toute les heures.
-			cacheReloader.start();
 			
+			cr.start();
+			if(args.length>0) {
+				setDebug(args[0].equals("-debug"));
+				}else {
+					setDebug(false);
+			}
 			System.out.println("Debug? "+DEBUG);
 			
 
@@ -53,8 +57,50 @@ public class Main {
 		return Main.DEBUG;
 	}
 
-	private static void setDebug(boolean b) {
+	public static void setDebug(boolean b) {
 		System.out.println("Mise de debug à "+b);
 		DEBUG=b;
 	}
+
+
+	public static final String getSERVER() {
+		return SERVER;
+	}
+
+
+	public static final void setSERVER(String sERVER) {
+		SERVER = sERVER;
+	}
+
+
+	public static final int getPORT() {
+		return PORT;
+	}
+
+
+	public static final void setPORT(int pORT) {
+		PORT = pORT;
+	}
+
+
+	public static final String[] getCHANNELS() {
+		return CHANNELS;
+	}
+
+
+	public static final void setCHANNELS(String[] cHANNELS) {
+		CHANNELS = cHANNELS;
+	}
+
+
+	public static final long getTIMEOUT_BEFORE_RECONNECTING() {
+		return TIMEOUT_BEFORE_RECONNECTING;
+	}
+
+
+	public static final void setTIMEOUT_BEFORE_RECONNECTING(long tIMEOUT_BEFORE_RECONNECTING) {
+		TIMEOUT_BEFORE_RECONNECTING = tIMEOUT_BEFORE_RECONNECTING;
+	}
+	
+	
 }

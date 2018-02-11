@@ -20,7 +20,7 @@ public class Reload extends Action {
 	public void react(String channel, String sender, String login, String hostname, String message) {
 		Date now = new Date();
 		Date lastCU = Cache.getInstance().getLastCacheUpdate();
-		if(lastCU.getTime() < now.getTime()-Cache.TIME_BETWEEN_RELOADS ) {		// Si la dernière MAJ date de + de 5 minutes
+		if(lastCU.getTime() < now.getTime()-Cache.getTIME_BETWEEN_RELOADS() ) {		// Si la dernière MAJ date de + de 5 minutes
 			bot.sendMessage(channel, "Je lance le reload!");
 			if(reload()) {
 				bot.sendMessage(channel, sender+": Le reload s'est bien passé.");
@@ -28,7 +28,7 @@ public class Reload extends Action {
 				bot.sendMessage(channel, sender+": Erreur au moment du reload.");
 			}
 		}else {
-			Date nextAllowed = new Date(lastCU.getTime()+Cache.TIME_BETWEEN_RELOADS);
+			Date nextAllowed = new Date(lastCU.getTime()+Cache.getTIME_BETWEEN_RELOADS());
 			bot.sendMessage(channel, "Trop de reload, attendez un peu. Le dernier à eu lieu le "+lastCU.toString()+" Prochain autorisé le "+nextAllowed);
 		}
 		

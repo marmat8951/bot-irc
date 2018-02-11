@@ -6,7 +6,7 @@ public class RejoinThread implements Runnable{
 
 	private volatile PircBot pb;
 	private String chan;
-	public static final long DEFAULT_WAIT_BEFORE_RECONNECT = 10000;
+	private static long DEFAULT_WAIT_BEFORE_RECONNECT = 10000;
 	private Thread thread;
 	private String threadName;
 	private int failures;
@@ -66,6 +66,22 @@ public class RejoinThread implements Runnable{
 
 	public int getFailures() {
 		return failures;
+	}
+
+
+	/**
+	 * @return the dEFAULT_WAIT_BEFORE_RECONNECT
+	 */
+	public static long getDEFAULT_WAIT_BEFORE_RECONNECT() {
+		return DEFAULT_WAIT_BEFORE_RECONNECT;
+	}
+
+
+	/**
+	 * @param dEFAULT_WAIT_BEFORE_RECONNECT the dEFAULT_WAIT_BEFORE_RECONNECT to set
+	 */
+	public static void setDEFAULT_WAIT_BEFORE_RECONNECT(long dEFAULT_WAIT_BEFORE_RECONNECT) {
+		DEFAULT_WAIT_BEFORE_RECONNECT = dEFAULT_WAIT_BEFORE_RECONNECT;
 	}
 
 	

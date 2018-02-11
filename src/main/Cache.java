@@ -19,7 +19,7 @@ public class Cache implements AffichableSurIRC {
 	public static volatile Cache instance = null;
 	private Date lastCacheUpdate;
 	private List<ISP> cache;
-	public static final long TIME_BETWEEN_RELOADS = 360000;
+	private static long TIME_BETWEEN_RELOADS = 360000;
 	
 	/**
 	 * Constructeur de cache. Celui ci est privé car la classe utilise le Design Patern singleton.
@@ -35,6 +35,24 @@ public class Cache implements AffichableSurIRC {
 		}
 	}
 	
+	/**
+	 * @return the tIME_BETWEEN_RELOADS
+	 */
+	public static long getTIME_BETWEEN_RELOADS() {
+		return TIME_BETWEEN_RELOADS;
+	}
+
+
+
+	/**
+	 * @param tIME_BETWEEN_RELOADS the tIME_BETWEEN_RELOADS to set
+	 */
+	public static void setTIME_BETWEEN_RELOADS(long tIME_BETWEEN_RELOADS) {
+		TIME_BETWEEN_RELOADS = tIME_BETWEEN_RELOADS;
+	}
+
+
+
 	/**
 	 * Dernière fois que le cache à été mis a jour.
 	 * @return Date correspondante à la dernière fois que le cache à été mis a jour

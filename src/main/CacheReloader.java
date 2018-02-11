@@ -64,4 +64,20 @@ public class CacheReloader implements Runnable {
 		
 	}
 
+	/**
+	 * @return the timeout
+	 */
+	public final long getTimeout() {
+		return timeout;
+	}
+
+	/**
+	 * @param timeout the timeout to set
+	 */
+	public final void setTimeout(long timeout) {
+		this.timeout = timeout;
+	}
+	
+	
+
 }

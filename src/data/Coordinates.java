@@ -62,4 +62,23 @@ public class Coordinates {
 		return this.latitude == Double.POSITIVE_INFINITY || this.longitude == Double.POSITIVE_INFINITY || this.latitude == Double.NEGATIVE_INFINITY || this.longitude == Double.NEGATIVE_INFINITY || this.latitude == Double.NaN || this.longitude == Double.NaN; 
 	}
 	
+	public boolean equals(Coordinates c, Double maxDiff) {
+		if(this.latitude+maxDiff>=c.latitude && this.latitude-maxDiff<=c.latitude) {
+			if(this.longitude+maxDiff>=c.latitude && this.longitude-maxDiff<=c.longitude) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/** (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Coordinates [latitude=" + latitude + ", longitude=" + longitude + "]";
+	}
+	
+	
 }
+

@@ -4,8 +4,11 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.AddresseToGPS;
+import data.AddresseToGPS.Lieu;
 import data.Coordinates;
 import data.ISP;
+import data.MultiplePossibleAddressException;
 import main.Bot;
 import main.Cache;
 import main.Main;
@@ -31,9 +34,27 @@ public class Distance extends Action {
 			latitude = Double.parseDouble(s.substring(0, s.indexOf(' ')));
 			s=s.substring(s.indexOf(' ')+1); // Je me et au second paramètre
 			longitude = Double.parseDouble(s);
-		}catch(Exception e) {
-			bot.sendMessage(channel, "Erreur: l'un des arguments n'est pas une coordonnée sous la forme d'un nombre a virgule");
+		}catch(Exception e) {	//Cela doit alors être une adresse!
+			try {
+				Coordinates ca = getCoordinatesFromMessage(message, channel);
+				latitude = ca.getLatitude();
+				longitude = ca.getLongitude();
+			} catch (MultiplePossibleAddressException e1) {
+				bot.sendMessage(channel, "Plusieurs possibilités pour cet endroit, nous choissisons le 1:");
+				for(int i = 0; i<e1.lieux.length; ++i) {
+					bot.sendMessage(channel, (i+1)+":"+e1.lieux[i].toString());
+				}
+				latitude = e1.lieux[0].coordonees.getLatitude();
+				longitude = e1.lieux[0].coordonees.getLongitude();
+			}
+			
+		}finally {
+			affichePlusProches(latitude, longitude, channel);
 		}
+
+	}
+	
+	private void affichePlusProches(double latitude, double longitude, String channel) {
 		ISP[] plusProches = getISPPlusProche(latitude, longitude);
 		for(int i=0;i<plusProches.length;++i) {
 			if(plusProches[i]!=null) {
@@ -45,10 +66,32 @@ public class Distance extends Action {
 				bot.sendMessage(channel, (i+1)+": "+plusProches[i].getBetterName()+" à "+nf.format(distance)+" Km");
 			}
 		}
-		
-
 	}
-
+	
+	private Coordinates getCoordinatesFromMessage(String message, String channel) throws MultiplePossibleAddressException {
+		final double MAX_DIFF = 0.1; //Differences there MUST between 2 coordinates so they are seen as differents
+		AddresseToGPS a2gps = new AddresseToGPS(message.substring(message.indexOf(' ')+1));
+		Lieu[] lieux = a2gps.getAllLieu();
+		if(lieux == null || lieux.length == 0) {
+			bot.sendMessage(channel, "Aucun lieu ne correspond. Requete effectuée: "+a2gps.getAddressToQuerry());
+			return null;
+		}else if(lieux.length == 1) {
+			return lieux[0].coordonees;
+		}else {
+			
+			for(int i=0;i<lieux.length; ++i) {
+				for(int j=0;j<lieux.length; ++j) {
+					if(!lieux[i].coordonees.equals(lieux[j].coordonees, MAX_DIFF)) {
+						throw new MultiplePossibleAddressException(lieux, a2gps.getAdresse());
+					}
+				}
+			}
+			return lieux[0].coordonees;
+		}
+		
+	}
+	
+	
 	
 	private ISP[] getISPPlusProche(double latitude, double longitude) {
 		return getISPPlusProche(new Coordinates(latitude, longitude));

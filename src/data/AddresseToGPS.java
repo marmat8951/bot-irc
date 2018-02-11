@@ -3,8 +3,6 @@ package data;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import main.Bot;
-
 public class AddresseToGPS {
 
 	private String adresse;
@@ -12,7 +10,7 @@ public class AddresseToGPS {
 	public static final String NOMINATUM = "https://nominatim.openstreetmap.org/search/";
 	public static final String FORMAT = "json";
 	public static final int LIMIT = 3;
-	private Bot bot;
+	
 	
 	public class Lieu{
 		public final String DisplayName;
@@ -27,15 +25,28 @@ public class AddresseToGPS {
 			DisplayName = jo.getString("display_name");
 			this.coordonees = new Coordinates(jo.getDouble("lat"), jo.getDouble("lon"));
 		}
+		
+		public String toString() {
+			return DisplayName+" : "+coordonees;
+		}
 	}
 	
-	public AddresseToGPS(String adresse, Bot b) {
+	public AddresseToGPS(String adresse) {
 		this.adresse = adresse;
-		this.bot = b;
+
 	}
 	
+	/**
+	 * @return the adresse
+	 */
+	public String getAdresse() {
+		return adresse;
+	}
+
 	public String getAddressToQuerry() {
-		return NOMINATUM+adresse+"?format="+FORMAT+"&limit="+LIMIT;
+		String s= NOMINATUM+adresse+"?format="+FORMAT+"&limit="+LIMIT;
+		s=s.replaceAll("\\s", "%20");
+		return s;
 	}
 
 	public Coordinates getCoordinates() throws MultiplePossibleAddressException {

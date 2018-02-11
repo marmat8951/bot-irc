@@ -56,7 +56,7 @@ public class ISPDAO {
 	 * @param https_url URL a récuperer en HTTPS
 	 * @return La chaine de caractères correspondant à la page demandée par l'URL.
 	 */
-	private String executeGet(String https_url) {
+	public String executeGet(String https_url) {
 		return executeGet(https_url, "", 443);
 	}
 	

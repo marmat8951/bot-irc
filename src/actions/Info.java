@@ -23,7 +23,7 @@ public class Info extends Action {
 	public void react(String channel, String sender, String login, String hostname, String message) {
 		String messageSansEspace = message.toLowerCase().replaceAll("\\s", "");
 		if(messageSansEspace.equals(CARACTERE_COMMANDE+keyWords.get(0))) {
-			bot.sendMessage(channel,CARACTERE_COMMANDE+messageSansEspace+" doit être suivi d'une chaine de caractère ou d'un numero");
+			bot.sendMessage(channel,messageSansEspace+" doit être suivi d'une chaine de caractère ou d'un numero");
 
 		}else {
 

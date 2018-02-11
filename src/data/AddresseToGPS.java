@@ -80,4 +80,21 @@ public class AddresseToGPS {
 		return l;
 		
 	}
+	
+	public Lieu[] getAllLieu() {
+		String get = ISPDAO.getInstance().executeGet(getAddressToQuerry());
+		JSONArray ja = new JSONArray(get);
+		if(ja.length()<1) {
+			return null;
+		}else {
+			int len = ja.length();
+			Lieu[] l = new Lieu[len];
+			for(int i=0;i<len;++i) {
+				l[i]=new Lieu(ja.getJSONObject(i));
+			}
+			return l;
+		}
+		
+	}
+	
 }

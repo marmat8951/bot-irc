@@ -11,6 +11,8 @@ import main.Cache;
 import verif_saisie.EntierPositifNonVide;
 
 public class Info extends Action {
+	
+	public static boolean INFO_ALL = false;
 
 	public Info(Bot b) {
 		super(b);
@@ -36,7 +38,7 @@ public class Info extends Action {
 			if(!EntierPositifNonVide.verifie(s)) {			// Un mot après +info
 
 
-				if(s.equalsIgnoreCase("all")) {	          			  // +info all
+				if(s.equalsIgnoreCase("all") && INFO_ALL) {	          			  // +info all
 					Cache c = Cache.getInstance();
 					ib.sendMessage(channel, c.toStringIRC());
 					for(ISP i : c.getListe()) {

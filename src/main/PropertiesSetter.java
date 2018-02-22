@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
+import actions.Action;
 import verif_saisie.EntierPositifNonVide;
 
 
@@ -63,13 +64,12 @@ public class PropertiesSetter {
 		Cache.setTIME_BETWEEN_RELOADS(1000*Long.parseLong(prop.getProperty("Minimum_time_beetween_+reload")));
 		
 		cr.setTimeout(Long.parseLong(prop.getProperty("CacheReloader_timeout")));
-
+		
+		if(prop.getProperty("Caractere_command") != null) {
+			Action.CARACTERE_COMMANDE=prop.getProperty("Caractere_command").charAt(0);
+		}
 		return true;
 	}
-	
-	
-	
-	
 	
 	private String[] getMultipleValues(Properties prop, String key) {
 		return prop.getProperty(key).split(",");

@@ -11,7 +11,6 @@ import data.ISP;
 import data.MultiplePossibleAddressException;
 import main.Bot;
 import main.Cache;
-import main.Main;
 
 public class Distance extends Action {
 	public static final int NOMBRE_AFFICHABLE = 3;

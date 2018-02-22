@@ -37,7 +37,7 @@ public class Bot extends PircBot {
 		}
 		//easter Egg
 		String ea="Ehlo UneFede";
-		if (message.contains("Ehlo UneFede")) {
+		if (message.contains(ea)) {
 			sendMessage(channel, "Ehlo "+sender+"!!");
 		}
 

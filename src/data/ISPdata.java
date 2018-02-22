@@ -56,7 +56,6 @@ public class ISPdata {
 		}catch(JSONException jsonE) {	// Si il n'y a pas de chatroom
 			if(Main.isDebug()) {
 				System.err.println("Warning : Pas de chatroom pour "+this.shortname);
-				jsonE.printStackTrace(System.err);
 			}
 			chatrooms = new Server[0];
 		}

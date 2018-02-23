@@ -38,7 +38,6 @@ public class Distance extends Action {
 				Coordinates ca = getCoordinatesFromMessage(message, channel);
 				latitude = ca.getLatitude();
 				longitude = ca.getLongitude();
-				affichePlusProches(latitude, longitude, channel);
 			} catch (MultiplePossibleAddressException e1) {
 				bot.sendMessage(channel, "Plusieurs possibilités pour cet endroit, nous choisirons le premier:");
 				for(int i = 0; i<e1.lieux.length; ++i) {

@@ -11,7 +11,7 @@ public abstract class Action {
 
 	public List<String> keyWords;
 	public PircBot bot;
-	public static char CARACTERE_COMMANDE = '+';
+	public volatile static char CARACTERE_COMMANDE = '+';
 	
 	protected Action(Bot b, List<String> keywords) {
 		this.keyWords = keywords;

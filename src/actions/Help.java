@@ -62,6 +62,6 @@ public class Help extends Action {
 	
 	@Override
 	public String help() {
-		return "Utilisez +help <commande> Pour avoir les informations sur une commande.";
+		return "Utilisez "+CARACTERE_COMMANDE+"help <commande> Pour avoir les informations sur une commande.";
 	}
 }

@@ -33,11 +33,13 @@ public class Distance extends Action {
 			latitude = Double.parseDouble(s.substring(0, s.indexOf(' ')));
 			s=s.substring(s.indexOf(' ')+1); // Je me et au second paramètre
 			longitude = Double.parseDouble(s);
-		}catch(NumberFormatException e) {	//Cela doit alors être une adresse!
+			affichePlusProches(latitude, longitude, channel);
+		}catch(Exception e) {	//Cela doit alors être une adresse!
 			try {
 				Coordinates ca = getCoordinatesFromMessage(message, channel);
 				latitude = ca.getLatitude();
 				longitude = ca.getLongitude();
+				affichePlusProches(latitude, longitude, channel);
 			} catch (MultiplePossibleAddressException e1) {
 				bot.sendMessage(channel, "Plusieurs possibilités pour cet endroit, nous choisirons le premier:");
 				for(int i = 0; i<e1.lieux.length; ++i) {
@@ -47,9 +49,9 @@ public class Distance extends Action {
 				longitude = e1.lieux[0].coordonees.getLongitude();
 				affichePlusProches(latitude, longitude, channel);
 			}
-		}finally {
-				affichePlusProches(latitude, longitude, channel);
 		}
+				
+		
 
 	}
 	

@@ -43,6 +43,14 @@ public class Bot extends PircBot {
 
 	}
 
+	public void onMode(String channel,
+            String sourceNick,
+            String sourceLogin,
+            String sourceHostname,
+            String mode) {
+	System.out.println("mode "+mode+" appliqué sur "+channel);
+	}
+	
 	
 	/**
 	 * Envoie les messages les uns à la suite de l'autre dans l'ordre de la liste.

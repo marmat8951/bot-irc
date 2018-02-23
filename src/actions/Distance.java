@@ -33,7 +33,7 @@ public class Distance extends Action {
 			latitude = Double.parseDouble(s.substring(0, s.indexOf(' ')));
 			s=s.substring(s.indexOf(' ')+1); // Je me et au second paramètre
 			longitude = Double.parseDouble(s);
-		}catch(Exception e) {	//Cela doit alors être une adresse!
+		}catch(NumberFormatException e) {	//Cela doit alors être une adresse!
 			try {
 				Coordinates ca = getCoordinatesFromMessage(message, channel);
 				latitude = ca.getLatitude();
@@ -45,10 +45,10 @@ public class Distance extends Action {
 				}
 				latitude = e1.lieux[0].coordonees.getLatitude();
 				longitude = e1.lieux[0].coordonees.getLongitude();
-			}
-			finally {
 				affichePlusProches(latitude, longitude, channel);
 			}
+		}finally {
+				affichePlusProches(latitude, longitude, channel);
 		}
 
 	}

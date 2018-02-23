@@ -40,12 +40,16 @@ public class Distance extends Action {
 				longitude = ca.getLongitude();
 				affichePlusProches(latitude, longitude, channel);
 			} catch (MultiplePossibleAddressException e1) {
-				bot.sendMessage(channel, "Plusieurs possibilités pour cet endroit, veuillez preciser:");
+				bot.sendMessage(channel, "Plusieurs possibilités pour cet endroit, nous choisirons le premier:");
 				for(int i = 0; i<e1.lieux.length; ++i) {
 					bot.sendMessage(channel, (i+1)+":"+e1.lieux[i].toString());
 				}
+				latitude = e1.lieux[0].coordonees.getLatitude();
+				longitude = e1.lieux[0].coordonees.getLongitude();
 			}
-			
+			finally {
+				affichePlusProches(latitude, longitude, channel);
+			}
 		}
 
 	}

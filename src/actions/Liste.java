@@ -12,7 +12,7 @@ import main.Cache;
 
 public class Liste extends Action {
 	
-	public static boolean allAllowed=true;
+	public static volatile boolean allAllowed=true;
 
 	public Liste(Bot b) {
 		super(b);
@@ -44,8 +44,7 @@ public class Liste extends Action {
 		messages.add("Les FAI surveillés par mes petits yeux mignons de bot sont:");
 		String s="";
 
-
-		if(allAllowed && message.indexOf(' ')!=-1 && message.substring(message.indexOf(" ")).equalsIgnoreCase("all")) {
+		if(allAllowed && message.indexOf(' ')!=-1 && message.substring(message.indexOf(" ")+1).equalsIgnoreCase("all")) {
 			messages.add("=== Hors fédé: ===");
 			for(ISP isp: listeFAI) {
 				if(!isp.isFFDNMember()) {

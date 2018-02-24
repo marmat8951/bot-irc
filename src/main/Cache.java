@@ -284,7 +284,27 @@ public class Cache implements AffichableSurIRC {
 		}
 
 		return null;
+	}
+	
+	public List<ISP> getMultipleISPWithGeoZone(String s){
+		List<ISP> res = new ArrayList<>();
+		for(ISP i: cache) {
+			if(Main.isDebug()) {
+				System.out.println("Recherche sur "+i.getBetterName());
+			}
+			if(i.getCoveredAreas()!= null) for(CoveredAreas ca : i.getCoveredAreas()) {
+				if(Main.isDebug()) {
+					ca.getName();
+				}
+				String name = ca.getName().toLowerCase();
+				s = s.toLowerCase();
+				if(name.contains(s)) {
+					res.add(i);
+				}
+			}
 
+		}
+		return res;
 	}
 	
 	/**

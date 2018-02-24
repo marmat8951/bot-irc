@@ -49,7 +49,11 @@ public class Bot extends PircBot {
             String sourceLogin,
             String sourceHostname,
             String mode) {
-	System.out.println("mode "+mode+" appliqué sur "+channel);
+		mode = mode.toLowerCase();
+
+		if(mode.contains("pircbot") && mode.substring(0, 2).equals("+b") && sourceLogin.toLowerCase().contains("abitbolg")) {
+			sendMessageToAdmins("Help, il semblerai que je me soit fait ban sur "+channel+" Tu peux vérifier?");
+		}
 	}
 	
 	

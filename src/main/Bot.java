@@ -8,12 +8,13 @@ import actions.Action;
 
 public class Bot extends PircBot {
 
-	private static long TIME_BETWEEN_MESSAGES = 200;
+	private volatile static long TIME_BETWEEN_MESSAGES = 200;
 	private List<Action> actions = Action.getAllActions(this);
 	private String[] admins;
 
 	public Bot() {
-		this.setName("UneFede2");
+		this.setAutoNickChange(true);
+		this.setName("UneFede");
 		this.setVersion("Gentille Droide de la fédération, <3 Marmat");
 		this.setMessageDelay(TIME_BETWEEN_MESSAGES);
 		if(Main.isDebug()) {
@@ -115,7 +116,6 @@ public class Bot extends PircBot {
 	public void setAdmins(String[] admins) {
 		this.admins = admins;
 	}
-	
-	
+
 
 }

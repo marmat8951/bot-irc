@@ -41,7 +41,7 @@ public class ID extends Action {
 			ISP fai = c.getISPWithName(idString);
 			if(fai!=null) {
 				bot.sendMessage(channel, "Le FAI "+fai.getBetterName()+" a pour ID: "+fai.getId());
-				bot.sendMessage(channel, "L'url dans db est https://db.ffdn.org/api/v1/isp/");
+				bot.sendMessage(channel, "L'url dans db est https://db.ffdn.org/api/v1/isp/"+fai.getId()+"/");
 			}else {
 				erreur(channel,sender,idString+" ne correspond a aucun FAI");
 			}

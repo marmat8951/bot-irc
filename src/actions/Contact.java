@@ -22,15 +22,15 @@ public class Contact extends Action {
 		
 		String s = message.substring(message.indexOf(' ')+1);
 		if(keyWords.contains(messageSansEspace(s).substring(1))) {	//+contact seul
-			bot.sendMessage(channel, messageSansEspace(s)+help());
+			bot.sendMessage(sender, messageSansEspace(s)+help());
 		}else if(!EntierPositifNonVide.verifie(s)) {					// +contact suivi d'un mot
 			Cache c = Cache.getInstance();
 			ISP fai = c.getISPWithName(s);
 			if(fai == null) {
-				bot.sendMessage(channel, "Aucun FAI "+s);
+				bot.sendMessage(sender, "Aucun FAI "+s);
 			}else {
 				Bot b = (Bot) bot;
-				b.sendMessage(channel, fai.contact());
+				b.sendMessage(sender, fai.contact());
 			}
 		}
 

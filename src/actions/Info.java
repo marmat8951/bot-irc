@@ -40,28 +40,28 @@ public class Info extends Action {
 
 				if(s.equalsIgnoreCase("all") && INFO_ALL) {	          			  // +info all
 					Cache c = Cache.getInstance();
-					ib.sendMessage(channel, c.toStringIRC());
+					ib.sendMessage(sender, c.toStringIRC());
 					for(ISP i : c.getListe()) {
 						if(i.isFFDNMember()) {
-							ib.sendMessage(channel, i.toStringIRC());
+							ib.sendMessage(sender, i.toStringIRC());
 						}
 					}
 
 				}else if(s.equalsIgnoreCase("ffdn")) {				//+info ffdn
 					Cache c = Cache.getInstance();
-					ib.sendMessage(channel, c.toStringIRC());
+					ib.sendMessage(sender, c.toStringIRC());
 
 				}else {
 					Cache c = Cache.getInstance();
 					ISP i = c.getISPWithName(s);
 					if(i == null) {
-						bot.sendMessage(channel, "Recherche d'une zone "+s);
+						bot.sendMessage(sender, "Recherche d'une zone "+s);
 						ISP j = c.getISPWithGeoZone(s);
 						if(j == null)
-							bot.sendMessage(channel, "Le FAI "+s+" est Inconnu, désolé. Et aucun FAI n'opère sur une sone dénomée "+s+" ...");
+							bot.sendMessage(sender, "Le FAI "+s+" est Inconnu, désolé. Et aucun FAI n'opère sur une sone dénomée "+s+" ...");
 						else {
-							bot.sendMessage(channel, "Un FAI opère sur une zone correspondante : ");
-							ib.sendMessage(channel, j.toStringIRC());
+							bot.sendMessage(sender, "Un FAI opère sur une zone correspondante : ");
+							ib.sendMessage(sender, j.toStringIRC());
 							List<CoveredAreas> cas = j.getCoveredAreas(s);
 							String technos = "Avec pour techno:";
 							for(CoveredAreas ca: cas) {
@@ -69,10 +69,10 @@ public class Info extends Action {
 								technos+=ca.getTechnos()+" ";
 								}
 							}
-							bot.sendMessage(channel, technos);
+							bot.sendMessage(sender, technos);
 						}
 					}else {
-						ib.sendMessage(channel, i.toStringIRC());
+						ib.sendMessage(sender, i.toStringIRC());
 					}
 				}
 
@@ -81,7 +81,7 @@ public class Info extends Action {
 				int  id = Integer.parseInt(message.substring(message.indexOf(' ')+1));
 				List<String> strings = idao.getISP(id).toStringIRC();
 				for(String response : strings) {
-					bot.sendMessage(channel,response);
+					bot.sendMessage(sender,response);
 				}
 			}
 		}

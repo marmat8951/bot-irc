@@ -11,7 +11,6 @@ import data.ISP;
 import data.MultiplePossibleAddressException;
 import main.Bot;
 import main.Cache;
-import main.Main;
 
 public class Distance extends Action {
 	public static final int NOMBRE_AFFICHABLE = 3;
@@ -34,23 +33,25 @@ public class Distance extends Action {
 			latitude = Double.parseDouble(s.substring(0, s.indexOf(' ')));
 			s=s.substring(s.indexOf(' ')+1); // Je me et au second paramètre
 			longitude = Double.parseDouble(s);
+			affichePlusProches(latitude, longitude, channel);
 		}catch(Exception e) {	//Cela doit alors être une adresse!
 			try {
 				Coordinates ca = getCoordinatesFromMessage(message, channel);
 				latitude = ca.getLatitude();
 				longitude = ca.getLongitude();
+				affichePlusProches(latitude, longitude, channel);
 			} catch (MultiplePossibleAddressException e1) {
-				bot.sendMessage(channel, "Plusieurs possibilités pour cet endroit, nous choissisons le 1:");
+				bot.sendMessage(channel, "Plusieurs possibilités pour cet endroit, nous choisirons le premier:");
 				for(int i = 0; i<e1.lieux.length; ++i) {
 					bot.sendMessage(channel, (i+1)+":"+e1.lieux[i].toString());
 				}
 				latitude = e1.lieux[0].coordonees.getLatitude();
 				longitude = e1.lieux[0].coordonees.getLongitude();
+				affichePlusProches(latitude, longitude, channel);
 			}
-			
-		}finally {
-			affichePlusProches(latitude, longitude, channel);
 		}
+				
+		
 
 	}
 	

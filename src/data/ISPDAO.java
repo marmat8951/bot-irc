@@ -153,7 +153,7 @@ public class ISPDAO {
 		if(json != null) {
 			if(Main.isDebug()) {
 				System.out.println("JSON du FAI "+number);
-		System.out.println(json);
+				//System.out.println(json);
 			}
 		JSONObject jsonObj = new JSONObject(json);
 		String name = getName(jsonObj);

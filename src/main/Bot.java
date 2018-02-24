@@ -8,12 +8,13 @@ import actions.Action;
 
 public class Bot extends PircBot {
 
-	private static long TIME_BETWEEN_MESSAGES = 200;
+	private volatile static long TIME_BETWEEN_MESSAGES = 200;
 	private List<Action> actions = Action.getAllActions(this);
 	private String[] admins;
 
 	public Bot() {
-		this.setName("UneFede2");
+		this.setAutoNickChange(true);
+		this.setName("UneFede");
 		this.setVersion("Gentille Droide de la fédération, <3 Marmat");
 		this.setMessageDelay(TIME_BETWEEN_MESSAGES);
 		if(Main.isDebug()) {
@@ -37,12 +38,24 @@ public class Bot extends PircBot {
 		}
 		//easter Egg
 		String ea="Ehlo UneFede";
-		if (message.contains("Ehlo UneFede")) {
+		if (message.contains(ea)) {
 			sendMessage(channel, "Ehlo "+sender+"!!");
 		}
 
 	}
 
+	public void onMode(String channel,
+            String sourceNick,
+            String sourceLogin,
+            String sourceHostname,
+            String mode) {
+		mode = mode.toLowerCase();
+
+		if(mode.contains("pircbot") && mode.substring(0, 2).equals("+b") && sourceLogin.toLowerCase().contains("abitbolg")) {
+			sendMessageToAdmins("Help, il semblerai que je me soit fait ban sur "+channel+" Tu peux vérifier?");
+		}
+	}
+	
 	
 	/**
 	 * Envoie les messages les uns à la suite de l'autre dans l'ordre de la liste.
@@ -107,7 +120,6 @@ public class Bot extends PircBot {
 	public void setAdmins(String[] admins) {
 		this.admins = admins;
 	}
-	
-	
+
 
 }

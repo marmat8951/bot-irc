@@ -1,7 +1,6 @@
 package data;
 
 import data.AddresseToGPS.Lieu;
-import main.Bot;
 
 public class TestAdresseToGPS {
 

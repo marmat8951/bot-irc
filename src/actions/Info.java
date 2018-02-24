@@ -11,6 +11,8 @@ import main.Cache;
 import verif_saisie.EntierPositifNonVide;
 
 public class Info extends Action {
+	
+	public static boolean INFO_ALL = false;
 
 	public Info(Bot b) {
 		super(b);
@@ -36,7 +38,7 @@ public class Info extends Action {
 			if(!EntierPositifNonVide.verifie(s)) {			// Un mot après +info
 
 
-				if(s.equalsIgnoreCase("all")) {	          			  // +info all
+				if(s.equalsIgnoreCase("all") && INFO_ALL) {	          			  // +info all
 					Cache c = Cache.getInstance();
 					ib.sendMessage(channel, c.toStringIRC());
 					for(ISP i : c.getListe()) {
@@ -58,14 +60,16 @@ public class Info extends Action {
 						if(j == null)
 							bot.sendMessage(channel, "Le FAI "+s+" est Inconnu, désolé. Et aucun FAI n'opère sur une sone dénomée "+s+" ...");
 						else {
-							bot.sendMessage(channel, "Un FAI opère sur la zone "+s+" : ");
+							bot.sendMessage(channel, "Un FAI opère sur une zone correspondante : ");
 							ib.sendMessage(channel, j.toStringIRC());
 							List<CoveredAreas> cas = j.getCoveredAreas(s);
-							String technos = "";
+							String technos = "Avec pour techno:";
 							for(CoveredAreas ca: cas) {
+								if(ca.getName().toLowerCase().contains(s.toLowerCase())) {
 								technos+=ca.getTechnos()+" ";
+								}
 							}
-							bot.sendMessage(channel, "Avec pour techno "+technos);
+							bot.sendMessage(channel, technos);
 						}
 					}else {
 						ib.sendMessage(channel, i.toStringIRC());

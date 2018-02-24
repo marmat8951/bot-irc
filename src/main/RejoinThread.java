@@ -7,6 +7,7 @@ public class RejoinThread implements Runnable{
 	private volatile PircBot pb;
 	private String chan;
 	private static long DEFAULT_WAIT_BEFORE_RECONNECT = 10000;
+	private static long DELAY_BEFORE_MESSAGE_AFTER_RECONNECT = 360;
 	private Thread thread;
 	private String threadName;
 	private int failures;
@@ -49,6 +50,11 @@ public class RejoinThread implements Runnable{
 			}
 
 		}while(!connected);
+		try {
+			Thread.sleep(DELAY_BEFORE_MESSAGE_AFTER_RECONNECT*1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		pb.sendMessage(chan, "Il semblerai que je me soit fait kicker récement. En cas de problème avec moi, merci de contacter adminsys<at>listes<dot>ffdn<dot>org , root[arobaSe]marmat[point]ovh, ou @Marmat sur l'IRC. ");
 		pb.sendMessage(chan, "Vous pouvez aussi ouvrir un ticket ici: https://code.ffdn.org/marmat8951/bot-irc2/issues");
 

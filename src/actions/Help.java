@@ -34,7 +34,7 @@ public class Help extends Action {
 					if(a.keyWords.contains(commande) && hasreacted == false) {
 						String msg = "";
 						for(String s : a.keyWords) {
-							msg+="+"+s+" ";
+							msg+=Action.CARACTERE_COMMANDE+s+" ";
 						}
 						msg += a.help();
 						bot.sendMessage(channel, msg);
@@ -62,6 +62,6 @@ public class Help extends Action {
 	
 	@Override
 	public String help() {
-		return "Utilisez +help <commande> Pour avoir les informations sur une commande.";
+		return "Utilisez "+CARACTERE_COMMANDE+"help <commande> Pour avoir les informations sur une commande.";
 	}
 }

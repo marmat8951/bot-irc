@@ -1,0 +1,1 @@
+git pull &&  javac -cp json-20171018.jar:pircbot-1.5.0/pircbot.jar:src:ressources:. src/main/Main.java && java -cp json-20171018.jar:pircbot-1.5.0/pircbot.jar:src:ressources: main.Main

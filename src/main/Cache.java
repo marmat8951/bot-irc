@@ -274,7 +274,9 @@ public class Cache implements AffichableSurIRC {
 				if(Main.isDebug()) {
 					ca.getName();
 				}
-				if(s.equalsIgnoreCase(ca.getName())) {
+				String name = ca.getName().toLowerCase();
+				s = s.toLowerCase();
+				if(name.contains(s)) {
 					return i;
 				}
 			}

@@ -11,6 +11,9 @@ public class Bot extends PircBot {
 	private volatile static long TIME_BETWEEN_MESSAGES = 200;
 	private List<Action> actions = Action.getAllActions(this);
 	private String[] admins;
+	public boolean responseOnPrivateChannel = true;
+	public boolean responseOnPrivateMessages = true;
+	
 
 	public Bot() {
 		this.setAutoNickChange(true);
@@ -25,7 +28,9 @@ public class Bot extends PircBot {
 	}
 	
 	public void onPrivateMessage(String sender, String login, String hostname, String message) {
-		this.sendMessage(sender, "Bonjour a toi "+sender+". Pas la peine de me demander mon 06, je ne répond pas aux messages privés. Sauf certains spéciaux.");
+		if(responseOnPrivateMessages) {
+			onMessage(sender, sender, login, hostname, message);
+		}
 	}
 	
 	public void onMessage(String channel, String sender,

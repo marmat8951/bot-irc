@@ -27,10 +27,9 @@ public class Contact extends Action {
 			Cache c = Cache.getInstance();
 			ISP fai = c.getISPWithName(s);
 			if(fai == null) {
-				bot.sendMessage(sender, "Aucun FAI "+s);
+				bot.sendMessage(sender,channel, "Aucun FAI "+s);
 			}else {
-				Bot b = (Bot) bot;
-				b.sendMessage(sender, fai.contact());
+				bot.sendMessages(sender, channel, fai.contact());
 			}
 		}
 

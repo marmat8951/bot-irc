@@ -32,7 +32,7 @@ public class Info extends Action {
 
 			String s = message.substring(message.indexOf(' ')+1);
 			ISPDAO idao = ISPDAO.getInstance();
-			Bot ib = (Bot)bot;
+			Bot ib = bot;
 
 
 			if(!EntierPositifNonVide.verifie(s)) {			// Un mot après +info
@@ -40,16 +40,16 @@ public class Info extends Action {
 
 				if(s.equalsIgnoreCase("all") && INFO_ALL) {	          			  // +info all
 					Cache c = Cache.getInstance();
-					ib.sendMessage(sender, c.toStringIRC());
+					ib.sendMessages(sender,channel, c.toStringIRC());
 					for(ISP i : c.getListe()) {
 						if(i.isFFDNMember()) {
-							ib.sendMessage(sender, i.toStringIRC());
+							ib.sendMessages(sender,channel, i.toStringIRC());
 						}
 					}
 
 				}else if(s.equalsIgnoreCase("ffdn")) {				//+info ffdn
 					Cache c = Cache.getInstance();
-					ib.sendMessage(sender, c.toStringIRC());
+					ib.sendMessages(sender, channel, c.toStringIRC());
 
 				}else {
 					Cache c = Cache.getInstance();
@@ -58,10 +58,10 @@ public class Info extends Action {
 						bot.sendMessage(sender, "Recherche d'une zone "+s);
 						ISP j = c.getISPWithGeoZone(s);
 						if(j == null)
-							bot.sendMessage(sender, "Le FAI "+s+" est Inconnu, désolé. Et aucun FAI n'opère sur une sone dénomée "+s+" ...");
+							bot.sendMessage(sender, channel, "Le FAI "+s+" est Inconnu, désolé. Et aucun FAI n'opère sur une sone dénomée "+s+" ...");
 						else {
-							bot.sendMessage(sender, "Un FAI opère sur une zone correspondante : ");
-							ib.sendMessage(sender, j.toStringIRC());
+							bot.sendMessage(sender, channel, "Un FAI opère sur une zone correspondante : ");
+							ib.sendMessages(sender, channel, j.toStringIRC());
 							List<CoveredAreas> cas = j.getCoveredAreas(s);
 							String technos = "Avec pour techno:";
 							for(CoveredAreas ca: cas) {
@@ -69,10 +69,10 @@ public class Info extends Action {
 								technos+=ca.getTechnos()+" ";
 								}
 							}
-							bot.sendMessage(sender, technos);
+							bot.sendMessage(sender, channel, technos);
 						}
 					}else {
-						ib.sendMessage(sender, i.toStringIRC());
+						ib.sendMessages(sender,channel, i.toStringIRC());
 					}
 				}
 
@@ -81,7 +81,7 @@ public class Info extends Action {
 				int  id = Integer.parseInt(message.substring(message.indexOf(' ')+1));
 				List<String> strings = idao.getISP(id).toStringIRC();
 				for(String response : strings) {
-					bot.sendMessage(sender,response);
+					bot.sendMessage(sender, channel, response);
 				}
 			}
 		}

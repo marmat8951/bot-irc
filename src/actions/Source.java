@@ -18,7 +18,7 @@ public class Source extends Action {
 
 	@Override
 	public void react(String channel, String sender, String login, String hostname, String message) {
-		bot.sendMessage(sender, sender+": mes sources sont disponibles ici: https://code.ffdn.org/marmat8951/bot-irc2");
+		bot.sendMessage(sender, channel, sender+": mes sources sont disponibles ici: https://code.ffdn.org/marmat8951/bot-irc2");
 	}
 
 	@Override

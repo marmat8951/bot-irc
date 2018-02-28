@@ -40,10 +40,10 @@ public class ID extends Action {
 		}else {
 			ISP fai = c.getISPWithName(idString);
 			if(fai!=null) {
-				bot.sendMessage(sender, "Le FAI "+fai.getBetterName()+" a pour ID: "+fai.getId());
-				bot.sendMessage(sender, "L'url dans db est https://db.ffdn.org/api/v1/isp/"+fai.getId()+"/");
+				bot.sendMessage(sender,channel, "Le FAI "+fai.getBetterName()+" a pour ID: "+fai.getId());
+				bot.sendMessage(sender,channel, "L'url dans db est https://db.ffdn.org/api/v1/isp/"+fai.getId()+"/");
 			}else {
-				erreur(sender,sender,idString+" ne correspond a aucun FAI");
+				erreur(sender,channel,idString+" ne correspond a aucun FAI");
 			}
 			
 		}
@@ -51,8 +51,8 @@ public class ID extends Action {
 
 	}
 	
-	private void erreur(String channel, String sender, String s) {
-		bot.sendMessage(channel, sender+": "+s);
+	private void erreur(String sender,String channel, String s) {
+		bot.sendMessage(sender,channel, sender+": "+s);
 	}
 
 	@Override

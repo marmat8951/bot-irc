@@ -73,8 +73,7 @@ public class Liste extends Action {
 			}
 		}
 		messages.add(s);
-		Bot b2 = (Bot) bot;
-		b2.sendMessage(sender, messages);
+		bot.sendMessages(sender,channel, messages);
 	}
 
 	@Override

@@ -21,8 +21,8 @@ public class Help extends Action {
 			boolean hasreacted = false;
 			String commandeSansEspaces = message.replaceAll("\\s", "").substring(1); // On enleve les espaces et le +
 			if(commandeSansEspaces.toLowerCase().equals("help")) {
-				bot.sendMessage(sender, help());
-				afficheListeCommandes(l, sender);
+				bot.sendMessage(sender,channel, help());
+				afficheListeCommandes(l, sender, channel);
 				hasreacted = true;
 			}else {
 				String commande = message.substring(message.indexOf(' ')+1);
@@ -37,7 +37,7 @@ public class Help extends Action {
 							msg+=Action.CARACTERE_COMMANDE+s+" ";
 						}
 						msg += a.help();
-						bot.sendMessage(sender, msg);
+						bot.sendMessage(sender,channel, msg);
 						hasreacted = true;
 					}
 				}
@@ -45,18 +45,18 @@ public class Help extends Action {
 			
 			// Si il n'as pas encore réagi
 			if(!hasreacted) {
-				bot.sendMessage(sender, "Commande inconnue.");
-				afficheListeCommandes(l, sender);
+				bot.sendMessage(sender,channel, "Commande inconnue.");
+				afficheListeCommandes(l, sender, channel);
 			}
 
 	}
 	
-	private void afficheListeCommandes(List<Action> l, String channel) {
+	private void afficheListeCommandes(List<Action> l, String sender, String channel) {
 		String listeCommandes="Voici la liste des commandes: ";
 		for(Action a : l) {
 			listeCommandes += CARACTERE_COMMANDE+a.keyWords.get(0)+" ";
 		}
-		bot.sendMessage(channel, listeCommandes);
+		bot.sendMessage(sender,channel, listeCommandes);
 	}
 
 	

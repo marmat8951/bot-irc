@@ -11,8 +11,8 @@ public class Bot extends PircBot {
 	private volatile static long TIME_BETWEEN_MESSAGES = 200;
 	private List<Action> actions = Action.getAllActions(this);
 	private String[] admins;
-	public boolean responseOnPrivateChannel = true;
-	public boolean responseOnPrivateMessages = true;
+	private boolean responseOnPrivateChannel = true;
+	private boolean responseOnPrivateMessages = true;
 	
 
 	public Bot() {
@@ -30,6 +30,8 @@ public class Bot extends PircBot {
 	public void onPrivateMessage(String sender, String login, String hostname, String message) {
 		if(responseOnPrivateMessages) {
 			onMessage(sender, sender, login, hostname, message);
+		}else {
+			sendMessage(sender,"Eh non, Je suis configurée pour ne pas répondre aux MP. Désolé!");
 		}
 	}
 	
@@ -42,8 +44,8 @@ public class Bot extends PircBot {
 			}
 		}
 		//easter Egg
-		String ea="Ehlo UneFede";
-		if (message.contains(ea)) {
+		String ea="Ehlo "+this.getNick();
+		if (message.toLowerCase().contains(ea.toLowerCase())) {
 			sendMessage(channel, "Ehlo "+sender+"!!");
 		}
 
@@ -67,11 +69,12 @@ public class Bot extends PircBot {
 	 * @param channel Channel IRC dans lequel envoyer les messages
 	 * @param lines liste de chaaines de caractères à envoyer.
 	 */
-	public void sendMessage(String channel, List<String> lines) {
+	private void sendMessage(String channel, List<String> lines) {
 		for(String s : lines) {
 			sendMessage(channel,s);
 		}
 	}
+	
 	
 	/**
 	 * 
@@ -126,5 +129,50 @@ public class Bot extends PircBot {
 		this.admins = admins;
 	}
 
+	/**
+	 * @return the responseOnPrivateChannel
+	 */
+	public boolean isResponseOnPrivateChannel() {
+		return responseOnPrivateChannel;
+	}
+
+	/**
+	 * @param responseOnPrivateChannel the responseOnPrivateChannel to set
+	 */
+	public void setResponseOnPrivateChannel(boolean responseOnPrivateChannel) {
+		this.responseOnPrivateChannel = responseOnPrivateChannel;
+	}
+
+	/**
+	 * @return the responseOnPrivateMessages
+	 */
+	public boolean isResponseOnPrivateMessages() {
+		return responseOnPrivateMessages;
+	}
+
+	/**
+	 * @param responseOnPrivateMessages the responseOnPrivateMessages to set
+	 */
+	public void setResponseOnPrivateMessages(boolean responseOnPrivateMessages) {
+		this.responseOnPrivateMessages = responseOnPrivateMessages;
+	}
+
+	public void sendMessage(String sender,String channel,String message) {
+		if(this.responseOnPrivateChannel) {
+			this.sendMessage(sender, message);
+		}else {
+			this.sendMessage(channel, message);
+		}
+	}
+	
+	public void sendMessages(String sender, String channel,List<String> messages) {
+		if(this.responseOnPrivateChannel) {
+			this.sendMessage(sender, messages);
+		}else {
+			this.sendMessage(channel, messages);
+		}
+	}
+	
+	
 
 }

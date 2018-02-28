@@ -21,15 +21,15 @@ public class Reload extends Action {
 		Date now = new Date();
 		Date lastCU = Cache.getInstance().getLastCacheUpdate();
 		if(lastCU.getTime() < now.getTime()-Cache.getTIME_BETWEEN_RELOADS() ) {		// Si la dernière MAJ date de + de 5 minutes
-			bot.sendMessage(sender, "Je lance le reload!");
+			bot.sendMessage(sender,channel, "Je lance le reload!");
 			if(reload()) {
-				bot.sendMessage(sender, sender+": Le reload s'est bien passé.");
+				bot.sendMessage(sender, channel, sender+": Le reload s'est bien passé.");
 			}else {
-				bot.sendMessage(sender, sender+": Erreur au moment du reload.");
+				bot.sendMessage(sender, channel, sender+": Erreur au moment du reload.");
 			}
 		}else {
 			Date nextAllowed = new Date(lastCU.getTime()+Cache.getTIME_BETWEEN_RELOADS());
-			bot.sendMessage(sender, "Trop de reload, attendez un peu. Le dernier à eu lieu le "+lastCU.toString()+" Prochain autorisé le "+nextAllowed);
+			bot.sendMessage(sender, channel, "Trop de reload, attendez un peu. Le dernier à eu lieu le "+lastCU.toString()+" Prochain autorisé le "+nextAllowed);
 		}
 		
 	}

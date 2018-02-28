@@ -3,14 +3,12 @@ package actions;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jibble.pircbot.PircBot;
-
 import main.Bot;
 
 public abstract class Action {
 
 	public List<String> keyWords;
-	public PircBot bot;
+	public Bot bot;
 	public volatile static char CARACTERE_COMMANDE = '+';
 	
 	protected Action(Bot b, List<String> keywords) {

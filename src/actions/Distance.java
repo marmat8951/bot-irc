@@ -33,21 +33,21 @@ public class Distance extends Action {
 			latitude = Double.parseDouble(s.substring(0, s.indexOf(' ')));
 			s=s.substring(s.indexOf(' ')+1); // Je me et au second paramètre
 			longitude = Double.parseDouble(s);
-			affichePlusProches(latitude, longitude, sender);
+			affichePlusProches(latitude, longitude, sender, channel);
 		}catch(Exception e) {	//Cela doit alors être une adresse!
 			try {
-				Coordinates ca = getCoordinatesFromMessage(message, channel);
+				Coordinates ca = getCoordinatesFromMessage(message, sender, channel);
 				latitude = ca.getLatitude();
 				longitude = ca.getLongitude();
-				affichePlusProches(latitude, longitude, sender);
+				affichePlusProches(latitude, longitude, sender, channel);
 			} catch (MultiplePossibleAddressException e1) {
-				bot.sendMessage(sender, "Plusieurs possibilités pour cet endroit, nous choisirons le premier:");
+				bot.sendMessage(sender, channel, "Plusieurs possibilités pour cet endroit, nous choisirons le premier:");
 				for(int i = 0; i<e1.lieux.length; ++i) {
-					bot.sendMessage(sender, (i+1)+":"+e1.lieux[i].toString());
+					bot.sendMessage(sender, channel, (i+1)+":"+e1.lieux[i].toString());
 				}
 				latitude = e1.lieux[0].coordonees.getLatitude();
 				longitude = e1.lieux[0].coordonees.getLongitude();
-				affichePlusProches(latitude, longitude, sender);
+				affichePlusProches(latitude, longitude, sender,channel);
 			}
 		}
 				
@@ -55,7 +55,7 @@ public class Distance extends Action {
 
 	}
 	
-	private void affichePlusProches(double latitude, double longitude, String channel) {
+	private void affichePlusProches(double latitude, double longitude, String sender, String channel) {
 		ISP[] plusProches = getISPPlusProche(latitude, longitude);
 		for(int i=0;i<plusProches.length;++i) {
 			if(plusProches[i]!=null) {
@@ -64,17 +64,17 @@ public class Distance extends Action {
 				nf.setMaximumFractionDigits(2);
 				nf.setMinimumFractionDigits(0);
 				distance = distance / 1000.0; 	//On met en KM		
-				bot.sendMessage(channel, (i+1)+": "+plusProches[i].getBetterName()+" à "+nf.format(distance)+" Km");
+				bot.sendMessage(sender,channel, (i+1)+": "+plusProches[i].getBetterName()+" à "+nf.format(distance)+" Km");
 			}
 		}
 	}
 	
-	private Coordinates getCoordinatesFromMessage(String message, String channel) throws MultiplePossibleAddressException {
+	private Coordinates getCoordinatesFromMessage(String message, String sender, String channel) throws MultiplePossibleAddressException {
 		final double MAX_DIFF = 0.1; //Differences there MUST between 2 coordinates so they are seen as differents
 		AddresseToGPS a2gps = new AddresseToGPS(message.substring(message.indexOf(' ')+1));
 		Lieu[] lieux = a2gps.getAllLieu();
 		if(lieux == null || lieux.length == 0) {
-			bot.sendMessage(channel, "Aucun lieu ne correspond. Requete effectuée: "+a2gps.getAddressToQuerry());
+			bot.sendMessage(sender,channel, "Aucun lieu ne correspond. Requete effectuée: "+a2gps.getAddressToQuerry());
 			return null;
 		}else if(lieux.length == 1) {
 			return lieux[0].coordonees;

@@ -60,6 +60,10 @@ public class PropertiesSetter {
 		
 		Bot.setTIME_BETWEEN_MESSAGES(Long.parseLong(prop.getProperty("Time_between_messages")));
 		b.setAdmins(getMultipleValues(prop, "Admins"));
+		b.setResponseOnPrivateChannel(Boolean.parseBoolean(prop.getProperty("Respond_using_private_channel")));
+		b.setResponseOnPrivateMessages(Boolean.parseBoolean(prop.getProperty("Allow_private_messages")));
+		
+		
 		
 		RejoinThread.setDEFAULT_WAIT_BEFORE_RECONNECT(Long.parseLong(prop.getProperty("Wait_before_reconnecting_when_kicked")));
 		

@@ -5,11 +5,13 @@ import java.util.List;
 import org.jibble.pircbot.PircBot;
 
 import actions.Action;
+import comportement.Comportement;
 
 public class Bot extends PircBot {
 
 	private volatile static long TIME_BETWEEN_MESSAGES = 200;
 	private List<Action> actions = Action.getAllActions(this);
+	private List<Comportement> comportements = Comportement.getAllComportements(this);
 	private String[] admins;
 	private boolean responseOnPrivateChannel = true;
 	private boolean responseOnPrivateMessages = true;
@@ -43,10 +45,24 @@ public class Bot extends PircBot {
 				a.react(channel, sender, login, hostname, message);
 			}
 		}
-		//easter Egg
+		//easter Eggs
 		String ea="Ehlo "+this.getNick();
 		if (message.toLowerCase().contains(ea.toLowerCase())) {
 			sendMessage(channel, "Ehlo "+sender+"!!");
+		}
+		
+		if(message.toLowerCase().contains("mousse au chocolat")) {
+			sendMessage(channel, "J'adore la mousse au chocolat de Benjamin B.");
+		}
+		System.out.println("cprt");
+		for(Comportement c : comportements) {
+			System.out.println("Comportements");
+			if(c.hastoreact(message)) {
+				c.react(channel, sender, login, hostname, message);
+				System.out.println("a reagi");
+			}else {
+				System.out.println("ne reagit pas");
+			}
 		}
 
 	}

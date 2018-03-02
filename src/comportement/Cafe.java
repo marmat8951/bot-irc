@@ -21,7 +21,7 @@ public class Cafe extends Comportement {
 	@Override
 	public boolean hastoreact(String mesg) {
 		String m=mesg.toLowerCase();
-		return (m.contains(getBotNick()+" fait moi un café")||m.contains(getBotNick()+" fait moi un thé"));
+		return m.contains(getBotNick())&&(m.contains("fais") || m.contains("fait")) && (m.contains("un café")||m.contains("un thé"));
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class Cafe extends Comportement {
 	}
 	//true = thé, false = café
 	private boolean istheorcafe(String msg) {
-		return msg.contains(getBotNick()+" fait moi un thé");	
+		return msg.contains("thé");
 	}
 	
 	public final static Cafe getInstance(Bot b) {

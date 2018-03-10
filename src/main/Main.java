@@ -4,9 +4,9 @@ import java.net.ConnectException;
 
 public class Main {
 
-	private static String SERVER = "irc.geeknode.net";
-	private static int PORT = 6667;
-	private static String[] CHANNELS = { "#marmat" };
+	public volatile static String SERVER = "irc.geeknode.net";
+	public volatile static int PORT = 6667;
+	private volatile static String[] CHANNELS = { "#marmat" };
 	private static long TIMEOUT_BEFORE_RECONNECTING = 360;
 	private static int failures = 0;
 	private static boolean DEBUG=true;
@@ -52,7 +52,6 @@ public class Main {
 		}
 	}
 
-
 	public static boolean isDebug () {
 		return Main.DEBUG;
 	}
@@ -62,45 +61,36 @@ public class Main {
 		DEBUG=b;
 	}
 
-
 	public static final String getSERVER() {
 		return SERVER;
 	}
-
 
 	public static final void setSERVER(String sERVER) {
 		SERVER = sERVER;
 	}
 
-
 	public static final int getPORT() {
 		return PORT;
 	}
-
 
 	public static final void setPORT(int pORT) {
 		PORT = pORT;
 	}
 
-
 	public static final String[] getCHANNELS() {
 		return CHANNELS;
 	}
-
 
 	public static final void setCHANNELS(String[] cHANNELS) {
 		CHANNELS = cHANNELS;
 	}
 
-
 	public static final long getTIMEOUT_BEFORE_RECONNECTING() {
 		return TIMEOUT_BEFORE_RECONNECTING;
 	}
 
-
 	public static final void setTIMEOUT_BEFORE_RECONNECTING(long tIMEOUT_BEFORE_RECONNECTING) {
 		TIMEOUT_BEFORE_RECONNECTING = tIMEOUT_BEFORE_RECONNECTING;
 	}
-	
-	
+
 }

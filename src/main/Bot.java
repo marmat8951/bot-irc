@@ -1,7 +1,14 @@
 package main;
 
+import java.io.IOException;
+import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
+import org.jibble.pircbot.IrcException;
+import org.jibble.pircbot.NickAlreadyInUseException;
 import org.jibble.pircbot.PircBot;
 
 import actions.Action;
@@ -15,6 +22,7 @@ public class Bot extends PircBot {
 	private String[] admins;
 	private boolean responseOnPrivateChannel = true;
 	private boolean responseOnPrivateMessages = true;
+	private volatile static long WAIT_BEFORE_RECONNECT = 60;
 	
 
 	public Bot() {
@@ -29,11 +37,53 @@ public class Bot extends PircBot {
 		}
 	}
 	
+	
 	public void onPrivateMessage(String sender, String login, String hostname, String message) {
 		if(responseOnPrivateMessages) {
 			onMessage(sender, sender, login, hostname, message);
 		}else {
 			sendMessage(sender,"Eh non, Je suis configurée pour ne pas répondre aux MP. Désolé!");
+		}
+	}
+	
+	
+	public void onDisconnect() {
+		Date d = new Date();
+		System.err.println("Je viens d'être déconnectée!");
+		this.sendMessageToAdmins("Je viens d'être déconnectée!");
+
+		while(!this.isConnected()) {
+		try {
+			Thread.sleep(WAIT_BEFORE_RECONNECT*1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+			try {
+				this.reconnect();
+			}catch (UnknownHostException e) {
+				
+			
+			} catch (NickAlreadyInUseException e) {
+				this.sendMessageToAdmins("Je viens d'être déconnectée et en tentant de me reconnecter mon nom était déjà utilisé!");
+				e.printStackTrace();
+			} catch (IOException e) {
+				this.sendMessageToAdmins("Je viens d'être déconnectée et en tentant de me reconnecter, j'ai eu une IOException: "+e.toString());
+				e.printStackTrace();
+			} catch (IrcException e) {
+				this.sendMessageToAdmins("Je viens d'être déconnectée et en tentant de me reconnecter, j'ai eu une IrcException: "+e.toString());
+				e.printStackTrace();
+			}
+		}
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss", Locale.FRENCH);
+		this.sendMessageToAdmins("Je viens de me reconnecter, j'était abscente depuis le "+sdf.format(d));
+		
+	}
+	
+	public final void joinChannels() {
+		String[] channels = Main.getCHANNELS();
+		for(int i = 0; i< channels.length; i++) {
+			joinChannel(channels[i]);
 		}
 	}
 	

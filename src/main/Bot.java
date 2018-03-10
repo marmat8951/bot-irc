@@ -109,9 +109,11 @@ public class Bot extends PircBot {
 			System.out.println("Comportements");
 			if(c.hastoreact(message)) {
 				c.react(channel, sender, login, hostname, message);
-				System.out.println("a reagi");
+				if(Main.isDebug()) System.out.println("a reagi");
+				
 			}else {
-				System.out.println("ne reagit pas");
+				
+				if(Main.isDebug())System.out.println("ne reagit pas");
 			}
 		}
 

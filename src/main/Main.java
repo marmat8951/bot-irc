@@ -1,6 +1,10 @@
 package main;
 
 import java.net.ConnectException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
+import rss.RSSChecker;
 
 public class Main {
 
@@ -10,6 +14,8 @@ public class Main {
 	private static long TIMEOUT_BEFORE_RECONNECTING = 360;
 	private static int failures = 0;
 	private static boolean DEBUG=true;
+	
+	public static final SimpleDateFormat DATE_FORMAT_OUT = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss", Locale.FRENCH);;
 
 	public static void main(String[] args) throws Exception {
 
@@ -42,7 +48,9 @@ public class Main {
 			}
 			System.out.println("Debug? "+DEBUG);
 			
-
+			RSSChecker rcheck = new RSSChecker("https://planet.ffdn.org/atom.xml", bot);
+			rcheck.start();
+			
 		}catch(ConnectException ce) {
 			failures++;
 			System.err.println("Erreur numéro "+failures);

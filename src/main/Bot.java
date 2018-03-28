@@ -75,8 +75,7 @@ public class Bot extends PircBot {
 			}
 		}
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss", Locale.FRENCH);
-		this.sendMessageToAdmins("Je viens de me reconnecter, j'était abscente depuis le "+sdf.format(d));
+		this.sendMessageToAdmins("Je viens de me reconnecter, j'était abscente depuis le "+Main.DATE_FORMAT_OUT.format(d));
 		
 	}
 	
@@ -161,6 +160,21 @@ public class Bot extends PircBot {
 		}
 	}
 	
+	public void sendMessageOnAllChannels(String message) {
+		String[] chans = this.getChannels();
+		for(int i=0;i<chans.length;i++) {
+			this.sendMessage(chans[i], message);
+		}
+	}
+	
+	public void sendMessagesOnAllChannels(List<String> messages) {
+		for(String s : messages) {
+			sendMessageOnAllChannels(s);
+		}
+	}
+	
+	
+	
 	
 	/**
 	 * @return the tIME_BETWEEN_MESSAGES
@@ -233,6 +247,7 @@ public class Bot extends PircBot {
 			this.sendMessage(channel, messages);
 		}
 	}
+	
 	
 	
 

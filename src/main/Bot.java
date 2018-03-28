@@ -54,14 +54,9 @@ public class Bot extends PircBot {
 		if(message.toLowerCase().contains("mousse au chocolat")) {
 			sendMessage(channel, "J'adore la mousse au chocolat de Benjamin B.");
 		}
-		System.out.println("cprt");
 		for(Comportement c : comportements) {
-			System.out.println("Comportements");
 			if(c.hastoreact(message)) {
 				c.react(channel, sender, login, hostname, message);
-				System.out.println("a reagi");
-			}else {
-				System.out.println("ne reagit pas");
 			}
 		}
 

@@ -9,6 +9,7 @@ import java.util.Properties;
 import actions.Action;
 import actions.Info;
 import actions.Liste;
+import rss.RSSChecker;
 import verif_saisie.EntierPositifNonVide;
 
 
@@ -26,7 +27,7 @@ public class PropertiesSetter {
 		f=configFile;
 	}
 
-	public boolean setPropertiesOn(CacheReloader cr, Bot b) throws IOException,NumberFormatException {
+	public boolean setPropertiesOn(CacheReloader cr, Bot b, RSSChecker rssc) throws IOException,NumberFormatException {
 		System.out.println(here);
 		System.out.println(here+File.separator+"ressources"+File.separator+"config"+File.separator+DEFAULT_PROPERTIES_FILE);
 		FileReader defaultProperties = new FileReader(new File(here+File.separator+"ressources"+File.separator+"config"+File.separator+DEFAULT_PROPERTIES_FILE));
@@ -81,8 +82,14 @@ public class PropertiesSetter {
 			Info.INFO_ALL = Boolean.parseBoolean(prop.getProperty("infoall"));
 		}
 		
+		setPropertiesOnRSS(prop, rssc);
 		
-		
+		return true;
+	}
+	
+	public boolean setPropertiesOnRSS(Properties prop, RSSChecker rss) {
+		rss.setRssaddr(prop.getProperty("RSS_adress"));
+		rss.setTimeout(Integer.parseInt(prop.getProperty("RSS_new_article_check")));
 		return true;
 	}
 	

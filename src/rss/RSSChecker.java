@@ -31,6 +31,10 @@ public class RSSChecker implements Runnable {
 	private Date lastarticle = new Date(); //last info
 	public static final SimpleDateFormat DATE_FORMATIN =  new SimpleDateFormat ("yyyy-MM-dd'T'HH:mm:ss'Z'");
 	private Bot b;
+	
+	public RSSChecker() {
+		this.rssaddr="";
+	}
 
 	public RSSChecker(String address, Bot b) {
 		this.rssaddr = address;
@@ -90,6 +94,7 @@ public class RSSChecker implements Runnable {
 								b.sendMessageOnAllChannels("Nouveautée sur planet.ffdn.org:");
 							}
 							afficheArticle(article);
+							lastarticle = date;
 						}
 						System.out.println(Main.DATE_FORMAT_OUT.format(date));
 					} catch (DOMException | ParseException e) {
@@ -134,5 +139,21 @@ public class RSSChecker implements Runnable {
 
 
 
+	}
+
+	public String getRssaddr() {
+		return rssaddr;
+	}
+
+	public void setRssaddr(String rssaddr) {
+		this.rssaddr = rssaddr;
+	}
+
+	public long getTimeout() {
+		return timeout;
+	}
+
+	public void setTimeout(long timeout) {
+		this.timeout = timeout;
 	}
 }

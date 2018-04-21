@@ -25,9 +25,12 @@ public class Main {
 			// Now start our bot up.
 			Bot bot = new Bot();
 			
+			RSSChecker rcheck = new RSSChecker("https://planet.ffdn.org/atom.xml", bot);
+			
 			//Properties Setter
 			PropertiesSetter ps = new PropertiesSetter("../../ressources/config/config.properties");
-			ps.setPropertiesOn(cr, bot);
+			
+			ps.setPropertiesOn(cr, bot,rcheck);
 
 			// Connect to the IRC server.
 			bot.connect(SERVER,PORT);
@@ -48,7 +51,7 @@ public class Main {
 			}
 			System.out.println("Debug? "+DEBUG);
 			
-			RSSChecker rcheck = new RSSChecker("https://planet.ffdn.org/atom.xml", bot);
+			
 			rcheck.start();
 			
 		}catch(ConnectException ce) {

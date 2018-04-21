@@ -48,34 +48,21 @@ public class RSSChecker implements Runnable {
 		}
 	}
 	
-	private void afficheArticle(Node article) {
+	
+	private void afficheArticle(Node article, String date) {
 		NodeList nl = article.getChildNodes();
-		int length = nl.getLength();
-		RssData rssdata = new RssData();
-		
-		itemToRssData(article, rssdata);
+		RssData rssdata = new RssData(article);
+		rssdata.setDate(date);
 		b.sendMessagesOnAllChannels(rssdata.toStringIRC());
+		
+	}
+	
+	private void afficheArticle(Node article) {
+		afficheArticle(article, "");
 			
 	}
 	
-	private void itemToRssData(Node item, RssData data) {
-		System.out.println(item);
-		String balise = item.getNodeName();
-		if(balise.equalsIgnoreCase("title")) {
-			data.setTitre(item.getTextContent());
-		}else if(balise.equalsIgnoreCase("author")) {
-			NodeList authlist =item.getChildNodes();
-			for(int i = 0;i<authlist.getLength();i++) {
-				Node bn = authlist.item(i);
-				if(bn.getNodeName().equalsIgnoreCase("name")) data.setAuteur(bn.getTextContent());
-			}
-		}else if(balise.equalsIgnoreCase("link")) {
-			NamedNodeMap nmp = item.getAttributes();
-			Node n = nmp.getNamedItem("href");
-			if(n!=null) data.setLien(n.getTextContent());
-		}
-		
-	}
+	
 	
 	private void workOnEntry(NodeList nl) {
 		int len = nl.getLength();
@@ -93,10 +80,9 @@ public class RSSChecker implements Runnable {
 								istherenews=true;
 								b.sendMessageOnAllChannels("Nouveautée sur planet.ffdn.org:");
 							}
-							afficheArticle(article);
+							afficheArticle(article,Main.DATE_FORMAT_OUT.format(date));
 							lastarticle = date;
 						}
-						System.out.println(Main.DATE_FORMAT_OUT.format(date));
 					} catch (DOMException | ParseException e) {
 						e.printStackTrace();
 					}
@@ -108,9 +94,12 @@ public class RSSChecker implements Runnable {
 	@Override
 	public void run() {
 		if(Main.isDebug()) {
-			System.out.println("RSS checker lancé sur "+rssaddr);
+			System.out.println(this.threadName+" lancé sur "+rssaddr);
 		}
 		do {
+			if(Main.isDebug()) {
+				System.out.println("Parsing du RSS "+rssaddr);
+			}
 			DocumentBuilder db=null;
 			Document doc = null;
 			try {
@@ -133,7 +122,7 @@ public class RSSChecker implements Runnable {
 			try {
 				Thread.sleep(1000*timeout);
 			} catch (InterruptedException e) {
-				System.err.println("rss Chacker à été arrété");
+				System.err.println(this.threadName+" à été arrété");
 			}
 		}while(!end);
 

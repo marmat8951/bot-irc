@@ -1,10 +1,15 @@
 package rss;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import main.AffichableSurIRC;
+
 /**
- * Le but principal de cette classe est de stocker les articles du flux RSS. 
+ * Le but principal de cette classe est de stocker les articles du flux RSS.
  * @author marmat
  */
-public class RssDataRemainder {
+public class RssDataRemainder implements AffichableSurIRC{
 
 	public RssData[] data;
 
@@ -12,9 +17,10 @@ public class RssDataRemainder {
 		data = new RssData[default_size];
 	}
 
-	public int getSIZE() {
+	public int getSize() {
 		return data.length;
 	}
+	
 
 	public void setSIZE(int size) {
 		if(size != data.length) {
@@ -35,8 +41,7 @@ public class RssDataRemainder {
 	 */
 	public int getCompletion() {
 		int i = 0;
-		for(; i<data.length && data[i] !=null ;++i) {
-		}
+		for(; i<data.length && data[i] !=null ;++i);
 		return i;
 	}
 
@@ -52,6 +57,27 @@ public class RssDataRemainder {
 		movetoright();
 		this.data[0]=newdata;
 	}
-
+	
+	public RssData getDataWithId(int id) {
+		if(id<0 || id>=data.length) return null;
+		return data[id];
+	}
+	
+	public String toString() {
+		return "Il y a "+data.length+" slots d'articles dont "+getCompletion()+" occupés.";
+	}
+	
+	public List<String> toStringIRC(){
+		List<String> res = new ArrayList<String>();
+		int len = getCompletion();
+		for(int i=0;i<len;i++) {
+			String ligne = "["+(i+1)+"] "+data[i].getTitre();
+			if(data[i].getAuteur()!= null && !data[i].getAuteur().equals("")) {
+				ligne +=" par "+data[i].getAuteur();
+			}
+			res.add(ligne);
+		}
+		return res;
+	}
 
 }

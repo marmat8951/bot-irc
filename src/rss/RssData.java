@@ -41,7 +41,6 @@ public class RssData implements AffichableSurIRC{
 				if(bn.getNodeName().equalsIgnoreCase("name")) {
 					String a = ""+bn.getTextContent();
 					setAuteur(a);
-					System.out.println("Mise de l'auteur a "+a);
 				}
 			}
 		}else if(balise.equalsIgnoreCase("link")) {

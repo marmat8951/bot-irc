@@ -12,9 +12,14 @@ import main.AffichableSurIRC;
 public class RssDataRemainder implements AffichableSurIRC{
 
 	public RssData[] data;
+	public static final int DEFAULT_SIZE=10;
 
 	public RssDataRemainder(int default_size) {
 		data = new RssData[default_size];
+	}
+	
+	public RssDataRemainder() {
+		this(DEFAULT_SIZE);
 	}
 
 	public int getSize() {
@@ -71,7 +76,7 @@ public class RssDataRemainder implements AffichableSurIRC{
 		List<String> res = new ArrayList<String>();
 		int len = getCompletion();
 		for(int i=0;i<len;i++) {
-			String ligne = "["+(i+1)+"] "+data[i].getTitre();
+			String ligne = "["+(i)+"] "+data[i].getTitre();
 			if(data[i].getAuteur()!= null && !data[i].getAuteur().equals("")) {
 				ligne +=" par "+data[i].getAuteur();
 			}

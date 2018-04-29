@@ -2,10 +2,8 @@ package main;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import org.jibble.pircbot.IrcException;
 import org.jibble.pircbot.NickAlreadyInUseException;
@@ -13,6 +11,7 @@ import org.jibble.pircbot.PircBot;
 
 import actions.Action;
 import comportement.Comportement;
+import rss.RssDataRemainder;
 
 public class Bot extends PircBot {
 
@@ -23,6 +22,7 @@ public class Bot extends PircBot {
 	private boolean responseOnPrivateChannel = true;
 	private boolean responseOnPrivateMessages = true;
 	private volatile static long WAIT_BEFORE_RECONNECT = 60;
+	private volatile RssDataRemainder rssdata = new RssDataRemainder();
 	
 
 	public Bot() {
@@ -249,6 +249,18 @@ public class Bot extends PircBot {
 	}
 	
 	
-	
+	public void sendMessages(String sender, String channel, AffichableSurIRC affichable) {
+		sendMessages(sender,channel,affichable.toStringIRC());
+	}
+
+
+	public RssDataRemainder getRssdata() {
+		return rssdata;
+	}
+
+
+	public void setRssdata(RssDataRemainder rssdata) {
+		this.rssdata = rssdata;
+	}
 
 }

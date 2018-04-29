@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.Bot;
+import rss.RssDataRemainder;
 
 public abstract class Action {
 
@@ -84,6 +85,7 @@ public abstract class Action {
 		ar.add(new Reload(b));
 		ar.add(new ID(b));
 		ar.add(new Distance(b));
+		ar.add(new RSS(b));
 		return ar;
 	}
 	

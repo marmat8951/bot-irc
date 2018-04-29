@@ -13,7 +13,7 @@ public class Main {
 	private volatile static String[] CHANNELS = { "#marmat" };
 	private static long TIMEOUT_BEFORE_RECONNECTING = 360;
 	private static int failures = 0;
-	private static boolean DEBUG=true;
+	private static volatile boolean DEBUG=true;
 	
 	public static final SimpleDateFormat DATE_FORMAT_OUT = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss", Locale.FRENCH);;
 
@@ -26,7 +26,7 @@ public class Main {
 			Bot bot = new Bot();
 			
 			RSSChecker rcheck = new RSSChecker("https://planet.ffdn.org/atom.xml", bot);
-			
+					
 			//Properties Setter
 			PropertiesSetter ps = new PropertiesSetter("../../ressources/config/config.properties");
 			
@@ -44,15 +44,11 @@ public class Main {
 			}
 			
 			cr.start();
-			if(args.length>0) {
-				setDebug(args[0].equals("-debug"));
-				}else {
-					setDebug(false);
-			}
+			
 			System.out.println("Debug? "+DEBUG);
 			
-			
 			rcheck.start();
+			
 			
 		}catch(ConnectException ce) {
 			failures++;

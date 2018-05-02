@@ -26,12 +26,12 @@ public class RSS extends Action {
 			String contenu = message.substring(message.indexOf(' ')+1);
 			try {
 				int id = Integer.parseInt(contenu);
-				if(id<0 || id>remainder.getCompletion()) {
+				if(id<0 || id>=remainder.getCompletion()) {
 					throw new IllegalArgumentException();
 				}
-				bot.sendMessages(sender, channel, remainder.getDataWithId(id-1));
+				bot.sendMessages(sender, channel, remainder.getDataWithId(id));
 			}catch ( NullPointerException | IllegalArgumentException e) {
-				bot.sendMessage(sender, channel, "erreur: Vous devez utiliser un nombre, et ce dernier doit être entre 0 et "+remainder.getCompletion());
+				bot.sendMessage(sender, channel, "erreur: Vous devez utiliser un nombre, et ce dernier doit être entre 0 et "+(remainder.getCompletion()-1));
 			}
 		}
 	}

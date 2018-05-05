@@ -49,7 +49,7 @@ public class Bot extends PircBot {
 	
 	public void onDisconnect() {
 		Date d = new Date();
-		System.err.println("Je viens d'être déconnectée!");
+		System.err.println(Main.DATE_FORMAT_OUT.format(d)+": Je viens d'être déconnectée!");
 		this.sendMessageToAdmins("Je viens d'être déconnectée!");
 
 		while(!this.isConnected()) {
@@ -74,9 +74,9 @@ public class Bot extends PircBot {
 				e.printStackTrace();
 			}
 		}
-		
+		this.joinChannels();
 		this.sendMessageToAdmins("Je viens de me reconnecter, j'était abscente depuis le "+Main.DATE_FORMAT_OUT.format(d));
-		
+		System.err.println("Je viens de me reconnecter, j'était abscente depuis le "+Main.DATE_FORMAT_OUT.format(d));
 	}
 	
 	public final void joinChannels() {

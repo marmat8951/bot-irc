@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import main.Bot;
+import main.Main;
 
 public class Cafe extends Comportement {
 	public static volatile Cafe instance = null;
@@ -21,7 +22,7 @@ public class Cafe extends Comportement {
 	@Override
 	public boolean hastoreact(String mesg) {
 		String m=mesg.toLowerCase();
-		return m.contains(getBotNick())&&(m.contains("fais") || m.contains("fait")) && (m.contains("un café")||m.contains("un thé"));
+		return m.contains(getBotNick())&&(m.contains("fais") || m.contains("fait")) && (m.contains("café")||m.contains("thé"));
 	}
 
 	@Override
@@ -37,7 +38,7 @@ public class Cafe extends Comportement {
 				if(d.getTime()-lastone < MAX_THE*1000) {
 					b.sendMessage(channel, "Ok, mais la dernière fois c'était il y a moins de "+MAX_THE+" secondes, tu devrais y aller plus doucement...");
 				}else {
-					b.sendMessage(channel, "Ok, pas de problème. La dernière fois c'était le "+new Date(lastone).toString());
+					b.sendMessage(channel, "Ok, pas de problème. La dernière fois c'était le "+Main.DATE_FORMAT_OUT.format(new Date(lastone)));
 				}
 			}
 			lastthe.put(sender, d.getTime());
@@ -51,7 +52,7 @@ public class Cafe extends Comportement {
 				if(d.getTime()-lastone < MAX_CAFE*1000) {
 					b.sendMessage(channel, "Eu... ok, mais, tu devrai plutôt prendre un thé, ça fait vraiment trop peu de temps la... ");
 				}else {
-					b.sendMessage(channel, "Ok, pas de problème, la dernière fois c'était le "+new Date(lastone).toString());
+					b.sendMessage(channel, "Ok, pas de problème, la dernière fois c'était le "+Main.DATE_FORMAT_OUT.format(new Date(lastone)));
 				}
 			}
 			lastcafe.put(sender, d.getTime());

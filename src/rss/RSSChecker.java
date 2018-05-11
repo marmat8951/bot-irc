@@ -129,6 +129,7 @@ public class RSSChecker implements Runnable {
 				doc = db.parse(rssaddr);
 			} catch (SAXException | IOException e1) {
 				e1.printStackTrace();
+				b.sendMessageToAdmins("Erreur du parseur XML");
 			}
 			if(doc!=null) {
 				NodeList nl = doc.getElementsByTagName("entry");
@@ -137,7 +138,8 @@ public class RSSChecker implements Runnable {
 				}
 				workOnEntry(nl);
 			}else {
-				b.sendMessageToAdmins("Erreur au parsing du RSS");
+				b.sendMessageToAdmins("Erreur au parsing du RSS, le document était null");
+				System.err.println("Erreur au parsing du RSS, le document était null");
 			}
 
 			try {
@@ -147,8 +149,6 @@ public class RSSChecker implements Runnable {
 			}
 			firstRun=false;
 		}while(!end);
-
-
 
 	}
 	

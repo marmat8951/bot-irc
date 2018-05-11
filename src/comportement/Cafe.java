@@ -15,7 +15,7 @@ public class Cafe extends Comportement {
 	public static final long MAX_THE = 30;
 	public static final long MAX_CAFE = 360;
 	
-	public Cafe(Bot b) {
+	private Cafe(Bot b) {
 		super(b);
 	}
 	

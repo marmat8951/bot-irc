@@ -16,6 +16,7 @@ public abstract class Comportement {
 	public static List<Comportement> getAllComportements(Bot b){
 		List<Comportement> liste = new ArrayList<>();
 		liste.add(Cafe.getInstance(b));
+		liste.add(Philo.getInstance(b));
 		return liste;
 	}
 	

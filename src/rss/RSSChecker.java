@@ -53,8 +53,7 @@ public class RSSChecker implements Runnable {
 			thread.start();
 		}
 	}
-	
-	
+
 	private void afficheArticle(Node article, String date) {
 		RssData rssdata = new RssData(article);
 		remainder.push(rssdata);
@@ -62,15 +61,16 @@ public class RSSChecker implements Runnable {
 		b.sendMessagesOnAllChannels(rssdata.toStringIRC());
 		
 	}
-	
+
 	private void afficheArticle(Node article) {
 		afficheArticle(article, "");
-			
 	}
-	
-	
-	
+
 	private void workOnEntry(NodeList nl) {
+		if(Main.isDebug()) {
+			System.out.println("Verification des <entry>");
+			System.out.println("Dernier article le: "+Main.DATE_FORMAT_OUT.format(lastarticle));
+		}
 		int len = nl.getLength();
 		boolean istherenews = false;
 		for(int i=len-1; i>=0;i--) {
@@ -81,7 +81,13 @@ public class RSSChecker implements Runnable {
 				if(fils.item(j).getNodeName().equalsIgnoreCase("updated")){
 					try {
 						Date date = DATE_FORMATIN.parse(fils.item(j).getTextContent());
+						if(Main.isDebug()) {
+							System.out.println("Date de l'article: "+Main.DATE_FORMAT_OUT.format(date));
+						}
 						if(date.after(lastarticle)) {
+							if(Main.isDebug()) {
+								System.out.println("Cet article est nouveau.");
+							}
 							if(!istherenews) {
 								istherenews=true;
 								b.sendMessageOnAllChannels("Nouveautée sur planet.ffdn.org:");

@@ -54,16 +54,12 @@ public class RSSChecker implements Runnable {
 		}
 	}
 
-	private void afficheArticle(Node article, String date) {
-		RssData rssdata = new RssData(article);
-		remainder.push(rssdata);
-		rssdata.setDate(date);
-		b.sendMessagesOnAllChannels(rssdata.toStringIRC());
-		
+	private void afficheArticle(RssData data) {
+		b.sendMessagesOnAllChannels(data.toStringIRC());
 	}
 
 	private void afficheArticle(Node article) {
-		afficheArticle(article, "");
+		afficheArticle(new RssData(article));
 	}
 
 	private void workOnEntry(NodeList nl) {
@@ -93,8 +89,9 @@ public class RSSChecker implements Runnable {
 								b.sendMessageOnAllChannels("Nouveautée sur planet.ffdn.org:");
 								
 							}
-							afficheArticle(article,Main.DATE_FORMAT_OUT.format(date));
-							remainder.push(new RssData(article));
+							RssData rs = new RssData(article, date);
+							remainder.push(rs);
+							afficheArticle(rs);
 							lastarticle = date;
 						}
 					} catch (DOMException | ParseException e) {

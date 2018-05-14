@@ -1,6 +1,7 @@
 package rss;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.w3c.dom.NamedNodeMap;
@@ -8,6 +9,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import main.AffichableSurIRC;
+import main.Main;
 
 public class RssData implements AffichableSurIRC{
 
@@ -23,6 +25,7 @@ public class RssData implements AffichableSurIRC{
 		this.titre = titre;
 		this.lien = lien;
 	}
+	
 	
 	public RssData(Node item) {
 		this();
@@ -49,6 +52,11 @@ public class RssData implements AffichableSurIRC{
 			if(link!=null) setLien(link);
 		}
 		}
+	}
+	
+	public RssData(Node item, Date date) {
+		this(item);
+		this.setDate(Main.DATE_FORMAT_OUT.format(date));
 	}
 
 

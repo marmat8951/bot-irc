@@ -7,6 +7,7 @@ import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import actions.Action;
@@ -83,9 +84,15 @@ public class Philo extends Comportement {
 		int nbrCit = array.length();
 		int choix = random.nextInt(nbrCit);
 		JSONObject quote  = array.getJSONObject(choix);
-		String author = quote.getString("author");
+		final String UNKNOWN = "Inconnu";
+		String author="";
+		try {
+			author = quote.getString("author");
+		}catch(JSONException e) {
+			author = UNKNOWN;
+		}
 		if(author == null) {
-			author = "Inconnu";
+			author = UNKNOWN;
 		}
 		return "\""+quote.getString("quote")+"\" par : "+author;
 	}

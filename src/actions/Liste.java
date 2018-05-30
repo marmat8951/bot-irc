@@ -10,6 +10,11 @@ import main.AffichableSurIRC;
 import main.Bot;
 import main.Cache;
 
+/**
+ * Classe servant à la récuperation d'une liste des FAI présents dans la base de donnée.
+ * @author marmat
+ *
+ */
 public class Liste extends Action {
 	
 	public static volatile boolean allAllowed=true;

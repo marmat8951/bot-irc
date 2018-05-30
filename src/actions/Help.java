@@ -51,6 +51,12 @@ public class Help extends Action {
 
 	}
 	
+	/**
+	 * 
+	 * @param l liste des actions possibles
+	 * @param sender personne ayant envoyé le message de demande
+	 * @param channel channel dans lequel la demande à été envoyé
+	 */
 	private void afficheListeCommandes(List<Action> l, String sender, String channel) {
 		String listeCommandes="Voici la liste des commandes: ";
 		for(Action a : l) {

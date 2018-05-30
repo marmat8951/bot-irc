@@ -53,7 +53,11 @@ public class Coordinates {
 		return dist * EARTH_RADIUS;
 		
 	}
-	
+	/**
+	 * 
+	 * @param coord Coordonnée avec laquelle faire la mesure
+	 * @return distance entre les 2 points
+	 */
 	public double distanceAvec(Coordinates coord) {
 		return distanceAvec(coord.latitude, coord.longitude);
 	}
@@ -62,6 +66,12 @@ public class Coordinates {
 		return this.latitude == Double.POSITIVE_INFINITY || this.longitude == Double.POSITIVE_INFINITY || this.latitude == Double.NEGATIVE_INFINITY || this.longitude == Double.NEGATIVE_INFINITY || this.latitude == Double.NaN || this.longitude == Double.NaN; 
 	}
 	
+	/**
+	 * 
+	 * @param c Coordonnée avec laquelle effectuer le equals
+	 * @param maxDiff Différence maximale pour estimer qu'il s'agit du même.
+	 * @return true si les coordonnées sont dans l'intervalle, false sinon.
+	 */
 	public boolean equals(Coordinates c, Double maxDiff) {
 		if(this.latitude+maxDiff>=c.latitude && this.latitude-maxDiff<=c.latitude) {
 			if(this.longitude+maxDiff>=c.latitude && this.longitude-maxDiff<=c.longitude) {

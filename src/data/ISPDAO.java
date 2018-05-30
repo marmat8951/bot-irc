@@ -223,7 +223,7 @@ public class ISPDAO {
 		return res;
 	}
 	/**
-	 * 
+	 * Récupere la date de dernière mise a jour
 	 * @param json Objet json a l'origine
 	 * @return chaine representant la date sous forme string:ISO8601 ou nu
 	 */

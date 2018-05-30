@@ -1,9 +1,10 @@
 package data;
 
+/**
+ * Cette enum permet de de transformer toutes les techno annoncée dans les zones couvertes en une valeur.
+ */
 public enum TechnoCoverage {
-	/**
-	 * Cette enum permet de de transformer toutes les techno annoncée dans les zones couvertes en une valeur.
-	 */
+	
 	
 	VPN,FTTH,ADSL,VDSL,xDSL,WIFI,PIGEON,CABLE,AUTRE;
 	

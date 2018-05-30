@@ -69,6 +69,14 @@ public class Distance extends Action {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param message message recu
+	 * @param sender personne qui envoie le message
+	 * @param channel channel dont le message provient
+	 * @return Les coordonnées du lieu correspondant au contenu du message
+	 * @throws MultiplePossibleAddressException Si il y a plussieurs coordonnées correspondantes à l'adresse demandée.
+	 */
 	private Coordinates getCoordinatesFromMessage(String message, String sender, String channel) throws MultiplePossibleAddressException {
 		final double MAX_DIFF = 0.1; //Differences there MUST between 2 coordinates so they are seen as differents
 		AddresseToGPS a2gps = new AddresseToGPS(message.substring(message.indexOf(' ')+1));
@@ -93,11 +101,21 @@ public class Distance extends Action {
 	}
 	
 	
-	
+	/**
+	 * Récupere le FAI le plus proche de la position indiquée en paramètre. Utilise {@link Distance#getISPPlusProche(Coordinates)}
+	 * @param latitude
+	 * @param longitude
+	 * @return Tableau contenant les FAI les plus proches.
+	 */
 	private ISP[] getISPPlusProche(double latitude, double longitude) {
 		return getISPPlusProche(new Coordinates(latitude, longitude));
 	}
 	
+	/**
+	 * Récupere le FAI le plus proche de la coordonnée indiquée en paramètre
+	 * @param coord
+	 * @return Tableau contenant les FAI les plus proches.
+	 */
 	private ISP[] getISPPlusProche(Coordinates coord) {
 		ISP[] res = new ISP[NOMBRE_AFFICHABLE];
 		Cache c = Cache.getInstance();
@@ -128,6 +146,11 @@ public class Distance extends Action {
 		return res;
 	}
 	
+	/**
+	 * Décalle les éléments du tableau afin de pouvoir un inserer un.
+	 * @param array tableau dans lequel effectuer l'opération
+	 * @param id numero a partir le décalage doit s'oppérer
+	 */
 	private void decale(ISP [] array , int id) {
 		int length = array.length;
 		for(int i = length-1; i>id; --i) {

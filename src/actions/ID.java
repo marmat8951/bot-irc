@@ -8,6 +8,10 @@ import main.Bot;
 import main.Cache;
 import verif_saisie.EntierPositifNonVide;
 
+/**
+ * Classe d'action servant à la récuperation de l'ID d'un FAI utilisé pour le stocker dans DB.FFDN
+ * @author marmat
+ */
 public class ID extends Action {
 
 	

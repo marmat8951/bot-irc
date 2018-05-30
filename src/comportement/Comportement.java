@@ -12,7 +12,11 @@ public abstract class Comportement {
 		this.bot = b;
 	}
 
-
+	/**
+	 * Crée et renvoie une liste de tous les comprtements présents.
+	 * @param b bot que les actions utiliseront pour répondre.
+	 * @return Liste de tous les comportements.
+	 */
 	public static List<Comportement> getAllComportements(Bot b){
 		List<Comportement> liste = new ArrayList<>();
 		liste.add(Cafe.getInstance(b));
@@ -40,7 +44,11 @@ public abstract class Comportement {
 	public void setBot(Bot bot) {
 		this.bot = bot;
 	}
-	
+
+	/**
+	 * 
+	 * @return le nom actuel du bot placé en minuscules
+	 */
 	public String getBotNick() {
 		return bot.getNick().toLowerCase();
 	}

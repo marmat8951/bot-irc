@@ -2,6 +2,11 @@ package data;
 
 import data.AddresseToGPS.Lieu;
 
+/**
+ * Classe servant pour {@link AddresseToGPS} a indiquer plusieurs possibilitées et a les stoquer, afin qu'elles soient traitées dans un catch
+ * @author marmat
+ *
+ */
 public class MultiplePossibleAddressException extends Exception {
 
 	/**

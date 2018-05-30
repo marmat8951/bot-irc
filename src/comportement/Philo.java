@@ -14,6 +14,11 @@ import actions.Action;
 import main.Bot;
 import main.Main;
 
+/**
+ * Singleton de comportement permettant au bot de faire de la philosophie
+ * @author marmat
+ *
+ */
 public class Philo extends Comportement {
 	
 	public static volatile Philo instance = null;
@@ -39,6 +44,9 @@ public class Philo extends Comportement {
 		return Philo.instance;
 	}
 	
+	/**
+	 * Parse les fichiers et les enregistre en mémoire.
+	 */
 	private void load() {
 		if(Main.isDebug()) {
 			System.out.println("Creation de la liste des citations de philo");
@@ -71,6 +79,11 @@ public class Philo extends Comportement {
 		
 	}
 
+	/**
+	 * Cherche un objet json de philosophie dont le topic correspond au message
+	 * @param message message envoyé
+	 * @return Objet contenant les messages si il existe une thématique, null sinon.
+	 */
 	private JSONObject getJSONObjectForMessage(String message) {
 		for(JSONObject json : JSONS) {
 			String topic = json.getString("topic");
@@ -79,6 +92,11 @@ public class Philo extends Comportement {
 		return null;
 	}
 	
+	/**
+	 * Choisi au hasard une citation dans la liste correspondant de l'objet
+	 * @param jo Objet contenant la liste de phrases
+	 * @return Citation mise en forme
+	 */
 	private String giveMeAQuoteFrom(JSONObject jo) {
 		JSONArray array = jo.getJSONArray("quotes");
 		int nbrCit = array.length();

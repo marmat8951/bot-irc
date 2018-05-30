@@ -7,6 +7,7 @@ import main.AffichableSurIRC;
 
 /**
  * Le but principal de cette classe est de stocker les articles du flux RSS.
+ * Celleçi agit comme un espace de taille fixe, dans lequel l'élément le plus ancien est supprimé au profit du plus récent.
  * @author marmat
  */
 public class RssDataRemainder implements AffichableSurIRC{
@@ -27,6 +28,11 @@ public class RssDataRemainder implements AffichableSurIRC{
 	}
 	
 
+	/**
+	 * Modifie la taille du remainder. Si la nouvelle taille est plus importante, alors crée un nouveau tableau de taille voulue et remet les valeurs précédentes, si elle est plus faible, alors elle détruit les éléments les plus vieux.
+	 * Dans le cas de la taille plus importante, il laisse a {@value <code>null</code>}  les emplacements les plus anciens.
+	 * @param size nouvelle taille
+	 */
 	public void setSIZE(int size) {
 		if(size != data.length) {
 			RssData[] newData = new RssData[size];
@@ -36,12 +42,15 @@ public class RssDataRemainder implements AffichableSurIRC{
 		}
 	}
 
+	/**
+	 * Détruit le remainder précédent et en crée un nouveau de même taille.
+	 */
 	public void clear() {
 		data = new RssData[data.length];
 	}
 
 	/**
-	 * 
+	 * Renvoie le nombre d'éléments non null stockés par le remainder
 	 * @return Le nombre d'élements de l'objets qui ne sont pas null
 	 */
 	public int getCompletion() {
@@ -50,6 +59,10 @@ public class RssDataRemainder implements AffichableSurIRC{
 		return i;
 	}
 
+	/**
+	 * Représente un sift dans les Donnée du remainder. Déplace tout les éléments.
+	 * @return L'élément supprimé du remainder a cause de l'insertion du nouveau
+	 */
 	private RssData movetoright() {
 		RssData res = data[data.length-1];
 		for(int i=data.length-1;i>0;--i) {
@@ -58,11 +71,20 @@ public class RssDataRemainder implements AffichableSurIRC{
 		return res;
 	}
 
+	/**
+	 * Décale les valeurs et place la nouvelle mise en paramètre
+	 * @param newdata
+	 */
 	public void push(RssData newdata) {
 		movetoright();
 		this.data[0]=newdata;
 	}
 	
+	/**
+	 * Récupere les données correspondant à l'ID indiqué en paramètre
+	 * @param id identifiant sous forme d'un entier
+	 * @return Données ou null si l'identifiant est incorrect ou n'ayant pas encore de valeur.
+	 */
 	public RssData getDataWithId(int id) {
 		if(id<0 || id>=data.length) return null;
 		return data[id];

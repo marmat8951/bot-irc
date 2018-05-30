@@ -11,10 +11,14 @@ public class AddresseToGPS {
 	public static final String FORMAT = "json";
 	public static final int LIMIT = 3;
 	
-	
+	/**
+	 * Lieu est un groupement d'un Nom a afficher et d'une coordonnée GPS.
+	 */
 	public class Lieu{
+		
 		public final String DisplayName;
 		public final Coordinates coordonees;
+		
 		public Lieu(String displayName, Coordinates coordonees) {
 			super();
 			DisplayName = displayName;
@@ -37,30 +41,47 @@ public class AddresseToGPS {
 	}
 	
 	/**
-	 * @return the adresse
+	 * @return l'adresse
 	 */
 	public String getAdresse() {
 		return adresse;
 	}
 
+	/**
+	 * Récupere l'URL pour la requète a Nominatum pour {@link AddresseToGPS#adresse} 
+	 * @return
+	 */
 	public String getAddressToQuerry() {
 		String s= NOMINATUM+adresse+"?format="+FORMAT+"&limit="+LIMIT;
 		s=s.replaceAll("\\s", "%20");
 		return s;
 	}
 
+	/**
+	 * Récupère les coordonnée du lieu correspondant à l'adresse
+	 * @return Coordonnée du lieu
+	 * @throws MultiplePossibleAddressException si plusieurs addresses sont possibles.
+	 */
 	public Coordinates getCoordinates() throws MultiplePossibleAddressException {
 		Lieu l = getLieu();
 		return l.coordonees;
 	}
 	
-	
+	/**
+	 * Récupère les coordonnée du lieu correspondant à l'adresse parmis plusieurs
+	 * @param choice identifiant du choix que l'ont fait parmis les multiples possibilitées de lieu
+	 * @return
+	 */
 	public Coordinates getCoordinatesWithChoiceForced(int choice) {
 		Lieu l = getLieuWithChoiceForced(choice);
 		return l.coordonees;
 	}
 	
-	
+	/**
+	 * Effectue la requète pour récuperer le lieu et le renvoie
+	 * @return Lieu correspondant ou null si il n'y en a pas
+	 * @throws MultiplePossibleAddressException si il y a plusieurs lieux possibles
+	 */
 	public Lieu getLieu() throws MultiplePossibleAddressException {
 		String get = ISPDAO.getInstance().executeGet(getAddressToQuerry());
 		JSONArray ja = new JSONArray(get);
@@ -79,6 +100,11 @@ public class AddresseToGPS {
 		}
 	}
 	
+	/**
+	 * Même chose que {@link AddresseToGPS#getLieu()} mais avec le choix forcé sur l'identifiant 
+	 * @param choice identifiant du choix
+	 * @return Lieu choisi parmis la liste ou null si aucun n'existe
+	 */
 	public Lieu getLieuWithChoiceForced(int choice) {
 		
 		String get = ISPDAO.getInstance().executeGet(getAddressToQuerry());
@@ -92,6 +118,10 @@ public class AddresseToGPS {
 		
 	}
 	
+	/**
+	 * Récupere un tableau de Lieu correspondant a l'adresse indiquée.
+	 * @return
+	 */
 	public Lieu[] getAllLieu() {
 		String get = ISPDAO.getInstance().executeGet(getAddressToQuerry());
 		JSONArray ja = new JSONArray(get);

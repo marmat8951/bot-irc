@@ -11,6 +11,11 @@ import org.w3c.dom.NodeList;
 import main.AffichableSurIRC;
 import main.Main;
 
+/**
+ * Classe de stockage des informations d'une entrée RSS.
+ * @author marmat
+ *
+ */
 public class RssData implements AffichableSurIRC{
 
 	private String auteur;
@@ -26,7 +31,10 @@ public class RssData implements AffichableSurIRC{
 		this.lien = lien;
 	}
 	
-	
+	/**
+	 * Transforme un Noeud correspondant à un <entry> en un RSSData
+	 * @param item Noeud w3c 
+	 */
 	public RssData(Node item) {
 		this();
 		NodeList childs = item.getChildNodes();

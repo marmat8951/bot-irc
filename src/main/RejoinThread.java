@@ -2,6 +2,11 @@ package main;
 
 import org.jibble.pircbot.PircBot;
 
+/**
+ * Classe de Thread, servant à ce que lorsque le bot est déconnecté, à se reconnecter, et a retourner sur les thread.
+ * @author marmat
+ *
+ */
 public class RejoinThread implements Runnable{
 
 	private volatile PircBot pb;
@@ -60,6 +65,9 @@ public class RejoinThread implements Runnable{
 
 	}
 
+	/**
+	 * Methode lancée lorsque le bot est kick qui va initialiser et démarer le thread de reconnexion
+	 */
 	public void start() {
 		System.err.println("Je me suis fait kicker de "+chan+" attente de "+DEFAULT_WAIT_BEFORE_RECONNECT/1000+" secondes entre chaque tentative de reconnection");
 		if(thread == null) {

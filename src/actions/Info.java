@@ -9,7 +9,11 @@ import data.ISPDAO;
 import main.Bot;
 import main.Cache;
 import verif_saisie.EntierPositifNonVide;
-
+/**
+ * Classe d'Action servant à gérer une demande d'info sur un FAI
+ * @author marmat
+ *
+ */
 public class Info extends Action {
 	
 	public static boolean INFO_ALL = false;

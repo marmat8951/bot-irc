@@ -7,6 +7,10 @@ import java.util.Map;
 import main.Bot;
 import main.Main;
 
+/**
+ * Singleton de comportement pour pouvoir demander au bot un thé ou un café
+ * @author marmat
+ */
 public class Cafe extends Comportement {
 	public static volatile Cafe instance = null;
 	public Map<String, Boolean> rep = new HashMap<>();
@@ -59,11 +63,20 @@ public class Cafe extends Comportement {
 		}
 			
 	}
-	//true = thé, false = café
+	/**
+	 * Indique si il s'agit de thé ou de café qui est demandé
+	 * @param msg message a verifier
+	 * @return true = thé false = café
+	 */
 	private boolean istheorcafe(String msg) {
 		return msg.contains("thé");
 	}
 	
+	/**
+	 * Renvoie l'instance de l'objet, ou le crée si besoin
+	 * @param b
+	 * @return
+	 */
 	public final static Cafe getInstance(Bot b) {
 		if (Cafe.instance == null) {
 			synchronized (Cafe.class) {

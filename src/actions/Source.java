@@ -5,6 +5,11 @@ import java.util.List;
 
 import main.Bot;
 
+/**
+ * Indique simplement où on peut trouver le code source
+ * @author marmat
+ *
+ */
 public class Source extends Action {
 
 	public Source(Bot b) {

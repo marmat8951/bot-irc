@@ -161,6 +161,11 @@ public class ISP implements AffichableSurIRC {
 		return res;
 	}
 
+	/**
+	 * Renvoie le textuel en Français pour un booleen
+	 * @param b booleen
+	 * @return "oui" si le boolean est True "non" sinon
+	 */
 	private String booleanToOuiNon(boolean b) {
 		if(b) {
 			return "oui";
@@ -169,11 +174,7 @@ public class ISP implements AffichableSurIRC {
 
 	}
 
-	/**
-	 * Renvoie une Liste de chaine de caractères pour permettre l'affichage sur IRC ligne par ligne, bien que le \n ne soit pas interprété.
-	 * @return Une Liste de chaine correspondant à toutes les lignes que le bot doit écrire
-	 */
-
+	
 	public List<String> toStringIRC () {
 		Cache c = Cache.getInstance();
 		List<String> res = new LinkedList<>();
@@ -230,7 +231,7 @@ public class ISP implements AffichableSurIRC {
 	}
 	
 	/**
-	 * Renvoie une liste 
+	 * Renvoie une liste de Chaines de caractères
 	 * @return Liste de phrases utilisables pour afficher le contact de ce FAI
 	 */
 	public List<String> contact() {

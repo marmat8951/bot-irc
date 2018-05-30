@@ -3,6 +3,11 @@ package data;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe stoquant les zones qu'un FAI couvre sous la forme d'une liste de technologies et d'un nom
+ * @author marmat
+ *
+ */
 public class CoveredAreas {
 
 	private final List<TechnoCoverage> technos;

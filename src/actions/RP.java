@@ -13,10 +13,20 @@ import main.Bot;
 import main.Main;
 import main.PropertiesSetter;
 
+/**
+ * Méthode pour gérer la sauvegarde de liens dans un fichier pour en faire une revue de presse.
+ * @author marmat
+ *
+ */
+
 public class RP extends Action {
 	
 	public File rpFile;
 
+	/**
+	 * Crée le fichier si il n'existe pas et prépare la possibilité d'utiliser l'action rp.
+	 * @param b bot b
+	 */
 	protected RP(Bot b) {
 		super(b);
 		List<String> ar = new ArrayList<>();

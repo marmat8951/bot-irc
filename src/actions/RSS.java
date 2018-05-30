@@ -6,6 +6,12 @@ import java.util.List;
 import main.Bot;
 import rss.RssDataRemainder;
 
+/**
+ * gère les actions liées au RSS
+ * @author marmat
+ *
+ */
+
 public class RSS extends Action {
 
 	public RSS(Bot b) {

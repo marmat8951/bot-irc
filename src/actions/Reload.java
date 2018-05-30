@@ -7,6 +7,11 @@ import java.util.List;
 import main.Bot;
 import main.Cache;
 
+/**
+ * Classe servant à l'action de forcer une mise à jour des informations
+ * @author marmat
+ *
+ */
 public class Reload extends Action {
 
 	public Reload(Bot b) {

@@ -40,7 +40,12 @@ public class RSSChecker implements Runnable {
 	public RSSChecker() {
 		this("",null);
 	}
-
+	
+	/**
+	 * Crée le checker de RSS sur l'adresse en paramètre
+	 * @param address adresse à laquelle faire la vérification
+	 * @param b bot utilisé pour stoquer les données et retravailler 
+	 */
 	public RSSChecker(String address, Bot b) {
 		this.rssaddr = address;
 		this.b=b;
@@ -53,15 +58,28 @@ public class RSSChecker implements Runnable {
 			thread.start();
 		}
 	}
-
+	
+	/**
+	 * Affiche l'aricle sur tous les channels du bot
+	 * @param data donnée RSS
+	 */
 	private void afficheArticle(RssData data) {
 		b.sendMessagesOnAllChannels(data.toStringIRC());
 	}
 
+	/**
+	 * Crée les données de RSS et les envoie a {@link #afficheArticle(RssData)}
+	 * @param article sous la forme d'un noeud
+	 */
 	private void afficheArticle(Node article) {
 		afficheArticle(new RssData(article));
 	}
 
+	/**
+	 * Travaille sur la liste d'entrée. Vérifie si il y en a des plus récents que
+	 * le dernier socké. Si c'est le cas, va prévenir les channels de la nouveautée, et l'intégrer au flux RSS du bot.
+	 * @param nl
+	 */
 	private void workOnEntry(NodeList nl) {
 		if(Main.isDebug()) {
 			System.out.println("Verification des <entry>");
@@ -155,6 +173,11 @@ public class RSSChecker implements Runnable {
 
 	}
 	
+	/**
+	 * Initialise le Remainder avec la liste de noeud RSS passée en paramètre.
+	 * Cette méthode est appelée au démarage afin de créer le remainder et d'y inserer les données présentes au départ.
+	 * @param nl
+	 */
 	private void initRemainder(NodeList nl) {
 		int len = nl.getLength();
 		for(int i=len-1; i>=0;--i) {

@@ -107,7 +107,7 @@ public class RSSChecker implements Runnable {
 								b.sendMessageOnAllChannels("Nouveautée sur planet.ffdn.org:");
 								
 							}
-							RssData rs = new RssData(article, date);
+							RssData rs = new RssData(article);
 							remainder.push(rs);
 							afficheArticle(rs);
 							lastarticle = date;

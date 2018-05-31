@@ -102,6 +102,9 @@ public class RssDataRemainder implements AffichableSurIRC{
 			if(data[i].getAuteur()!= null && !data[i].getAuteur().equals("")) {
 				ligne +=" par "+data[i].getAuteur();
 			}
+			if(data[i].getSource()!= null && !data[i].getSource().equals("")) {
+				ligne +=" via "+data[i].getSource();
+			}
 			res.add(ligne);
 		}
 		return res;

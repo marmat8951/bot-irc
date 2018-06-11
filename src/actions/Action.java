@@ -90,7 +90,7 @@ public abstract class Action {
 	}
 	
 	/**
-	 * Renvoie le message help de la fonction. Ce message sert lors de l'utilisation de +help <nom de commande>
+	 * Renvoie le message help de la fonction. Ce message sert lors de l'utilisation de +help *nom de commande*
 	 * @return chaine help de la commande
 	 */
 	public abstract String help();

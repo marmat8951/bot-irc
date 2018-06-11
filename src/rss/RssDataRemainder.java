@@ -30,7 +30,7 @@ public class RssDataRemainder implements AffichableSurIRC{
 
 	/**
 	 * Modifie la taille du remainder. Si la nouvelle taille est plus importante, alors crée un nouveau tableau de taille voulue et remet les valeurs précédentes, si elle est plus faible, alors elle détruit les éléments les plus vieux.
-	 * Dans le cas de la taille plus importante, il laisse a {@value <code>null</code>}  les emplacements les plus anciens.
+	 * Dans le cas de la taille plus importante, il laisse a <code>null</code>  les emplacements les plus anciens.
 	 * @param size nouvelle taille
 	 */
 	public void setSIZE(int size) {

@@ -36,7 +36,7 @@ public class RssData implements AffichableSurIRC{
 	}
 
 	/**
-	 * Transforme un Noeud correspondant à un <entry> en un RSSData
+	 * Transforme un Noeud correspondant à un entry en un RSSData
 	 * @param item Noeud w3c 
 	 */
 	public RssData(Node item, Date date) {

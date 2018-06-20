@@ -3,6 +3,7 @@ package actions;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.Message;
 import main.Bot;
 
 public abstract class Action {
@@ -46,6 +47,7 @@ public abstract class Action {
 	 * Indique si oui ou non cette action doit être executée
 	 * @param s message envoyé
 	 * @return true si l'action contenue doit être executée, false sinon.
+	 * @deprecated
 	 */
 	public boolean hasToReact(String s) {
 		if(s.charAt(0)!=CARACTERE_COMMANDE) {
@@ -67,6 +69,27 @@ public abstract class Action {
 		}
 		return false;
 		
+	}
+	
+	/**
+	 * 
+	 * Methode réagissant au message @see PircBot;
+	 * @param channel channer sur l'IRC
+	 * @param sender personne ayant envoyé le message
+	 * @param login	login du bot
+	 * @param hostname hostname actuell
+	 * @param message message en question
+	 */
+	public boolean hasToReact(Message m) {
+		if(m.getC()!=CARACTERE_COMMANDE) {
+			return false;								// On ne réagit pas si ce n'est pas une commande. Cela évite la suite du traitement.
+		}
+		for(String kw : keyWords) {
+			if(m.getCommande().equalsIgnoreCase(kw)){
+				return true;
+			}
+		}
+		return false;		
 	}
 	
 	/**
@@ -95,6 +118,12 @@ public abstract class Action {
 	 */
 	public abstract String help();
 	
+	/**
+	 * modifie la chaine pour supprimer les espaces
+	 * @deprecated
+	 * @param s chaine de caracteres
+	 * @return renvoie la chaine mise en lowercase et sans espaces
+	 */
 	public static String messageSansEspace(String s) {
 		return s.toLowerCase().replaceAll("\\s", "");
 	}

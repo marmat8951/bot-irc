@@ -11,6 +11,7 @@ import org.jibble.pircbot.PircBot;
 
 import actions.Action;
 import comportement.Comportement;
+import data.Message;
 import rss.RssDataRemainder;
 
 public class Bot extends PircBot {
@@ -88,7 +89,8 @@ public class Bot extends PircBot {
 	
 	public void onMessage(String channel, String sender,
 			String login, String hostname, String message) {
-		
+		Message m = new Message(message);
+		System.out.println(m.toString());
 		for(Action a:actions){
 			if(a.hasToReact(message)) {
 				a.react(channel, sender, login, hostname, message);

@@ -3,6 +3,8 @@ package actions;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.output.ThresholdingOutputStream;
+
 import data.Message;
 import main.Bot;
 
@@ -30,6 +32,7 @@ public abstract class Action {
 		this.keyWords=ar;
 	}
 	
+	
 	/**
 	 * 
 	 * Methode réagissant au message @see PircBot;
@@ -40,9 +43,13 @@ public abstract class Action {
 	 * @param message message en question
 	 */
 	public abstract void react(String channel, String sender,
-			String login, String hostname, String message);
+			String login, String hostname, Message message);
 	
-	
+	public void reactUsingMessage(String channel,String sender,
+			String login, String hostname, String message) {
+		Message m = new Message(message);
+		react(channel, sender, login, hostname, m);
+	}
 	/**
 	 * Indique si oui ou non cette action doit être executée
 	 * @param s message envoyé
@@ -72,13 +79,9 @@ public abstract class Action {
 	}
 	
 	/**
-	 * 
-	 * Methode réagissant au message @see PircBot;
-	 * @param channel channer sur l'IRC
-	 * @param sender personne ayant envoyé le message
-	 * @param login	login du bot
-	 * @param hostname hostname actuell
-	 * @param message message en question
+	 * Indique si oui ou non cette action doit être executée
+	 * @param s message envoyé
+	 * @return true si l'action contenue doit être executée, false sinon.
 	 */
 	public boolean hasToReact(Message m) {
 		if(m.getC()!=CARACTERE_COMMANDE) {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import data.ISP;
+import data.Message;
 import main.Bot;
 import main.Cache;
 import verif_saisie.EntierPositifNonVide;
@@ -17,14 +18,20 @@ public class Contact extends Action {
 		this.keyWords = ar;
 	}
 
+
 	@Override
-	public void react(String channel, String sender, String login, String hostname, String message) {
-		
-		String s = message.substring(message.indexOf(' ')+1);
-		if(keyWords.contains(messageSansEspace(s).substring(1))) {	//+contact seul
-			bot.sendMessage(sender, messageSansEspace(s)+help());
-		}else if(!EntierPositifNonVide.verifie(s)) {					// +contact suivi d'un mot
+	public String help() {
+		return " suivi du nom d'un fai. Renvoie les moyens pour contacter le FAI en question";
+	}
+
+	@Override
+	public void react(String channel, String sender, String login, String hostname, Message message) {
+
+		if(message.hasNoParameters()) {
+			bot.sendMessage(sender, message.commandCharacterAndKeyword()+help());
+		}else{
 			Cache c = Cache.getInstance();
+			String s = message.getAllParametersAsOneString();
 			ISP fai = c.getISPWithName(s);
 			if(fai == null) {
 				bot.sendMessage(sender,channel, "Aucun FAI "+s);
@@ -32,12 +39,7 @@ public class Contact extends Action {
 				bot.sendMessages(sender, channel, fai.contact());
 			}
 		}
-
-	}
-
-	@Override
-	public String help() {
-		return " suivi du nom d'un fai. Renvoie les moyens pour contacter le FAI en question";
+		
 	}
 
 	

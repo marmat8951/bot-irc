@@ -62,8 +62,7 @@ public class Bot extends PircBot {
 			try {
 				this.reconnect();
 			}catch (UnknownHostException e) {
-				
-			
+				e.printStackTrace();
 			} catch (NickAlreadyInUseException e) {
 				this.sendMessageToAdmins("Je viens d'être déconnectée et en tentant de me reconnecter mon nom était déjà utilisé!");
 				e.printStackTrace();
@@ -92,8 +91,8 @@ public class Bot extends PircBot {
 		Message m = new Message(message);
 		System.out.println(m.toString());
 		for(Action a:actions){
-			if(a.hasToReact(message)) {
-				a.react(channel, sender, login, hostname, message);
+			if(a.hasToReact(m)) {
+				a.react(channel, sender, login, hostname, m);
 			}
 		}
 		//easter Eggs
@@ -103,7 +102,7 @@ public class Bot extends PircBot {
 		}
 		
 		if(message.toLowerCase().contains("mousse au chocolat")) {
-			sendMessage(channel, "J'adore la mousse au chocolat de Benjamin B.");
+			sendMessage(channel, "J'adore la mousse au chocolat de Benjamin-");
 		}
 		for(Comportement c : comportements) {
 			if(c.hastoreact(message)) {

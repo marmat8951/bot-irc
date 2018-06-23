@@ -3,6 +3,11 @@ package data;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class main goal is to create an easysly readable command so we can use it to implement actions
+ * @author marmat
+ *
+ */
 public class Message {
 	private final char c;
 	private final String commande;
@@ -38,10 +43,14 @@ public class Message {
 		return Integer.parseInt(get(id));
 	}
 	public double getElementAsDouble(int id) throws NumberFormatException  {
-		return Double.parseDouble(get(id));
+		String s = get(id);
+		s=s.replace(',', '.');
+		return Double.parseDouble(s);
 	}
 	public float getElementAsFloat(int id) throws NumberFormatException  {
-		return Float.parseFloat(get(id));
+		String s = get(id);
+		s=s.replace(',', '.');
+		return Float.parseFloat(s);
 	}
 	public String getElementAsString(int id) throws NumberFormatException  {
 		return get(id);
@@ -66,6 +75,10 @@ public class Message {
 		return commande;
 	}
 	
+	/**
+	 * Converti tous les paramètres en une chaine de caractères
+	 * @return Une String correspondant à tous les paramètres séparés par des espaces
+	 */
 	public String getAllParametersAsOneString() {
 		int size = parameterSize();
 		String res = "";
@@ -76,6 +89,23 @@ public class Message {
 			}
 		}
 		return res;
+	}
+	/**
+	 * verifie si un paramètre est égal à la chaine correspondante, en ignorant la case.
+	 * @param s chaine a verifier
+	 * @return true si la chaine correspond a un paramètre, false sinon
+	 */
+	public boolean parametersContains(String s) {
+		for(String st : parameters) {
+			if(st.equalsIgnoreCase(s)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean hasNoParameters() {
+		return this.parameterSize() == 0;
 	}
 
 	@Override
@@ -89,5 +119,9 @@ public class Message {
 		}
 		res+= " ]";
 		return res;
+	}
+	
+	public String commandCharacterAndKeyword() {
+		return c+commande;
 	}
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import data.Message;
 import main.Bot;
 import main.Cache;
 
@@ -20,9 +21,19 @@ public class Reload extends Action {
 		ar.add("reload");
 		this.keyWords = ar;
 	}
+	
+	private boolean reload() {
+		Cache c = Cache.getInstance();
+		return c.reload();
+	}
 
 	@Override
-	public void react(String channel, String sender, String login, String hostname, String message) {
+	public String help() {
+		return " Met à jour le cache";
+	}
+
+	@Override
+	public void react(String channel, String sender, String login, String hostname, Message message) {
 		Date now = new Date();
 		Date lastCU = Cache.getInstance().getLastCacheUpdate();
 		if(lastCU.getTime() < now.getTime()-Cache.getTIME_BETWEEN_RELOADS() ) {		// Si la dernière MAJ date de + de 5 minutes
@@ -37,16 +48,6 @@ public class Reload extends Action {
 			bot.sendMessage(sender, channel, "Trop de reload, attendez un peu. Le dernier à eu lieu le "+lastCU.toString()+" Prochain autorisé le "+nextAllowed);
 		}
 		
-	}
-	
-	private boolean reload() {
-		Cache c = Cache.getInstance();
-		return c.reload();
-	}
-
-	@Override
-	public String help() {
-		return " Met à jour le cache";
 	}
 
 }

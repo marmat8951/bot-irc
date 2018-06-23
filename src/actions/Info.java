@@ -6,6 +6,7 @@ import java.util.List;
 import data.CoveredAreas;
 import data.ISP;
 import data.ISPDAO;
+import data.Message;
 import main.Bot;
 import main.Cache;
 import verif_saisie.EntierPositifNonVide;
@@ -26,23 +27,23 @@ public class Info extends Action {
 	}
 
 	@Override
-	public void react(String channel, String sender, String login, String hostname, String message) {
-		String messageSansEspace = message.toLowerCase().replaceAll("\\s", "");
-		if(messageSansEspace.equals(CARACTERE_COMMANDE+keyWords.get(0))) {
-			bot.sendMessage(channel,messageSansEspace+" doit être suivi d'une chaine de caractère ou d'un numero");
+	public String help() {
+		return " suivi du nom d'un FAI ou de son numero. Dans le cas d'un nom, il va le chercher dans le Cache. Dans le cas d'un numéro, il fait la requète directement dans db.ffdn.org. Exemples: \"+info 2\" ou \"+info fdn\". Pour les infos sur la fédé: \"+info ffdn\"";
+	}
 
+	@Override
+	public void react(String channel, String sender, String login, String hostname, Message message) {
+		
+		if(message.hasNoParameters()) {
+			bot.sendMessage(channel,message.commandCharacterAndKeyword()+" doit être suivi d'une chaine de caractère ou d'un numero");
 		}else {
-
-
-			String s = message.substring(message.indexOf(' ')+1);
+			String s = message.getAllParametersAsOneString();
 			ISPDAO idao = ISPDAO.getInstance();
 			Bot ib = bot;
 
+			if(!EntierPositifNonVide.verifie(s)) {			// Un mot après commande
 
-			if(!EntierPositifNonVide.verifie(s)) {			// Un mot après +info
-
-
-				if(s.equalsIgnoreCase("all") && INFO_ALL) {	          			  // +info all
+				if(s.equalsIgnoreCase("all") && INFO_ALL) {	          			  // info all
 					Cache c = Cache.getInstance();
 					ib.sendMessages(sender,channel, c.toStringIRC());
 					for(ISP i : c.getListe()) {
@@ -51,7 +52,7 @@ public class Info extends Action {
 						}
 					}
 
-				}else if(s.equalsIgnoreCase("ffdn")) {				//+info ffdn
+				}else if(s.equalsIgnoreCase("ffdn")) {				//info ffdn
 					Cache c = Cache.getInstance();
 					ib.sendMessages(sender, channel, c.toStringIRC());
 
@@ -81,20 +82,21 @@ public class Info extends Action {
 				}
 
 			}else {											// Un nombre après +info
-
-				int  id = Integer.parseInt(message.substring(message.indexOf(' ')+1));
-				List<String> strings = idao.getISP(id).toStringIRC();
-				for(String response : strings) {
-					bot.sendMessage(sender, channel, response);
+				int nbParameters = message.parameterSize();
+				for(int i=0; i<nbParameters;i++) {
+					try {
+					int  id = message.getElementAsInt(i);
+					List<String> strings = idao.getISP(id).toStringIRC();
+						for(String response : strings) {
+							bot.sendMessage(sender, channel, response);
+						}
+					}catch(NumberFormatException ne) {
+						bot.sendMessage(sender, channel, message.getElementAsString(i)+" n'est pas un nombre");
+					}
 				}
 			}
 		}
-
-	}
-
-	@Override
-	public String help() {
-		return " suivi du nom d'un FAI ou de son numero. Dans le cas d'un nom, il va le chercher dans le Cache. Dans le cas d'un numéro, il fait la requète directement dans db.ffdn.org. Exemples: \"+info 2\" ou \"+info fdn\". Pour les infos sur la fédé: \"+info ffdn\"";
+		
 	}
 
 }

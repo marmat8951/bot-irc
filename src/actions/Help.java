@@ -3,6 +3,7 @@ package actions;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.Message;
 import main.Bot;
 
 public class Help extends Action {
@@ -15,42 +16,7 @@ public class Help extends Action {
 		this.keyWords = kw;
 	}
 
-	@Override
-	public void react(String channel, String sender, String login, String hostname, String message) {
-		List<Action> l = Action.getAllActions((Bot) bot);
-			boolean hasreacted = false;
-			String commandeSansEspaces = message.replaceAll("\\s", "").substring(1); // On enleve les espaces et le +
-			if(commandeSansEspaces.toLowerCase().equals("help")) {
-				bot.sendMessage(sender,channel, help());
-				afficheListeCommandes(l, sender, channel);
-				hasreacted = true;
-			}else {
-				String commande = message.substring(message.indexOf(' ')+1);
-				if(commande.indexOf(' ') != -1) {
-					commande = commande.substring(0,commande.indexOf(' '));
-				}
-				commande = commande.replace("+", "");
-				for(Action a : l) {
-					if(a.keyWords.contains(commande) && hasreacted == false) {
-						String msg = "";
-						for(String s : a.keyWords) {
-							msg+=Action.CARACTERE_COMMANDE+s+" ";
-						}
-						msg += a.help();
-						bot.sendMessage(sender,channel, msg);
-						hasreacted = true;
-					}
-				}
-			}
-			
-			// Si il n'as pas encore réagi
-			if(!hasreacted) {
-				bot.sendMessage(sender,channel, "Commande inconnue.");
-				afficheListeCommandes(l, sender, channel);
-			}
 
-	}
-	
 	/**
 	 * 
 	 * @param l liste des actions possibles
@@ -65,9 +31,44 @@ public class Help extends Action {
 		bot.sendMessage(sender,channel, listeCommandes);
 	}
 
-	
+
 	@Override
 	public String help() {
 		return "Utilisez "+CARACTERE_COMMANDE+"help <commande> Pour avoir les informations sur une commande.";
+	}
+
+	@Override
+	public void react(String channel, String sender, String login, String hostname, Message message) {
+		List<Action> l = Action.getAllActions((Bot) bot);
+		boolean hasreacted = false;
+		if(message.hasNoParameters()) {
+			bot.sendMessage(sender,channel, help());
+			afficheListeCommandes(l, sender, channel);
+			hasreacted = true;
+		}else {
+			int nbParameters = message.parameterSize();
+			for(int i=0; i<nbParameters; ++i) {
+				String commande = message.getElementAsString(i);
+				commande = commande.replaceAll(""+Action.CARACTERE_COMMANDE, "");
+				for(Action a : l) {
+					if(a.keyWords.contains(commande)) {
+						String msg = "";
+						for(String s : a.keyWords) {
+							msg+=Action.CARACTERE_COMMANDE+s+" ";
+						}
+						msg += a.help();
+						bot.sendMessage(sender,channel, msg);
+						hasreacted = true;
+					}
+				}
+			}
+
+			// Si il n'as pas encore réagi
+			if(!hasreacted) {
+				bot.sendMessage(sender,channel, "Commande inconnue.");
+				afficheListeCommandes(l, sender, channel);
+			}
+
+		}
 	}
 }

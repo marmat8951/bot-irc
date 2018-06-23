@@ -8,6 +8,7 @@ import data.AddresseToGPS;
 import data.AddresseToGPS.Lieu;
 import data.Coordinates;
 import data.ISP;
+import data.Message;
 import data.MultiplePossibleAddressException;
 import main.Bot;
 import main.Cache;
@@ -23,37 +24,6 @@ public class Distance extends Action {
 		this.keyWords=kw;
 	}
 
-	@Override
-	public void react(String channel, String sender, String login, String hostname, String message) {
-		String s = message.substring(1);
-		s=s.replace(',', '.');
-		s=s.substring(s.indexOf(' ')+1); // Je me met après la commande
-		double latitude = Double.POSITIVE_INFINITY, longitude = latitude;
-		try {
-			latitude = Double.parseDouble(s.substring(0, s.indexOf(' ')));
-			s=s.substring(s.indexOf(' ')+1); // Je me et au second paramètre
-			longitude = Double.parseDouble(s);
-			affichePlusProches(latitude, longitude, sender, channel);
-		}catch(Exception e) {	//Cela doit alors être une adresse!
-			try {
-				Coordinates ca = getCoordinatesFromMessage(message, sender, channel);
-				latitude = ca.getLatitude();
-				longitude = ca.getLongitude();
-				affichePlusProches(latitude, longitude, sender, channel);
-			} catch (MultiplePossibleAddressException e1) {
-				bot.sendMessage(sender, channel, "Plusieurs possibilités pour cet endroit, nous choisirons le premier:");
-				for(int i = 0; i<e1.lieux.length; ++i) {
-					bot.sendMessage(sender, channel, (i+1)+":"+e1.lieux[i].toString());
-				}
-				latitude = e1.lieux[0].coordonees.getLatitude();
-				longitude = e1.lieux[0].coordonees.getLongitude();
-				affichePlusProches(latitude, longitude, sender,channel);
-			}
-		}
-				
-		
-
-	}
 	
 	private void affichePlusProches(double latitude, double longitude, String sender, String channel) {
 		ISP[] plusProches = getISPPlusProche(latitude, longitude);
@@ -68,7 +38,7 @@ public class Distance extends Action {
 			}
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param message message recu
@@ -87,7 +57,7 @@ public class Distance extends Action {
 		}else if(lieux.length == 1) {
 			return lieux[0].coordonees;
 		}else {
-			
+
 			for(int i=0;i<lieux.length; ++i) {
 				for(int j=0;j<lieux.length; ++j) {
 					if(!lieux[i].coordonees.equals(lieux[j].coordonees, MAX_DIFF)) {
@@ -97,10 +67,10 @@ public class Distance extends Action {
 			}
 			return lieux[0].coordonees;
 		}
-		
+
 	}
-	
-	
+
+
 	/**
 	 * Récupere le FAI le plus proche de la position indiquée en paramètre. Utilise {@link Distance#getISPPlusProche(Coordinates)}
 	 * @param latitude
@@ -110,7 +80,7 @@ public class Distance extends Action {
 	private ISP[] getISPPlusProche(double latitude, double longitude) {
 		return getISPPlusProche(new Coordinates(latitude, longitude));
 	}
-	
+
 	/**
 	 * Récupere le FAI le plus proche de la coordonnée indiquée en paramètre
 	 * @param coord
@@ -124,28 +94,28 @@ public class Distance extends Action {
 			Coordinates faicoord = fai.getData().getCoordonnees();
 			double distance = faicoord.distanceAvec(coord);
 			if(distance>=0) {
-			for(int i=0;i<NOMBRE_AFFICHABLE;++i) {
-				
-				if(res[i] == null || distance<res[i].getData().getCoordonnees().distanceAvec(coord)) {				//TODO creer un accesseur plus rapide
-					if(res[i]!=null) {
-						decale(res,i);
-						res[i] = fai;											//J'insere
-					}else {
-						res[i] = fai;
+				for(int i=0;i<NOMBRE_AFFICHABLE;++i) {
+
+					if(res[i] == null || distance<res[i].getData().getCoordonnees().distanceAvec(coord)) {				//TODO creer un accesseur plus rapide
+						if(res[i]!=null) {
+							decale(res,i);
+							res[i] = fai;											//J'insere
+						}else {
+							res[i] = fai;
+						}
+						break;
 					}
-					break;
+
 				}
-				
-			}
 			}else {
-				
+
 			}
-			
+
 		}
-		
+
 		return res;
 	}
-	
+
 	/**
 	 * Décalle les éléments du tableau afin de pouvoir un inserer un.
 	 * @param array tableau dans lequel effectuer l'opération
@@ -160,9 +130,40 @@ public class Distance extends Action {
 
 	@Override
 	public String help() {
-		
-		return " suivi de la latitude, puis la longitude au format décimal. Exemple: +"+keyWords.get(0)+" 50,410658 61.574548      Renvoie les "+NOMBRE_AFFICHABLE+" FAI de la fédération les plus proches à vol d'oiseau";
+		return " suivi de la latitude, puis la longitude au format décimal, ou une addresse. Exemple: "+Action.CARACTERE_COMMANDE+keyWords.get(0)+" 50,410658 61.574548      Renvoie les "+NOMBRE_AFFICHABLE+" FAI de la fédération les plus proches à vol d'oiseau";
 	}
+
+	@Override
+	public void react(String channel, String sender, String login, String hostname, Message message) {
+		double latitude = Double.POSITIVE_INFINITY, longitude = latitude;
+		if(!message.hasNoParameters()) {
+			try {
+				latitude = message.getElementAsDouble(0);
+				longitude = message.getElementAsDouble(1);
+				affichePlusProches(latitude, longitude, sender, channel);
+			}catch(NumberFormatException e) {	//Cela doit alors être une adresse!
+				try {
+					Coordinates ca = getCoordinatesFromMessage(message.getAllParametersAsOneString(), sender, channel);
+					latitude = ca.getLatitude();
+					longitude = ca.getLongitude();
+					affichePlusProches(latitude, longitude, sender, channel);
+				} catch (MultiplePossibleAddressException e1) {
+					bot.sendMessage(sender, channel, "Plusieurs possibilités pour cet endroit, nous choisirons le premier:");
+					for(int i = 0; i<e1.lieux.length; ++i) {
+						bot.sendMessage(sender, channel, (i+1)+":"+e1.lieux[i].toString());
+					}
+					latitude = e1.lieux[0].coordonees.getLatitude();
+					longitude = e1.lieux[0].coordonees.getLongitude();
+					affichePlusProches(latitude, longitude, sender,channel);
+				}
+			}
+
+		}else {
+			bot.sendMessage(sender, channel, message.commandCharacterAndKeyword()+help());
+		}
 	
+		
+	}
+
 }
 

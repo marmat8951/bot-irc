@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import data.Message;
 import main.Bot;
 import main.Main;
 import main.PropertiesSetter;
@@ -69,7 +70,12 @@ public class RP extends Action {
 	}
 
 	@Override
-	public void react(String channel, String sender, String login, String hostname, String message) {
+	public String help() {
+		return "Concatène l'URL indiquée dans un fichier pour les revue de presse";
+	}
+
+	@Override
+	public void react(String channel, String sender, String login, String hostname, Message message) {
 		Date now = new Date();
 		PrintWriter writer = null;
 		try {
@@ -81,15 +87,10 @@ public class RP extends Action {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		writer.println(Main.DATE_FORMAT_OUT.format(now)+" "+message.substring(message.indexOf(" "))+"\n");
+		writer.println(Main.DATE_FORMAT_OUT.format(now)+": "+message.getAllParametersAsOneString());
 		bot.sendMessage(sender, channel, "Ajout a la RP réussi!");
 		writer.close();
-	}
-	
-
-	@Override
-	public String help() {
-		return "Concatène l'URL indiquée dans un fichier pour les revue de presse";
+		
 	}
 
 }

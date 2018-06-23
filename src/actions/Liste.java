@@ -6,6 +6,7 @@ import java.util.List;
 
 import data.ISP;
 import data.ISPDAO;
+import data.Message;
 import main.AffichableSurIRC;
 import main.Bot;
 import main.Cache;
@@ -28,7 +29,12 @@ public class Liste extends Action {
 	}
 
 	@Override
-	public void react(String channel, String sender, String login, String hostname, String message) {
+	public String help() {
+		return " Liste tous les FAI de la fédération. L'Ajout du parametre All affiche aussi ceux hors fédération.";
+	}
+
+	@Override
+	public void react(String channel, String sender, String login, String hostname, Message message) {
 		ISPDAO idao = ISPDAO.getInstance();
 		Cache c = Cache.getInstance();
 		List<ISP> listeFAI=null;
@@ -43,13 +49,11 @@ public class Liste extends Action {
 			}
 		}
 
-
-
 		List<String> messages = new LinkedList<>();
 		messages.add("Les FAI surveillés par mes petits yeux mignons de bot sont:");
 		String s="";
 
-		if(allAllowed && message.indexOf(' ')!=-1 && message.substring(message.indexOf(" ")+1).equalsIgnoreCase("all")) {
+		if(allAllowed && message.parametersContains("all")) {
 			messages.add("=== Hors fédé: ===");
 			for(ISP isp: listeFAI) {
 				if(!isp.isFFDNMember()) {
@@ -66,9 +70,7 @@ public class Liste extends Action {
 		messages.add("=== Dans la fédé: ===");
 		for(ISP isp: listeFAI ) {
 			if(isp.isFFDNMember()) {
-
 				s+= isp.getBetterName();
-
 				if(s.length()>=AffichableSurIRC.MAX_CHARACTERS) {
 					messages.add(s);
 					s="";
@@ -79,11 +81,7 @@ public class Liste extends Action {
 		}
 		messages.add(s);
 		bot.sendMessages(sender,channel, messages);
-	}
-
-	@Override
-	public String help() {
-		return " Liste tous les FAI de la fédération. L'Ajout du parametre All affiche aussi ceux hors fédération.";
+		
 	}
 
 }

@@ -104,7 +104,7 @@ public class RSSChecker implements Runnable {
 							}
 							if(!istherenews) {
 								istherenews=true;
-								b.sendMessageOnAllChannels("Nouveautée sur planet.ffdn.org:");
+								b.sendMessageOnAllChannels("Nouveauté sur planet.ffdn.org:");
 								
 							}
 							RssData rs = new RssData(article);

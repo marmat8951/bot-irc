@@ -13,12 +13,20 @@ public class CoveredAreas {
 	private final List<TechnoCoverage> technos;
 	private final String name;
 	private ISP isp;
+	private Polygon poligon;
 	
-	public CoveredAreas(String name, ISP isp, List<TechnoCoverage> techno) {
-		technos=techno;
-		this.name=name;
+
+
+	public CoveredAreas(String name, ISP isp,List<TechnoCoverage> techno, Polygon poligon) {
+		super();
+		this.technos = techno;
+		this.name = name;
 		this.isp = isp;
-		
+		this.poligon = poligon;
+	}
+
+	public CoveredAreas(String name, ISP isp, List<TechnoCoverage> techno) {
+		this(name,isp,techno,null);
 	}
 	
 	public CoveredAreas(String name, List<TechnoCoverage> techno) {
@@ -63,7 +71,13 @@ public class CoveredAreas {
 		this.isp = isp;
 	}
 	
-	
+	public Polygon getPoligon() {
+		return poligon;
+	}
+
+	public void setPoligon(Polygon poligon) {
+		this.poligon = poligon;
+	}
 	
 
 }

@@ -26,7 +26,7 @@ public class CoveredAreas {
 	}
 
 	public CoveredAreas(String name, ISP isp, List<TechnoCoverage> techno) {
-		this(name,isp,techno,null);
+		this(name,isp,techno,new Polygon());
 	}
 	
 	public CoveredAreas(String name, List<TechnoCoverage> techno) {

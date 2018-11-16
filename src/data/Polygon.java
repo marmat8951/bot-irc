@@ -19,8 +19,6 @@ public class Polygon {
 	public boolean addPoint(Coordinates point) {
 		return this.points.add(point);
 	}
-	
-	
 
 	public boolean isEmpty() {
 		return points.isEmpty();
@@ -65,19 +63,30 @@ public class Polygon {
 			Segment s = getSegment(i);
 			if(s.isLatitudeBeetweenTheTwoPoints(latitude)) {
 				res.add(s);
+				System.out.println("Segment: "+s+" crossing the lat");
+			}else {
+				System.out.println("Segment: "+s+" NOT crossing the lat");
 			}
 		}
 		return res;
 	}
 	
 	public boolean isInPolygon(Coordinates coordinates) {
-		List<Segment> segmentsInTheLatitude =  getAllSegmentsOfThePolygonForTheLatitude(coordinates.getLatitude());
+		List<Segment> segmentsInTheLatitude = getAllSegmentsOfThePolygonForTheLatitude(coordinates.getLatitude());
 		int segmentsCrossed = 0;
+		boolean res = false;
 		for(Segment s : segmentsInTheLatitude) {
 			double longitude = s.getLongitudeCorrespondingToTheLatitude(coordinates.getLatitude());
-			if(longitude<=coordinates.getLongitude()) segmentsCrossed++;
+			if(longitude<=coordinates.getLongitude()) {
+				segmentsCrossed++;
+				res = !res;
+				System.out.println(s+" a une longitude <= a celle demandée, on incrémente");
+			}else {
+				System.out.println(s+" a une longitude > a celle demandée");
+			}
+			System.out.println("On a croisé "+segmentsCrossed+" segments");
 		}
-		return (segmentsCrossed / 2) == 1;  //nombre impair de croisement de segments: on est dans le polygone.
+		return res;
 	}
 	
 	

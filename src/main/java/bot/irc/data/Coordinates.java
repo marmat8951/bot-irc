@@ -80,6 +80,16 @@ public class Coordinates {
 		}
 		return false;
 	}
+	
+	/**
+	 * Cette methode renvoie une distance Mathématique, sans unitée de mesure et non une distance en KM comme le fait DistanceAvec.
+	 * @param p2
+	 * @return Une distance mathématique, sans unitée de mesure.
+	 */
+	
+	public double distanceWithPoint(Coordinates p2) {
+		return Math.sqrt(Math.pow(this.latitude-p2.latitude, 2) + Math.pow(this.longitude-p2.longitude, 2) );
+	}
 
 	/** (non-Javadoc)
 	 * @see java.lang.Object#toString()

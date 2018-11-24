@@ -23,24 +23,24 @@ public class Main {
 			
 			CacheReloader cr = new CacheReloader(3600); // Met à jour la base toute les heures.
 			// Now start our bot up.
-			Bot bot = new Bot();
+			IRCBot iRCBot = new IRCBot();
 			
-			RSSChecker rcheck = new RSSChecker("https://planet.ffdn.org/atom.xml", bot);
+			RSSChecker rcheck = new RSSChecker("https://planet.ffdn.org/atom.xml", iRCBot);
 					
 			//Properties Setter
 			PropertiesSetter ps = new PropertiesSetter("../../ressources/config/config.properties");
 			
-			ps.setPropertiesOn(cr, bot,rcheck);
+			ps.setPropertiesOn(cr, iRCBot,rcheck);
 
 			// Connect to the IRC server.
-			bot.connect(SERVER,PORT);
+			iRCBot.connect(SERVER,PORT);
 
 			// Get All the infomations and store in a cache
 			Cache c = Cache.getInstance();
 
 			// Join the #pircbot channel.
 			for(int i = 0; i< CHANNELS.length; i++) {
-				bot.joinChannel(CHANNELS[i]);
+				iRCBot.joinChannel(CHANNELS[i]);
 			}
 			
 			cr.start();

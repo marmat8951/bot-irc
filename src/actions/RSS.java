@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import data.Message;
-import main.Bot;
+import main.IRCBot;
 import rss.RssData;
 import rss.RssDataRemainder;
 
@@ -16,7 +16,7 @@ import rss.RssDataRemainder;
 
 public class RSS extends Action {
 
-	public RSS(Bot b) {
+	public RSS(IRCBot b) {
 		super(b);
 		List<String> kw = new ArrayList<>();
 		kw.add("rss");
@@ -32,9 +32,9 @@ public class RSS extends Action {
 
 	@Override
 	public void react(String channel, String sender, String login, String hostname, Message message) {
-		RssDataRemainder remainder = bot.getRssdata();
+		RssDataRemainder remainder = iRCBot.getRssdata();
 		if(message.hasNoParameters()) {
-			bot.sendMessages(sender, channel, remainder.toStringIRC());
+			iRCBot.sendMessages(sender, channel, remainder.toStringIRC());
 		}
 		int nbParams = message.parameterSize();
 		try {
@@ -42,16 +42,16 @@ public class RSS extends Action {
 				int id = message.getElementAsInt(i);
 				RssData data = remainder.getDataWithId(id);
 				if(data != null) {
-					bot.sendMessages(sender, channel, data);
+					iRCBot.sendMessages(sender, channel, data);
 				}else {
-					bot.sendMessage(sender, channel, "erreur: le nombre "+id+" n'est pas correct, ce dernier doit être entre 0 et "+(remainder.getCompletion()-1));
+					iRCBot.sendMessage(sender, channel, "erreur: le nombre "+id+" n'est pas correct, ce dernier doit être entre 0 et "+(remainder.getCompletion()-1));
 				}
 				if(i!=nbParams-1) {
-					bot.sendMessage(sender, channel, "-------");
+					iRCBot.sendMessage(sender, channel, "-------");
 				}
 			}
 		}catch (NumberFormatException e) {
-			bot.sendMessage(sender, channel, "erreur: Vous devez utiliser des entiers en paramètres, et ces derniers doivent être entre 0 et "+(remainder.getCompletion()-1));
+			iRCBot.sendMessage(sender, channel, "erreur: Vous devez utiliser des entiers en paramètres, et ces derniers doivent être entre 0 et "+(remainder.getCompletion()-1));
 		}
 	}
 

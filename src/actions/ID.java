@@ -5,7 +5,7 @@ import java.util.List;
 
 import data.ISP;
 import data.Message;
-import main.Bot;
+import main.IRCBot;
 import main.Cache;
 import verif_saisie.EntierPositifNonVide;
 
@@ -15,7 +15,7 @@ import verif_saisie.EntierPositifNonVide;
  */
 public class ID extends Action {
 
-	public ID(Bot b) {
+	public ID(IRCBot b) {
 		super(b);
 		List<String> keywords = new ArrayList<>();
 		keywords.add("id");
@@ -23,7 +23,7 @@ public class ID extends Action {
 	}
 
 	private void erreur(String sender,String channel, String s) {
-		bot.sendMessage(sender,channel, sender+": "+s);
+		iRCBot.sendMessage(sender,channel, sender+": "+s);
 	}
 
 	@Override
@@ -42,15 +42,15 @@ public class ID extends Action {
 				int id = Integer.parseInt(idString);
 				ISP fai = c.getISPWithID(id);
 				if(fai!=null) {
-					bot.sendMessage(sender, "Le FAI "+id+" est: "+fai.getBetterName());
+					iRCBot.sendMessage(sender, "Le FAI "+id+" est: "+fai.getBetterName());
 				}else {
 					erreur(sender,sender,idString+" est un id null");
 				}
 			}else {
 				ISP fai = c.getISPWithName(idString);
 				if(fai!=null) {
-					bot.sendMessage(sender,channel, "Le FAI "+fai.getBetterName()+" a pour ID: "+fai.getId());
-					bot.sendMessage(sender,channel, "L'url dans db est https://db.ffdn.org/api/v1/isp/"+fai.getId()+"/");
+					iRCBot.sendMessage(sender,channel, "Le FAI "+fai.getBetterName()+" a pour ID: "+fai.getId());
+					iRCBot.sendMessage(sender,channel, "L'url dans db est https://db.ffdn.org/api/v1/isp/"+fai.getId()+"/");
 				}else {
 					erreur(sender,channel,idString+" ne correspond a aucun FAI");
 				}

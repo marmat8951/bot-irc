@@ -3,13 +3,13 @@ package comportement;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.Bot;
+import main.IRCBot;
 
 public abstract class Comportement {
 
-	private Bot bot;
-	public Comportement(Bot b) {
-		this.bot = b;
+	private IRCBot iRCBot;
+	public Comportement(IRCBot b) {
+		this.iRCBot = b;
 	}
 
 	/**
@@ -17,7 +17,7 @@ public abstract class Comportement {
 	 * @param b bot que les actions utiliseront pour répondre.
 	 * @return Liste de tous les comportements.
 	 */
-	public static List<Comportement> getAllComportements(Bot b){
+	public static List<Comportement> getAllComportements(IRCBot b){
 		List<Comportement> liste = new ArrayList<>();
 		liste.add(Cafe.getInstance(b));
 		liste.add(Philo.getInstance(b));
@@ -33,16 +33,16 @@ public abstract class Comportement {
 	/**
 	 * @return the bot
 	 */
-	public Bot getBot() {
-		return bot;
+	public IRCBot getBot() {
+		return iRCBot;
 	}
 
 
 	/**
-	 * @param bot the bot to set
+	 * @param iRCBot the bot to set
 	 */
-	public void setBot(Bot bot) {
-		this.bot = bot;
+	public void setBot(IRCBot iRCBot) {
+		this.iRCBot = iRCBot;
 	}
 
 	/**
@@ -50,6 +50,6 @@ public abstract class Comportement {
 	 * @return le nom actuel du bot placé en minuscules
 	 */
 	public String getBotNick() {
-		return bot.getNick().toLowerCase();
+		return iRCBot.getNick().toLowerCase();
 	}
 }

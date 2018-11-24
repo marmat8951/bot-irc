@@ -14,7 +14,7 @@ import comportement.Comportement;
 import data.Message;
 import rss.RssDataRemainder;
 
-public class Bot extends PircBot {
+public class IRCBot extends PircBot {
 
 	private volatile static long TIME_BETWEEN_MESSAGES = 200;
 	private List<Action> actions = Action.getAllActions(this);
@@ -26,7 +26,7 @@ public class Bot extends PircBot {
 	private volatile RssDataRemainder rssdata = new RssDataRemainder();
 	
 
-	public Bot() {
+	public IRCBot() {
 		this.setAutoNickChange(true);
 		this.setName("UneFede");
 		this.setVersion("Gentille Droide de la fédération, <3 Marmat");

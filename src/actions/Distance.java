@@ -10,13 +10,13 @@ import data.Coordinates;
 import data.ISP;
 import data.Message;
 import data.MultiplePossibleAddressException;
-import main.Bot;
+import main.IRCBot;
 import main.Cache;
 
 public class Distance extends Action {
 	public static final int NOMBRE_AFFICHABLE = 3;
 
-	public Distance(Bot b) {
+	public Distance(IRCBot b) {
 		super(b);
 		List<String> kw = new ArrayList<>();
 		kw.add("dist");
@@ -34,7 +34,7 @@ public class Distance extends Action {
 				nf.setMaximumFractionDigits(2);
 				nf.setMinimumFractionDigits(0);
 				distance = distance / 1000.0; 	//On met en KM		
-				bot.sendMessage(sender,channel, (i+1)+": "+plusProches[i].getBetterName()+" à "+nf.format(distance)+" Km");
+				iRCBot.sendMessage(sender,channel, (i+1)+": "+plusProches[i].getBetterName()+" à "+nf.format(distance)+" Km");
 			}
 		}
 	}
@@ -52,7 +52,7 @@ public class Distance extends Action {
 		AddresseToGPS a2gps = new AddresseToGPS(message.substring(message.indexOf(' ')+1));
 		Lieu[] lieux = a2gps.getAllLieu();
 		if(lieux == null || lieux.length == 0) {
-			bot.sendMessage(sender,channel, "Aucun lieu ne correspond. Requete effectuée: "+a2gps.getAddressToQuerry());
+			iRCBot.sendMessage(sender,channel, "Aucun lieu ne correspond. Requete effectuée: "+a2gps.getAddressToQuerry());
 			return null;
 		}else if(lieux.length == 1) {
 			return lieux[0].coordonees;
@@ -148,9 +148,9 @@ public class Distance extends Action {
 					longitude = ca.getLongitude();
 					affichePlusProches(latitude, longitude, sender, channel);
 				} catch (MultiplePossibleAddressException e1) {
-					bot.sendMessage(sender, channel, "Plusieurs possibilités pour cet endroit, nous choisirons le premier:");
+					iRCBot.sendMessage(sender, channel, "Plusieurs possibilités pour cet endroit, nous choisirons le premier:");
 					for(int i = 0; i<e1.lieux.length; ++i) {
-						bot.sendMessage(sender, channel, (i+1)+":"+e1.lieux[i].toString());
+						iRCBot.sendMessage(sender, channel, (i+1)+":"+e1.lieux[i].toString());
 					}
 					latitude = e1.lieux[0].coordonees.getLatitude();
 					longitude = e1.lieux[0].coordonees.getLongitude();
@@ -159,7 +159,7 @@ public class Distance extends Action {
 			}
 
 		}else {
-			bot.sendMessage(sender, channel, message.commandCharacterAndKeyword()+help());
+			iRCBot.sendMessage(sender, channel, message.commandCharacterAndKeyword()+help());
 		}
 	
 		

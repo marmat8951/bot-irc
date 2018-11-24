@@ -7,7 +7,7 @@ import data.CoveredAreas;
 import data.ISP;
 import data.ISPDAO;
 import data.Message;
-import main.Bot;
+import main.IRCBot;
 import main.Cache;
 import verif_saisie.EntierPositifNonVide;
 /**
@@ -19,7 +19,7 @@ public class Info extends Action {
 	
 	public static boolean INFO_ALL = false;
 
-	public Info(Bot b) {
+	public Info(IRCBot b) {
 		super(b);
 		List<String> ar = new ArrayList<>();
 		ar.add("info");
@@ -35,11 +35,11 @@ public class Info extends Action {
 	public void react(String channel, String sender, String login, String hostname, Message message) {
 		
 		if(message.hasNoParameters()) {
-			bot.sendMessage(channel,message.commandCharacterAndKeyword()+" doit être suivi d'une chaine de caractère ou d'un numero");
+			iRCBot.sendMessage(channel,message.commandCharacterAndKeyword()+" doit être suivi d'une chaine de caractère ou d'un numero");
 		}else {
 			String s = message.getAllParametersAsOneString();
 			ISPDAO idao = ISPDAO.getInstance();
-			Bot ib = bot;
+			IRCBot ib = iRCBot;
 
 			if(!EntierPositifNonVide.verifie(s)) {			// Un mot après commande
 
@@ -60,12 +60,12 @@ public class Info extends Action {
 					Cache c = Cache.getInstance();
 					ISP i = c.getISPWithName(s);
 					if(i == null) {
-						bot.sendMessage(sender, "Recherche d'une zone "+s);
+						iRCBot.sendMessage(sender, "Recherche d'une zone "+s);
 						ISP j = c.getISPWithGeoZone(s);
 						if(j == null)
-							bot.sendMessage(sender, channel, "Le FAI "+s+" est Inconnu, désolé. Et aucun FAI n'opère sur une sone dénomée "+s+" ...");
+							iRCBot.sendMessage(sender, channel, "Le FAI "+s+" est Inconnu, désolé. Et aucun FAI n'opère sur une sone dénomée "+s+" ...");
 						else {
-							bot.sendMessage(sender, channel, "Un FAI opère sur une zone correspondante : ");
+							iRCBot.sendMessage(sender, channel, "Un FAI opère sur une zone correspondante : ");
 							ib.sendMessages(sender, channel, j.toStringIRC());
 							List<CoveredAreas> cas = j.getCoveredAreas(s);
 							String technos = "Avec pour techno:";
@@ -74,7 +74,7 @@ public class Info extends Action {
 								technos+=ca.getTechnos()+" ";
 								}
 							}
-							bot.sendMessage(sender, channel, technos);
+							iRCBot.sendMessage(sender, channel, technos);
 						}
 					}else {
 						ib.sendMessages(sender,channel, i.toStringIRC());
@@ -88,10 +88,10 @@ public class Info extends Action {
 					int  id = message.getElementAsInt(i);
 					List<String> strings = idao.getISP(id).toStringIRC();
 						for(String response : strings) {
-							bot.sendMessage(sender, channel, response);
+							iRCBot.sendMessage(sender, channel, response);
 						}
 					}catch(NumberFormatException ne) {
-						bot.sendMessage(sender, channel, message.getElementAsString(i)+" n'est pas un nombre");
+						iRCBot.sendMessage(sender, channel, message.getElementAsString(i)+" n'est pas un nombre");
 					}
 				}
 			}

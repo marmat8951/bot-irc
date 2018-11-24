@@ -15,7 +15,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import main.Bot;
+import main.IRCBot;
 import main.Main;
 
 /**
@@ -34,7 +34,7 @@ public class RSSChecker implements Runnable {
 	DocumentBuilderFactory docbfact=DocumentBuilderFactory.newInstance();
 	private Date lastarticle = new Date(); //last info
 	public static final SimpleDateFormat DATE_FORMATIN =  new SimpleDateFormat ("yyyy-MM-dd'T'HH:mm:ss'Z'");
-	private Bot b;
+	private IRCBot b;
 	private volatile RssDataRemainder remainder;
 	
 	public RSSChecker() {
@@ -46,7 +46,7 @@ public class RSSChecker implements Runnable {
 	 * @param address adresse à laquelle faire la vérification
 	 * @param b bot utilisé pour stoquer les données et retravailler 
 	 */
-	public RSSChecker(String address, Bot b) {
+	public RSSChecker(String address, IRCBot b) {
 		this.rssaddr = address;
 		this.b=b;
 		this.remainder = b.getRssdata();

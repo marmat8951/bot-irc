@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import data.Message;
-import main.Bot;
+import main.IRCBot;
 import main.Cache;
 
 /**
@@ -15,7 +15,7 @@ import main.Cache;
  */
 public class Reload extends Action {
 
-	public Reload(Bot b) {
+	public Reload(IRCBot b) {
 		super(b);
 		List<String> ar = new ArrayList<>();
 		ar.add("reload");
@@ -37,15 +37,15 @@ public class Reload extends Action {
 		Date now = new Date();
 		Date lastCU = Cache.getInstance().getLastCacheUpdate();
 		if(lastCU.getTime() < now.getTime()-Cache.getTIME_BETWEEN_RELOADS() ) {		// Si la dernière MAJ date de + de 5 minutes
-			bot.sendMessage(sender,channel, "Je lance le reload!");
+			iRCBot.sendMessage(sender,channel, "Je lance le reload!");
 			if(reload()) {
-				bot.sendMessage(sender, channel, sender+": Le reload s'est bien passé.");
+				iRCBot.sendMessage(sender, channel, sender+": Le reload s'est bien passé.");
 			}else {
-				bot.sendMessage(sender, channel, sender+": Erreur au moment du reload.");
+				iRCBot.sendMessage(sender, channel, sender+": Erreur au moment du reload.");
 			}
 		}else {
 			Date nextAllowed = new Date(lastCU.getTime()+Cache.getTIME_BETWEEN_RELOADS());
-			bot.sendMessage(sender, channel, "Trop de reload, attendez un peu. Le dernier à eu lieu le "+lastCU.toString()+" Prochain autorisé le "+nextAllowed);
+			iRCBot.sendMessage(sender, channel, "Trop de reload, attendez un peu. Le dernier à eu lieu le "+lastCU.toString()+" Prochain autorisé le "+nextAllowed);
 		}
 		
 	}

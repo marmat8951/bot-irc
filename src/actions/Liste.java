@@ -8,7 +8,7 @@ import data.ISP;
 import data.ISPDAO;
 import data.Message;
 import main.AffichableSurIRC;
-import main.Bot;
+import main.IRCBot;
 import main.Cache;
 
 /**
@@ -20,7 +20,7 @@ public class Liste extends Action {
 	
 	public static volatile boolean allAllowed=true;
 
-	public Liste(Bot b) {
+	public Liste(IRCBot b) {
 		super(b);
 		List<String> ar = new ArrayList<>();
 		ar.add("liste");
@@ -80,7 +80,7 @@ public class Liste extends Action {
 			}
 		}
 		messages.add(s);
-		bot.sendMessages(sender,channel, messages);
+		iRCBot.sendMessages(sender,channel, messages);
 		
 	}
 

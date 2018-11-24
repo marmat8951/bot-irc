@@ -11,7 +11,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import actions.Action;
-import main.Bot;
+import main.IRCBot;
 import main.Main;
 
 /**
@@ -28,12 +28,12 @@ public class Philo extends Comportement {
 	private final String[] files = folder.list();
 	private final Random random = new Random();
 	
-	private Philo(Bot b) {
+	private Philo(IRCBot b) {
 		super(b);
 		load();
 	}
 	
-	public final static Philo getInstance(Bot b) {
+	public final static Philo getInstance(IRCBot b) {
 		if (Philo.instance == null) {
 			synchronized (Philo.class) {
 				if(Philo.instance == null) {
@@ -117,7 +117,7 @@ public class Philo extends Comportement {
 	
 	@Override
 	public void react(String channel, String sender, String login, String hostname, String message) {
-		Bot b = this.getBot();
+		IRCBot b = this.getBot();
 		String res = ""+sender;
 		JSONObject jo;
 		if(message.toLowerCase().replaceAll(" ", "").equals(Action.CARACTERE_COMMANDE+"philo")) {

@@ -5,13 +5,13 @@ import java.util.List;
 
 import data.ISP;
 import data.Message;
-import main.Bot;
+import main.IRCBot;
 import main.Cache;
 import verif_saisie.EntierPositifNonVide;
 
 public class Contact extends Action {
 
-	public Contact(Bot b) {
+	public Contact(IRCBot b) {
 		super(b);
 		List<String> ar = new ArrayList<>();
 		ar.add("contact");
@@ -28,15 +28,15 @@ public class Contact extends Action {
 	public void react(String channel, String sender, String login, String hostname, Message message) {
 
 		if(message.hasNoParameters()) {
-			bot.sendMessage(sender, message.commandCharacterAndKeyword()+help());
+			iRCBot.sendMessage(sender, message.commandCharacterAndKeyword()+help());
 		}else{
 			Cache c = Cache.getInstance();
 			String s = message.getAllParametersAsOneString();
 			ISP fai = c.getISPWithName(s);
 			if(fai == null) {
-				bot.sendMessage(sender,channel, "Aucun FAI "+s);
+				iRCBot.sendMessage(sender,channel, "Aucun FAI "+s);
 			}else {
-				bot.sendMessages(sender, channel, fai.contact());
+				iRCBot.sendMessages(sender, channel, fai.contact());
 			}
 		}
 		

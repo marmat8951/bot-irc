@@ -27,7 +27,7 @@ public class PropertiesSetter {
 		f=configFile;
 	}
 
-	public boolean setPropertiesOn(CacheReloader cr, Bot b, RSSChecker rssc) throws IOException,NumberFormatException {
+	public boolean setPropertiesOn(CacheReloader cr, IRCBot b, RSSChecker rssc) throws IOException,NumberFormatException {
 		System.out.println(here);
 		System.out.println(here+File.separator+"ressources"+File.separator+"config"+File.separator+DEFAULT_PROPERTIES_FILE);
 		FileReader defaultProperties = new FileReader(new File(here+File.separator+"ressources"+File.separator+"config"+File.separator+DEFAULT_PROPERTIES_FILE));
@@ -59,7 +59,7 @@ public class PropertiesSetter {
 		Main.setTIMEOUT_BEFORE_RECONNECTING(Long.parseLong(prop.getProperty("Timeout_before_reconnecting")));
 		Main.setDebug(Boolean.parseBoolean(prop.getProperty("Debug")));
 		
-		Bot.setTIME_BETWEEN_MESSAGES(Long.parseLong(prop.getProperty("Time_between_messages")));
+		IRCBot.setTIME_BETWEEN_MESSAGES(Long.parseLong(prop.getProperty("Time_between_messages")));
 		b.setAdmins(getMultipleValues(prop, "Admins"));
 		b.setResponseOnPrivateChannel(Boolean.parseBoolean(prop.getProperty("Respond_using_private_channel")));
 		b.setResponseOnPrivateMessages(Boolean.parseBoolean(prop.getProperty("Allow_private_messages")));

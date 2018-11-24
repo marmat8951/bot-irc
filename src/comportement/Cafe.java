@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import main.Bot;
+import main.IRCBot;
 import main.Main;
 
 /**
@@ -19,7 +19,7 @@ public class Cafe extends Comportement {
 	public static final long MAX_THE = 30;
 	public static final long MAX_CAFE = 360;
 	
-	private Cafe(Bot b) {
+	private Cafe(IRCBot b) {
 		super(b);
 	}
 	
@@ -33,7 +33,7 @@ public class Cafe extends Comportement {
 	public void react(String channel, String sender, String login, String hostname, String message) {
 		Long lastone;
 		Date d = new Date();
-		Bot b = this.getBot();
+		IRCBot b = this.getBot();
 		if(istheorcafe(message.toLowerCase())) {
 			lastone = lastthe.get(sender);
 			if(lastone == null) {
@@ -77,7 +77,7 @@ public class Cafe extends Comportement {
 	 * @param b
 	 * @return
 	 */
-	public final static Cafe getInstance(Bot b) {
+	public final static Cafe getInstance(IRCBot b) {
 		if (Cafe.instance == null) {
 			synchronized (Cafe.class) {
 				if(Cafe.instance == null) {

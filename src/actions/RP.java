@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import data.Message;
-import main.Bot;
+import main.IRCBot;
 import main.Main;
 import main.PropertiesSetter;
 
@@ -28,7 +28,7 @@ public class RP extends Action {
 	 * Crée le fichier si il n'existe pas et prépare la possibilité d'utiliser l'action rp.
 	 * @param b bot b
 	 */
-	protected RP(Bot b) {
+	protected RP(IRCBot b) {
 		super(b);
 		List<String> ar = new ArrayList<>();
 		ar.add("rp");
@@ -81,14 +81,14 @@ public class RP extends Action {
 		try {
 			writer = new PrintWriter(rpFile, "UTF-8");
 		} catch (FileNotFoundException e) {
-			bot.sendMessageToAdmins("Erreur: Le fichier rp n'existe pas, impossible d'écrire");
-			bot.sendMessageToAdmins(e.getLocalizedMessage());
+			iRCBot.sendMessageToAdmins("Erreur: Le fichier rp n'existe pas, impossible d'écrire");
+			iRCBot.sendMessageToAdmins(e.getLocalizedMessage());
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 		writer.println(Main.DATE_FORMAT_OUT.format(now)+": "+message.getAllParametersAsOneString());
-		bot.sendMessage(sender, channel, "Ajout a la RP réussi!");
+		iRCBot.sendMessage(sender, channel, "Ajout a la RP réussi!");
 		writer.close();
 		
 	}

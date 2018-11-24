@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import data.Message;
-import main.Bot;
+import main.IRCBot;
 
 public class Help extends Action {
 
-	public Help(Bot b) {
+	public Help(IRCBot b) {
 		super(b);
 		List<String> kw = new ArrayList<>(3);
 		kw.add("help");
@@ -28,7 +28,7 @@ public class Help extends Action {
 		for(Action a : l) {
 			listeCommandes += CARACTERE_COMMANDE+a.keyWords.get(0)+" ";
 		}
-		bot.sendMessage(sender,channel, listeCommandes);
+		iRCBot.sendMessage(sender,channel, listeCommandes);
 	}
 
 
@@ -39,10 +39,10 @@ public class Help extends Action {
 
 	@Override
 	public void react(String channel, String sender, String login, String hostname, Message message) {
-		List<Action> l = Action.getAllActions((Bot) bot);
+		List<Action> l = Action.getAllActions((IRCBot) iRCBot);
 		boolean hasreacted = false;
 		if(message.hasNoParameters()) {
-			bot.sendMessage(sender,channel, help());
+			iRCBot.sendMessage(sender,channel, help());
 			afficheListeCommandes(l, sender, channel);
 			hasreacted = true;
 		}else {
@@ -57,7 +57,7 @@ public class Help extends Action {
 							msg+=Action.CARACTERE_COMMANDE+s+" ";
 						}
 						msg += a.help();
-						bot.sendMessage(sender,channel, msg);
+						iRCBot.sendMessage(sender,channel, msg);
 						hasreacted = true;
 					}
 				}
@@ -65,7 +65,7 @@ public class Help extends Action {
 
 			// Si il n'as pas encore réagi
 			if(!hasreacted) {
-				bot.sendMessage(sender,channel, "Commande inconnue.");
+				iRCBot.sendMessage(sender,channel, "Commande inconnue.");
 				afficheListeCommandes(l, sender, channel);
 			}
 

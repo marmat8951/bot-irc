@@ -14,7 +14,7 @@ import comportement.Comportement;
 import data.Message;
 import rss.RssDataRemainder;
 
-public class IRCBot extends PircBot {
+public class IRCBot extends PircBot implements Bot {
 
 	private volatile static long TIME_BETWEEN_MESSAGES = 200;
 	private List<Action> actions = Action.getAllActions(this);

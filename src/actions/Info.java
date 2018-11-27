@@ -23,6 +23,7 @@ public class Info extends Action {
 		super(b);
 		List<String> ar = new ArrayList<>();
 		ar.add("info");
+		ar.add("adh");
 		this.keyWords = ar;
 	}
 

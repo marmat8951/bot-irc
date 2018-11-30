@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import data.Message;
-import main.IRCBot;
+import main.Bot;
 import main.Main;
 import main.PropertiesSetter;
 
@@ -28,7 +28,7 @@ public class RP extends Action {
 	 * Crée le fichier si il n'existe pas et prépare la possibilité d'utiliser l'action rp.
 	 * @param b bot b
 	 */
-	protected RP(IRCBot b) {
+	protected RP(Bot b) {
 		super(b);
 		List<String> ar = new ArrayList<>();
 		ar.add("rp");
@@ -81,16 +81,37 @@ public class RP extends Action {
 		try {
 			writer = new PrintWriter(rpFile, "UTF-8");
 		} catch (FileNotFoundException e) {
-			iRCBot.sendMessageToAdmins("Erreur: Le fichier rp n'existe pas, impossible d'écrire");
-			iRCBot.sendMessageToAdmins(e.getLocalizedMessage());
+			bot.sendMessageToAdmins("Erreur: Le fichier rp n'existe pas, impossible d'écrire");
+			bot.sendMessageToAdmins(e.getLocalizedMessage());
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 		writer.println(Main.DATE_FORMAT_OUT.format(now)+": "+message.getAllParametersAsOneString());
-		iRCBot.sendMessage(sender, channel, "Ajout a la RP réussi!");
+		bot.sendMessage(sender, channel, "Ajout a la RP réussi!");
 		writer.close();
 		
+	}
+
+	@Override
+	public List<String> reactL(String channel, String sender, String login, String hostname, Message message) {
+		List<String> res = new ArrayList<>();
+		Date now = new Date();
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter(rpFile, "UTF-8");
+		} catch (FileNotFoundException e) {
+			String s = "Erreur: Le fichier rp n'existe pas, impossible d'écrire";
+			System.err.println(s);
+			res.add(s);
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		writer.println(Main.DATE_FORMAT_OUT.format(now)+": "+message.getAllParametersAsOneString());
+		res.add("Ajout a la RP réussi!");
+		writer.close();
+		return res;
 	}
 
 }

@@ -3,7 +3,9 @@ package rss;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -15,6 +17,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import main.Bot;
 import main.IRCBot;
 import main.Main;
 
@@ -31,25 +34,22 @@ public class RSSChecker implements Runnable {
 	private long timeout=3600;
 	private String rssaddr;  // Must be https://planet.ffdn.org/atom.xml
 	boolean end = false;
-	DocumentBuilderFactory docbfact=DocumentBuilderFactory.newInstance();
+	private DocumentBuilderFactory docbfact=DocumentBuilderFactory.newInstance();
 	private Date lastarticle = new Date(); //last info
 	public static final SimpleDateFormat DATE_FORMATIN =  new SimpleDateFormat ("yyyy-MM-dd'T'HH:mm:ss'Z'");
-	private IRCBot b;
+	private List<Bot> b;
 	private volatile RssDataRemainder remainder;
 	
-	public RSSChecker() {
-		this("",null);
-	}
 	
 	/**
 	 * Crée le checker de RSS sur l'adresse en paramètre
 	 * @param address adresse à laquelle faire la vérification
 	 * @param b bot utilisé pour stoquer les données et retravailler 
 	 */
-	public RSSChecker(String address, IRCBot b) {
+	public RSSChecker(String address, List<Bot> b) {
 		this.rssaddr = address;
-		this.b=b;
-		this.remainder = b.getRssdata();
+		this.b=new ArrayList<>(4);
+		this.remainder = new RssDataRemainder();
 	}
 
 	public void start() {
@@ -62,9 +62,12 @@ public class RSSChecker implements Runnable {
 	/**
 	 * Affiche l'aricle sur tous les channels du bot
 	 * @param data donnée RSS
+	 * @deprecated
 	 */
 	private void afficheArticle(RssData data) {
-		b.sendMessagesOnAllChannels(data.toStringIRC());
+		for(Bot actualbot : b) {
+			actualbot.sendRSSMessage(data.toStringIRC());
+		}
 	}
 
 	/**
@@ -75,12 +78,24 @@ public class RSSChecker implements Runnable {
 		afficheArticle(new RssData(article));
 	}
 
+	private void sendToAllBots(List<String> s) {
+		for(Bot a : b) {
+			a.sendRSSMessage(s);
+		}
+		
+	}
+	
+	
+	
+	
 	/**
 	 * Travaille sur la liste d'entrée. Vérifie si il y en a des plus récents que
 	 * le dernier socké. Si c'est le cas, va prévenir les channels de la nouveautée, et l'intégrer au flux RSS du bot.
 	 * @param nl
 	 */
-	private void workOnEntry(NodeList nl) {
+
+	private List<String> workOnEntry(NodeList nl) {
+		List<String> res = new ArrayList<>();
 		if(Main.isDebug()) {
 			System.out.println("Verification des <entry>");
 			System.out.println("Dernier article le: "+Main.DATE_FORMAT_OUT.format(lastarticle));
@@ -104,12 +119,12 @@ public class RSSChecker implements Runnable {
 							}
 							if(!istherenews) {
 								istherenews=true;
-								b.sendMessageOnAllChannels("Nouveauté sur planet.ffdn.org:");
+								res.add("Nouveauté sur planet.ffdn.org:");
 								
 							}
 							RssData rs = new RssData(article);
 							remainder.push(rs);
-							afficheArticle(rs);
+							res.addAll(rs.toStringIRC());
 							lastarticle = date;
 						}
 					} catch (DOMException | ParseException e) {
@@ -118,8 +133,9 @@ public class RSSChecker implements Runnable {
 				}
 			}
 		}
+		return res;
 	}
-
+	
 	public RssDataRemainder getRemainder() {
 		return remainder;
 	}
@@ -143,23 +159,25 @@ public class RSSChecker implements Runnable {
 			try {
 				db = docbfact.newDocumentBuilder();
 			} catch (ParserConfigurationException e1) {
-				b.sendMessageToAdmins("Erreur lors de la creation du document Builder dans RSSChecker.run()"); 
+				System.err.println("Erreur lors de la creation du document Builder dans RSSChecker.run()");
 				e1.printStackTrace();
 			}
 			try {
 				doc = db.parse(rssaddr);
 			} catch (SAXException | IOException e1) {
 				e1.printStackTrace();
-				b.sendMessageToAdmins("Erreur du parseur XML");
+				System.err.println("Erreur du parseur XML");
 			}
 			if(doc!=null) {
 				NodeList nl = doc.getElementsByTagName("entry");
 				if(firstRun) {
 					initRemainder(nl);
 				}
-				workOnEntry(nl);
+				List<String> result = workOnEntry(nl);
+				if(!result.isEmpty()) {
+					sendToAllBots(result);
+				}
 			}else {
-				b.sendMessageToAdmins("Erreur au parsing du RSS, le document était null");
 				System.err.println("Erreur au parsing du RSS, le document était null");
 			}
 

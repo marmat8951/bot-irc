@@ -23,8 +23,7 @@ public class IRCBot extends PircBot implements Bot {
 	private boolean responseOnPrivateChannel = true;
 	private boolean responseOnPrivateMessages = true;
 	private volatile static long WAIT_BEFORE_RECONNECT = 60;
-	private volatile RssDataRemainder rssdata = new RssDataRemainder();
-	
+	private String BotName = "IRC";
 
 	public IRCBot() {
 		this.setAutoNickChange(true);
@@ -255,13 +254,16 @@ public class IRCBot extends PircBot implements Bot {
 	}
 
 
-	public RssDataRemainder getRssdata() {
-		return rssdata;
+	@Override
+	public String getBotName() {
+		return BotName;
 	}
 
 
-	public void setRssdata(RssDataRemainder rssdata) {
-		this.rssdata = rssdata;
+	@Override
+	public void sendRSSMessage(List<String> messages) {
+		sendMessagesOnAllChannels(messages);
+		
 	}
 
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import data.Message;
-import main.IRCBot;
+import main.Bot;
 
 /**
  * Indique simplement où on peut trouver le code source
@@ -13,7 +13,7 @@ import main.IRCBot;
  */
 public class Source extends Action {
 
-	public Source(IRCBot b) {
+	public Source(Bot b) {
 		super(b);
 		List<String> ar = new ArrayList<>();
 		ar.add("source");
@@ -32,8 +32,16 @@ public class Source extends Action {
 		react(channel, sender);
 	}
 	
+	@Deprecated
 	private void react(String channel, String sender) {
-		iRCBot.sendMessage(sender, channel, sender+": mes sources sont disponibles ici: https://code.ffdn.org/marmat8951/bot-irc2");
+		bot.sendMessage(sender, channel, sender+": mes sources sont disponibles ici: https://code.ffdn.org/marmat8951/bot-irc2");
+	}
+
+	@Override
+	public List<String> reactL(String channel, String sender, String login, String hostname, Message message) {
+		List<String> s = new ArrayList<>(1);
+		s.add(sender+": mes sources sont disponibles ici: https://code.ffdn.org/marmat8951/bot-irc2");
+		return s;
 	}
 }
 

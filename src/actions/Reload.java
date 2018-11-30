@@ -5,8 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 import data.Message;
-import main.IRCBot;
+import main.Bot;
 import main.Cache;
+import main.Main;
 
 /**
  * Classe servant à l'action de forcer une mise à jour des informations
@@ -15,7 +16,7 @@ import main.Cache;
  */
 public class Reload extends Action {
 
-	public Reload(IRCBot b) {
+	public Reload(Bot b) {
 		super(b);
 		List<String> ar = new ArrayList<>();
 		ar.add("reload");
@@ -33,21 +34,39 @@ public class Reload extends Action {
 	}
 
 	@Override
+	@Deprecated
 	public void react(String channel, String sender, String login, String hostname, Message message) {
 		Date now = new Date();
 		Date lastCU = Cache.getInstance().getLastCacheUpdate();
 		if(lastCU.getTime() < now.getTime()-Cache.getTIME_BETWEEN_RELOADS() ) {		// Si la dernière MAJ date de + de 5 minutes
-			iRCBot.sendMessage(sender,channel, "Je lance le reload!");
+			bot.sendMessage(sender,channel, "Je lance le reload!");
 			if(reload()) {
-				iRCBot.sendMessage(sender, channel, sender+": Le reload s'est bien passé.");
+				bot.sendMessage(sender, channel, sender+": Le reload s'est bien passé.");
 			}else {
-				iRCBot.sendMessage(sender, channel, sender+": Erreur au moment du reload.");
+				bot.sendMessage(sender, channel, sender+": Erreur au moment du reload.");
 			}
 		}else {
 			Date nextAllowed = new Date(lastCU.getTime()+Cache.getTIME_BETWEEN_RELOADS());
-			iRCBot.sendMessage(sender, channel, "Trop de reload, attendez un peu. Le dernier à eu lieu le "+lastCU.toString()+" Prochain autorisé le "+nextAllowed);
+			bot.sendMessage(sender, channel, "Trop de reload, attendez un peu. Le dernier à eu lieu le "+lastCU.toString()+" Prochain autorisé le "+nextAllowed);
 		}
 		
 	}
 
+	@Override
+	public List<String> reactL(String channel, String sender, String login, String hostname, Message message) {
+		List<String> res = new ArrayList<>();
+		Date now = new Date();
+		Date lastCU = Cache.getInstance().getLastCacheUpdate();
+		if(lastCU.getTime() < now.getTime()-Cache.getTIME_BETWEEN_RELOADS() ) {		// Si la dernière MAJ date de + de 5 minutes
+			if(reload()) {
+				res.add(sender+": Le reload s'est bien passé.");
+			}else {
+				res.add(sender+": Erreur au moment du reload.");
+			}
+		}else {
+			Date nextAllowed = new Date(lastCU.getTime()+Cache.getTIME_BETWEEN_RELOADS());
+			res.add("Trop de reload, attendez un peu. Le dernier à eu lieu le "+Main.DATE_FORMAT_OUT.format(lastCU.toString())+" Prochain autorisé le "+Main.DATE_FORMAT_OUT.format(nextAllowed));
+		}
+		return res;
+	}
 }

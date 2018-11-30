@@ -12,7 +12,7 @@ public class TestAdresseToGPS {
 		Lieu l=null;
 		try {
 			l=ad.getLieu();
-		} catch (MultiplePossibleAddressException e) {
+		} catch (ErrorAddressException e) {
 			System.err.println("Plusieurs lieux pour cette adresse, soyez plus précis");
 		}
 		if(l!=null) {

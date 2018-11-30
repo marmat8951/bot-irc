@@ -12,4 +12,10 @@ public interface Bot {
 	public void sendMessages(String sender, String channel,List<String> messages);
 	
 	public void sendMessages(String sender, String channel, AffichableSurIRC affichable);
+	
+	public String getBotName();
+
+	public void sendMessageToAdmins(String string);
+	
+	public void sendRSSMessage(List<String> messages);
 }

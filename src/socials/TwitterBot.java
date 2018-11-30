@@ -9,6 +9,7 @@ import main.Bot;
 import twitter4j.DirectMessage;
 import twitter4j.IDs;
 import twitter4j.ResponseList;
+import twitter4j.StatusUpdate;
 import twitter4j.Twitter;
 import twitter4j.TwitterAdapter;
 import twitter4j.TwitterException;
@@ -18,6 +19,7 @@ public class TwitterBot extends TwitterAdapter implements Bot {
 	
 	private Twitter sender;
 	private String login;
+	private String BotName = "Twitter";
 	
 	public TwitterBot() {
 		super();
@@ -48,6 +50,7 @@ public class TwitterBot extends TwitterAdapter implements Bot {
 	}
 
 	
+	
 
 	/* (non-Javadoc)
 	 * @see twitter4j.TwitterAdapter#gotIncomingFriendships(twitter4j.IDs)
@@ -72,22 +75,60 @@ public class TwitterBot extends TwitterAdapter implements Bot {
 
 	@Override
 	public void sendMessage(String sender, String channel, String message) {
-		// TODO Auto-generated method stub
+		try {
+			DirectMessage msg = this.sender.sendDirectMessage(sender, message);
+			System.out.println(BotName+": Envoyé: "+ msg.getText() + " à @" + msg.getRecipientScreenName());
+		} catch (TwitterException e) {
+			System.err.println(BotName+"Twitter : Impossible d'envoyer le message");
+			e.printStackTrace();
+		}
 		
 	}
 
 	@Override
 	public void sendMessages(String sender, String channel, List<String> messages) {
-		// TODO Auto-generated method stub
-		
+		String m="";
+		for(String s : messages) {
+			m=m+s+'\n';
+		}
+		if(!m.equals("")) {
+			sendMessage(sender, channel, m);
+		}
 	}
 
 	@Override
 	public void sendMessages(String sender, String channel, AffichableSurIRC affichable) {
-		// TODO Auto-generated method stub
+		sendMessages(sender,channel,affichable.toStringIRC());
 		
 	}
+
+	@Override
+	public String getBotName() {
+		return BotName;
+	}
+
+	@Override
+	public void sendMessageToAdmins(String string) {
+		//TODO Not yet implemented
 		
+	}
+
+	@Override
+	public void sendRSSMessage(List<String> messages) {
+		String aff = "";
+		for(String s : messages) {
+			aff += s+"\n";
+		}
+		StatusUpdate status = new StatusUpdate(aff);
+		try {
+			sender.updateStatus(status);
+		} catch (TwitterException e) {
+			System.err.println(BotName+": Erreur: impossible de twitter");
+			e.printStackTrace();
+		}
+		
+	}
+	
 	
 
 }

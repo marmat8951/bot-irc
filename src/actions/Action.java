@@ -4,25 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import data.Message;
+import main.Bot;
 import main.IRCBot;
 
 public abstract class Action {
 
 	public List<String> keyWords;
-	public IRCBot iRCBot;
+	public Bot bot;
 	public volatile static char CARACTERE_COMMANDE = '+';
 	
-	protected Action(IRCBot b, List<String> keywords) {
+	protected Action(Bot b, List<String> keywords) {
 		this.keyWords = keywords;
-		this.iRCBot = b;
+		this.bot = b;
 	}
 	
-	protected Action(IRCBot b) {
-		this.iRCBot = b;
+	protected Action(Bot b) {
+		this.bot = b;
 	}
 	
-	protected Action(IRCBot b, String...keywords) {
-		this.iRCBot = b;
+	protected Action(Bot b, String...keywords) {
+		this.bot = b;
 		List<String> ar = new ArrayList<>(keywords.length); 
 		for(int i=0;i<keywords.length;++i) {
 			ar.add(keywords[i]);
@@ -30,17 +31,26 @@ public abstract class Action {
 		this.keyWords=ar;
 	}
 	
-	
+	/**
+	 * @deprecated
+	 * @param channel
+	 * @param sender
+	 * @param login
+	 * @param hostname
+	 * @param message
+	 */
+	public abstract void react(String channel, String sender,
+			String login, String hostname, Message message);
 	/**
 	 * 
-	 * Methode réagissant au message @see PircBot;
+	 * Methode réagissant au message @see ;
 	 * @param channel channer sur l'IRC
 	 * @param sender personne ayant envoyé le message
 	 * @param login	login du bot
 	 * @param hostname hostname actuell
 	 * @param message message en question
 	 */
-	public abstract void react(String channel, String sender,
+	public abstract List<String> reactL(String channel, String sender,
 			String login, String hostname, Message message);
 	
 	public void reactUsingMessage(String channel,String sender,
@@ -98,7 +108,7 @@ public abstract class Action {
 	 * @param b Bot que nous utiliserons pour nos actions
 	 * @return Liste d'actions prete à être utilisée dans un forEach verifiant si elle doivent être executées.
 	 */
-	public static List<Action> getAllActions(IRCBot b){
+	public static List<Action> getAllActions(Bot b){
 		List<Action> ar= new ArrayList<>();
 		ar.add(new Help(b));
 		ar.add(new Contact(b));

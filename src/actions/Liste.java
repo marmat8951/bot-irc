@@ -8,7 +8,7 @@ import data.ISP;
 import data.ISPDAO;
 import data.Message;
 import main.AffichableSurIRC;
-import main.IRCBot;
+import main.Bot;
 import main.Cache;
 
 /**
@@ -20,7 +20,7 @@ public class Liste extends Action {
 	
 	public static volatile boolean allAllowed=true;
 
-	public Liste(IRCBot b) {
+	public Liste(Bot b) {
 		super(b);
 		List<String> ar = new ArrayList<>();
 		ar.add("liste");
@@ -33,8 +33,16 @@ public class Liste extends Action {
 		return " Liste tous les FAI de la fédération. L'Ajout du parametre All affiche aussi ceux hors fédération.";
 	}
 
+	
 	@Override
+	@Deprecated
 	public void react(String channel, String sender, String login, String hostname, Message message) {
+		bot.sendMessages(sender,channel, reactL(channel, sender, login, hostname, message));
+		
+	}
+
+	@Override
+	public List<String> reactL(String channel, String sender, String login, String hostname, Message message) {
 		ISPDAO idao = ISPDAO.getInstance();
 		Cache c = Cache.getInstance();
 		List<ISP> listeFAI=null;
@@ -80,8 +88,7 @@ public class Liste extends Action {
 			}
 		}
 		messages.add(s);
-		iRCBot.sendMessages(sender,channel, messages);
-		
+		return messages;
 	}
 
 }

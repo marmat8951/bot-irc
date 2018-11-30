@@ -8,6 +8,7 @@ import data.ISP;
 import data.ISPDAO;
 import data.Message;
 import main.IRCBot;
+import main.Bot;
 import main.Cache;
 import verif_saisie.EntierPositifNonVide;
 /**
@@ -19,7 +20,7 @@ public class Info extends Action {
 	
 	public static boolean INFO_ALL = false;
 
-	public Info(IRCBot b) {
+	public Info(Bot b) {
 		super(b);
 		List<String> ar = new ArrayList<>();
 		ar.add("info");
@@ -32,14 +33,15 @@ public class Info extends Action {
 	}
 
 	@Override
+	@Deprecated
 	public void react(String channel, String sender, String login, String hostname, Message message) {
 		
 		if(message.hasNoParameters()) {
-			iRCBot.sendMessage(channel,message.commandCharacterAndKeyword()+" doit être suivi d'une chaine de caractère ou d'un numero");
+			bot.sendMessage(sender,channel,message.commandCharacterAndKeyword()+" doit être suivi d'une chaine de caractère ou d'un numero");
 		}else {
 			String s = message.getAllParametersAsOneString();
 			ISPDAO idao = ISPDAO.getInstance();
-			IRCBot ib = iRCBot;
+			Bot ib = bot;
 
 			if(!EntierPositifNonVide.verifie(s)) {			// Un mot après commande
 
@@ -60,12 +62,12 @@ public class Info extends Action {
 					Cache c = Cache.getInstance();
 					ISP i = c.getISPWithName(s);
 					if(i == null) {
-						iRCBot.sendMessage(sender, "Recherche d'une zone "+s);
+						bot.sendMessage(sender, channel, "Recherche d'une zone "+s);
 						ISP j = c.getISPWithGeoZone(s);
 						if(j == null)
-							iRCBot.sendMessage(sender, channel, "Le FAI "+s+" est Inconnu, désolé. Et aucun FAI n'opère sur une sone dénomée "+s+" ...");
+							bot.sendMessage(sender, channel, "Le FAI "+s+" est Inconnu, désolé. Et aucun FAI n'opère sur une sone dénomée "+s+" ...");
 						else {
-							iRCBot.sendMessage(sender, channel, "Un FAI opère sur une zone correspondante : ");
+							bot.sendMessage(sender, channel, "Un FAI opère sur une zone correspondante : ");
 							ib.sendMessages(sender, channel, j.toStringIRC());
 							List<CoveredAreas> cas = j.getCoveredAreas(s);
 							String technos = "Avec pour techno:";
@@ -74,7 +76,7 @@ public class Info extends Action {
 								technos+=ca.getTechnos()+" ";
 								}
 							}
-							iRCBot.sendMessage(sender, channel, technos);
+							bot.sendMessage(sender, channel, technos);
 						}
 					}else {
 						ib.sendMessages(sender,channel, i.toStringIRC());
@@ -88,14 +90,80 @@ public class Info extends Action {
 					int  id = message.getElementAsInt(i);
 					List<String> strings = idao.getISP(id).toStringIRC();
 						for(String response : strings) {
-							iRCBot.sendMessage(sender, channel, response);
+							bot.sendMessage(sender, channel, response);
 						}
 					}catch(NumberFormatException ne) {
-						iRCBot.sendMessage(sender, channel, message.getElementAsString(i)+" n'est pas un nombre");
+						bot.sendMessage(sender, channel, message.getElementAsString(i)+" n'est pas un nombre");
 					}
 				}
 			}
 		}
+		
+	}
+
+	@Override
+	public List<String> reactL(String channel, String sender, String login, String hostname, Message message) {
+		List<String> res = new ArrayList<>();
+		if(message.hasNoParameters()) {
+			res.add(message.commandCharacterAndKeyword()+" doit être suivi d'une chaine de caractère ou d'un numero");
+		}else {
+			String s = message.getAllParametersAsOneString();
+			ISPDAO idao = ISPDAO.getInstance();
+
+			if(!EntierPositifNonVide.verifie(s)) {			// Un mot après commande
+
+				if(s.equalsIgnoreCase("all") && INFO_ALL) {	          			  // info all
+					Cache c = Cache.getInstance();
+					res.addAll(c.toStringIRC());
+					for(ISP i : c.getListe()) {
+						if(i.isFFDNMember()) {
+							res.addAll(i.toStringIRC());
+						}
+					}
+
+				}else if(s.equalsIgnoreCase("ffdn")) {				//info ffdn
+					Cache c = Cache.getInstance();
+					res.addAll(c.toStringIRC());
+
+				}else {												//info FAI / Zone
+					Cache c = Cache.getInstance();
+					ISP i = c.getISPWithName(s);
+					if(i == null) {
+						res.add("Recherche d'une zone "+s);
+						ISP j = c.getISPWithGeoZone(s);
+						if(j == null)
+							res.add("Le FAI "+s+" est Inconnu, désolé. Et aucun FAI n'opère sur une sone dénomée "+s+" ...");
+						else {
+							res.add("Un FAI opère sur une zone correspondante : ");
+							res.addAll(j.toStringIRC());
+							List<CoveredAreas> cas = j.getCoveredAreas(s);
+							String technos = "Avec pour techno:";
+							for(CoveredAreas ca: cas) {
+								if(ca.getName().toLowerCase().contains(s.toLowerCase())) {
+								technos+=ca.getTechnos()+" ";
+								}
+							}
+							res.add(technos);
+						}
+					}else {
+						res.addAll(i.toStringIRC());
+					}
+				}
+
+			}else {												// Un nombre après info
+				int nbParameters = message.parameterSize();
+				for(int i=0; i<nbParameters;i++) {
+					try {
+					int id = message.getElementAsInt(i);
+					res.addAll(idao.getISP(id).toStringIRC());
+						
+					}catch(NumberFormatException ne) {
+						res.add(message.getElementAsString(i)+" n'est pas un nombre");
+					}
+				}
+			}
+		}
+		return res;
 		
 	}
 

@@ -2,9 +2,13 @@ package main;
 
 import java.net.ConnectException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import rss.RSSChecker;
+import rss.RssDataRemainder;
+import socials.TwitterBot;
 
 public class Main {
 
@@ -14,6 +18,11 @@ public class Main {
 	private static long TIMEOUT_BEFORE_RECONNECTING = 360;
 	private static int failures = 0;
 	private static volatile boolean DEBUG=true;
+	private static CacheReloader CR;
+	private static IRCBot IRCBOT;
+	private static TwitterBot TWITTER;
+	private static List<Bot> BOTS = new ArrayList<>();
+	private static RssDataRemainder RSS_DATA_REMAINDER;
 	
 	public static final SimpleDateFormat DATE_FORMAT_OUT = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss", Locale.FRENCH);;
 
@@ -21,29 +30,34 @@ public class Main {
 
 		try {
 			
-			CacheReloader cr = new CacheReloader(3600); // Met à jour la base toute les heures.
+			CR = new CacheReloader(3600); // Met à jour la base toute les heures.
 			// Now start our bot up.
-			IRCBot iRCBot = new IRCBot();
+			IRCBOT = new IRCBot();
+			BOTS.add(IRCBOT);
 			
-			RSSChecker rcheck = new RSSChecker("https://planet.ffdn.org/atom.xml", iRCBot);
+			TWITTER = new TwitterBot();
+			BOTS.add(TWITTER);
+			
+			RSSChecker rcheck = new RSSChecker("https://planet.ffdn.org/atom.xml", BOTS);
+			RSS_DATA_REMAINDER = rcheck.getRemainder();
 					
 			//Properties Setter
 			PropertiesSetter ps = new PropertiesSetter("../../ressources/config/config.properties");
 			
-			ps.setPropertiesOn(cr, iRCBot,rcheck);
+			ps.setPropertiesOn(CR, IRCBOT,rcheck);
 
 			// Connect to the IRC server.
-			iRCBot.connect(SERVER,PORT);
+			IRCBOT.connect(SERVER,PORT);
 
 			// Get All the infomations and store in a cache
 			Cache c = Cache.getInstance();
 
 			// Join the #pircbot channel.
 			for(int i = 0; i< CHANNELS.length; i++) {
-				iRCBot.joinChannel(CHANNELS[i]);
+				IRCBOT.joinChannel(CHANNELS[i]);
 			}
 			
-			cr.start();
+			CR.start();
 			
 			System.out.println("Debug? "+DEBUG);
 			
@@ -98,6 +112,55 @@ public class Main {
 
 	public static final void setTIMEOUT_BEFORE_RECONNECTING(long tIMEOUT_BEFORE_RECONNECTING) {
 		TIMEOUT_BEFORE_RECONNECTING = tIMEOUT_BEFORE_RECONNECTING;
+	}
+
+	/**
+	 * @return the failures
+	 */
+	public static int getFailures() {
+		return failures;
+	}
+
+	/**
+	 * @return the dEBUG
+	 */
+	public static boolean isDEBUG() {
+		return DEBUG;
+	}
+
+	/**
+	 * @return the cR
+	 */
+	public static CacheReloader getCR() {
+		return CR;
+	}
+
+	/**
+	 * @return the iRCBOT
+	 */
+	public static IRCBot getIRCBOT() {
+		return IRCBOT;
+	}
+
+	/**
+	 * @return the bOTS
+	 */
+	public static List<Bot> getBOTS() {
+		return BOTS;
+	}
+
+	/**
+	 * @return the rSS_DATA_REMAINDER
+	 */
+	public static RssDataRemainder getRSS_DATA_REMAINDER() {
+		return RSS_DATA_REMAINDER;
+	}
+
+	/**
+	 * @return the dateFormatOut
+	 */
+	public static SimpleDateFormat getDateFormatOut() {
+		return DATE_FORMAT_OUT;
 	}
 
 }

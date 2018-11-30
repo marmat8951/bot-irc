@@ -60,9 +60,9 @@ public class AddresseToGPS {
 	/**
 	 * Récupère les coordonnée du lieu correspondant à l'adresse
 	 * @return Coordonnée du lieu
-	 * @throws MultiplePossibleAddressException si plusieurs addresses sont possibles.
+	 * @throws ErrorAddressException si plusieurs addresses sont possibles.
 	 */
-	public Coordinates getCoordinates() throws MultiplePossibleAddressException {
+	public Coordinates getCoordinates() throws ErrorAddressException {
 		Lieu l = getLieu();
 		return l.coordonees;
 	}
@@ -80,9 +80,9 @@ public class AddresseToGPS {
 	/**
 	 * Effectue la requète pour récuperer le lieu et le renvoie
 	 * @return Lieu correspondant ou null si il n'y en a pas
-	 * @throws MultiplePossibleAddressException si il y a plusieurs lieux possibles
+	 * @throws ErrorAddressException si il y a plusieurs lieux possibles
 	 */
-	public Lieu getLieu() throws MultiplePossibleAddressException {
+	public Lieu getLieu() throws ErrorAddressException {
 		String get = ISPDAO.getInstance().executeGet(getAddressToQuerry());
 		JSONArray ja = new JSONArray(get);
 		if(ja.length()<1) {
@@ -93,7 +93,7 @@ public class AddresseToGPS {
 			for(int i=0;i<len;++i) {
 				l[i]=new Lieu(ja.getJSONObject(i));
 			}
-			throw new MultiplePossibleAddressException(l, adresse);
+			throw new ErrorAddressException(l, adresse);
 		}else {
 			Lieu l = new Lieu(ja.getJSONObject(0));
 			return l;

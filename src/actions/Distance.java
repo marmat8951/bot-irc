@@ -9,14 +9,14 @@ import data.AddresseToGPS.Lieu;
 import data.Coordinates;
 import data.ISP;
 import data.Message;
-import data.MultiplePossibleAddressException;
-import main.IRCBot;
+import data.ErrorAddressException;
+import main.Bot;
 import main.Cache;
 
 public class Distance extends Action {
 	public static final int NOMBRE_AFFICHABLE = 3;
 
-	public Distance(IRCBot b) {
+	public Distance(Bot b) {
 		super(b);
 		List<String> kw = new ArrayList<>();
 		kw.add("dist");
@@ -24,7 +24,7 @@ public class Distance extends Action {
 		this.keyWords=kw;
 	}
 
-	
+	@Deprecated
 	private void affichePlusProches(double latitude, double longitude, String sender, String channel) {
 		ISP[] plusProches = getISPPlusProche(latitude, longitude);
 		for(int i=0;i<plusProches.length;++i) {
@@ -34,26 +34,42 @@ public class Distance extends Action {
 				nf.setMaximumFractionDigits(2);
 				nf.setMinimumFractionDigits(0);
 				distance = distance / 1000.0; 	//On met en KM		
-				iRCBot.sendMessage(sender,channel, (i+1)+": "+plusProches[i].getBetterName()+" à "+nf.format(distance)+" Km");
+				bot.sendMessage(sender,channel, (i+1)+": "+plusProches[i].getBetterName()+" à "+nf.format(distance)+" Km");
 			}
 		}
 	}
-
+	
+	private List<String> getPlusProchesL(double latitude, double longitude, String sender, String channel) {
+		List<String> res = new ArrayList<>();
+		ISP[] plusProches = getISPPlusProche(latitude, longitude);
+		for(int i=0;i<plusProches.length;++i) {
+			if(plusProches[i]!=null) {
+				double distance =  plusProches[i].getData().getCoordonnees().distanceAvec(latitude, longitude);
+				NumberFormat nf = NumberFormat.getInstance();
+				nf.setMaximumFractionDigits(2);
+				nf.setMinimumFractionDigits(0);
+				distance = distance / 1000.0; 	//On met en KM		
+				res.add((i+1)+": "+plusProches[i].getBetterName()+" à "+nf.format(distance)+" Km");
+			}
+		}
+		return res;
+	}
+	
+	
+	
 	/**
-	 * 
 	 * @param message message recu
 	 * @param sender personne qui envoie le message
 	 * @param channel channel dont le message provient
 	 * @return Les coordonnées du lieu correspondant au contenu du message
-	 * @throws MultiplePossibleAddressException Si il y a plussieurs coordonnées correspondantes à l'adresse demandée.
+	 * @throws ErrorAddressException Si il y a plussieurs coordonnées correspondantes à l'adresse demandée.
 	 */
-	private Coordinates getCoordinatesFromMessage(String message, String sender, String channel) throws MultiplePossibleAddressException {
+	private Coordinates getCoordinatesFromMessage(String message, String sender, String channel) throws ErrorAddressException {
 		final double MAX_DIFF = 0.1; //Differences there MUST between 2 coordinates so they are seen as differents
 		AddresseToGPS a2gps = new AddresseToGPS(message.substring(message.indexOf(' ')+1));
 		Lieu[] lieux = a2gps.getAllLieu();
 		if(lieux == null || lieux.length == 0) {
-			iRCBot.sendMessage(sender,channel, "Aucun lieu ne correspond. Requete effectuée: "+a2gps.getAddressToQuerry());
-			return null;
+			throw new ErrorAddressException(null, a2gps.getAdresse(),"Aucun lieu ne correspond. Requete effectuée: "+a2gps.getAddressToQuerry());
 		}else if(lieux.length == 1) {
 			return lieux[0].coordonees;
 		}else {
@@ -61,7 +77,7 @@ public class Distance extends Action {
 			for(int i=0;i<lieux.length; ++i) {
 				for(int j=0;j<lieux.length; ++j) {
 					if(!lieux[i].coordonees.equals(lieux[j].coordonees, MAX_DIFF)) {
-						throw new MultiplePossibleAddressException(lieux, a2gps.getAdresse());
+						throw new ErrorAddressException(lieux, a2gps.getAdresse());
 					}
 				}
 			}
@@ -70,7 +86,8 @@ public class Distance extends Action {
 
 	}
 
-
+	
+	
 	/**
 	 * Récupere le FAI le plus proche de la position indiquée en paramètre. Utilise {@link Distance#getISPPlusProche(Coordinates)}
 	 * @param latitude
@@ -134,6 +151,7 @@ public class Distance extends Action {
 	}
 
 	@Override
+	@Deprecated
 	public void react(String channel, String sender, String login, String hostname, Message message) {
 		double latitude = Double.POSITIVE_INFINITY, longitude = latitude;
 		if(!message.hasNoParameters()) {
@@ -147,10 +165,10 @@ public class Distance extends Action {
 					latitude = ca.getLatitude();
 					longitude = ca.getLongitude();
 					affichePlusProches(latitude, longitude, sender, channel);
-				} catch (MultiplePossibleAddressException e1) {
-					iRCBot.sendMessage(sender, channel, "Plusieurs possibilités pour cet endroit, nous choisirons le premier:");
+				} catch (ErrorAddressException e1) {
+					bot.sendMessage(sender, channel, "Plusieurs possibilités pour cet endroit, nous choisirons le premier:");
 					for(int i = 0; i<e1.lieux.length; ++i) {
-						iRCBot.sendMessage(sender, channel, (i+1)+":"+e1.lieux[i].toString());
+						bot.sendMessage(sender, channel, (i+1)+":"+e1.lieux[i].toString());
 					}
 					latitude = e1.lieux[0].coordonees.getLatitude();
 					longitude = e1.lieux[0].coordonees.getLongitude();
@@ -159,10 +177,48 @@ public class Distance extends Action {
 			}
 
 		}else {
-			iRCBot.sendMessage(sender, channel, message.commandCharacterAndKeyword()+help());
+			bot.sendMessage(sender, channel, message.commandCharacterAndKeyword()+help());
 		}
 	
 		
+	}
+
+
+	@Override
+	public List<String> reactL(String channel, String sender, String login, String hostname, Message message) {
+		List<String> res = new ArrayList<>();
+		double latitude = Double.POSITIVE_INFINITY, longitude = latitude;
+		if(!message.hasNoParameters()) {
+			try {
+				latitude = message.getElementAsDouble(0);
+				longitude = message.getElementAsDouble(1);
+				res.addAll(getPlusProchesL(latitude, longitude, sender, channel));
+			}catch(NumberFormatException e) {	//Cela doit alors être une adresse!
+				try {
+					Coordinates ca = getCoordinatesFromMessage(message.getAllParametersAsOneString(), sender, channel);
+					latitude = ca.getLatitude();
+					longitude = ca.getLongitude();
+					res.addAll(getPlusProchesL(latitude, longitude, sender, channel));
+				} catch (ErrorAddressException e1) {
+					if(!e1.isVide()) {
+						res.add("Plusieurs possibilités pour cet endroit, nous choisirons le premier:");
+						for(int i = 0; i<e1.lieux.length; ++i) {
+							res.add((i+1)+":"+e1.lieux[i].toString());
+						}
+						latitude = e1.lieux[0].coordonees.getLatitude();
+						longitude = e1.lieux[0].coordonees.getLongitude();
+						res.addAll(getPlusProchesL(latitude, longitude, sender, channel));
+					}else {
+						res.add(e1.msg);
+					}
+				}
+			}
+
+		}else {
+			res.add(message.commandCharacterAndKeyword()+help());
+		}
+	
+		return res;
 	}
 
 }

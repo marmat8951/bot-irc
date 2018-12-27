@@ -1,0 +1,42 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+
+
+sourceCompatibility = 1.8
+version = '1.0'
+
+jar {
+	manifest {
+		attributes 'Implementation-Title': 'UneFede',
+				   'Implementation-Version': version
+	}
+}
+
+repositories {
+	jcenter()
+    maven { url 'https://jitpack.io' }
+    mavenCentral()
+    flatDir	{
+    	dirs '/lib/'
+   	}
+}
+
+dependencies {
+	implementation 'com.github.sys1yagi.mastodon4j:build:1.7.0'
+	compile group: 'commons-io', name: 'commons-io', version: '2.6'
+	compile group: 'org.json', name: 'json', version: '20180813'
+	compile group: 'pircbot', name: 'pircbot', version: '1.5.0'
+	compile group: 'org.twitter4j', name: 'twitter4j-core', version: '4.0.7'
+	compile group: 'org.twitter4j', name: 'twitter4j-async', version: '4.0.7'
+	compile group: 'org.twitter4j', name: 'twitter4j-stream', version: '4.0.7'
+	compile group: 'com.github.sys1yagi.mastodon4j', name: 'mastodon4j', version: '1.7.0'
+}
+
+application {
+	mainClassName="bot.irc.main.Main"
+}
+
+run {
+
+}

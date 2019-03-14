@@ -11,7 +11,7 @@ public class RejoinThread implements Runnable{
 
 	private volatile PircBot pb;
 	private String chan;
-	private static long DEFAULT_WAIT_BEFORE_RECONNECT = 10000;
+	private static long DEFAULT_WAIT_BEFORE_RECONNECT = Config.getPropertyAsLong("Wait_before_reconnecting_when_kicked");
 	private static long DELAY_BEFORE_MESSAGE_AFTER_RECONNECT = 360;
 	private Thread thread;
 	private String threadName;

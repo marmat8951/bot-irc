@@ -8,20 +8,22 @@ import java.util.Locale;
 
 import bot.irc.rss.RSSChecker;
 import bot.irc.rss.RssDataRemainder;
+import bot.irc.socials.MastodonBot;
 import bot.irc.socials.TwitterBot;
 
 
 public class Main {
-
-	public volatile static String SERVER = "irc.geeknode.net";
-	public volatile static int PORT = 6667;
-	private volatile static String[] CHANNELS = { "#marmat" };
+	private static volatile Config CONFIG;
+	public volatile static String SERVER = Config.getProperty("SERVER", "irc.geeknode.net");
+	public volatile static int PORT = Config.getPropertyAsUnsignedInt("PORT");
+	private volatile static String[] CHANNELS = Config.getMultipleValues("CHANNELS");
 	private static long TIMEOUT_BEFORE_RECONNECTING = 360;
 	private static int failures = 0;
-	private static volatile boolean DEBUG=true;
+	private static volatile boolean DEBUG=Boolean.parseBoolean(Config.getProperty("Debug"));
 	private static CacheReloader CR;
 	private static IRCBot IRCBOT;
 	private static TwitterBot TWITTER;
+	private static MastodonBot MASTODON;
 	private static List<Bot> BOTS = new ArrayList<>();
 	private static RssDataRemainder RSS_DATA_REMAINDER;
 	
@@ -30,28 +32,34 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 
 		try {
+
+			CONFIG = new Config();
+			CR = new CacheReloader(Config.getPropertyAsUnsignedInt("CacheReloader_timeout")); // Met à jour la base toute les heures.
+			// Get All the infomations and store in a cache
+			Cache c = Cache.getInstance();
 			
-			CR = new CacheReloader(3600); // Met à jour la base toute les heures.
+			
 			// Now start our bot up.
 			IRCBOT = new IRCBot();
 			BOTS.add(IRCBOT);
 			
 			TWITTER = new TwitterBot();
 			BOTS.add(TWITTER);
+			TWITTER.start();
 			
-			RSSChecker rcheck = new RSSChecker("https://planet.ffdn.org/atom.xml", BOTS);
+			RSSChecker rcheck = new RSSChecker(Config.getProperty("RSS_address"), BOTS);
 			RSS_DATA_REMAINDER = rcheck.getRemainder();
-					
-			//Properties Setter
-			PropertiesSetter ps = new PropertiesSetter("../../ressources/config/config.properties");
 			
-			ps.setPropertiesOn(CR, IRCBOT,rcheck);
-
+			
+			MASTODON = new MastodonBot();
+			BOTS.add(MASTODON);
+			MASTODON.start();
+			
+			
 			// Connect to the IRC server.
 			IRCBOT.connect(SERVER,PORT);
 
-			// Get All the infomations and store in a cache
-			Cache c = Cache.getInstance();
+			
 
 			// Join the #pircbot channel.
 			for(int i = 0; i< CHANNELS.length; i++) {

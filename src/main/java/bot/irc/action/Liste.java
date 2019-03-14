@@ -10,6 +10,7 @@ import bot.irc.data.Message;
 import bot.irc.main.AffichableSurIRC;
 import bot.irc.main.Bot;
 import bot.irc.main.Cache;
+import bot.irc.main.Config;
 
 /**
  * Classe servant à la récuperation d'une liste des FAI présents dans la base de donnée.
@@ -18,7 +19,7 @@ import bot.irc.main.Cache;
  */
 public class Liste extends Action {
 	
-	public static volatile boolean allAllowed=true;
+	public static volatile boolean allAllowed=Config.getPropertyAsBoolean("listeall",true);
 
 	public Liste(Bot b) {
 		super(b);

@@ -19,7 +19,7 @@ public class Cache implements AffichableSurIRC {
 	public static volatile Cache instance = null;
 	private Date lastCacheUpdate;
 	private List<ISP> cache;
-	private static long TIME_BETWEEN_RELOADS = 360000;
+	private static long TIME_BETWEEN_RELOADS = 1000*Config.getPropertyAsLong("Minimum_time_beetween_+reload");
 	
 	/**
 	 * Constructeur de cache. Celui ci est privé car la classe utilise le Design Patern singleton.

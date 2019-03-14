@@ -1,9 +1,12 @@
 package bot.irc.comportement;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import bot.irc.main.Bot;
 import bot.irc.main.IRCBot;
 import bot.irc.main.Main;
 
@@ -19,7 +22,7 @@ public class Cafe extends Comportement {
 	public static final long MAX_THE = 30;
 	public static final long MAX_CAFE = 360;
 	
-	private Cafe(IRCBot b) {
+	private Cafe(Bot b) {
 		super(b);
 	}
 	
@@ -29,39 +32,38 @@ public class Cafe extends Comportement {
 		return m.contains(getBotNick())&&(m.contains("fais") || m.contains("fait")) && (m.contains("café")||m.contains("thé"));
 	}
 
-	@Override
-	public void react(String channel, String sender, String login, String hostname, String message) {
+	public List<String> react(String channel, String sender, String login, String hostname, String message) {
+		List<String> res = new ArrayList<>();
 		Long lastone;
 		Date d = new Date();
-		IRCBot b = this.getBot();
 		if(istheorcafe(message.toLowerCase())) {
 			lastone = lastthe.get(sender);
 			if(lastone == null) {
-			b.sendMessage(channel, "Ok pour le thé");
+				res.add("Ok pour le thé");
 			}else {
 				if(d.getTime()-lastone < MAX_THE*1000) {
-					b.sendMessage(channel, "Ok, mais la dernière fois c'était il y a moins de "+MAX_THE+" secondes, tu devrais y aller plus doucement...");
+					res.add("Ok, mais la dernière fois c'était il y a moins de "+MAX_THE+" secondes, tu devrais y aller plus doucement...");
 				}else {
-					b.sendMessage(channel, "Ok, pas de problème. La dernière fois c'était le "+Main.DATE_FORMAT_OUT.format(new Date(lastone)));
+					res.add("Ok, pas de problème. La dernière fois c'était le "+Main.DATE_FORMAT_OUT.format(new Date(lastone)));
 				}
 			}
 			lastthe.put(sender, d.getTime());
 		}else {
 			lastone = lastcafe.get(sender);
-			if(sender.equals("quota_atypique")) {
-				b.sendMessage(channel, "Ok Quota!");
+			if(sender.toLowerCase().contains("quota_atypique")) {
+				res.add("Ok Quota!");
 			}else if(lastone == null) {
-				b.sendMessage(channel, "Ok pour le café!");
+				res.add("Ok pour le café!");
 			}else {
 				if(d.getTime()-lastone < MAX_CAFE*1000) {
-					b.sendMessage(channel, "Eu... ok, mais, tu devrai plutôt prendre un thé, ça fait vraiment trop peu de temps la... ");
+					res.add("Eu... ok, mais, tu devrai plutôt prendre un thé, ça fait vraiment trop peu de temps la... ");
 				}else {
-					b.sendMessage(channel, "Ok, pas de problème, la dernière fois c'était le "+Main.DATE_FORMAT_OUT.format(new Date(lastone)));
+					res.add("Ok, pas de problème, la dernière fois c'était le "+Main.DATE_FORMAT_OUT.format(new Date(lastone)));
 				}
 			}
 			lastcafe.put(sender, d.getTime());
 		}
-			
+		return res;
 	}
 	/**
 	 * Indique si il s'agit de thé ou de café qui est demandé
@@ -77,7 +79,7 @@ public class Cafe extends Comportement {
 	 * @param b
 	 * @return
 	 */
-	public final static Cafe getInstance(IRCBot b) {
+	public final static Cafe getInstance(Bot b) {
 		if (Cafe.instance == null) {
 			synchronized (Cafe.class) {
 				if(Cafe.instance == null) {

@@ -3,13 +3,15 @@ package bot.irc.comportement;
 import java.util.ArrayList;
 import java.util.List;
 
+import bot.irc.main.Bot;
 import bot.irc.main.IRCBot;
+
 
 public abstract class Comportement {
 
-	private IRCBot iRCBot;
-	public Comportement(IRCBot b) {
-		this.iRCBot = b;
+	private Bot bot;
+	public Comportement(Bot b) {
+		this.bot = b;
 	}
 
 	/**
@@ -24,25 +26,25 @@ public abstract class Comportement {
 		return liste;
 	}
 	
+	
 	public abstract boolean hastoreact(String message);
 	
-	public abstract void react(String channel, String sender,
+	public abstract List<String> react(String channel, String sender,
 			String login, String hostname, String message);
-
-
+	
 	/**
 	 * @return the bot
 	 */
-	public IRCBot getBot() {
-		return iRCBot;
+	public Bot getBot() {
+		return bot;
 	}
 
 
 	/**
 	 * @param iRCBot the bot to set
 	 */
-	public void setBot(IRCBot iRCBot) {
-		this.iRCBot = iRCBot;
+	public void setBot(Bot bot) {
+		this.bot = bot;
 	}
 
 	/**
@@ -50,6 +52,6 @@ public abstract class Comportement {
 	 * @return le nom actuel du bot placé en minuscules
 	 */
 	public String getBotNick() {
-		return iRCBot.getNick().toLowerCase();
+		return bot.getBotName().toLowerCase();
 	}
 }

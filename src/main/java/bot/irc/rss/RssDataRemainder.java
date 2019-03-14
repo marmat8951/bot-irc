@@ -2,6 +2,7 @@ package bot.irc.rss;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 import bot.irc.main.AffichableSurIRC;
 
@@ -10,7 +11,7 @@ import bot.irc.main.AffichableSurIRC;
  * Celleçi agit comme un espace de taille fixe, dans lequel l'élément le plus ancien est supprimé au profit du plus récent.
  * @author marmat
  */
-public class RssDataRemainder implements AffichableSurIRC{
+public class RssDataRemainder extends Observable implements AffichableSurIRC{
 
 	public RssData[] data;
 	public static final int DEFAULT_SIZE=10;
@@ -40,6 +41,8 @@ public class RssDataRemainder implements AffichableSurIRC{
 				newData[i]=data[i];
 			}
 		}
+		this.setChanged();
+		this.notifyObservers();
 	}
 
 	/**
@@ -47,6 +50,8 @@ public class RssDataRemainder implements AffichableSurIRC{
 	 */
 	public void clear() {
 		data = new RssData[data.length];
+		this.setChanged();
+		this.countObservers();
 	}
 
 	/**
@@ -78,6 +83,8 @@ public class RssDataRemainder implements AffichableSurIRC{
 	public void push(RssData newdata) {
 		movetoright();
 		this.data[0]=newdata;
+		this.setChanged();
+		this.notifyObservers(newdata);
 	}
 	
 	/**

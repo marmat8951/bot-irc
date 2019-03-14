@@ -1,34 +1,100 @@
 package bot.irc.socials;
 
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import bot.irc.action.Action;
 import bot.irc.data.Message;
 import bot.irc.main.AffichableSurIRC;
 import bot.irc.main.Bot;
+import bot.irc.rss.RssData;
+import bot.irc.rss.RssDataRemainder;
 import twitter4j.DirectMessage;
+import twitter4j.DirectMessageList;
 import twitter4j.IDs;
+import twitter4j.StallWarning;
+import twitter4j.Status;
+import twitter4j.StatusDeletionNotice;
 import twitter4j.StatusUpdate;
 import twitter4j.Twitter;
 import twitter4j.TwitterAdapter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
+import twitter4j.TwitterStream;
+import twitter4j.TwitterStreamFactory;
+import twitter4j.User;
+import twitter4j.UserList;
+import twitter4j.UserStreamListener;
 
-public class TwitterBot extends TwitterAdapter implements Bot {
+public class TwitterBot extends TwitterAdapter implements Bot, UserStreamListener, Runnable, Observer {
 	
-	private Twitter sender;
+	private Twitter twitter;
+	private TwitterStream twitterStream;
 	private String login;
 	private String BotName = "Twitter";
+	private List<Action> actions = Action.getAllActions(this);
+	private Thread thread;
+	private long timeout = 100;
+	private String cursor = null;
+	private final int COUNT = 50;
+	
+	boolean end = false;
 	
 	public TwitterBot() {
 		super();
-		this.sender = TwitterFactory.getSingleton();
+		TwitterFactory factory = new TwitterFactory();
+		twitter = factory.getInstance();
+		this.twitter = new TwitterFactory().getInstance();
+		
 		try {
-			this.login = sender.getScreenName();
+			this.login = twitter.getScreenName();
 		} catch (IllegalStateException | TwitterException e) {
 			this.login = "UneFede";
 			e.printStackTrace();
 		}
+		
+		TwitterStreamFactory twitterStreamFactory = new TwitterStreamFactory();
+        twitterStream = twitterStreamFactory.getInstance();
+        twitterStream.addListener(this);
+
+	}
+	
+	public void start() {
+		System.out.println("Démarage du Bot Mastodon. Mise à jour toute les "+timeout+" secondes.");
+		if(thread == null) {
+			thread = new Thread(this, this.BotName);
+			thread.start();
+		}
+	}
+	
+	public void run() {
+		do {
+			try {
+				
+			DirectMessageList messages = twitter.getDirectMessages(COUNT);
+			 for (DirectMessage message : messages) {
+				 this.onDirectMessage(message);
+				 twitter.destroyDirectMessage(message.getId());
+				 String cr = messages.getNextCursor();
+				 if(cr != null) {
+					 cursor = cr;
+				 }
+			 }
+			
+			 
+			}catch (TwitterException e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					Thread.sleep(timeout*1000);
+				 } catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				 }
+			}
+		} while(!end);
+		
 	}
 
 	/* (non-Javadoc)
@@ -38,13 +104,22 @@ public class TwitterBot extends TwitterAdapter implements Bot {
 	public void gotDirectMessage(DirectMessage message) {
 		super.gotDirectMessage(message);
 		String s = message.getText();
+		System.out.println("reçu sur twitter: "+s);
 		Message m = new Message(s);
+		String envoyeur="";
 		try {
-			onMessage("", sender.showUser(message.getId()).getName(), s, "", s);
-		} catch (TwitterException e) {
+			envoyeur = twitter.showUser(message.getSenderId()).getName();
+		} catch (TwitterException e1) {
 			
-			e.printStackTrace();
+			e1.printStackTrace();
+		}finally {
+			for (Action a: actions) {
+				if(a.hasToReact(m)) {
+					sendMessages(envoyeur, null, a.reactL("", envoyeur, s, login, m));
+				}
+			}
 		}
+		
 		
 	}
 
@@ -59,7 +134,7 @@ public class TwitterBot extends TwitterAdapter implements Bot {
 		super.gotIncomingFriendships(ids);
 		do{
 			try {
-				sender.sendDirectMessage(ids.getNextCursor(), "Bonjour! Pour apprendre toutes mes commandes, envoyez moi "+Action.CARACTERE_COMMANDE+"help");
+				twitter.sendDirectMessage(ids.getNextCursor(), "Bonjour! Pour apprendre toutes mes commandes, envoyez moi "+Action.CARACTERE_COMMANDE+"help");
 			} catch (TwitterException e) {
 				e.printStackTrace();
 			}
@@ -75,8 +150,8 @@ public class TwitterBot extends TwitterAdapter implements Bot {
 	@Override
 	public void sendMessage(String sender, String channel, String message) {
 		try {
-			DirectMessage msg = this.sender.sendDirectMessage(sender, message);
-			System.out.println(BotName+": Envoyé: "+ msg.getText() + " à @" + msg.getRecipientScreenName());
+			DirectMessage msg = this.twitter.sendDirectMessage(sender, message);
+			System.out.println(BotName+": Envoyé: "+ msg.getText());
 		} catch (TwitterException e) {
 			System.err.println(BotName+"Twitter : Impossible d'envoyer le message");
 			e.printStackTrace();
@@ -120,14 +195,189 @@ public class TwitterBot extends TwitterAdapter implements Bot {
 		}
 		StatusUpdate status = new StatusUpdate(aff);
 		try {
-			sender.updateStatus(status);
+			twitter.updateStatus(status);
 		} catch (TwitterException e) {
 			System.err.println(BotName+": Erreur: impossible de twitter");
 			e.printStackTrace();
 		}
 		
 	}
-	
-	
 
+	
+	@Override
+	public void onDirectMessage(DirectMessage directMessage) {
+		gotDirectMessage(directMessage);
+	}
+	
+	@Override
+	public void onStatus(Status status) {
+		// donothing
+		
+	}
+
+	@Override
+	public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
+		// donothing
+		
+	}
+
+	@Override
+	public void onTrackLimitationNotice(int numberOfLimitedStatuses) {
+		// donothing
+		
+	}
+
+	@Override
+	public void onScrubGeo(long userId, long upToStatusId) {
+		// donothing
+		
+	}
+
+	@Override
+	public void onStallWarning(StallWarning warning) {
+		// donothing
+		
+	}
+
+	@Override
+	public void onException(Exception ex) {
+		// donothing
+		
+	}
+
+	@Override
+	public void onDeletionNotice(long directMessageId, long userId) {
+		// donothing
+		
+	}
+
+	@Override
+	public void onFriendList(long[] friendIds) {
+		// donothing
+		
+	}
+
+	@Override
+	public void onFavorite(User source, User target, Status favoritedStatus) {
+		// donothing
+		
+	}
+
+	@Override
+	public void onUnfavorite(User source, User target, Status unfavoritedStatus) {
+		// donothing
+		
+	}
+
+	@Override
+	public void onFollow(User source, User followedUser) {
+		// donothing
+		
+	}
+
+	@Override
+	public void onUnfollow(User source, User unfollowedUser) {
+		// donothing
+		
+	}
+
+
+
+	@Override
+	public void onUserListMemberAddition(User addedMember, User listOwner, UserList list) {
+		// donothing
+		
+	}
+
+	@Override
+	public void onUserListMemberDeletion(User deletedMember, User listOwner, UserList list) {
+		// donothing
+		
+	}
+
+	@Override
+	public void onUserListSubscription(User subscriber, User listOwner, UserList list) {
+		// donothing
+		
+	}
+
+	@Override
+	public void onUserListUnsubscription(User subscriber, User listOwner, UserList list) {
+		// donothing
+		
+	}
+
+	@Override
+	public void onUserListCreation(User listOwner, UserList list) {
+		// donothing
+		
+	}
+
+	@Override
+	public void onUserListUpdate(User listOwner, UserList list) {
+		// donothing
+		
+	}
+
+	@Override
+	public void onUserListDeletion(User listOwner, UserList list) {
+		// donothing
+		
+	}
+
+	@Override
+	public void onUserProfileUpdate(User updatedUser) {
+		// donothing
+		
+	}
+
+	@Override
+	public void onUserSuspension(long suspendedUser) {
+		// donothing
+		
+	}
+
+	@Override
+	public void onUserDeletion(long deletedUser) {
+		// donothing
+		
+	}
+
+	@Override
+	public void onBlock(User source, User blockedUser) {
+		// donothing
+		
+	}
+
+	@Override
+	public void onUnblock(User source, User unblockedUser) {
+		// donothing
+		
+	}
+
+	@Override
+	public void onRetweetedRetweet(User source, User target, Status retweetedStatus) {
+		// donothing
+		
+	}
+
+	@Override
+	public void onFavoritedRetweet(User source, User target, Status favoritedRetweeet) {
+		// do nothing
+		
+	}
+
+	@Override
+	public void onQuotedTweet(User source, User target, Status quotingTweet) {
+		// do nothing
+		
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		if(o.getClass().equals(RssDataRemainder.class)) {
+			RssData data = (RssData) arg;
+			this.sendRSSMessage(data.toStringIRC());
+		}
+	}
 }

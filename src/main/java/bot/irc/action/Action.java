@@ -5,12 +5,13 @@ import java.util.List;
 
 import bot.irc.data.Message;
 import bot.irc.main.Bot;
+import bot.irc.main.Config;
 
 public abstract class Action {
 
 	public List<String> keyWords;
 	public Bot bot;
-	public volatile static char CARACTERE_COMMANDE = '+';
+	public volatile static char CARACTERE_COMMANDE = Config.getProperty("Caractere_commande").charAt(0);
 	
 	protected Action(Bot b, List<String> keywords) {
 		this.keyWords = keywords;

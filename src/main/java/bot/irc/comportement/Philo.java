@@ -3,6 +3,7 @@ package bot.irc.comportement;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
@@ -11,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import bot.irc.action.Action;
+import bot.irc.main.Bot;
 import bot.irc.main.IRCBot;
 import bot.irc.main.Main;
 
@@ -28,12 +30,12 @@ public class Philo extends Comportement {
 	private final String[] files = folder.list();
 	private final Random random = new Random();
 	
-	private Philo(IRCBot b) {
+	private Philo(Bot b) {
 		super(b);
 		load();
 	}
 	
-	public final static Philo getInstance(IRCBot b) {
+	public final static Philo getInstance(Bot b) {
 		if (Philo.instance == null) {
 			synchronized (Philo.class) {
 				if(Philo.instance == null) {
@@ -116,8 +118,8 @@ public class Philo extends Comportement {
 	}
 	
 	@Override
-	public void react(String channel, String sender, String login, String hostname, String message) {
-		IRCBot b = this.getBot();
+	public List<String> react(String channel, String sender, String login, String hostname, String message) {
+		List<String> ret= new ArrayList<>();
 		String res = ""+sender;
 		JSONObject jo;
 		if(message.toLowerCase().replaceAll(" ", "").equals(Action.CARACTERE_COMMANDE+"philo")) {
@@ -132,8 +134,9 @@ public class Philo extends Comportement {
 			res += jo.getString("topic")+":";
 			
 		}
-		b.sendMessage(channel, res);
-		b.sendMessage(channel, giveMeAQuoteFrom(jo));
+		ret.add(res);
+		ret.add(giveMeAQuoteFrom(jo));
+		return ret;
 	}
 
 }

@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.Date;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import org.jibble.pircbot.IrcException;
 import org.jibble.pircbot.NickAlreadyInUseException;
@@ -12,15 +14,17 @@ import org.jibble.pircbot.PircBot;
 import bot.irc.action.Action;
 import bot.irc.comportement.Comportement;
 import bot.irc.data.Message;
+import bot.irc.rss.RssData;
+import bot.irc.rss.RssDataRemainder;
 
-public class IRCBot extends PircBot implements Bot {
+public class IRCBot extends PircBot implements Bot, Observer {
 
-	private volatile static long TIME_BETWEEN_MESSAGES = 200;
+	private volatile static long TIME_BETWEEN_MESSAGES = Config.getPropertyAsLong("Time_between_messages");
 	private List<Action> actions = Action.getAllActions(this);
 	private List<Comportement> comportements = Comportement.getAllComportements(this);
-	private String[] admins;
-	private boolean responseOnPrivateChannel = true;
-	private boolean responseOnPrivateMessages = true;
+	private String[] admins = Config.getMultipleValues("Admins");
+	private boolean responseOnPrivateChannel = Config.getPropertyAsBoolean("Respond_using_private_channel", true);
+	private boolean responseOnPrivateMessages = Config.getPropertyAsBoolean("Allow_private_messages", true);
 	private volatile static long WAIT_BEFORE_RECONNECT = 60;
 	private String BotName = "IRC";
 
@@ -264,5 +268,16 @@ public class IRCBot extends PircBot implements Bot {
 		sendMessagesOnAllChannels(messages);
 		
 	}
+
+
+	@Override
+	public void update(Observable o, Object arg) {
+			if(o.getClass().equals(RssDataRemainder.class)) {
+				RssData data = (RssData) arg;
+				this.sendRSSMessage(data.toStringIRC());
+			}
+		
+	}
+
 
 }

@@ -18,4 +18,6 @@ public interface Bot {
 	public void sendMessageToAdmins(String string);
 	
 	public void sendRSSMessage(List<String> messages);
+
+	
 }

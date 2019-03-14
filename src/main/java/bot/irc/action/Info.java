@@ -9,6 +9,7 @@ import bot.irc.data.ISPDAO;
 import bot.irc.data.Message;
 import bot.irc.main.Bot;
 import bot.irc.main.Cache;
+import bot.irc.main.Config;
 import bot.irc.verif_saisie.EntierPositifNonVide;
 /**
  * Classe d'Action servant à gérer une demande d'info sur un FAI
@@ -17,7 +18,7 @@ import bot.irc.verif_saisie.EntierPositifNonVide;
  */
 public class Info extends Action {
 	
-	public static boolean INFO_ALL = false;
+	public static boolean INFO_ALL = Config.getPropertyAsBoolean("infoall", false);
 
 	public Info(Bot b) {
 		super(b);

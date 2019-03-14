@@ -11,8 +11,8 @@ import java.util.List;
 
 import bot.irc.data.Message;
 import bot.irc.main.Bot;
+import bot.irc.main.Config;
 import bot.irc.main.Main;
-import bot.irc.main.PropertiesSetter;
 
 /**
  * Méthode pour gérer la sauvegarde de liens dans un fichier pour en faire une revue de presse.
@@ -34,7 +34,7 @@ public class RP extends Action {
 		ar.add("rp");
 		ar.add("citation");
 		this.keyWords = ar;
-		rpFile = new File(PropertiesSetter.here+File.separator+"ressources"+File.separator+"rp"+File.separator+"index.txt");
+		rpFile = new File(Config.here+File.separator+"ressources"+File.separator+"rp"+File.separator+"index.txt");
 		boolean fileExists = rpFile.exists();
 		if(!fileExists) {
 			if(Main.isDebug()) {

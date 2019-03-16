@@ -51,7 +51,7 @@ public class RssDataRemainder extends Observable implements AffichableSurIRC{
 	public void clear() {
 		data = new RssData[data.length];
 		this.setChanged();
-		this.countObservers();
+		this.notifyObservers();
 	}
 
 	/**

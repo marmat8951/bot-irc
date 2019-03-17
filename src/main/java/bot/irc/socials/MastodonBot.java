@@ -156,7 +156,9 @@ public class MastodonBot implements Bot, Runnable,Observer {
 		int len = json.length();
 		for(int i=0;i<len;++i) {
 			JSONObject jo = json.getJSONObject(i);
-			System.out.println("traitement de "+jo.toString());
+			if(Config.isDebug()) {
+				System.out.println("traitement de "+jo.toString());
+			}
 			lastDmId = jo.getString("id");
 		}
 	}

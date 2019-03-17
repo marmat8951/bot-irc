@@ -11,6 +11,7 @@ public class Config {
 	  public final static String DEFAULT_PROPERTIES_FILE = "default.properties";
 	  public final static String PROPERTIES_FILE = "config.properties";
 	  public final static String here = (new File(".")).getAbsolutePath();
+	  private static boolean isDebug = false;
 	  
 	  static {
 	    try {
@@ -22,11 +23,16 @@ public class Config {
 	        props.load(in);
 	        in.close();
 	        System.out.println("Config ready");
+	        isDebug=Boolean.parseBoolean(Config.getProperty("Debug"));
 	        for(String s:defaultProp.stringPropertyNames()) System.out.println(s+"="+getProperty(s));
 	       
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
+	  }
+	  
+	  public static boolean isDebug() {
+		  return isDebug;
 	  }
 	  
 	  public static String getProperty(String key) {
@@ -85,6 +91,8 @@ public class Config {
 			}
 			
 		}
+		
+		
 		
 		
 }

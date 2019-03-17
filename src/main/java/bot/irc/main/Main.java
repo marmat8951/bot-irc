@@ -35,11 +35,10 @@ public class Main {
 
 			CONFIG = new Config();
 			CR = new CacheReloader(Config.getPropertyAsUnsignedInt("CacheReloader_timeout")); // Met à jour la base toute les heures.
-			// Get All the infomations and store in a cache
+
 			Cache c = Cache.getInstance();
 			
-			
-			// Now start our bot up.
+			// Now start our bots up.
 			IRCBOT = new IRCBot();
 			BOTS.add(IRCBOT);
 			
@@ -61,7 +60,7 @@ public class Main {
 
 			
 
-			// Join the #pircbot channel.
+			// Join the channels.
 			for(int i = 0; i< CHANNELS.length; i++) {
 				IRCBOT.joinChannel(CHANNELS[i]);
 			}
@@ -71,13 +70,16 @@ public class Main {
 			System.out.println("Debug? "+DEBUG);
 			
 			rcheck.start();
+			RSS_DATA_REMAINDER.addObserver(IRCBOT);
+			RSS_DATA_REMAINDER.addObserver(TWITTER);
+			RSS_DATA_REMAINDER.addObserver(MASTODON);
 			
 			
 		}catch(ConnectException ce) {
 			failures++;
 			System.err.println("Erreur numéro "+failures);
 			System.err.println("La connection a l'adresse "+SERVER+":"+PORT+" a échoué. Le Bot retentera de se connecter dans "+TIMEOUT_BEFORE_RECONNECTING+" secondes");
-			Thread.sleep(TIMEOUT_BEFORE_RECONNECTING*1000);
+			Thread.sleep(TIMEOUT_BEFORE_RECONNECTING*(1000*failures));
 			main(args);
 		}
 	}

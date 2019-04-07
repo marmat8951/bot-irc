@@ -49,11 +49,11 @@ public class Main {
 			RSSChecker rcheck = new RSSChecker(Config.getProperty("RSS_address"), BOTS);
 			RSS_DATA_REMAINDER = rcheck.getRemainder();
 			
-			
-			MASTODON = new MastodonBot();
-			BOTS.add(MASTODON);
-			MASTODON.start();
-			
+			if(Config.getPropertyAsBoolean("mastodon_enable")) {
+				MASTODON = new MastodonBot();
+				BOTS.add(MASTODON);
+				MASTODON.start();
+			}
 			
 			// Connect to the IRC server.
 			IRCBOT.connect(SERVER,PORT);

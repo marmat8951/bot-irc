@@ -1,6 +1,7 @@
 package bot.irc.socials;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -14,6 +15,8 @@ import com.sys1yagi.mastodon4j.MastodonClient;
 import com.sys1yagi.mastodon4j.Parameter;
 import com.sys1yagi.mastodon4j.api.Handler;
 import com.sys1yagi.mastodon4j.api.Shutdownable;
+import com.sys1yagi.mastodon4j.api.entity.Account;
+import com.sys1yagi.mastodon4j.api.entity.Mention;
 import com.sys1yagi.mastodon4j.api.entity.Notification;
 import com.sys1yagi.mastodon4j.api.entity.Status;
 import com.sys1yagi.mastodon4j.api.exception.Mastodon4jRequestException;
@@ -33,7 +36,7 @@ import okio.BufferedSink;
 
 
 public class MastodonBot implements Bot, Runnable,Observer {
-	MastodonClient client;
+	private MastodonClient client;
 	private String accessToken=Config.getProperty("Mastodon_access_token");
 	private String BotName = "Mastodon";
 	private Streaming streaming;
@@ -59,7 +62,7 @@ public class MastodonBot implements Bot, Runnable,Observer {
 			System.out.println(arg0.getType()+" | "+arg0.getStatus().getContent()+" | "+arg0.getStatus().getVisibility());
 			if(arg0.getType().equals(Notification.Type.Mention.getValue()) && arg0.getStatus().getVisibility().equals("direct")) {
 				System.out.println(arg0.getAccount().getUserName() + " | "+ arg0.getAccount().getAcct());
-				sendMessage(arg0.getAccount().getAcct(), ""+arg0.getStatus().getId(), "testRep");
+				sendMessage(arg0.getAccount().getId()+"", ""+arg0.getStatus().getId(), "testRep");
 			}
 		}
 	};
@@ -176,11 +179,21 @@ public class MastodonBot implements Bot, Runnable,Observer {
 			@Override
 			public void writeTo(BufferedSink sink) throws IOException {
 				JSONObject jo = new JSONObject();
-				jo.put("status", sender+" "+message);
-				jo.put("in_reply_to_id", channel);
-				jo.put("visibility", "direct");
-				sink.writeUtf8(jo.toString());
-				sink.flush();
+				Response accSenderResponse = client.get("/api/v1/accounts/"+sender, null);
+				if(accSenderResponse.isSuccessful()){
+					twitter4j.JSONObject accSenderResponseObject = new twitter4j.JSONObject(accSenderResponse.body().string()); 
+					List<Mention> mlist = new ArrayList<>(1);
+					Mention m = new Mention(accSenderResponseObject.getString("url"), accSenderResponseObject.getString("username"),  accSenderResponseObject.getString("acct"), accSenderResponseObject.getLong("id"));
+					mlist.add(m);
+					jo.put("status", sender+" "+message);
+					jo.put("in_reply_to_id", channel);
+					jo.put("visibility", "direct");
+					JSONArray mentionsArray = new JSONArray();
+					jo.put("mentions", mlist);
+					System.out.println("reply: "+jo.toString());
+					sink.writeUtf8(jo.toString());
+					sink.flush();
+				}
 				
 			}
 			

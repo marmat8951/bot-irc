@@ -15,6 +15,7 @@ public class RssDataRemainder extends Observable implements AffichableSurIRC{
 
 	public RssData[] data;
 	public static final int DEFAULT_SIZE=10;
+	private boolean ready = false;
 
 	public RssDataRemainder(int default_size) {
 		data = new RssData[default_size];
@@ -83,8 +84,10 @@ public class RssDataRemainder extends Observable implements AffichableSurIRC{
 	public void push(RssData newdata) {
 		movetoright();
 		this.data[0]=newdata;
-		this.setChanged();
-		this.notifyObservers(newdata);
+		if(ready) {
+			this.setChanged();
+			this.notifyObservers(newdata);
+		}
 	}
 	
 	/**
@@ -116,5 +119,21 @@ public class RssDataRemainder extends Observable implements AffichableSurIRC{
 		}
 		return res;
 	}
+
+	/**
+	 * @return the ready
+	 */
+	public boolean isReady() {
+		return ready;
+	}
+
+	/**
+	 * @param ready the ready to set
+	 */
+	public void setReady(boolean ready) {
+		this.ready = ready;
+	}
+	
+	
 
 }

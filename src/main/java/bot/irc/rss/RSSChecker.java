@@ -201,6 +201,7 @@ public class RSSChecker implements Runnable {
 			RssData data = new RssData(nl.item(i));
 			remainder.push(data);
 		}
+		remainder.setReady(true);
 	}
 
 	public String getRssaddr() {

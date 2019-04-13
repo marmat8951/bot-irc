@@ -18,6 +18,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import bot.irc.main.Bot;
+import bot.irc.main.Config;
 import bot.irc.main.Main;
 
 /**
@@ -30,7 +31,7 @@ public class RSSChecker implements Runnable {
 
 	private Thread thread;
 	private final String threadName="RssChecker";
-	private long timeout=3600;
+	private long timeout=Config.getPropertyAsLong("RSS_new_article_check");
 	private String rssaddr;  // Must be https://planet.ffdn.org/atom.xml
 	boolean end = false;
 	private DocumentBuilderFactory docbfact=DocumentBuilderFactory.newInstance();

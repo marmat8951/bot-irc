@@ -42,14 +42,16 @@ public class Main {
 			IRCBOT = new IRCBot();
 			BOTS.add(IRCBOT);
 			
-			TWITTER = new TwitterBot();
-			BOTS.add(TWITTER);
-			TWITTER.start();
+			if(Config.getPropertyAsBoolean("Twitter_enable")) {
+				TWITTER = new TwitterBot();
+				BOTS.add(TWITTER);
+				TWITTER.start();
+			}
 			
 			RSSChecker rcheck = new RSSChecker(Config.getProperty("RSS_address"), BOTS);
 			RSS_DATA_REMAINDER = rcheck.getRemainder();
 			
-			if(Config.getPropertyAsBoolean("mastodon_enable")) {
+			if(Config.getPropertyAsBoolean("Mastodon_enable")) {
 				MASTODON = new MastodonBot();
 				BOTS.add(MASTODON);
 				MASTODON.start();
@@ -71,8 +73,8 @@ public class Main {
 			
 			rcheck.start();
 			RSS_DATA_REMAINDER.addObserver(IRCBOT);
-			RSS_DATA_REMAINDER.addObserver(TWITTER);
-			RSS_DATA_REMAINDER.addObserver(MASTODON);
+			if(Config.getPropertyAsBoolean("Twitter_enable")) RSS_DATA_REMAINDER.addObserver(TWITTER);
+			if(Config.getPropertyAsBoolean("Mastodon_enable")) RSS_DATA_REMAINDER.addObserver(MASTODON);
 			
 			
 		}catch(ConnectException ce) {

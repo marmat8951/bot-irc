@@ -109,7 +109,7 @@ public class RP extends Action {
 			e.printStackTrace();
 		}
 		writer.println(Main.DATE_FORMAT_OUT.format(now)+": "+message.getAllParametersAsOneString());
-		res.add("Ajout a la RP réussi!");
+		res.add("Ajout à la RP réussi!");
 		writer.close();
 		return res;
 	}

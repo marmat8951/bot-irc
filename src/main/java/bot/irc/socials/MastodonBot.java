@@ -235,9 +235,37 @@ public class MastodonBot implements Bot, Runnable,Observer {
 	}
 	@Override
 	public void sendRSSMessage(List<String> messages) {
-		// TODO Auto-generated method stub
 		
-	}
+		
+		Response r = client.post("statuses", new RequestBody() {
+			
+			@Override
+			public void writeTo(BufferedSink sink) throws IOException {
+				String aff = "";
+				for(String s : messages) {
+					aff += s+"\n";
+				}
+				JSONObject jo = new JSONObject();
+					jo.put("status", aff);
+					jo.put("visibility", "public");
+					sink.writeUtf8(jo.toString());
+					sink.flush();
+				}
+				
+			
+			
+			@Override
+			public MediaType contentType() {
+				return MediaType.parse("application/json");
+			}
+		});
+		if(Main.isDebug()) {
+			System.out.println(r.networkResponse());
+		}
+		
+		
+
+		}
 
 
 

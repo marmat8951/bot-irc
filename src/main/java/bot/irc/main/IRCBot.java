@@ -10,6 +10,7 @@ import java.util.Observer;
 import org.jibble.pircbot.IrcException;
 import org.jibble.pircbot.NickAlreadyInUseException;
 import org.jibble.pircbot.PircBot;
+import org.jibble.pircbot.User;
 
 import bot.irc.action.Action;
 import bot.irc.comportement.Comportement;
@@ -277,6 +278,21 @@ public class IRCBot extends PircBot implements Bot, Observer {
 				this.sendRSSMessage(data.toStringIRC());
 			}
 		
+	}
+	
+	@Override
+	protected void onInvite(String targetNick, String sourceNick, String sourceLogin, String sourceHostname, String channel) {
+		if(targetNick == getNick()) {
+			User[] users = getUsers("#FFDN");
+			int i = 0;
+			for(; i < users.length && users[i].getNick() != sourceNick ; ++i) {}
+			if(i < users.length && users[i].isOp()) {
+				joinChannel(channel);
+				
+			}
+			
+			
+		}
 	}
 
 

@@ -61,7 +61,7 @@ public class TwitterBot extends TwitterAdapter implements Bot, UserStreamListene
 	}
 	
 	public void start() {
-		System.out.println("Démarage du Bot Mastodon. Mise à jour toute les "+timeout+" secondes.");
+		System.out.println("Démarage du Bot "+BotName+". Mise à jour toute les "+timeout+" secondes.");
 		if(thread == null) {
 			thread = new Thread(this, this.BotName);
 			thread.start();

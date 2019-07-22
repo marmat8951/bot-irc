@@ -10,25 +10,16 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="bot.irc.action.Contact" project="bot-irc-with-graddle" 
-    file="/bot-irc-with-graddle/src/main/java/bot/irc/action/Contact.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="112" y="666"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="3" language="java" name="bot.irc.action.Distance" project="bot-irc-with-graddle" 
+  <class id="2" language="java" name="bot.irc.action.Distance" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/action/Distance.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="471" y="1867"/>    
+    <position height="-1" width="-1" x="685" y="2211"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="bot.irc.action.Help" project="bot-irc-with-graddle" 
+  <class id="3" language="java" name="bot.irc.action.Help" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/action/Help.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="765" y="175"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -37,7 +28,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="bot.irc.action.ID" project="bot-irc-with-graddle" 
+  <class id="4" language="java" name="bot.irc.action.ID" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/action/ID.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="329" y="898"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -46,7 +37,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="bot.irc.action.Info" project="bot-irc-with-graddle" 
+  <class id="5" language="java" name="bot.irc.action.Info" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/action/Info.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1113" y="406"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -55,7 +46,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="bot.irc.action.Liste" project="bot-irc-with-graddle" 
+  <class id="6" language="java" name="bot.irc.action.Liste" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/action/Liste.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-354" y="838"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -64,25 +55,25 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="bot.irc.action.Reload" project="bot-irc-with-graddle" 
+  <class id="7" language="java" name="bot.irc.action.Reload" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/action/Reload.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-207" y="254"/>    
+    <position height="-1" width="-1" x="-308" y="682"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="bot.irc.action.RP" project="bot-irc-with-graddle" 
+  <class id="8" language="java" name="bot.irc.action.RP" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/action/RP.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-254" y="477"/>    
+    <position height="-1" width="-1" x="-110" y="431"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="bot.irc.action.RSS" project="bot-irc-with-graddle" 
+  <class id="9" language="java" name="bot.irc.action.RSS" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/action/RSS.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="135" width="293" x="-379" y="28"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -91,7 +82,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="bot.irc.action.Source" project="bot-irc-with-graddle" 
+  <class id="10" language="java" name="bot.irc.action.Source" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/action/Source.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="158" width="303" x="589" y="356"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -100,7 +91,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="bot.irc.comportement.Comportement" project="bot-irc-with-graddle" 
+  <class id="11" language="java" name="bot.irc.comportement.Comportement" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/comportement/Comportement.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="944" y="-49"/>    
@@ -110,7 +101,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="bot.irc.comportement.Philo" project="bot-irc-with-graddle" 
+  <class id="12" language="java" name="bot.irc.comportement.Philo" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/comportement/Philo.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="582" y="-77"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -119,7 +110,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="bot.irc.comportement.Cafe" project="bot-irc-with-graddle" 
+  <class id="13" language="java" name="bot.irc.comportement.Cafe" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/comportement/Cafe.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1080" y="-221"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -128,7 +119,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="bot.irc.data.AddresseToGPS" project="bot-irc-with-graddle" 
+  <class id="14" language="java" name="bot.irc.data.AddresseToGPS" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/data/AddresseToGPS.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="547" y="1491"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -137,7 +128,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="16" language="java" name="bot.irc.data.AddresseToGPS.Lieu" project="bot-irc-with-graddle" 
+  <class id="15" language="java" name="bot.irc.data.AddresseToGPS.Lieu" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/data/AddresseToGPS.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="764" y="1250"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -146,7 +137,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="17" language="java" name="bot.irc.data.Coordinates" project="bot-irc-with-graddle" 
+  <class id="16" language="java" name="bot.irc.data.Coordinates" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/data/Coordinates.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1111" y="1575"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -155,7 +146,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="18" language="java" name="bot.irc.data.CoveredAreas" project="bot-irc-with-graddle" 
+  <class id="17" language="java" name="bot.irc.data.CoveredAreas" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/data/CoveredAreas.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1091" y="773"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -164,7 +155,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="19" language="java" name="bot.irc.data.ErrorAddressException" project="bot-irc-with-graddle" 
+  <class id="18" language="java" name="bot.irc.data.ErrorAddressException" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/data/ErrorAddressException.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1027" y="1211"/>    
@@ -174,7 +165,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="20" language="java" name="bot.irc.data.ISP" project="bot-irc-with-graddle" 
+  <class id="19" language="java" name="bot.irc.data.ISP" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/data/ISP.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="26" y="1600"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -183,7 +174,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="21" language="java" name="bot.irc.data.ISPDAO" project="bot-irc-with-graddle" 
+  <class id="20" language="java" name="bot.irc.data.ISPDAO" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/data/ISPDAO.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-503" y="1309"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -192,34 +183,34 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="22" language="java" name="bot.irc.data.ISPdata" project="bot-irc-with-graddle" 
+  <class id="21" language="java" name="bot.irc.data.ISPdata" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/data/ISPdata.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-21" y="2775"/>    
+    <position height="-1" width="-1" x="-74" y="2754"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="23" language="java" name="bot.irc.data.Message" project="bot-irc-with-graddle" 
+  <class id="22" language="java" name="bot.irc.data.Message" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/data/Message.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-318" y="2429"/>    
+    <position height="-1" width="-1" x="-610" y="2455"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="24" language="java" name="bot.irc.data.Polygon" project="bot-irc-with-graddle" 
+  <class id="23" language="java" name="bot.irc.data.Polygon" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/data/Polygon.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="644" y="2450"/>    
+    <position height="-1" width="-1" x="730" y="2521"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="25" language="java" name="bot.irc.data.Segment" project="bot-irc-with-graddle" 
+  <class id="24" language="java" name="bot.irc.data.Segment" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/data/Segment.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1075" y="2376"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -228,16 +219,16 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="26" language="java" name="bot.irc.data.TechnoCoverage" project="bot-irc-with-graddle" 
+  <enumeration id="25" language="java" name="bot.irc.data.TechnoCoverage" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/data/TechnoCoverage.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="436" y="546"/>    
+    <position height="-1" width="-1" x="821" y="1244"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <enumeration id="27" language="java" name="bot.irc.IRC.Server.Type" project="bot-irc-with-graddle" 
+  <enumeration id="26" language="java" name="bot.irc.IRC.Server.Type" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/IRC/Server.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="210" y="1043"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -246,7 +237,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <class id="28" language="java" name="bot.irc.IRC.Server" project="bot-irc-with-graddle" 
+  <class id="27" language="java" name="bot.irc.IRC.Server" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/IRC/Server.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="50" y="945"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -255,7 +246,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="29" language="java" name="bot.irc.main.AffichableSurIRC" project="bot-irc-with-graddle" 
+  <interface id="28" language="java" name="bot.irc.main.AffichableSurIRC" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/main/AffichableSurIRC.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-211" y="1667"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -264,25 +255,25 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="30" language="java" name="bot.irc.main.Bot" project="bot-irc-with-graddle" 
+  <interface id="29" language="java" name="bot.irc.main.Bot" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/main/Bot.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="82" y="477"/>    
+    <position height="-1" width="-1" x="220" y="509"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="31" language="java" name="bot.irc.main.Cache" project="bot-irc-with-graddle" 
+  <class id="30" language="java" name="bot.irc.main.Cache" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/main/Cache.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="400" y="2891"/>    
+    <position height="-1" width="-1" x="286" y="2361"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="32" language="java" name="bot.irc.main.CacheReloader" project="bot-irc-with-graddle" 
+  <class id="31" language="java" name="bot.irc.main.CacheReloader" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/main/CacheReloader.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="655" y="2761"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -291,7 +282,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="33" language="java" name="bot.irc.main.Config" project="bot-irc-with-graddle" 
+  <class id="32" language="java" name="bot.irc.main.Config" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/main/Config.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="-46" y="-268"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -300,7 +291,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="34" language="java" name="bot.irc.main.IRCBot" project="bot-irc-with-graddle" 
+  <class id="33" language="java" name="bot.irc.main.IRCBot" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/main/IRCBot.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="279" y="-475"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -309,16 +300,16 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="35" language="java" name="bot.irc.main.Main" project="bot-irc-with-graddle" 
+  <class id="34" language="java" name="bot.irc.main.Main" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/main/Main.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-328" y="-748"/>    
+    <position height="-1" width="-1" x="-313" y="-807"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="36" language="java" name="bot.irc.main.RejoinThread" project="bot-irc-with-graddle" 
+  <class id="35" language="java" name="bot.irc.main.RejoinThread" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/main/RejoinThread.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="157" y="-988"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -327,7 +318,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="37" language="java" name="bot.irc.rss.RSSChecker" project="bot-irc-with-graddle" 
+  <class id="36" language="java" name="bot.irc.rss.RSSChecker" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/rss/RSSChecker.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="700" y="-1105"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -336,7 +327,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="38" language="java" name="bot.irc.rss.RssData" project="bot-irc-with-graddle" 
+  <class id="37" language="java" name="bot.irc.rss.RssData" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/rss/RssData.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1001" y="-959"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -345,7 +336,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="39" language="java" name="bot.irc.rss.RssDataRemainder" project="bot-irc-with-graddle" 
+  <class id="38" language="java" name="bot.irc.rss.RssDataRemainder" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/rss/RssDataRemainder.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1003" y="-535"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -354,18 +345,27 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="40" language="java" name="bot.irc.socials.MastodonBot" project="bot-irc-with-graddle" 
+  <class id="39" language="java" name="bot.irc.socials.MastodonBot" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/socials/MastodonBot.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-651" y="-313"/>    
+    <position height="-1" width="-1" x="-735" y="-320"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="41" language="java" name="bot.irc.socials.TwitterBot" project="bot-irc-with-graddle" 
+  <class id="40" language="java" name="bot.irc.socials.TwitterBot" project="bot-irc-with-graddle" 
     file="/bot-irc-with-graddle/src/main/java/bot/irc/socials/TwitterBot.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-678" y="514"/>    
+    <position height="-1" width="-1" x="-739" y="514"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="bot.irc.action.Contact" project="bot-irc-with-graddle" 
+    file="/bot-irc-with-graddle/src/main/java/bot/irc/action/Contact.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="261" y="696"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -373,723 +373,843 @@
     </display>  
   </class>  
   <dependency id="42">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="23"/>  
-  </dependency>  
-  <association id="43">    
-    <end type="SOURCE" refId="22" navigable="false">      
-      <attribute id="44" name="ircChan"/>      
-      <multiplicity id="45" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="28" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <nesting id="46">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="16"/>  
-  </nesting>  
-  <dependency id="47">    
-    <end type="SOURCE" refId="35"/>    
-    <end type="TARGET" refId="31"/>  
-  </dependency>  
-  <generalization id="48">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <dependency id="49">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="22"/>  
-  </dependency>  
-  <dependency id="50">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="20"/>  
-  </dependency>  
-  <dependency id="51">    
-    <end type="SOURCE" refId="31"/>    
-    <end type="TARGET" refId="33"/>  
-  </dependency>  
-  <dependency id="52">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="30"/>  
-  </dependency>  
-  <dependency id="53">    
-    <end type="SOURCE" refId="34"/>    
-    <end type="TARGET" refId="38"/>  
-  </dependency>  
-  <dependency id="54">    
     <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="33"/>  
-  </dependency>  
-  <dependency id="55">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="20"/>  
-  </dependency>  
-  <generalization id="56">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <association id="57">    
-    <end type="SOURCE" refId="21" navigable="false">      
-      <attribute id="58" name="instance"/>      
-      <multiplicity id="59" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="21" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <nesting id="60">    
-    <end type="SOURCE" refId="28"/>    
-    <end type="TARGET" refId="27"/>  
-  </nesting>  
-  <dependency id="61">    
-    <end type="SOURCE" refId="40"/>    
-    <end type="TARGET" refId="29"/>  
-  </dependency>  
-  <dependency id="62">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="21"/>  
-  </dependency>  
-  <dependency id="63">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="35"/>  
-  </dependency>  
-  <dependency id="64">    
-    <end type="SOURCE" refId="38"/>    
-    <end type="TARGET" refId="37"/>  
-  </dependency>  
-  <dependency id="65">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="31"/>  
-  </dependency>  
-  <dependency id="66">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="1"/>  
-  </dependency>  
-  <dependency id="67">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="33"/>  
-  </dependency>  
-  <dependency id="68">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="31"/>  
-  </dependency>  
-  <association id="69">    
-    <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="70" name="coordonees"/>      
-      <multiplicity id="71" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="17" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="72">    
-    <end type="SOURCE" refId="40"/>    
-    <end type="TARGET" refId="33"/>  
-  </dependency>  
-  <dependency id="73">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="23"/>  
-  </dependency>  
-  <dependency id="74">    
-    <end type="SOURCE" refId="24"/>    
-    <end type="TARGET" refId="25"/>  
-  </dependency>  
-  <generalization id="75">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <dependency id="76">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="23"/>  
-  </dependency>  
-  <dependency id="77">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="22"/>  
-  </dependency>  
-  <association id="78">    
-    <end type="SOURCE" refId="35" navigable="false">      
-      <attribute id="79" name="RSS_DATA_REMAINDER"/>      
-      <multiplicity id="80" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="39" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="81">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="30"/>  
-  </dependency>  
-  <dependency id="82">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="18"/>  
-  </dependency>  
-  <association id="83">    
-    <end type="SOURCE" refId="28" navigable="false">      
-      <attribute id="84" name="t"/>      
-      <multiplicity id="85" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="27" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="86">    
-    <end type="SOURCE" refId="22"/>    
-    <end type="TARGET" refId="35"/>  
-  </dependency>  
-  <association id="87">    
-    <end type="SOURCE" refId="20" navigable="false">      
-      <attribute id="88" name="coveredAreas"/>      
-      <multiplicity id="89" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="18" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="90">    
-    <end type="SOURCE" refId="30"/>    
-    <end type="TARGET" refId="29"/>  
-  </dependency>  
-  <association id="91">    
-    <end type="SOURCE" refId="35" navigable="false">      
-      <attribute id="92" name="BOTS"/>      
-      <multiplicity id="93" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="30" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="94">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <association id="95">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="96" name="bot"/>      
-      <multiplicity id="97" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="30" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="98">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="39"/>  
-  </dependency>  
-  <dependency id="99">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="33"/>  
-  </dependency>  
-  <dependency id="100">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="31"/>  
-  </dependency>  
-  <dependency id="101">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="30"/>  
-  </dependency>  
-  <dependency id="102">    
-    <end type="SOURCE" refId="31"/>    
-    <end type="TARGET" refId="18"/>  
-  </dependency>  
-  <dependency id="103">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="23"/>  
-  </dependency>  
-  <generalization id="104">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="12"/>  
-  </generalization>  
-  <dependency id="105">    
-    <end type="SOURCE" refId="32"/>    
-    <end type="TARGET" refId="31"/>  
-  </dependency>  
-  <dependency id="106">    
-    <end type="SOURCE" refId="34"/>    
-    <end type="TARGET" refId="23"/>  
-  </dependency>  
-  <dependency id="107">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="35"/>  
-  </dependency>  
-  <dependency id="108">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="20"/>  
-  </dependency>  
-  <association id="109">    
-    <end type="SOURCE" refId="24" navigable="false">      
-      <attribute id="110" name="points"/>      
-      <multiplicity id="111" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="17" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="112">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <dependency id="113">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="30"/>  
-  </dependency>  
-  <dependency id="114">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="33"/>  
-  </dependency>  
-  <dependency id="115">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="15"/>  
-  </dependency>  
-  <association id="116">    
-    <end type="SOURCE" refId="31" navigable="false">      
-      <attribute id="117" name="instance"/>      
-      <multiplicity id="118" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="31" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="119">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="20"/>  
-  </dependency>  
-  <dependency id="120">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="30"/>  
-  </dependency>  
-  <dependency id="121">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="35"/>  
-  </dependency>  
-  <dependency id="122">    
-    <end type="SOURCE" refId="41"/>    
-    <end type="TARGET" refId="38"/>  
-  </dependency>  
-  <dependency id="123">    
-    <end type="SOURCE" refId="40"/>    
-    <end type="TARGET" refId="39"/>  
-  </dependency>  
-  <dependency id="124">    
-    <end type="SOURCE" refId="41"/>    
-    <end type="TARGET" refId="39"/>  
-  </dependency>  
-  <dependency id="125">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="35"/>  
-  </dependency>  
-  <dependency id="126">    
-    <end type="SOURCE" refId="36"/>    
-    <end type="TARGET" refId="33"/>  
-  </dependency>  
-  <dependency id="127">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="21"/>  
-  </dependency>  
-  <dependency id="128">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="23"/>  
-  </dependency>  
-  <dependency id="129">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="17"/>  
-  </dependency>  
-  <realization id="130">    
-    <end type="SOURCE" refId="39"/>    
-    <end type="TARGET" refId="29"/>  
-  </realization>  
-  <realization id="131">    
-    <end type="SOURCE" refId="41"/>    
-    <end type="TARGET" refId="30"/>  
-  </realization>  
-  <generalization id="132">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <association id="133">    
-    <end type="SOURCE" refId="39" navigable="false">      
-      <attribute id="134" name="data"/>      
-      <multiplicity id="135" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="38" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="136">    
-    <end type="SOURCE" refId="28"/>    
-    <end type="TARGET" refId="29"/>  
-  </realization>  
-  <dependency id="137">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="23"/>  
-  </dependency>  
-  <dependency id="138">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="21"/>  
-  </dependency>  
-  <dependency id="139">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="17"/>  
-  </dependency>  
-  <association id="140">    
-    <end type="SOURCE" refId="34" navigable="false">      
-      <attribute id="141" name="comportements"/>      
-      <multiplicity id="142" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="143">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="23"/>  
-  </dependency>  
-  <dependency id="144">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="20"/>  
-  </dependency>  
-  <dependency id="145">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="30"/>  
-  </dependency>  
-  <dependency id="146">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="23"/>  
-  </dependency>  
-  <realization id="147">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="29"/>  
-  </realization>  
-  <association id="148">    
-    <end type="SOURCE" refId="20" navigable="false">      
-      <attribute id="149" name="data"/>      
-      <multiplicity id="150" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="22" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="151">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="31"/>  
-  </dependency>  
-  <association id="152">    
-    <end type="SOURCE" refId="37" navigable="false">      
-      <attribute id="153" name="b"/>      
-      <multiplicity id="154" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="30" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="155">    
-    <end type="SOURCE" refId="34"/>    
-    <end type="TARGET" refId="39"/>  
-  </dependency>  
-  <dependency id="156">    
-    <end type="SOURCE" refId="31"/>    
-    <end type="TARGET" refId="21"/>  
-  </dependency>  
-  <association id="157">    
-    <end type="SOURCE" refId="35" navigable="false">      
-      <attribute id="158" name="CR"/>      
-      <multiplicity id="159" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="32" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="160">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <dependency id="161">    
-    <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="19"/>  
   </dependency>  
-  <association id="162">    
-    <end type="SOURCE" refId="35" navigable="false">      
-      <attribute id="163" name="CONFIG"/>      
-      <multiplicity id="164" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="33" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="165">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="26"/>  
-  </dependency>  
-  <association id="166">    
-    <end type="SOURCE" refId="41" navigable="false">      
-      <attribute id="167" name="actions"/>      
-      <multiplicity id="168" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="169">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="30"/>  
-  </dependency>  
-  <dependency id="170">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="28"/>  
-  </dependency>  
-  <dependency id="171">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="23"/>  
-  </dependency>  
-  <association id="172">    
-    <end type="SOURCE" refId="37" navigable="false">      
-      <attribute id="173" name="remainder"/>      
-      <multiplicity id="174" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="39" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="175">    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="176" name="poligon"/>      
-      <multiplicity id="177" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="24" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="178">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <dependency id="179">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="30"/>  
-  </dependency>  
-  <association id="180">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="181" name="bot"/>      
-      <multiplicity id="182" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="30" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="183">    
-    <end type="SOURCE" refId="34"/>    
-    <end type="TARGET" refId="30"/>  
-  </realization>  
-  <association id="184">    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="185" name="technos"/>      
-      <multiplicity id="186" minimum="0" maximum="2147483647"/>    
+  <association id="43">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="44" name="t">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="45" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="26" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="187">    
-    <end type="SOURCE" refId="3"/>    
+  <dependency id="46">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="34"/>  
+  </dependency>  
+  <dependency id="47">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="32"/>  
+  </dependency>  
+  <realization id="48">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="28"/>  
+  </realization>  
+  <dependency id="49">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <dependency id="50">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="32"/>  
+  </dependency>  
+  <generalization id="51">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <dependency id="52">    
+    <end type="SOURCE" refId="40"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <dependency id="53">    
+    <end type="SOURCE" refId="30"/>    
     <end type="TARGET" refId="20"/>  
   </dependency>  
-  <dependency id="188">    
-    <end type="SOURCE" refId="3"/>    
+  <dependency id="54">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="32"/>  
+  </dependency>  
+  <dependency id="55">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
+  <nesting id="56">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="26"/>  
+  </nesting>  
+  <association id="57">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="58" name="BOTS">        
+        <position height="0" width="0" x="138" y="32"/>      
+      </attribute>      
+      <multiplicity id="59" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="138" y="32"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="60">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="61" name="isp">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="62" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="63">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <association id="64">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="65" name="poligon">        
+        <position height="0" width="0" x="86" y="71"/>      
+      </attribute>      
+      <multiplicity id="66" minimum="0" maximum="1">        
+        <position height="0" width="0" x="86" y="71"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="67">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <dependency id="68">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <association id="69">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="70" name="cache">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="71" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="72">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="34"/>  
+  </dependency>  
+  <nesting id="73">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="15"/>  
+  </nesting>  
+  <dependency id="74">    
+    <end type="SOURCE" refId="14"/>    
     <end type="TARGET" refId="16"/>  
   </dependency>  
-  <dependency id="189">    
-    <end type="SOURCE" refId="36"/>    
-    <end type="TARGET" refId="35"/>  
+  <dependency id="75">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="21"/>  
   </dependency>  
-  <dependency id="190">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="31"/>  
-  </dependency>  
-  <realization id="191">    
-    <end type="SOURCE" refId="31"/>    
-    <end type="TARGET" refId="29"/>  
+  <realization id="76">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="28"/>  
   </realization>  
-  <dependency id="192">    
-    <end type="SOURCE" refId="34"/>    
-    <end type="TARGET" refId="33"/>  
+  <dependency id="77">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="18"/>  
   </dependency>  
-  <realization id="193">    
-    <end type="SOURCE" refId="38"/>    
+  <association id="78">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="79" name="lieux">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="80" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="81">    
+    <end type="SOURCE" refId="10"/>    
     <end type="TARGET" refId="29"/>  
-  </realization>  
-  <dependency id="194">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="30"/>  
   </dependency>  
-  <dependency id="195">    
-    <end type="SOURCE" refId="37"/>    
-    <end type="TARGET" refId="35"/>  
+  <dependency id="82">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="22"/>  
   </dependency>  
-  <dependency id="196">    
-    <end type="SOURCE" refId="41"/>    
-    <end type="TARGET" refId="23"/>  
-  </dependency>  
-  <dependency id="197">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="23"/>  
-  </dependency>  
-  <generalization id="198">    
+  <association id="83">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="84" name="MASTODON">        
+        <position height="0" width="0" x="-84" y="-7"/>      
+      </attribute>      
+      <multiplicity id="85" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-84" y="-7"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="39" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="86">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="1"/>  
   </generalization>  
-  <association id="199">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="200" name="instance"/>      
-      <multiplicity id="201" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="202">    
-    <end type="SOURCE" refId="25" navigable="false">      
-      <attribute id="203" name="c2"/>      
-      <multiplicity id="204" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="17" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="205">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="12"/>  
+  <dependency id="87">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="30"/>  
+  </dependency>  
+  <realization id="88">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="29"/>  
+  </realization>  
+  <generalization id="89">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="1"/>  
   </generalization>  
-  <association id="206">    
-    <end type="SOURCE" refId="19" navigable="false">      
-      <attribute id="207" name="lieux"/>      
-      <multiplicity id="208" minimum="0" maximum="2147483647"/>    
+  <association id="90">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="91" name="b">        
+        <position height="0" width="0" x="138" y="32"/>      
+      </attribute>      
+      <multiplicity id="92" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="138" y="32"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="93">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="32"/>  
+  </dependency>  
+  <realization id="94">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="29"/>  
+  </realization>  
+  <dependency id="95">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <realization id="96">    
+    <end type="SOURCE" refId="40"/>    
+    <end type="TARGET" refId="29"/>  
+  </realization>  
+  <dependency id="97">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="30"/>  
+  </dependency>  
+  <association id="98">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="99" name="coordonees">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="100" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="16" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="209">    
-    <end type="SOURCE" refId="35" navigable="false">      
-      <attribute id="210" name="TWITTER"/>      
-      <multiplicity id="211" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="41" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="212">    
+  <dependency id="101">    
     <end type="SOURCE" refId="41"/>    
-    <end type="TARGET" refId="29"/>  
-  </dependency>  
-  <association id="213">    
-    <end type="SOURCE" refId="31" navigable="false">      
-      <attribute id="214" name="cache"/>      
-      <multiplicity id="215" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="20" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="216">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="23"/>  
-  </dependency>  
-  <dependency id="217">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="19"/>  
-  </dependency>  
-  <dependency id="218">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="18"/>  
-  </dependency>  
-  <generalization id="219">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <dependency id="220">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="35"/>  
-  </dependency>  
-  <dependency id="221">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="31"/>  
-  </dependency>  
-  <realization id="222">    
-    <end type="SOURCE" refId="40"/>    
     <end type="TARGET" refId="30"/>  
-  </realization>  
-  <association id="223">    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="224" name="isp"/>      
-      <multiplicity id="225" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="20" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="226">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="35"/>  
   </dependency>  
-  <association id="227">    
-    <end type="SOURCE" refId="25" navigable="false">      
-      <attribute id="228" name="c1"/>      
-      <multiplicity id="229" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="17" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="230">    
-    <end type="SOURCE" refId="34" navigable="false">      
-      <attribute id="231" name="actions"/>      
-      <multiplicity id="232" minimum="0" maximum="2147483647"/>    
+  <association id="102">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="103" name="actions">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="104" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="233">    
-    <end type="SOURCE" refId="35" navigable="false">      
-      <attribute id="234" name="MASTODON"/>      
-      <multiplicity id="235" minimum="0" maximum="1"/>    
+  <dependency id="105">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="27"/>  
+  </dependency>  
+  <dependency id="106">    
+    <end type="SOURCE" refId="40"/>    
+    <end type="TARGET" refId="28"/>  
+  </dependency>  
+  <association id="107">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="108" name="data">        
+        <position height="0" width="0" x="-53" y="-21"/>      
+      </attribute>      
+      <multiplicity id="109" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-53" y="-21"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="40" navigable="true"/>    
+    <end type="TARGET" refId="21" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="236">    
+  <dependency id="110">    
+    <end type="SOURCE" refId="36"/>    
+    <end type="TARGET" refId="34"/>  
+  </dependency>  
+  <generalization id="111">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <dependency id="112">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="34"/>  
+  </dependency>  
+  <dependency id="113">    
+    <end type="SOURCE" refId="41"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <dependency id="114">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <dependency id="115">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <association id="116">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="117" name="ircChan">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="118" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="119">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="32"/>  
+  </dependency>  
+  <generalization id="120">    
+    <end type="SOURCE" refId="41"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <dependency id="121">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <dependency id="122">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="28"/>  
+  </dependency>  
+  <dependency id="123">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="20"/>  
+  </dependency>  
+  <dependency id="124">    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="34"/>  
+  </dependency>  
+  <dependency id="125">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="37"/>  
+  </dependency>  
+  <dependency id="126">    
     <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="34"/>  
+  </dependency>  
+  <realization id="127">    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="28"/>  
+  </realization>  
+  <dependency id="128">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="129">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <dependency id="130">    
+    <end type="SOURCE" refId="41"/>    
     <end type="TARGET" refId="29"/>  
   </dependency>  
-  <dependency id="237">    
-    <end type="SOURCE" refId="40"/>    
-    <end type="TARGET" refId="38"/>  
+  <dependency id="131">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="19"/>  
   </dependency>  
-  <dependency id="238">    
+  <generalization id="132">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <generalization id="133">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <dependency id="134">    
     <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="30"/>  
+    <end type="TARGET" refId="22"/>  
   </dependency>  
-  <dependency id="239">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="30"/>  
-  </dependency>  
-  <dependency id="240">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="35"/>  
-  </dependency>  
-  <dependency id="241">    
-    <end type="SOURCE" refId="38"/>    
-    <end type="TARGET" refId="35"/>  
-  </dependency>  
-  <association id="242">    
+  <association id="135">    
     <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="243" name="instance"/>      
-      <multiplicity id="244" minimum="0" maximum="1"/>    
+      <attribute id="136" name="instance">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="137" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="13" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="245">    
-    <end type="SOURCE" refId="34"/>    
+  <association id="138">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="139" name="points">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="140" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="141">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <dependency id="142">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="30"/>  
+  </dependency>  
+  <association id="143">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="144" name="instance">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="145" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="146">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="32"/>  
+  </dependency>  
+  <dependency id="147">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <dependency id="148">    
+    <end type="SOURCE" refId="40"/>    
+    <end type="TARGET" refId="37"/>  
+  </dependency>  
+  <dependency id="149">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <dependency id="150">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="34"/>  
+  </dependency>  
+  <association id="151">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="152" name="IRCBOT">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="153" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="154">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <dependency id="155">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="34"/>  
+  </dependency>  
+  <dependency id="156">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="30"/>  
+  </dependency>  
+  <dependency id="157">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <dependency id="158">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="14"/>  
+  </dependency>  
+  <dependency id="159">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <realization id="160">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="28"/>  
+  </realization>  
+  <association id="161">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="162" name="technos">        
+        <position height="0" width="0" x="385" y="698"/>      
+      </attribute>      
+      <multiplicity id="163" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="385" y="698"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="164">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <association id="165">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="166" name="TWITTER">        
+        <position height="0" width="0" x="-61" y="0"/>      
+      </attribute>      
+      <multiplicity id="167" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-61" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="168">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <association id="169">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="170" name="coordonnees">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="171" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="172">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="173" name="c2">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="174" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="175">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="38"/>  
+  </dependency>  
+  <dependency id="176">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="34"/>  
+  </dependency>  
+  <association id="177">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="178" name="data">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="179" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="180">    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="32"/>  
+  </dependency>  
+  <dependency id="181">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <dependency id="182">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="37"/>  
+  </dependency>  
+  <generalization id="183">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <association id="184">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="185" name="CR">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="186" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="187">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="188" name="instance">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="189" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="190">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="191" name="RSS_DATA_REMAINDER">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="192" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="193">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="28"/>  
+  </dependency>  
+  <association id="194">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="195" name="instance">        
+        <position height="0" width="0" x="-114" y="-530"/>      
+      </attribute>      
+      <multiplicity id="196" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-114" y="-530"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="197">    
+    <end type="SOURCE" refId="37"/>    
     <end type="TARGET" refId="36"/>  
   </dependency>  
-  <association id="246">    
-    <end type="SOURCE" refId="22" navigable="false">      
-      <attribute id="247" name="coordonnees"/>      
-      <multiplicity id="248" minimum="0" maximum="1"/>    
+  <dependency id="198">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <dependency id="199">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <dependency id="200">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="16"/>  
+  </dependency>  
+  <dependency id="201">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="28"/>  
+  </dependency>  
+  <generalization id="202">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <dependency id="203">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="32"/>  
+  </dependency>  
+  <dependency id="204">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="38"/>  
+  </dependency>  
+  <dependency id="205">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="30"/>  
+  </dependency>  
+  <dependency id="206">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
+  <association id="207">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="208" name="coveredAreas">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="209" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="17" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="249">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="38"/>  
+  <dependency id="210">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="35"/>  
   </dependency>  
-  <dependency id="250">    
-    <end type="SOURCE" refId="34"/>    
+  <dependency id="211">    
+    <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="29"/>  
   </dependency>  
-  <dependency id="251">    
-    <end type="SOURCE" refId="8"/>    
+  <dependency id="212">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="37"/>  
+  </dependency>  
+  <dependency id="213">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <dependency id="214">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="20"/>  
+  </dependency>  
+  <association id="215">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="216" name="bot">        
+        <position height="0" width="0" x="138" y="32"/>      
+      </attribute>      
+      <multiplicity id="217" minimum="0" maximum="1">        
+        <position height="0" width="0" x="138" y="32"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="218">    
+    <end type="SOURCE" refId="40"/>    
+    <end type="TARGET" refId="38"/>  
+  </dependency>  
+  <dependency id="219">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="34"/>  
+  </dependency>  
+  <dependency id="220">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="38"/>  
+  </dependency>  
+  <dependency id="221">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <dependency id="222">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="20"/>  
+  </dependency>  
+  <dependency id="223">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="24"/>  
+  </dependency>  
+  <association id="224">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="225" name="c1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="226" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="227">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
+  <dependency id="228">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="229">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <generalization id="230">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <dependency id="231">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="28"/>  
+  </dependency>  
+  <association id="232">    
+    <end type="SOURCE" refId="40" navigable="false">      
+      <attribute id="233" name="actions">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="234" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="235">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="236" name="remainder">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="237" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="238">    
+    <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="30"/>  
   </dependency>  
-  <association id="252">    
-    <end type="SOURCE" refId="35" navigable="false">      
-      <attribute id="253" name="IRCBOT"/>      
-      <multiplicity id="254" minimum="0" maximum="1"/>    
+  <dependency id="239">    
+    <end type="SOURCE" refId="41"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <dependency id="240">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <dependency id="241">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="25"/>  
+  </dependency>  
+  <realization id="242">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="28"/>  
+  </realization>  
+  <dependency id="243">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="30"/>  
+  </dependency>  
+  <dependency id="244">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <association id="245">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="246" name="comportements">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="247" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="34" navigable="true"/>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="248">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="34"/>  
+  </dependency>  
+  <association id="249">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="250" name="bot">        
+        <position height="0" width="0" x="138" y="32"/>      
+      </attribute>      
+      <multiplicity id="251" minimum="0" maximum="1">        
+        <position height="0" width="0" x="138" y="32"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import bot.irc.main.Bot;
-import bot.irc.main.IRCBot;
 import bot.irc.main.Main;
 
 /**

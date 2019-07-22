@@ -13,7 +13,6 @@ import org.json.JSONObject;
 
 import bot.irc.action.Action;
 import bot.irc.main.Bot;
-import bot.irc.main.IRCBot;
 import bot.irc.main.Main;
 
 /**

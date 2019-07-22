@@ -13,7 +13,6 @@ import bot.irc.socials.TwitterBot;
 
 
 public class Main {
-	private static volatile Config CONFIG;
 	public volatile static String SERVER = Config.getProperty("SERVER", "irc.geeknode.net");
 	public volatile static int PORT = Config.getPropertyAsUnsignedInt("PORT");
 	private volatile static String[] CHANNELS = Config.getMultipleValues("CHANNELS");
@@ -33,10 +32,9 @@ public class Main {
 
 		try {
 
-			CONFIG = new Config();
 			CR = new CacheReloader(Config.getPropertyAsUnsignedInt("CacheReloader_timeout")); // Met à jour la base toute les heures.
 
-			Cache c = Cache.getInstance();
+			Cache.getInstance();
 			
 			// Now start our bots up.
 			IRCBOT = new IRCBot();

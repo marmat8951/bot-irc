@@ -15,7 +15,6 @@ import com.sys1yagi.mastodon4j.MastodonClient;
 import com.sys1yagi.mastodon4j.Parameter;
 import com.sys1yagi.mastodon4j.api.Handler;
 import com.sys1yagi.mastodon4j.api.Shutdownable;
-import com.sys1yagi.mastodon4j.api.entity.Account;
 import com.sys1yagi.mastodon4j.api.entity.Mention;
 import com.sys1yagi.mastodon4j.api.entity.Notification;
 import com.sys1yagi.mastodon4j.api.entity.Status;
@@ -188,7 +187,6 @@ public class MastodonBot implements Bot, Runnable,Observer {
 					jo.put("status", sender+" "+message);
 					jo.put("in_reply_to_id", channel);
 					jo.put("visibility", "direct");
-					JSONArray mentionsArray = new JSONArray();
 					jo.put("mentions", mlist);
 					System.out.println("reply: "+jo.toString());
 					sink.writeUtf8(jo.toString());

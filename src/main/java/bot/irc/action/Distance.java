@@ -21,7 +21,7 @@ public class Distance extends Action {
 		List<String> kw = new ArrayList<>();
 		kw.add("dist");
 		kw.add("distance");
-		this.keyWords=kw;
+		this.setKeyWords(kw);
 	}
 
 	@Deprecated
@@ -147,7 +147,7 @@ public class Distance extends Action {
 
 	@Override
 	public String help() {
-		return " suivi de la latitude, puis la longitude au format décimal, ou une addresse. Exemple: "+Action.CARACTERE_COMMANDE+keyWords.get(0)+" 50,410658 61.574548      Renvoie les "+NOMBRE_AFFICHABLE+" FAI de la fédération les plus proches à vol d'oiseau";
+		return " suivi de la latitude, puis la longitude au format décimal, ou une addresse. Exemple: "+Action.CARACTERE_COMMANDE+this.getKeyWords().get(0)+" 50,410658 61.574548      Renvoie les "+NOMBRE_AFFICHABLE+" FAI de la fédération les plus proches à vol d'oiseau";
 	}
 
 	@Override

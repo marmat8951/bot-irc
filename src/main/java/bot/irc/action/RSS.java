@@ -23,7 +23,7 @@ public class RSS extends Action {
 		kw.add("rss");
 		kw.add("planet");
 		kw.add("flux");
-		this.keyWords=kw;
+		this.setKeyWords(kw);
 	}
 
 	@Override

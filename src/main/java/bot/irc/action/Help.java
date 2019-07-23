@@ -13,7 +13,7 @@ public class Help extends Action {
 		List<String> kw = new ArrayList<>(3);
 		kw.add("help");
 		kw.add("?");
-		this.keyWords = kw;
+		this.setKeyWords(kw);
 	}
 
 
@@ -26,7 +26,7 @@ public class Help extends Action {
 	private void afficheListeCommandes(List<Action> l, String sender, String channel) {
 		String listeCommandes="Voici la liste des commandes: ";
 		for(Action a : l) {
-			listeCommandes += CARACTERE_COMMANDE+a.keyWords.get(0)+" ";
+			listeCommandes += CARACTERE_COMMANDE+a.getFirstKeyword()+" ";
 		}
 		bot.sendMessage(sender,channel, listeCommandes);
 	}
@@ -34,7 +34,7 @@ public class Help extends Action {
 	private String getListeCommandes(List<Action> l, String sender, String channel) {
 		String listeCommandes="Voici la liste des commandes: ";
 		for(Action a : l) {
-			listeCommandes += CARACTERE_COMMANDE+a.keyWords.get(0)+" ";
+			listeCommandes += CARACTERE_COMMANDE+a.getFirstKeyword()+" ";
 		}
 		return listeCommandes;
 	}
@@ -60,9 +60,9 @@ public class Help extends Action {
 				String commande = message.getElementAsString(i);
 				commande = commande.replaceAll(""+Action.CARACTERE_COMMANDE, "");
 				for(Action a : l) {
-					if(a.keyWords.contains(commande)) {
+					if(a.getKeyWords().contains(commande)) {
 						String msg = "";
-						for(String s : a.keyWords) {
+						for(String s : a.getKeyWords()) {
 							msg+=Action.CARACTERE_COMMANDE+s+" ";
 						}
 						msg += a.help();
@@ -96,9 +96,9 @@ public class Help extends Action {
 				String commande = message.getElementAsString(i);
 				commande = commande.replaceAll(""+Action.CARACTERE_COMMANDE, "");
 				for(Action a : l) {
-					if(a.keyWords.contains(commande)) {
+					if(a.getKeyWords().contains(commande)) {
 						String msg = "";
-						for(String s : a.keyWords) {
+						for(String s : a.getKeyWords()) {
 							msg+=Action.CARACTERE_COMMANDE+s+" ";
 						}
 						msg += a.help();

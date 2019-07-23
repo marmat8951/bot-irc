@@ -9,9 +9,9 @@ import bot.irc.main.Config;
 
 public abstract class Action {
 
-	public List<String> keyWords;
-	public Bot bot;
-	public volatile static char CARACTERE_COMMANDE = Config.getProperty("Caractere_commande").charAt(0);
+	private List<String> keyWords;
+	protected Bot bot;
+	public static final char CARACTERE_COMMANDE = Config.getProperty("Caractere_commande").charAt(0);
 	
 	protected Action(Bot b, List<String> keywords) {
 		this.keyWords = keywords;
@@ -31,6 +31,18 @@ public abstract class Action {
 		this.keyWords=ar;
 	}
 	
+	protected List<String> getKeyWords() {
+		return keyWords;
+	}
+	
+	protected String getFirstKeyword() {
+		return this.keyWords.get(0);
+	}
+
+	protected void setKeyWords(List<String> keyWords) {
+		this.keyWords = keyWords;
+	}
+
 	/**
 	 * @deprecated
 	 * @param channel

@@ -19,7 +19,7 @@ public class Source extends Action {
 		ar.add("source");
 		ar.add("sources");
 		ar.add("code");
-		this.keyWords = ar;
+		this.setKeyWords(ar);
 	}
 
 	@Override

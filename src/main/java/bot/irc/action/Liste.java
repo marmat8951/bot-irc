@@ -26,7 +26,7 @@ public class Liste extends Action {
 		List<String> ar = new ArrayList<>();
 		ar.add("liste");
 		ar.add("list");
-		this.keyWords = ar;
+		this.setKeyWords(ar);
 	}
 
 	@Override

@@ -14,7 +14,7 @@ public class Contact extends Action {
 		super(b);
 		List<String> ar = new ArrayList<>();
 		ar.add("contact");
-		this.keyWords = ar;
+		this.setKeyWords(ar);
 	}
 
 

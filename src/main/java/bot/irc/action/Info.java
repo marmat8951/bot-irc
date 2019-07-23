@@ -24,7 +24,7 @@ public class Info extends Action {
 		super(b);
 		List<String> ar = new ArrayList<>();
 		ar.add("info");
-		this.keyWords = ar;
+		this.setKeyWords(ar);
 	}
 
 	@Override

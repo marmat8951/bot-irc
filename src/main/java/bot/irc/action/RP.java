@@ -31,8 +31,8 @@ public class RP extends Action {
 		List<String> ar = new ArrayList<>();
 		ar.add("rp");
 		ar.add("citation");
-		this.keyWords = ar;
-		rpFile = new File(Config.here+File.separator+"ressources"+File.separator+"rp"+File.separator+"index.txt");
+		this.setKeyWords(ar);
+		rpFile = new File(Config.HERE+File.separator+"ressources"+File.separator+"rp"+File.separator+"index.txt");
 		boolean fileExists = rpFile.exists();
 		if(!fileExists) {
 			if(Main.isDebug()) {

@@ -17,9 +17,9 @@ public class ID extends Action {
 
 	public ID(Bot b) {
 		super(b);
-		List<String> keywords = new ArrayList<>();
-		keywords.add("id");
-		this.keyWords=keywords;
+		List<String> keyWords = new ArrayList<>();
+		keyWords.add("id");
+		this.setKeyWords(keyWords);
 	}
 
 	private String erreur(String sender,String channel, String s) {

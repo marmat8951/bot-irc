@@ -20,7 +20,7 @@ public class Reload extends Action {
 		super(b);
 		List<String> ar = new ArrayList<>();
 		ar.add("reload");
-		this.keyWords = ar;
+		this.setKeyWords(ar);
 	}
 	
 	private boolean reload() {

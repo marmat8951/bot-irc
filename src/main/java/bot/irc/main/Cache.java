@@ -45,10 +45,10 @@ public class Cache implements AffichableSurIRC {
 
 
 	/**
-	 * @param tIME_BETWEEN_RELOADS the tIME_BETWEEN_RELOADS to set
+	 * @param timeBetweenReloads the tIME_BETWEEN_RELOADS to set
 	 */
-	public static void setTIME_BETWEEN_RELOADS(long tIME_BETWEEN_RELOADS) {
-		TIME_BETWEEN_RELOADS = tIME_BETWEEN_RELOADS;
+	public static void setTIME_BETWEEN_RELOADS(long timeBetweenReloads) {
+		TIME_BETWEEN_RELOADS = timeBetweenReloads;
 	}
 
 
@@ -66,7 +66,7 @@ public class Cache implements AffichableSurIRC {
 	 * Méthode du design patern singleton. Permet de récuperer et si besoin d'initialiser, l'unique instance de la classe.
 	 * @return Instance du Cache
 	 */
-	public final static Cache getInstance() {
+	public static final Cache getInstance() {
 		if (Cache.instance == null) {
 			synchronized (ISPDAO.class) {
 				if(Cache.instance == null) {
@@ -251,7 +251,7 @@ public class Cache implements AffichableSurIRC {
 	 * Affichage des statistiques de la fédération. Méthode utilisée pour l'affichage de +info ffdn
 	 */
 	public List<String> toStringIRC() {
-		List<String> liste = new LinkedList<String>();
+		List<String> liste = new LinkedList<>();
 		liste.add("Il y a "+cache.size()+" FAI dont "+getISPCount(Boolean.TRUE)+" dans la fédé");
 		liste.add("Cela représente en tout (dans la fédé) "+getSubscribersCountInFede()+" Abonné.e.s et "+getMemberCountInFede()+" Membres");
 		liste.add("Et hors fédé : "+getSubscribersCountOutFede()+" Abonné.e.s et "+getMemberCountOutFede()+" Membres");

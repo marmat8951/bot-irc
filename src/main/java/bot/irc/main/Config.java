@@ -10,16 +10,16 @@ public class Config {
 	  private static Properties props;
 	  public final static String DEFAULT_PROPERTIES_FILE = "default.properties";
 	  public final static String PROPERTIES_FILE = "config.properties";
-	  public final static String here = (new File(".")).getAbsolutePath();
+	  public final static String HERE = (new File(".")).getAbsolutePath();
 	  private static boolean isDebug = false;
 	  
 	  static {
 	    try {
-	    	FileReader defaultProperties = new FileReader(new File(here+File.separator+"ressources"+File.separator+"config"+File.separator+DEFAULT_PROPERTIES_FILE));
+	    	FileReader defaultProperties = new FileReader(new File(HERE+File.separator+"ressources"+File.separator+"config"+File.separator+DEFAULT_PROPERTIES_FILE));
 			Properties defaultProp = new Properties();
 			defaultProp.load(defaultProperties);
 			props=new Properties(defaultProp);
-	        FileReader in = new FileReader(new File(here+File.separator+"ressources"+File.separator+"config"+File.separator+PROPERTIES_FILE));
+	        FileReader in = new FileReader(new File(HERE+File.separator+"ressources"+File.separator+"config"+File.separator+PROPERTIES_FILE));
 	        props.load(in);
 	        in.close();
 	        System.out.println("Config ready");

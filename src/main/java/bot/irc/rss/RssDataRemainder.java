@@ -11,6 +11,7 @@ import bot.irc.main.AffichableSurIRC;
  * Celleçi agit comme un espace de taille fixe, dans lequel l'élément le plus ancien est supprimé au profit du plus récent.
  * @author marmat
  */
+@SuppressWarnings("deprecation")
 public class RssDataRemainder extends Observable implements AffichableSurIRC{
 
 	private RssData[] data;
@@ -142,6 +143,4 @@ public class RssDataRemainder extends Observable implements AffichableSurIRC{
 		this.data = data;
 	}
 	
-	
-
 }

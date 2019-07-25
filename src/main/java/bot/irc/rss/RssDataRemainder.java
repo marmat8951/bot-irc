@@ -13,7 +13,7 @@ import bot.irc.main.AffichableSurIRC;
  */
 public class RssDataRemainder extends Observable implements AffichableSurIRC{
 
-	public RssData[] data;
+	private RssData[] data;
 	public static final int DEFAULT_SIZE=10;
 	private boolean ready = false;
 
@@ -132,6 +132,14 @@ public class RssDataRemainder extends Observable implements AffichableSurIRC{
 	 */
 	public void setReady(boolean ready) {
 		this.ready = ready;
+	}
+
+	public RssData[] getData() {
+		return data;
+	}
+
+	public void setData(RssData[] data) {
+		this.data = data;
 	}
 	
 	

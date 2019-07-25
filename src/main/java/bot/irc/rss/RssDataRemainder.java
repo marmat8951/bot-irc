@@ -17,8 +17,8 @@ public class RssDataRemainder extends Observable implements AffichableSurIRC{
 	public static final int DEFAULT_SIZE=10;
 	private boolean ready = false;
 
-	public RssDataRemainder(int default_size) {
-		data = new RssData[default_size];
+	public RssDataRemainder(int defaultSize) {
+		data = new RssData[defaultSize];
 	}
 	
 	public RssDataRemainder() {

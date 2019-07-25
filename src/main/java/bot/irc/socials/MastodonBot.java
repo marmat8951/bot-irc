@@ -34,6 +34,7 @@ import okhttp3.Response;
 import okio.BufferedSink;
 
 
+@SuppressWarnings("deprecation")
 public class MastodonBot implements Bot, Runnable,Observer {
 	private MastodonClient client;
 	private String accessToken=Config.getProperty("Mastodon_access_token");
@@ -44,7 +45,7 @@ public class MastodonBot implements Bot, Runnable,Observer {
 	boolean end = false;
 	private String lastDmId = null;
 	private final String INSTANCE_ADRESS = Config.getProperty("Mastodon_instance");
-	public  Handler handler = new Handler() {
+	private Handler handler = new Handler() {
 	    
 		@Override
 	    public void onStatus(@NotNull Status status) {
@@ -234,7 +235,6 @@ public class MastodonBot implements Bot, Runnable,Observer {
 	@Override
 	public void sendRSSMessage(List<String> messages) {
 		
-		
 		Response r = client.post("statuses", new RequestBody() {
 			
 			@Override
@@ -257,14 +257,11 @@ public class MastodonBot implements Bot, Runnable,Observer {
 				return MediaType.parse("application/json");
 			}
 		});
+		
 		if(Main.isDebug()) {
 			System.out.println(r.networkResponse());
 		}
-		
-		
-
-		}
-
+	}
 
 
 	@Override
@@ -274,8 +271,5 @@ public class MastodonBot implements Bot, Runnable,Observer {
 			this.sendRSSMessage(data.toStringIRC());
 		}
 	}
-
-
-	
 
 }

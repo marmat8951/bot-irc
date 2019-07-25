@@ -27,12 +27,13 @@ import twitter4j.User;
 import twitter4j.UserList;
 import twitter4j.UserStreamListener;
 
+@SuppressWarnings("deprecation")
 public class TwitterBot extends TwitterAdapter implements Bot, UserStreamListener, Runnable, Observer {
 	
 	private Twitter twitter;
 	private TwitterStream twitterStream;
 	private String login;
-	private String BotName = "Twitter";
+	private String botName = "Twitter";
 	private List<Action> actions = Action.getAllActions(this);
 	private Thread thread;
 	private long timeout = 100;
@@ -61,9 +62,9 @@ public class TwitterBot extends TwitterAdapter implements Bot, UserStreamListene
 	}
 	
 	public void start() {
-		System.out.println("Démarage du Bot "+BotName+". Mise à jour toute les "+timeout+" secondes.");
+		System.out.println("Démarage du Bot "+botName+". Mise à jour toute les "+timeout+" secondes.");
 		if(thread == null) {
-			thread = new Thread(this, this.BotName);
+			thread = new Thread(this, this.botName);
 			thread.start();
 		}
 	}
@@ -151,9 +152,9 @@ public class TwitterBot extends TwitterAdapter implements Bot, UserStreamListene
 	public void sendMessage(String sender, String channel, String message) {
 		try {
 			DirectMessage msg = this.twitter.sendDirectMessage(sender, message);
-			System.out.println(BotName+": Envoyé: "+ msg.getText());
+			System.out.println(botName+": Envoyé: "+ msg.getText());
 		} catch (TwitterException e) {
-			System.err.println(BotName+"Twitter : Impossible d'envoyer le message");
+			System.err.println(botName+" : Twitter : Impossible d'envoyer le message");
 			e.printStackTrace();
 		}
 		
@@ -178,7 +179,7 @@ public class TwitterBot extends TwitterAdapter implements Bot, UserStreamListene
 
 	@Override
 	public String getBotName() {
-		return BotName;
+		return botName;
 	}
 
 	@Override
@@ -197,7 +198,7 @@ public class TwitterBot extends TwitterAdapter implements Bot, UserStreamListene
 		try {
 			twitter.updateStatus(status);
 		} catch (TwitterException e) {
-			System.err.println(BotName+": Erreur: impossible de twitter");
+			System.err.println(botName+": Erreur: impossible de twitter");
 			e.printStackTrace();
 		}
 		

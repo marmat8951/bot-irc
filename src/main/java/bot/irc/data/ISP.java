@@ -14,8 +14,8 @@ public class ISP implements AffichableSurIRC {
 	private String name;
 	private int id;
 	private boolean isFFDNMember;
-	private String date_added;
-	private String last_update;
+	private String dateAdded;
+	private String lastUpdate;
 	private ISPdata data;
 	private CoveredAreas [] coveredAreas;
 
@@ -24,19 +24,19 @@ public class ISP implements AffichableSurIRC {
 	 * @param name Nom du FAI
 	 * @param id Identifiant unique sur DB
 	 * @param isFFDNMember est il membre de FFDN
-	 * @param date_added Date d'ajout
-	 * @param last_update Date de mise a jour sur DB
+	 * @param dateAdded Date d'ajout
+	 * @param lastUpdate Date de mise a jour sur DB
 	 * @param data Data correspondant au champ étendu sur db
 	 * @param ca  Zones couvertes
 	 */
 
-	public ISP(String name, int id, boolean isFFDNMember, String date_added, String last_update, ISPdata data, CoveredAreas [] ca) {
+	public ISP(String name, int id, boolean isFFDNMember, String dateAdded, String lastUpdate, ISPdata data, CoveredAreas [] ca) {
 		super();
 		this.name = name;
 		this.id = id;
 		this.isFFDNMember = isFFDNMember;
-		this.date_added = date_added;
-		this.last_update = last_update;
+		this.dateAdded = dateAdded;
+		this.lastUpdate = lastUpdate;
 		this.data = data;
 		this.coveredAreas = ca;
 		for(int i=0; i<coveredAreas.length;++i) {
@@ -125,23 +125,23 @@ public class ISP implements AffichableSurIRC {
 	}
 
 
-	public String getDate_added() {
-		return date_added;
+	public String getDateAdded() {
+		return dateAdded;
 	}
 
 
-	public void setDate_added(String date_added) {
-		this.date_added = date_added;
+	public void setDateAdded(String dateAdded) {
+		this.dateAdded = dateAdded;
 	}
 
 
-	public String getLast_update() {
-		return last_update;
+	public String getLastUpdate() {
+		return lastUpdate;
 	}
 
 
-	public void setLast_update(String last_update) {
-		this.last_update = last_update;
+	public void setLastUpdate(String lastUpdate) {
+		this.lastUpdate = lastUpdate;
 	}
 
 

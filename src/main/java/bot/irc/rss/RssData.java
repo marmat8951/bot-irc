@@ -60,8 +60,11 @@ public class RssData implements AffichableSurIRC{
 				}
 			}else if(balise.equalsIgnoreCase("link")) {
 				NamedNodeMap nmp = actualchild.getAttributes();
-				String link = nmp.getNamedItem("href").getTextContent();
-				if(link!=null) setLien(link);
+				String link = null;
+				if(nmp.getNamedItem("rel").getTextContent().equalsIgnoreCase("alternate")) {
+					link = nmp.getNamedItem("href").getTextContent();
+				}
+				if(link != null) setLien(link);
 			}else if(balise.equalsIgnoreCase("source")) {
 				NodeList nl = actualchild.getChildNodes();
 				for(int j = 0; j<nl.getLength();++j) {

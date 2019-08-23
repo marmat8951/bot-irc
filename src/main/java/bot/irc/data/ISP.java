@@ -7,7 +7,6 @@ import java.util.List;
 import bot.irc.IRC.Server;
 import bot.irc.main.AffichableSurIRC;
 import bot.irc.main.Cache;
-import bot.irc.main.Main;
 
 public class ISP implements AffichableSurIRC {
 

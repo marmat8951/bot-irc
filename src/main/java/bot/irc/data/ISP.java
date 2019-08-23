@@ -237,26 +237,22 @@ public class ISP implements AffichableSurIRC {
 	public List<String> contact() {
 		List<String> s = new ArrayList<>();
 		
-		String res= "["+this.getBetterName()+"] est joignable par: ";
+		s.add("["+this.getBetterName()+"] est joignable par: \n");
 		String site = getData().getWebsite();
-		if(site != null && !site.equals("")) res+= "Site web: "+site;
+		if(site != null && !site.equals("")) s.add("Site web: "+site+"\n");
 		String email = getData().emailSyntaxer();
-		if(email != null && !email.equals("")) {
-			res+=" Email: "+email;
-		}
-		s.add(res);
-		String chats="Chat : ";
+		if(email != null && !email.equals("")) s.add(" Email: "+email);
 		Server[] chans = getData().getIrcChan();
 		if(chans != null) {
+			s.add("Chat : ");
 			for(int i=0; i<chans.length; i++) {
-				chats+=chans[i].toString()+" ";
-			}
-			s.add(chats);
-		} else {
-			if(Main.isDebug()) {
-			s.add("Chans a Null");
+				s.add(chans[i].toString());
 			}
 		}
+		if(s.size() == 1) { //Il n'y a aucun élément disponible pour le contact
+			s.add("Aucun contact disponible");
+		}
+		
 		return s;
 	}
 

@@ -281,17 +281,29 @@ public class IRCBot extends PircBot implements Bot, Observer {
 	}
 	
 	@Override
-	protected void onInvite(String targetNick, String sourceNick, String sourceLogin, String sourceHostname, String channel) {
-		if(targetNick == getNick()) {
-			User[] users = getUsers("#FFDN");
+	public void onInvite(String targetNick, String sourceNick, String sourceLogin, String sourceHostname, String channel) {
+		
+		if(targetNick.equalsIgnoreCase(getNick())) {
+			User[] users = getUsers("#ffdn");
 			int i = 0;
-			for(; i < users.length && users[i].getNick() != sourceNick ; ++i) {}
-			if(i < users.length && users[i].isOp()) {
-				joinChannel(channel);
-				
+				if(Main.isDebug()) System.out.println("i: "+i+ "ul: "+users.length);
+			for(; i < users.length && !users[i].getNick().equalsIgnoreCase(sourceNick) ; ++i){
+				if(Main.isDebug()) System.out.println("SourceNick: "+sourceNick+" | users["+i+"].getNick() : " +users[i].getNick());
 			}
 			
-			
+			if(i < users.length && users[i].isOp()) {
+				joinChannel(channel);
+				if(Main.isDebug()) {
+					System.out.println("J'ai bien rejoint le channel "+channel);
+				}
+			}else if(i < users.length) {
+				sendMessage(sourceNick, "Désolé, Tu doit être OP sur #FFDN pour m'inviter");
+				if(Main.isDebug()) {
+					System.err.println(sourceNick + " a essayé de m'inviter sans être OP");
+				}
+			}else {
+				System.err.println("J'ai pas trouvé d'utilisateur corespondant à "+sourceNick+" dans les canneaux IRC");
+			}
 		}
 	}
 

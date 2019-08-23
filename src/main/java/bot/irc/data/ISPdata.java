@@ -12,7 +12,7 @@ public class ISPdata {
 	private String shortname;
 	private String website;
 	private String description;
-	private Server [] ircChan;
+	private Server [] comChan;
 	private int progressStatus;
 	private int membersCount;
 	private int subscribersCount;
@@ -31,7 +31,7 @@ public class ISPdata {
 		this.shortname = shortName;
 		this.website = website;
 		this.description = description;
-		this.ircChan = chatrooms;
+		this.comChan = chatrooms;
 		this.progressStatus = progressStatus;
 		this.membersCount = membersCount;
 		this.subscribersCount = subscribersCount;
@@ -59,7 +59,7 @@ public class ISPdata {
 			}
 			chatrooms = new Server[0];
 		}
-		this.ircChan = chatrooms;
+		this.comChan = chatrooms;
 		this.progressStatus = getInt(jo,"progressStatus");
 		this.membersCount = getInt(jo,"memberCount",0);
 		this.subscribersCount = getInt(jo,"subscriberCount",0);
@@ -145,7 +145,7 @@ public class ISPdata {
 	}
 
 	public Server[] getIrcChan() {
-		return ircChan;
+		return comChan;
 	}
 
 	public String getEmail() {

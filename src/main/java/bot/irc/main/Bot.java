@@ -14,6 +14,12 @@ public interface Bot {
 	public void sendMessages(String sender, String channel, AffichableSurIRC affichable);
 	
 	public String getBotName();
+	
+	/**
+	 * 
+	 * @return Nom du bot sur la ressource (ex: UneFede sur IRC | unrouteur sur Twitter | o 
+	 */
+	public String getBotNickName();
 
 	public void sendMessageToAdmins(String string);
 	

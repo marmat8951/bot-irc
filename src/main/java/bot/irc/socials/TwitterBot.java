@@ -381,4 +381,17 @@ public class TwitterBot extends TwitterAdapter implements Bot, UserStreamListene
 			this.sendRSSMessage(data.toStringIRC());
 		}
 	}
+
+	@Override
+	public String getBotNickName() {
+		try {
+			return twitter.getScreenName();
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			return null;
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
+	}
 }

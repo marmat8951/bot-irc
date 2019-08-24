@@ -2,6 +2,7 @@ package bot.irc.main;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Observable;
@@ -95,7 +96,7 @@ public class IRCBot extends PircBot implements Bot, Observer {
 		System.out.println(m.toString());
 		for(Action a:actions){
 			if(a.hasToReact(m)) {
-				a.react(channel, sender, login, hostname, m);
+				sendMessage(channel, a.reactL(channel, sender, login, hostname, m));
 			}
 		}
 		//easter Eggs
@@ -109,7 +110,7 @@ public class IRCBot extends PircBot implements Bot, Observer {
 		}
 		for(Comportement c : comportements) {
 			if(c.hastoreact(message)) {
-				c.react(channel, sender, login, hostname, message);
+				sendMessage(channel, c.react(channel, sender, login, hostname, message));
 			}
 		}
 
@@ -284,7 +285,15 @@ public class IRCBot extends PircBot implements Bot, Observer {
 	public void onInvite(String targetNick, String sourceNick, String sourceLogin, String sourceHostname, String channel) {
 		
 		if(targetNick.equalsIgnoreCase(getNick())) {
-			User[] users = getUsers("#ffdn");
+			/*String[] channels = Config.getMultipleValues("CHANNELS");
+			List <User> users = new ArrayList<>();
+			users.addAll(getUsers(channels[1]));
+			for(int c=1;c<channels.length;++c) {
+				User [] users2 = getUsers(channels[c]);
+				
+			}	*/
+			User [] users = getUsers("#ffdn");
+			 
 			int i = 0;
 				if(Main.isDebug()) System.out.println("i: "+i+ "ul: "+users.length);
 			for(; i < users.length && !users[i].getNick().equalsIgnoreCase(sourceNick) ; ++i){
@@ -305,6 +314,12 @@ public class IRCBot extends PircBot implements Bot, Observer {
 				System.err.println("J'ai pas trouvé d'utilisateur corespondant à "+sourceNick+" dans les canneaux IRC");
 			}
 		}
+	}
+
+
+	@Override
+	public String getBotNickName() {
+		return this.getNick();
 	}
 
 

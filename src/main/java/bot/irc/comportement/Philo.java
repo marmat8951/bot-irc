@@ -122,8 +122,7 @@ public class Philo extends Comportement {
 		String res = ""+sender;
 		JSONObject jo;
 		if(message.toLowerCase().replaceAll(" ", "").equals(Action.CARACTERE_COMMANDE+"philo")) {
-			int size = JSONS.size();
-			int choix = random.nextInt(size);
+			int choix = random.nextInt(JSONS.size());
 			jo = JSONS.get(choix);
 			res += ": Voici une citation à propos de "+jo.getString("topic");
 			

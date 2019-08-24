@@ -65,6 +65,14 @@ public abstract class Action {
 	public abstract List<String> reactL(String channel, String sender,
 			String login, String hostname, Message message);
 	
+	/**
+	 * @deprecated
+	 * @param channel channer sur l'IRC
+	 * @param sender personne ayant envoyé le message
+	 * @param login	login du bot
+	 * @param hostname hostname actuell
+	 * @param message message en question
+	 */
 	public void reactUsingMessage(String channel,String sender,
 			String login, String hostname, String message) {
 		Message m = new Message(message);

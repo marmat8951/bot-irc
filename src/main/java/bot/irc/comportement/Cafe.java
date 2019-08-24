@@ -28,10 +28,14 @@ public class Cafe extends Comportement {
 	@Override
 	public boolean hastoreact(String mesg) {
 		String m=mesg.toLowerCase();
-		return m.contains(getBotNick())&&(m.contains("fais") || m.contains("fait")) && (m.contains("café")||m.contains("thé"));
+		/*System.out.println(getBot().getBotNickName());
+		System.out.println(m.toLowerCase().contains(getBot().getBotNickName().toLowerCase())+ " | "+ m.toLowerCase().contains("fais") +" | "+m.toLowerCase().contains("fait")+" | café: "+m.toLowerCase().contains("café")+" | thé:"+ m.toLowerCase().contains("thé") );
+		*/
+		return m.toLowerCase().contains(getBot().getBotNickName().toLowerCase())&&(m.toLowerCase().contains("fais") || m.toLowerCase().contains("fait") || m.toLowerCase().contains("sert")) && (m.toLowerCase().contains("café")||m.toLowerCase().contains("thé"));
 	}
 
 	public List<String> react(String channel, String sender, String login, String hostname, String message) {
+		System.out.println("++++++ react CAFE ++++++");
 		List<String> res = new ArrayList<>();
 		Long lastone;
 		Date d = new Date();

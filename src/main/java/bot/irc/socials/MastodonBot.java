@@ -272,4 +272,11 @@ public class MastodonBot implements Bot, Runnable,Observer {
 		}
 	}
 
+
+
+	@Override
+	public String getBotNickName() {
+		return "UneFede@"+Config.getProperty("Mastodon_instance");
+	}
+
 }

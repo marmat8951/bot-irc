@@ -203,7 +203,7 @@ public class Distance extends Action {
 					if(!e1.isVide()) {
 						res.add("Plusieurs possibilités pour cet endroit, nous choisirons le premier:");
 						for(int i = 0; i<e1.lieux.length; ++i) {
-							res.add((i+1)+":"+e1.lieux[i].toString());
+							res.add(((char)('a'+i))+") "+e1.lieux[i].toString());
 						}
 						latitude = e1.lieux[0].coordonees.getLatitude();
 						longitude = e1.lieux[0].coordonees.getLongitude();

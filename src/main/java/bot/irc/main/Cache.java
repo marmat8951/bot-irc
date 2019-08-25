@@ -309,7 +309,7 @@ public class Cache implements AffichableSurIRC {
 	
 	/**
 	 * 
-	 * @param id numerro correspondanat au FAI dans <a href=db.ffdn.org>db.ffdn.org</a>
+	 * @param id numerro correspondant au FAI dans <a href=db.ffdn.org>db.ffdn.org</a>
 	 * @return ISP correpondant a l'identifiant ou null si ce dernier n'est pas dans le cache.
 	 */
 	public ISP getISPWithID(int id) {

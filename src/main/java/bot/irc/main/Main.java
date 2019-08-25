@@ -18,7 +18,7 @@ public class Main {
 	private volatile static String[] CHANNELS = Config.getMultipleValues("CHANNELS");
 	private static long TIMEOUT_BEFORE_RECONNECTING = 360;
 	private static int failures = 0;
-	private static volatile boolean DEBUG=Boolean.parseBoolean(Config.getProperty("Debug"));
+	private static volatile boolean DEBUG = Boolean.parseBoolean(Config.getProperty("Debug"));
 	private static CacheReloader CR;
 	private static IRCBot IRCBOT;
 	private static TwitterBot TWITTER;
@@ -77,8 +77,8 @@ public class Main {
 			
 		}catch(ConnectException ce) {
 			failures++;
-			System.err.println("Erreur numéro "+failures);
-			System.err.println("La connection a l'adresse "+SERVER+":"+PORT+" a échoué. Le Bot retentera de se connecter dans "+TIMEOUT_BEFORE_RECONNECTING+" secondes");
+			System.err.println("Le serveur IRC n'a pas pu se connecter "+failures+" fois.");
+			System.err.println("La connection a l'adresse "+SERVER+":"+PORT+" a échoué. Le Bot retentera de se connecter dans "+TIMEOUT_BEFORE_RECONNECTING*failures+" secondes");
 			Thread.sleep(TIMEOUT_BEFORE_RECONNECTING*(1000*failures));
 			main(args);
 		}

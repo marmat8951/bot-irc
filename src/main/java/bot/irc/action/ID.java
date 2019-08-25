@@ -1,4 +1,4 @@
-package bot.irc.action;
+ 	package bot.irc.action;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,7 @@ import bot.irc.data.ISP;
 import bot.irc.data.Message;
 import bot.irc.main.Bot;
 import bot.irc.main.Cache;
+import bot.irc.main.Config;
 import bot.irc.verif_saisie.EntierPositifNonVide;
 
 /**
@@ -28,7 +29,7 @@ public class ID extends Action {
 
 	@Override
 	public String help() {
-		return " Suivi du nom d'un FAI ou du numero d'un FAI. Renvoie l'Opposé de l'information donnée en paramètre. Exemple: \"+id 2\"   renvoie \"Ilico\"";
+		return " Suivi du nom d'un FAI ou du numero d'un FAI. Renvoie l'Opposé de l'information donnée en paramètre. Exemple: \""+Config.getProperty("Caractere_commande")+"id 2\"   renvoie \"Ilico\"";
 	}
 
 	@Override

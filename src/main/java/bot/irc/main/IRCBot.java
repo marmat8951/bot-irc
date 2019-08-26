@@ -96,7 +96,8 @@ public class IRCBot extends PircBot implements Bot, Observer {
 		System.out.println(m.toString());
 		for(Action a:actions){
 			if(a.hasToReact(m)) {
-				sendMessage(channel, a.reactL(channel, sender, login, hostname, m));
+				if(Config.getPropertyAsBoolean("Respond_using_private_channel")) sendMessage(sender, a.reactL(channel, sender, login, hostname, m));
+				else sendMessage(channel, a.reactL(channel, sender, login, hostname, m));
 			}
 		}
 		//easter Eggs

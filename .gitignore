@@ -4,3 +4,6 @@ twitter4j.properties
 ressources/config/*
 # Ignore Gradle build output directory
 build
+# Ignore eclipse files
+.classpath
+.settings/*
